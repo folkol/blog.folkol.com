@@ -1,0 +1,9 @@
+# blog.folkol.com
+
+## build
+gem install jekyll
+jekyll serve --livereload
+
+
+## deploy
+TODO

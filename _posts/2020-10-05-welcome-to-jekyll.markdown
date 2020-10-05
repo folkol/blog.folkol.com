@@ -1,0 +1,13 @@
+---
+layout: post
+title:  I ran jekyll new... now what?
+date:   2020-10-05 20:02:22 +0200
+categories: jekyll update
+---
+>I have no clue what I'm doing — but let's see how deep this rabbit hole goes.
+
+I take notes.
+
+I'm not particularly good at it — and they are certainly not as organized as I would like them to be — but I take notes. I take notes when I work, I take notes when I read, I take notes when I look at YouTube.
+
+This website is a fledgling attempt of cleaning up, and collecting, some of these scribblings in one place.
