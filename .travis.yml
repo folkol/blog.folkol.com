@@ -1,7 +1,7 @@
 language: ruby
 rvm:
 - 2.6.3
-install: bundler install
+install: bundle install
 script: jekyll build
 cache: bundler
 notifications:
