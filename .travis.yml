@@ -1,12 +1,15 @@
 language: ruby
 rvm:
-  - 2.6.3
-
-install: gem install jekyll html-proofer
+- 2.6.3
+install: bundler install
 script: jekyll build
-
-cache: bundler # caching bundler gem packages will speed up build
-
-# Optional: disable email notifications about the outcome of your builds
+cache: bundler
 notifications:
   email: false
+deploy:
+  provider: s3
+  access_key_id: AKIAQ4WU3QSDVVLHFEMX
+  bucket: arn:aws:s3:::com.folkol.blog
+env:
+  global:
+    secure: TL3ntIi4JodHZIDiv56hKjf02YBh7y3GbohcUJlZLWW0cvOh8vHQTb7vzvEJeqApfffY0GQcoOk3O6HUZoYZhsebaQsKb4/G4uplRRLZh4MM61g/5N64jSqPlSvX96oFjvsH51mJQI33gpMPNe99XU4yLKyOQueWQY2KOu6HguNdd7pxO04ZGNzFMbez0feDHvyBtRc/Ten/T4fU33KP3kVq/bCfOfzXapWZDeBKSDlrvdbVYO3QMEnpUiUGALOFN06P913diDcgKhdZrXuJ3RnxtcVDGl8e/Iqp9ZcDG3BqEfur5yLhSEneRiksgdl//yi9XhNB6d69AYKQ3iqt5wydT/r3hAyxg9RgeIQlLJAQV+I2CeTxNEiIYrtxf/bmlltITCHLymadDLPip4c3oHbVifrnHfeCqSsphPeNrB36Kc9U9kDzHvkqxA3vFVZAeyAMb8lKESn5Q98zhlCLhCzuHOFOGGyngoAatR6aCpH6tSImiZ8/qFJLDuwmWTd2IWBK+nQmD2s0xuV3Di5YhxWGRdw2DWcAksd7hJmKXYsn5Gi+H8GIiJFPfY8B18KNuJAgOgEnAyf9056/Ar3EefIJXWvfUHJiVJZ4Dt4afaKkAVLdZGuVa3fXqPpdVsg0QW7p3+i/q06omaOyxkq9wFCf0Vpgh0k79TksSlM8XDg=
