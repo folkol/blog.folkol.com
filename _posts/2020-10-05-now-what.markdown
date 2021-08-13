@@ -1,10 +1,10 @@
 ---
 layout: post
-title:  I ran jekyll new... now what?
+title:  I ran "jekyll new"... now what?
 date:   2020-10-05 20:02:22 +0200
 categories: jekyll update
 ---
->I have no clue what I'm doing — but let's see how deep this rabbit hole goes.
+>I have no clue what I'm doing — but here we go! :)
 
 I take notes.
 

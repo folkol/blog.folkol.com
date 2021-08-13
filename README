@@ -1,9 +1,12 @@
 # blog.folkol.com
 
-## build
-gem install jekyll
-jekyll serve --livereload
+https://jekyllrb.com/docs/usage/
 
+## build
+gem install bundle
+bundle config set --local path 'vendor/bundle'
+bundle install
+bundle exec jekyll serve --livereload
 
 ## deploy
 TODO
