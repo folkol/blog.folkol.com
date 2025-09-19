@@ -23,7 +23,7 @@ email: folkol@mailbox.org
 description: >- # this means to ignore newlines until "baseurl:"
   Confused scribblings about programming, etc.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://blog.folkol.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: folkol
 github_username:  folkol
 
