@@ -9,4 +9,14 @@ bundle install
 bundle exec jekyll serve --livereload
 
 ## deploy
-TODO
+$ bundle exec jekyll clean
+$ JEKYLL_ENV=production bundle exec jekyll build
+$ aws-vault exec admin -- aws s3 sync _site/ s3://com.folkol.blog/ \
+  --exclude "*" \
+  --include "assets/*" \
+  --include "images/*" \
+  --cache-control "public,max-age=31536000,immutable"
+$ aws-vault exec admin -- aws s3 sync _site/ s3://com.folkol.blog/ \
+  --delete \
+  --exclude "assets/*" --exclude "images/*" \
+  --cache-control "public,max-age=300"
