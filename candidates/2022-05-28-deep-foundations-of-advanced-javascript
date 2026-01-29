@@ -1,0 +1,33 @@
+# https://www.youtube.com/watch?v=HcW5-P2SNec
+
+Kyle Simpson, author of YDNJ(Y).
+
+JavaScript Compiler
+Coercion
+Object Wrappers
+Closure
+
+OLOO vs OO (Object link to other objects)
+
+== vs ===
+ES6 Warnings
+Better Communication
+
+gettyfy
+
+
+https://frontendmasters.com/courses/javascript-foundations/
+
+## Scope, Closures
+lexical scope system, and the closure system built on top of this
+Nested scope. "Hoisting".
+"Stumble of articulate"
+Modules.
+
+Function Scoping
+
+IIFE, Immediately Invoked Function Expression.
+- Parenthesis outside or inside the function expression
+
+N.b. https://astexplorer.net
+

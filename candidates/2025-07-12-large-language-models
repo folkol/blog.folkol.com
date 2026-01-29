@@ -1,0 +1,37 @@
+why are they called "large language models"?
+- what other kinds of models are there
+- what is going on with chatgpt.com that is not 'raw inference'?
+
+
+
+- system prompt (you are a ..., etc)
+- prompt (or, user's question)
+- 
+
+
+- 'embedding space'
+- each token is 'embedded' into a space
+	- 12288 dimensions
+
+
+
+# Some nubmers from GPT3
+
+~27k matricers
+
+embedding matrix:
+- 12288 (embedding dimensions) x 50247 (#tokens) = 617M weights / parameters
+
+
+
+unembedding matrix:
+- same as embedding, but order swapped
+
+
+
+
+> Attention block: 'what vector you need to add to the generic embedding (mole) to get the specific one' (mole as in number of molecules, mole as the creature, mole as the little cyst)
+
+
+
+TODO: What does it meant that a set (?) 'acts' on a group? What is the intuition, and how came up with the name? (what are alternatives names for this?)

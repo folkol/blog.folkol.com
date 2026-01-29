@@ -1,0 +1,194 @@
+# Understanding and constructing the Rijndael (AES) S-box
+
+https://www.youtube.com/watch?v=vFXgbEL7DhI&t=2502s
+
+## what is the Rijndael S-box?
+
+    ### What is an S-box?
+
+    s(ubstitution)-box is a basic component of symmetric key algorithms which performs substitution.
+    In block ciphers, they are typically used to obscure the relationship between the key and the ciphertext, this ensuring Shannon's property of confusion.
+    Mathematically, an S-box is a vectorial boolean function.
+
+    "An S-box is a substitution box and it is the only non-linear component in the cipher. Its main purpose is to obscure the relationship between the key, the plaintext, and the ciphertext."  — Making the transformation non-linear
+
+    Linear cryptanalysis, finding affine approximations to the action of a cipher.
+    Differential cryptanalysis, the study of how differences in input can affect the difference at the output. Discovering where the cipher exhibits non-random behaviour and exploiting such properties to recover the key.
+
+The Rijndael S-box is the S-box used by the Rijndael block cipher (which modelled the AES cipher, see NIST documents for definition). Because of this, it is also called the AES S-box.
+
+B8: The set of sequences of 8 bits
+
+    00000000
+    00000001
+    00000010
+    00000011
+    ...
+    01111111
+
+Can also be seen as the set of integers {0, 255}.
+
+We can also think of B8 as the set of pairs of hex characters.
+
+    00
+    01
+    10
+    11
+    ...
+    FF
+
+The Rijndael S-box is a certain bijective function S: B8 -> B8.
+
+So the Rijndael S-box can be viewed as taking a pair of hex characters as input and its output is also a pair of hex characters.
+
+For example, we have S(9s) = b8
+
+The goal of this video is to write the code to reproduce the values in this table.
+
+
+AWS S-box (the column is determined by the least significant nibble, and the row by the most significant nibble. For example, the value 0a(16) is mapped to b8(a6)).
+
+TODO:
+[plot as matrix]
+[plot as clock with 255 numbers and lines between src->dst]
+[plot as lookup-table]
+
+
+## A bijection between non-negative integers and binary polynomials
+
+    ### Indeterminate variable
+
+    In mathematics, particularly in formal algebra, an indeterminate is a symbol that is treated as a variable, does not stand for anything else except itself, and is often used as a placeholder in objects such as polynomials and formal power series.[1][2] In particular:
+    - It does not designate a constant or a parameter of the problem.
+    - It is not an unknown that could be solved for.
+    - It is not a variable designating a function argument, or a variable being summed or integrated over.
+    - It is not any type of bound variable.
+    - It is just a symbol used in an entirely formal way.[3]
+
+Let F2 = {0, 1} be the field of two elements.
+Let T be an indeterminate variable and F2[T] be the ring of polynomials with coefficients in F2. Such polynomials are called 'binary polynomials'.
+
+
+    ### Finite Fields
+
+    https://www.doc.ic.ac.uk/~mrh/330tutor/ch04s04.html
+
+    Finite fields of order 2**m are called binary fields or characteristic-two finite fields. The elements of GF(2**m) are binary polynomials, i.e. polynomials whose coefficients are either 0 or 1.
+
+        #### Polynomial ring
+
+        https://en.wikipedia.org/wiki/Polynomial_ring
+
+        In mathematics, especially in the field of algebra, a polynomial ring or polynomial algebra is a ring (which is also a commutative algebra) formed from the set of polynomials in one or more indeterminates (traditionally also called variables) with coefficients in another ring, often a field.
+
+        ring: set of elements under multiplication and addition
+
+    GF(2**m) contain 2**m elements/polynomials of at most degree m-1, correponding to m-bit strings of 0 and 1 (the coefficients of the corresponding binary polynomial!)
+
+    For example, GF(23) contains 8 element {0, 1, x, x+1, x2, x2+1, x2+x, x2+x+1}. x+1 is actually 0x2+1x+1, so it can be represented as a bit string 011. Similarly, x2+x = 1x2+1x+0, so it can be represented as 110.
+
+    In modulo 2 arithmetics, 1+1 ≡ 0 mod 2, 1+0 ≡ 1 mod 2 and 0+0 ≡ 0 mod 2, which coincide with bit-XOR, i.e. 1⊕1=0, 1⊕0=1 0⊕0=0. Therefore for binary polynomials, addition is simply bit-by-bit XOR. Also, in modulo 2 arithmetics, -1 ≡ 1 mod 2, so the result of subtraction of elements is the same as addition. For example:
+
+    + == - == XOR (of the coefficients bitfields / strings)
+
+    (x2+x+1) +(x+1) =x2+2x+2, since 2 ≡ 0 mod 2 the final result is x2. It can also be computed as 111⊕011=100. 100 is the bit string representation of x2.
+
+    Multiplication of binary polynomials can be implemented as simple bit-shift and XOR. For example:
+
+    (x2+x+1)*(x2+1) = x4+x3+2x2+x+1. The final result is x4+x3+x+1 after reduction modulo 2. It can also be computed as 111*101=11100⊕111=11011, which is exactly the bit string representation of x4+x3+x+1.
+
+        #### Irreducible polynomial
+
+        In mathematics, an irreducible polynomial is, roughly speaking, a polynomial that cannot be factored into the product of two non-constant polynomials. 
+
+        The property of irreducibility depends on the nature of the coefficients that are accepted for the possible factors, that is, the field to which the coefficients of the polynomial and its possible factors are supposed to belong. 
+
+        In GF(2m), when the degree of the result is more than m-1, it needs to be reduced modulo a irreducible polynomial. This can be implemented as bit-shift and XOR. For example, x3+x+1 is an irreducible polynomial and x4+x3+x+1 ≡ x2+x mod (x3+x+1). The bit-string representation of x4+x3+x+1 is 11011 and the bit-string representation of x3+x+1 is 1011. The degree of 11011 is 4 and the degree of the irreducible polynomial is 3, so the reduction starts by shifting the irreducible polynomial 1011 one bit left, you get 10110, then 11011⊕10110 = 1101. The degree of 1101 is 3 which is still greater than m-1=2, so you need another XOR. But you don't need to shift the irreducible polynomial this time. 1101⊕1011 =0110, which is the bit-string representation of x2+x.
+
+        Reduction is iterable, and if the result is higher than the 'irreducible polynomial', the 'irreducible polynomial' must be shifted left before xor.
+
+    Elements of F2[T] are polynomials in T, with all coefficients being 0 or 1. This means that they are summations of powers of T with coefficients in front.
+
+    This means that we can represent these polynomials as bit strings.
+
+        #### NSA Knew about differential cryptanalysis for decades, what else do they know?
+
+    Associate any non-negative integer x to a binary polynomial by using its binary expansion as coefficients according to GF above.
+
+    Note that number_bits(x) = deg(f(T)) + 1
+
+    In the case x = 0, we define f(T) = 0, the zero polynomial
+
+    "sum of powers of two, with the leading bit not being 0"
+
+    "The big idea": Treat a number as a polynomial by associating the binary expansion of x with the polynomial with corresponding coefficients.
+
+        Example: Suppose x = (201)10.
+
+        Convering x to binary gives x = (11001001)2.
+
+        Then the corresponding polynomial is:
+
+        1T7 + 1T6 + 0T5 + 0T4 + 1T3 + 0T2 + 0T1 + 1T0
+
+        This simplifies to: 1T7 + 1T6 + 1T3 + 1T0.
+
+        So, we have the association  x = 201 -> fx(T) = T7 + T6 + T3 + 1
+
+    Using the above construction, we can define a function:
+
+        one-to-one and onto = bijection
+
+            phi : N0 -> F2[T]
+                x -> fx(T)
+
+            phi is an isomorphism of commutative rings, but before we can do this we would need to supply two ring operations on this set of polynomials
+
+    Let (+) denote the XOR operation on N0.
+
+    Notice that for all x,y in N0, we have :
+
+        fx(+)y(T) = fx(T) + fy(T), in the polynomial ring F2[T]. 
+
+        More generally, if z = (+)ixi then fz(T) = SiFxi(T).
+
+            if z is an XOR-summation of lots of x, then fz(T) is the sum of the corresponding polynomials fxi(T).
+
+        We will need this fact later.
+
+    We note the following property of this map.
+
+        Proposition: For ant x in N0, we have:
+
+            fx<<1(T) = Tfx(T), any x left-shifted by 1 and look at the corresponding associated polynomial, it is the same thing as taking the polynomial fx(T) and multiplying it with T.
+
+        Proof:  ... Append 0, this is always 0 so we can ignore the last monomial. This is the same as T x, after shifting Summation limits and indices.
+
+        BY repeated application of this property, we see more generally that, for any i,x in N0, we have:
+
+            f x<<i(T) = Ti * fx(T)
+
+        We will need this fact later.
+
+## Multiplication of integers as polynomials
+
+## Modulo Reduction of integers as polynomials
+
+## Constructing finite fields
+
+### Finite fields = Galois fields = non-infinite set with *, /, -, + (group)
+Field: A set that forms a group under (*, / — when ignoring the additive identity) and that also forms a group under (+, /)
+
+    They should feel similar! In fact, every ring is a group, and every field is a ring. A ring is a group with an additional operation, where the second operation is associative and the distributive properties make the two operations "compatible".
+
+    A field is a ring such that the second operation also satisfies all the group properties (after throwing out the additive identity); i.e. it has multiplicative inverses, multiplicative identity, and is commutative.
+
+## Rijndael multiplication and the Rijndael inverse
+
+## Affine Transformations
+
+"In Euclidean geometry, an affine transformation, or an affinity (from the Latin, affinis, "connected with"), is a geometric transformation that preserves lines and parallelism (but not necessarily distances and angles)."
+
+## The Rijndael S-box
+
+## Writing the code

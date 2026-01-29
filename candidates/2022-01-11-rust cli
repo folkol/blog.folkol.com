@@ -1,0 +1,36 @@
+https://crates.io/crates/clap
+
+Compare to RipGrep.
+
+https://rust-lang-nursery.github.io/rust-cookbook/cli/arguments.html
+
+https://rust-lang-nursery.github.io/rust-cookbook/cli/ansi_terminal.html
+
+https://kbknapp.dev/rust-cli/
+	With those components in mind, I like to start all CLI applications by building, or at least stubbing the CLI. This allows me to get a feel for what it's like to use the tool, and often leads to small changes for a better user experience (UX). Granted, we're talking about the CLI here, so UX is on a relative scale, but there is nothing that says a CLI has to be terrible!
+
+//! which indicate module-level or crate-level documentation. Here's a quick example of the difference:
+
+https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html
+
+	Outer and inner documentation
+
+	The /// syntax is used to document the item present after it. That's why it is called an outer documentation. There is another syntax: //!, which is used to document the item it is present inside. It is called an inner documentation. It is often used when documenting the entire crate, because nothing comes before it: it is the root of the crate. So in order to document an entire crate, you need to use //! syntax. For example:
+
+
+
+	//! This is my first rust crate
+	When used in the crate root, it documents the item it is inside, which is the crate itself.
+
+	For more information about the //! syntax, see the Book.
+
+		https://doc.rust-lang.org/book/ch14-02-publishing-to-crates-io.html#commenting-contained-items
+
+
+https://epage.github.io/blog/2021/12/clap3/
+
+https://github.com/clap-rs/clap/releases/tag/v3.0.0
+
+	
+
+https://github.com/rust-cli

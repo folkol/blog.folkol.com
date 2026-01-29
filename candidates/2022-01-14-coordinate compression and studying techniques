@@ -1,0 +1,143 @@
+5464
+19228
+
+https://google.github.io/swift/
+
+
+
+day21
+
+simulate it
+
+x - 1 % 10 + 1
+
+
+second: These are way too many, we can't simulate these.
+
+
+
+constructed table: [possible outcomes and frequencies]
+
+Frequency count method: https://www.youtube.com/watch?v=1U3Uwct45IY
+
+https://publications.lib.chalmers.se/records/fulltext/251828/local_251828.pdf
+
+
+https://www.youtube.com/watch?v=a6ZdJEntKkk
+
+
+
+coordinate compression | coloring
+
+	https://codeforces.com/blog/entry/23180
+
+	In Chinese: 离散化(ie. map larger values to smaller distinct values)
+
+	Coordinate Compression is mainly used to map larger values to smaller values to remove the vacant space.
+
+	For example: if a = 5, b = 122, c = 122 and d = 3333 then, we can map a = 1, b = 2, c = 2 and d = 3.
+
+	Algorithm: Simply store all the values in a set, then iterate it and assign values to the elements one by one and increment counter at each step (counter = 0 or 1 or any Integer at the beginning).
+
+	'coloring operation'
+
+
+	https://www.youtube.com/watch?v=TSUvGqRFlug
+
+
+
+https://www.youtube.com/watch?v=--Hu2w0s72Y
+The problem with active recall and spaced repetition (truth behind studying smarter).
+
+	There are some things that work reasonable well if you are already pretty good at learning.
+	There are people who are pretty good at deep processing, you can pick up at new concept and learn it pretty fast.
+	I want to teach techniques that works even if you aren't already "a genius".
+
+	How does learning works in the first place?
+		Studying is not the same thing as learning.
+		Studying: The physical process.
+			- The purpose of studying is to 'produce learning'
+		Learning: The cognitive process that occurs, successful learning is when you retain information and can recall it / pair it up with other pieces of information.
+		Active learning techniques = higher part of the 'learning/studying-quota-spectrum'.
+
+		Memory:
+			Multi-store model of memory.
+				Different places in our memory:
+					Sensory information in sensory memory.
+						- forgotten very quickly
+						- energy inefficient
+						- if we don't need it — we will skip it
+					 If intend do keep -> shunts it into working memory.
+					 Working memory (/ short-term memory):
+					 	- 'encoding' sends it to long-term
+					 	- will forget information pretty fast, seconds to minutes.
+					 Long-term memory.
+					 	- Can move to working memory with 'retrieval'
+					 	- will forget things, but much more slowly than the working memory, hours or days or months. (Depending on how strongly it was encoded.)
+
+					 You can't retrieve what you didn't encode. You can't pour from an empty bucket.
+
+					 Encoding uses a lot of 'cognitive load'.
+
+					 Cognitive load = brain mojo.
+
+					 Encoding does not happen without sufficient cognitive load.
+
+					 Your brain have a certain amount of cognitive load that it can tolerate, and this limit can be trained.
+
+					 When the load increases, learning also happens. (Up to a certain point.)
+
+					 Passive learning does not encode as hard as active learning.
+					 Research strongly suggests that higher load implies better learning — to a point.
+
+					 "Cognitive load feels like confusion."
+
+					 Feeling of confusion means your brain is engaging high-efficiency learning pathways.
+
+					 So, if you are studying and don't feel confused — learning is not very strong!
+
+					 Bored or drowsy means studying techniques is not very efficient.
+
+					 Desirable difficulty: Encoding process comes with discomfort. Embrace it!
+
+
+
+		5 attributes of a good learning
+			- priming ("prestudy", but not really. But skim the content before actually digging into it. Don't get sucked into details!)
+			- 'event' (classroom, study-session, etc.). If you are feeling non-active here, or not getting high load. This is where you must focus. Compare to when someone throw you a ball, you can't just 'stand there', you must 'be prepared to catch it'. There are ways to do this, you can ask questions (either out-load, or inside your head). Ask A LOT of questions. Multiple questions every minute. Every information that comes into your mind, think about what you want to ask about this. There is different 'yield' to different questions.
+				If you learn about some muscle tissue or some cell, you can ask 'what is this muscle tissue, where does it comes from, what are the features of this tissue'. But questions with better yield (because they tie back to the bigger picture) is questions like why and how.
+				If we tie it back to the big picture, we can tie it into a higher mastery (:bloom's taxonomy). We not only need to learn about a concept in a vaccum, but understand how it ties back to other concepts.
+					- why?
+					- how come?
+			- After the event, revision.
+				- Good studens have their first revision within 24 hours from event.
+					- Preferably before going to sleep the same day.
+				- "Sleep dependent memory consolidation"
+			- The way that you do the revision, what technique do you use?
+				- How active is it?
+				- Does it tie back to the big picture?
+				- Take information that we learned during the lecture and tie it back to the big picture, maybe because of a mind map?
+				- Some guidelines for notes, you should try to make your notes reasonable non-verbal.
+				- "Use different senses"? (Verbal, )
+				- You don't need to write 'a lot' of notes, keep them brief.
+				- It may even be bad since it might reduce the cognitive load.
+				- Confusion is a good thing, optimize the level — not too much. (But not too little, we need the confusion to 'trick' our brain into trying to categorize the information and file it away somewhere in the big picture.)
+				- Delayed note-taking might keep the confusion in the optimal band.
+				- Summary sheet, but after writing copious notes and just paraphrasing their previous notes.
+				- We can also do this summary inside the brain, since we don't need write down something.
+				- If we don't need to type all the time, we can focus on the event at hand with more focus/more senses.
+			- Pre-exam revision
+				- challenging
+					- recall, not recognition!
+						- might be better to re-write notes rather than to re-read them
+						- even better to represent the same information with diagrams or mind-maps
+				- different each time!
+				- might be complemented with:
+					- spaced repetition
+						- flash cards
+					- mindmaps
+					- active listening
+					- active reading
+					- how to prime effectively
+					- All of these sits on the scaffold of the top level 5 points
+

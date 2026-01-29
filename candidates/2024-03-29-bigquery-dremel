@@ -1,0 +1,306 @@
+# BigQuery
+
+Walk through the life of a query.
+
+"remote memory shuffle, to store intermediate results"
+
+replicated distributed storage (colossus): s3
+actually compute (dremel): worker, or slots (in the jobs and reservation model video)
+jupiter: super fast / google scale network petabit network
+
+In BigQuery: each shuffled row can be consumed as soon as it is created, which makes it possible to consume distributed jobs in a pipeline
+
+
+submit query:
+API request management, 'query POST'
+- authenticating and authorization
+- calculate metadata
+
+
+## Dremel
+
+https://www.youtube.com/watch?v=JxeITDS-xh0&list=TLPQMjgwMzIwMjRUh6CdK_Xnpg&index=1
+
+Bunch of OLAP systems.
+
+Reoccurring themes:
+- resource disaggregation / separate storage from compute (for one operation: separate memory as well)
+- lack of statistics
+- columnar and non-relational data
+- vectorized execution
+
+Optimizer implementation: https://www.youtube.com/watch?v=7pBYKI7BCAo&list=PLSE8ODhjZXjasmrEd2_Yi1deeE360zv5O&index=23
+
+> In the spark paper, we used to do code gen -- but now we only use vectorization.
+
+Let's talk about todays' paper (dremel retrospective). Go back to 2011 when the original dremel paper came out.
+
+In the 2000–2010, whenever Google released a research paper describing an internal system — other tech companies would write open-source clones.
+
+There is enough tooling now, so that you don't have to build everything from scratch.
+
+## data system at Google (that they have released papers on, and talked publicly about)
+- MapReduce
+- BigTable
+- Chubby (lock service) ZooKeeper, etcd
+- Megastore
+- Vitess
+- Dremel (sharding middle-ware for MySQL, commercialized as Planetscale)
+- Spanner
+- F1
+- Mesa
+- Napa
+
+### Napa
+
+The Napa paper: https://research.google/pubs/napa-powering-scalable-data-warehousing-with-robust-query-performance-at-google/
+
+Napa’s principal technologies for robust query performance include the aggressive use of materialized views that are maintained consistently as new data is ingested across multiple data centers.
+
+## Google Dremel
+
+- Original use case: run SQL queries on 'a bunch of files lying around' (e.g. output artifacts of MapReduce jobs). Instead of injesting it into a DWH, defining schema, etc. (Did not support joins in this version.)
+- Rewritten in 2010 to shared-disk architecture built on top of GFS (originally: shared-nothing, compute tied to disk)
+- Release as a public commercial product (BigQuery) in 2012
+
+"Retrospective paper discuss the in-memory shuffle, which was an important part -- which is why we didn't read the original paper."
+
+Both BigQuery and Spark do this shuffle.
+
+"Get query execution on a single node done right first, then distribute it."
+
+"Other systems do shuffle as well, in particular operations. Like if you want to do a ShuffleJoin, you shuffle/repartition your data before."
+
+"The database system in no longer the center of the universe, schema / ingest / data cleanup. The data's final data place."
+
+"In the modern company, the different units provide different data -- and instead of ingesting into the monolithic DWH you store it in S3."
+
+"In-situ data processing"
+- execute queries on data files in shared/external storage, in their original format, without first ingesting them into a DWH/DB
+- this is usually what people mean when they say "data lake"
+	- object store with a bunch of random files
+	- if you are lucky, there might be a catalogue
+- the "data lakehouse" is the DBMS that sits on top of the data lake
+	- marketing term that was introduced in the spark paper(?)
+	- tech target: https://www.techtarget.com/searchdatamanagement/definition/data-lakehouse
+		- "What does a data lakehouse do? The first documented use of the term data lakehouse was in 2017, but the lakehouse concept that has taken hold was initially outlined by data platform vendor Databricks in 2020 and then embraced by various other vendors."
+		- A data lakehouse is a data management architecture that combines the key features and the benefits of a data lake and a data warehouse. Data lakehouse platforms merge the rigorous data management functions, ease of access and data querying capabilities found in data warehouses with the data storage flexibility, scalability and relatively low cost of data lakes.
+		- Like their two predecessors, data lakehouses support data analytics uses. But they're designed to handle both the business intelligence (BI) and reporting applications typically run against data warehouses and the more complex data science applications run against data lakes.
+		- "Data warehouses were first developed in the 1980s as a repository for structured data to support BI and basic analytics independent of the operational databases used for transaction processing"
+		- "Data lakes originated with Hadoop clusters in the early 2000s and have since evolved to include other types of big data systems. They provide a lower-cost storage tier for a combination of structured, unstructured and semistructured data by using a file system or cloud object storage instead of the relational databases and disk storage common in data warehouses."
+		- "Data lakes and data warehouses require different processes for capturing and managing data from operational systems and other sources."
+		- "To streamline things, organizations began developing a two-tier architecture in which data is first captured into a data lake. Some of the structured data is then converted into a SQL format and moved to a data warehouse, using extract, transform and load (ETL) processes or an alternative extract, load and transform (ELT) approach."
+		- "However, such architectures can lead to data processing delays, increased complexity and additional management overhead. Maintaining separate data platforms also results in significant capital expenditures and ongoing operational expenses. A data lakehouse, on the other hand, keeps all analytics data in a single platform that can be used more efficiently for BI, machine learning, predictive analytics, data mining and other applications."
+	- 'Technically, Dremel is a Data Lakehouse system'
+- the goal is to reduce the amount of prep time needed to start analyzing data
+- users are willing to sacrifice query performance to avoid having to re-encode / load data files
+
+## Quick overview of Google Dremel
+
+- shared-disk / disaggregated storage, sometimes managed -- Dremel define storage
+- vectorized query processing (SIMD), using intrinsics
+- shuffle-based distributed query execution
+- columnar storage
+	- zone maps / filters to prune early
+		- "A zone map is a independent access structure that can be built for a table. During table and index scans, zone maps enable you to prune disk blocks of a table and potentially full partitions of a partitioned table based on predicates on the table columns."
+		- dictionary / RLE compression
+		- only inverted indexes (not in the paper, but from BigQuery docs)
+- hash joins only
+- heuristic optimizer + adaptive optimization (change query plan based on the data they see)
+
+
+### Query Execution
+
+- SQL queries
+- parse them
+- bind to files ("run it through the bindier")
+- plan it
+- slice the plan up to stages
+	- within stage, parallel tasks
+- one root node (coordinator)
+- one task: deterministic / repeatable / idempotent, allow for re-run of broken task
+	- if you have a PRNG in your job, make sure you re-used the same seed
+- "Root ndoe (Coordinator) retrieves all the meta-data for target files in a batch and then embeds it in the query plan" <-- "avoids 1000s of workers hitting up distributed file systems for meta-data at the same time"
+
+- coordinator gets the query
+	- constructs a query plan
+	- fires up workers
+	- all workers write output to 'external, in-memory, shuffle-service'
+	- these workers are running all the time, spin-up was non-negligble
+
+- stages:
+	- distributed file system
+	- coordinator (query)
+	- partial group by
+	- in-memory shuffle
+	- group by, sort, limit
+	- in-memory shuffle
+	- sort, limit
+	- distributed file system
+
+# Query Processing Models
+- https://www.doc.ic.ac.uk/~pjm/CO572/lectures/ProcessingModels.pdf
+- "A pipeline breaker is an operator that produces the first (correct) output tuple only after all input tuples have been processed"
+- "Volcano Processing (1990)": https://dl.acm.org/doi/10.1145/93605.98720
+- "The Volcano model (originally known as the Iterator Model) is the 'classical' evaluation strategy of an analytical DBMS query: Each relational-algebraic operator produces a tuple stream, and a consumer can iterate over its input streams."
+	- The tuple stream interface is essentially: 'open', 'next' and 'close'; all operators offer the same interface, and the implementation is opaque.
+	- "Graefe: Query Evaluation Techniques for Large Databases]"
+	- Parsing -> Query Validation -> View Resolution -> Optimization -> Plan Compilation -> Execution
+	- Basically, tree of iterators (like unix pipelines?)
+	- goals: flexibility, clean design, maintainability, developer productivity
+	- operators:
+		operator	open		next				close		local_state
+		print		open input	next on input		close input
+		scan		open file	read next item		close file	open file descriptor
+		select		open input	call next until hit	close input
+		hashjoin	...
+		mergejoin	...
+
+		scan: read a table from the buffer manager and return the container tuples one b one
+		projection: filter columns
+		selection: filter tuples
+		union: chain children
+		difference: set difference, read all tuples from right side and then filter
+		pipelinebreaker: consume all input, then yield first correct output
+		crossproduct: read all right side, then for each left -- combine with all from right
+		volcanocrossproduct (streaming): ...
+		grouped aggregation: group all tuples that are equal (given projection) and calculate one or more per-group aggregates
+		hashing: 
+	- advantages of volcano: our implementatin is roughly 200 lines
+		- extensible: adding operators is easy, takes advantage of underlying language
+	- buffer manager, buffering intermediates: cross product, group by, etc.
+	- problems with volcano:
+		- cpu efficiency
+		- pointers cause pipeline stalls
+- if CPU is bottleneck
+	- bulk process, buffer tuples and use SIMD
+	- in bulk processing, every operator is a pipeline breaker
+	- we are materializing intermediate results
+
+# Accessing the Data
+- https://resources.mpi-inf.mpg.de/departments/d5/teaching/ws06_07/queryoptimization/Lecture8.pdf
+- The Database organizes the physical storage in multiple layers
+	- [physical] partition: sequence of pages
+	- [physical] extent: subsequence of a partition
+	- [physical] record: sequence of bytes stored on a page
+	-  [logical] segment (file): logical sequence of pages, set of extents
+- database item: something stored in a database (record/tuple, table, others)
+- scan: produce a stream of items from another item
+- select * from Student
+
+## In-memory Shuffle
+
+- shuffle-paradigm goes back to the 80's, but mostly for joins
+- producer/consumer model for transmitting intermediate results from each stage to the next
+	- workers send outputs to shuffle nodes
+	- shuffle nodes store data in-memory in hashed partitions
+	- workers at the next stage retrieve their inputs form the shuffle nodes
+	- shuffle nodes store this data in-memory and only spill to disk if necessary
+
+- stage n:
+	- do work
+	- hash on some key that everybody agrees on
+	- write to shuffle-service
+		- spill to distributed file system if overflow
+- stage n+1
+	- read from shuffle-nodes
+		- wait for coordinator, or speculatively start reading stuff
+- "shuffle phases are basically checkpoints in a query's lifecycle where the coordinator makes sure that all tasks are done"
+	- fault tolerance / straggler avoidance: idempotent workers, so re-run if needed
+	- dynamic resource allocation: scale up/down the number of workers based on size of stage output
+
+- can re-run nodes or stages
+- one consuming worker "per partition"
+- shuffle service: "the abstraction makes software engineering easier"
+- "Snowflake doesn't do the shuffle, their workers can write to local disk"
+
+## Observation, how to do physical plan if no statistics?
+
+- "OLAP system, like Dremel"
+- You can use files like S3, or connectors like other DBMSs
+	- you can either push filters and selects to the underlying system
+	- or you can select * and do it yourself
+	- you can see if you have a star schema or a snowflake schema, and do things like push down constraints from the dimension table to the fact tables
+		- "Fact tables and dimension tables are key components of a schema in a data warehouse."
+		- In a data warehouse, a fact table is a table that stores the measurements, metrics, or facts related to a business operation. 
+			- It is located at the center of a star or snowflake schema and is surrounded by dimension tables.
+		- Dimension tables contain descriptions of the objects in a fact table and provide information about dimensions such as values, characteristics, and keys. 
+			- These tables are usually small, with a number of rows ranging from a few hundred to a few thousand. 
+- "Photon is a high-performance Databricks-native vectorized query engine"
+- Dremel will start with a preliminary plan based on heuristics, and then adapt this plan for each stage depending on the stage outputs
+
+- If your Dremel query has got a materialized view, then it will generate the materialized view -- result caching -- and for operators on this view it will have statistics
+- This is not the common case, most people will run queries on raw tables
+
+- dynamic query optimization
+	- Dremel changes the query plan before a stage starts based on observations from the preceding stage
+	- avoids the problem of optimizer making decisions with inaccurate (or non-exiting) data
+	- optimization examples:
+		- change the #workers in a stage
+		- switch between shuffle vs broadcast joins
+		- change the physical operator implementation
+		- dynamic repartitioning
+- dynamic repartitioning
+	- dremel dynamically load balances and adjusts intermetiate result partitioning to adapt to data skew
+	- DBMS detects whether shuffle partition gets too full and then instructs workers to adjust their partitioning scheme "shuffle node partition starts to fill up", recursive hashing / grace hash
+	- fire up another workers to repartition the data in the 'old partition' and kill it off
+- 
+
+
+
+# Google BigQuery Capacitor, columnar storage format
+- https://cloud.google.com/blog/products/bigquery/inside-capacitor-bigquerys-next-generation-columnar-storage-format
+- BigQuery "under the hood": https://cloud.google.com/blog/products/bigquery/bigquery-under-the-hood
+- BigQuery = Service + Infra
+	- Infra: Jupiter + Borg + Colossus + Dremel
+		- Jupiter: network
+		- Borg: compute
+		- Colossus: Distributed Storage
+		- Dremel: Execution Engine
+			- "It takes more than just a lot of hardware to make your queries run fast. BigQuery requests are powered by the Dremel query engine (paper on Dremel published in 2010), which orchestrates your query by breaking it up into pieces and re-assembling the results."
+			- Root server + mixers + lead nodes | jupiter | colossus
+			- "Dremel turns your SQL query into an execution tree. The leaves of the tree it calls ‘slots’, and do the heavy lifting of reading the data from Colossus and doing any computation necessary."
+			- "The branches of the tree are ‘mixers’, which perform the aggregation. In between is ‘shuffle’, which takes advantage of Google’s Jupiter network to move data extremely rapidly from one place to another. The mixers and slots are all run by Borg, which doles out hardware resources."
+- Capacitor:
+	- nested data inspired by Dremel columnar format
+	- The definition and repetition levels encoding is so efficient for semistructured data that other open source columnar formats, such as Parquet, also adopted this technique. 
+	- In the last 10 years, there's been a resurgence of research in column oriented database systems.
+	- Integrating Compression and Execution in Column-Oriented Database Systems
+		- https://15721.courses.cs.cmu.edu/spring2016/papers/abadi-sigmod2006.pdf
+		- ...describes various techniques and encodings, such as Run Length Encoding (RLE), Dictionary encoding, Bit-Vector encoding, Frame of Reference encoding, etc.
+		- "It doesn’t end here. BigQuery has background processes that constantly look at all the stored data and check if it can be optimized even further. Perhaps initially data was loaded in small chunks, and without seeing all the data, some decisions were not globally optimal. Or perhaps some parameters of the system have changed, and there are new opportunities for storage restructuring. Or perhaps, Capacitor models got more trained and tuned, and it possible to enhance existing data. Whatever the case might be, when the system detects an opportunity to improve storage, it kickstarts data conversion tasks. These tasks do not compete with queries for resources, they run completely in parallel, and don’t degrade query performance. Once the new, optimized storage is complete, it atomically replaces old storage data — without interfering with running queries. Old data will be garbage-collected later."
+		- "BigQuery performs all this maintenance behind the scenes, and it's completely invisible to you, and free of charge, both money and performance. BigQuery is a true NoOps service — it lets you focus on solving your business problems, and takes care of managing the rest for you!"
+
+- S3 query?
+- Storing and querying tree-structured records in Dremel: https://research.google/pubs/storing-and-querying-tree-structured-records-in-dremel/
+
+DREMEL: SQL
+- Google transitioned to NoSQL ()
+- Then they realized that E Cobb was a genious and transitioned back to SQL
+- In early 2010, many of Google's internal DBMS projects each had their own SQL dialect
+- GoogleSQL unified these redundant efforts to build a data model, type system, syntax, semantics and library
+- ZetaSQL, open source version of GoogleSQL
+- "I don't think that everybody will converge to a single dialect"
+- "the only defacto standard is Postgres, because a lot of systems forked the Postgres parser"
+
+- Apache Drill, Dremio, Apache Impala was inspired / based on Dremel
+- Bunch of companies did codegen, but gave up.
+- Presto and Trino
+	- Trino (formerly known as PrestoSQL) and Presto are both SQL query engines.
+	- They are both designed for high-performance SQL queries on large datasets.
+		- What is a query engine? A query engine takes a request for data, translates it from human to machine language, and then fulfills the request by retrieving specific data.
+
+- Dremio, Apache Arrow-based. Inspired of Dremel.
+	- Leverages user-defined materialized views called "reflections" to speed up query execution on external data files
+	- Also relies on Java-based codegen and vectorization
+
+- Impala:
+	- "They do code gen on the execution nodes"
+	- send worker to data note for push-down
+	- "Cloudera got eaten alive by Databricks", did not pivot to cloud native environments
+
+- Parting thoughts
+	- Dremel is an innovative DBMS that predates all oather major cloud-native OLAP DBMS
+	- The shuffle phase simplifies engineering and can improve performance
+	- it is also a good example of the benefit of decomposing a DBMS's components into individual services to abstract raw resources
+

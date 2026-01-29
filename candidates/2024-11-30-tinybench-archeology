@@ -1,0 +1,184 @@
+# Tinybench
+
+copy of tinyspy?
+
+
+
+export const now = () => {
+  // @ts-ignore
+  if (globalThis.process?.hrtime) {
+    return nanoToMs(Number(process.hrtime.bigint()));
+  }
+  return performance.now();
+};
+
+'process unknown'
+'fix with ai'
+
+export const now = () => {
+  if (typeof process !== 'undefined' && process.hrtime) {
+    return nanoToMs(Number(process.hrtime.bigint()));
+  }
+  }
+  return performance.now();
+};
+
+
+'real fix' would have been to 'add node types'
+
+
+
+BDD-style
+
+
+
+
+https://rust-book.cs.brown.edu
+
+
+Understanding Ownership
+
+Ownership is Rust’s most unique feature and has deep implications for the rest of the language. It enables Rust to make memory safety guarantees without needing a garbage collector, so it’s important to understand how ownership works. In this chapter, we’ll talk about ownership as well as several related features: borrowing, slices, and how Rust lays data out in memory.
+
+
+
+
+
+
+first version of criterion.rs:
+    let mut b = Bencher::new();
+    b.bench("exp", || 2.0_f64.exp());
+
+    if self.clock.is_none() {
+        self.clock = Some(Clock::new(self.config.dump_clock));
+    }
+
+    let min_time = 10.ms();
+    let size = self.config.sample_size;
+    let nresamples = self.config.nresamples;
+    let cl = self.config.confidence_level;
+
+    let (elapsed, iters, action) = run_for_at_least(min_time, 1, action);
+    	pub fn run_for_at_least<'a, T>(
+		    how_long: u64,
+		    seed: usize,
+		    action: impl Fn() -> T + 'a,
+		) -> (u64, usize, impl Fn() -> T + 'a) {
+		    let mut iters = seed;
+		    let mut tries = 0;
+
+		    let init = precise_time_ns();
+		    loop {
+		        let start = precise_time_ns();
+		        for _ in 0..iters {
+		            black_box(action());
+		        }
+		        let elapsed = precise_time_ns() - start;
+
+		        if elapsed > how_long {
+		            return (elapsed, iters, action);
+		        }
+
+		        iters *= 2;
+		        tries += 1;
+
+		        if precise_time_ns() - init > 10 * how_long {
+		            panic!("took too long to run: seed {}, tries {}", seed, tries);
+		        }
+		    }
+		}
+
+	Sample::new <-- for measurement in 0..size, call f() 'iters' times and then store elapsed time for this measurement
+
+	// classify outliers using the boxplot method
+	// report outliers
+
+	// dump sample
+
+	// sample.without_outliers().bootstrap(nresamples, cl).report();
+	for n in 0..nresamples -> resample.next(), push means/medians/std_devs
+
+	mean = Estimate::new(sample.mean(), means.as_slice, cl)
+		impl Estimate {
+		    fn new(point: f64, bootstrap: &[f64], cl: f64) -> Estimate {
+		        let standard_error = bootstrap.std_dev();
+		        let lower_bound = bootstrap.percentile(50.0 * (1.0 - cl));
+		        let upper_bound = bootstrap.percentile(50.0 * (1.0 + cl));
+
+		        Estimate {
+		            confidence_level: cl,
+		            lower_bound: lower_bound,
+		            point: point,
+		            standard_error: standard_error,
+		            upper_bound: upper_bound,
+		        }
+		    }
+		}
+
+
+
+
+
+
+
+
+
+
+## Modern criterion
+
+
+
+run with -- --bench, because of reasons
+
+
+
+
+fn single_fibonacci(c: &mut Criterion) {
+    c.bench_function("Recursive", |b| b.iter(|| fibonacci_slow(black_box(20))));
+}
+
+fn main() {
+    let mut criterion = Criterion::default().configure_from_args();
+    single_fibonacci(&mut criterion);
+    criterion.final_summary();
+}
+
+
+let mut criterion = Criterion::default().configure_from_args();
+single_fibonacci(&mut criterion);
+	c.bench_function("Recursive", |b| b.iter(|| fibonacci_slow(black_box(20))));
+		self.benchmark_group(id)
+            .bench_function(BenchmarkId::no_function(), f);
+        self
+        	BenchmarkGroup::new(self, group_name)
+        		group.bench_function(id, f)
+			        self.run_bench(id.into_benchmark_id(), &(), |b, _| f(b));
+			        	group::run_bench
+			        		let config = self.partial_config.to_complete(&self.criterion.config);
+	        		        let report_context = ReportContext {
+					            output_directory: self.criterion.output_directory.clone(),
+					            plot_config: self.partial_config.plot_config.clone(),
+					        };
+					        internal_benchmark_id = ...
+					        assert!(unique)
+					        id.ensure_directory_name_unique(&self.criterion.all_directories);
+			                self.criterion
+					            .all_directories
+					            .insert(id.as_directory_name().to_owned());
+			                id.ensure_title_unique(&self.criterion.all_titles);
+			                let do_run = self.criterion.filter_matches(id.id());
+			                let mut func = Function::new(f);
+
+
+criterion.final_summary();
+
+
+- always a group, if no group -> add to a new anonymous groupo
+- criterion.report.warmup(...)
+- 
+
+
+during html report:
+Criterion.rs ERROR: error: Failed to access file "/Users/folkol/code/criterion.rs/target/criterion/Fibonacci/Iterative/new/sample.json": No such file or directory (os error 2)
+
+

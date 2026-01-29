@@ -1,0 +1,10 @@
+fn = fn-1 + fn-2
+F(x) = xF(x) + x2F(x) + x
+F(x) = x/(1 - x - x2) = x / ((1 - fix)(1 + (1/fi)x)) = (1/sqrt(5))/(1 - fix) - (1/sqrt(5))/(1 + (1/fi)x)
+(1/sqrt(5)) * ∑finxn - (1/sqrt(5))*∑(-1/fi)nxn
+fn(fi(n)) - (-1/fi)n / sqrt(5)
+
+- partial fraction decomposition
+- geometric series power expansion
+- exact closed form expression
+

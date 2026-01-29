@@ -1,0 +1,135 @@
+secondment agreement p.g.a. inte anställd av Ivbar
+
+Ivbar har haft Avanza.
+    Ej söderberg och partners partner, men nordnet är.
+
+openssl:    19.1.0
+
+Hacking:
+- re-used passwords + data breaches
+    https://en.wikipedia.org/wiki/Credential_stuffing
+- social engineering, steal credentials or install malware
+- man in the middle
+
+
+----------------------------------
+ Tue Jan 11 09:48:32 CET 2022
+
+
+Digital signatures
+    - https://www.youtube.com/watch?v=s22eJ1eVLTU
+        - https://www.youtube.com/watch?v=GSIDS_lvRv4
+
+            Cipher Strength?
+                - https://crypto.stackexchange.com/questions/43569/measuring-cypher-strength
+                - best known attack, feasible? (=within reach of any organization on the planet)
+                    - Generally we still show the strength after attacks in bits. For instance, the strongest attack requires about 249 2 49 plaintexts. As a plaintext block is 23 2 3 bits, the strength of the cipher - if this attack is possible - is about 52 bits instead of the promised 56 bits. As can be seen, DES is just insecure because of the small key size rather than cryptographic weaknesses. This allows it to be used for Triple DES which may still provide adequate security even nowadays.
+
+    Tröjtryck:
+    - Kådklåpare / Kådknåpare / kådknåpare / KÅDKNÅPARE
+    - GO NUTS  (funkofob)
+    - leap of fail!
+    - Hur väljer _DU_ dina siffror?
+    - #pragma
+
+
+Variable Length Quantities
+
+
+----------------------------------
+ Wed Jan 12 10:39:31 CET 2022
+
+
+https://stackoverflow.com/questions/39239051/rs256-vs-hs256-whats-the-difference
+    NB when using rs256 - there is (or was) a security risk in many libraries which allowed the token to determine which algorithm to use. Essentially the attacker could use the public rs256 key with a hs256 encoding to pretend it is the secret key. So make sure your library doesn't have this behaviour! – 
+    Alex
+     Oct 4 '16 at 9:22
+        https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/
+
+https://datatracker.ietf.org/doc/html/rfc6749#section-4.1
+
+get stat URL from context or find out what listened on :4040
+
+qlutter.io
+
+
+----------------------------------
+ Fri Jan 14 09:53:20 CET 2022
+
+
+ Nagios alarms (1 critical) + cannot login to VPN (See ERA-2743).
+    - Console + nagios.log show 'yubico api connetion CRITICAL' for admin.safe.ivbar.com.
+    - Console + nagios.log show 'yubico api connetion CRITICAL' for admin.se-prod.ivbar.com.
+
+    ƒolkoƛ
+
+    Maria om UI Design:
+
+        Det är dels en direkt jobbrelaterad sak (jag vill kringgå vår utvecklingsprocess för en åtgärd som har säkerhetsimplikationer) och en annan sak som är "yrkesrelaterad" men som inte har direkt bäring på "Era-förvaltning och nedmontering"... (jag går onlinekurser då och då, och en kurs som jag tänkte börja på i helgen visade sig kosta lite mer än vad jag är van vid – så jag tänkte mest höra med dig ifall det fanns någon utbildningsbudget eller motsvarande som jag skulle kunna utnyttja för detta).
+
+        Registreringen är öppen till tisdag nästa vecka.
+
+        Jag prenumererar på hans nyhetsbrev, och det har gett ett gott intryck.
+
+
+        Hi Tim,
+        I am going to help Jeroen and Marco with automating deployments for the mrdm-datascience-platform repo, and as a convenience I'd like to get access to the mrdm-main-test-cluster Kubernetes cluster so that I can inspect pod logs and so on without having to do it through the Bitbucket Pipeline Runners. This cluster does not use RBAC though, so this means I can't just get read access to a specific namespace but rather full admin access or nothing. Do you think that his is a reasonable thing to do?
+
+
+        Tim approves k8s access, but there is a pending decision whether I need a secondment agreement or not.
+
+
+----------------------------------
+ Mon Jan 17 09:29:12 CET 2022
+
+    Nagios warnings:
+
+    - 2022-01-14: 1 critical on vpn.safe and vpn.se-prod (yubico api).
+        - There is a branch with new IPs, but it seems like the old servers got resurrected during the weekend.
+            - Maybe deploy anyway since these contain IPs from different segments?
+
+    - status changes:
+
+        PROBLEM Service: no recent unattended upgrades Host: dns@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: frontproxy0@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: trans@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: inbox@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: mail@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: bridge@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: log@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: vpn@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: engine@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: preprod0@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: vault@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: front@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: jenkins@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: jenkins3@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: vpn-util@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: uiproxy@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: orc@se-prod
+        PROBLEM Service: no recent unattended upgrades Host: datastore@se-prod
+
+        PROBLEM Service: no recent unattended upgrades Host: se-insight-inbox@safe
+        PROBLEM Service: no recent unattended upgrades Host: vpn@safe
+        PROBLEM Service: no recent unattended upgrades Host: se-vgr-misc-dev@safe
+        PROBLEM Service: no recent unattended upgrades Host: repo@safe
+        PROBLEM Service: no recent unattended upgrades Host: se-lul-mat-dev@safe
+        PROBLEM Service: no recent unattended upgrades Host: se-lul-mat-front@safe
+        PROBLEM Service: no recent unattended upgrades Host: log@safe
+        PROBLEM Service: no recent unattended upgrades Host: se-vgr-misc-front@safe
+        PROBLEM Service: no recent unattended upgrades Host: mirror@safe
+
+
+    TODO: Från Maria: Gör utlägg, men ändra totalsumman till 5000SEK.
+
+
+    https://app.learnui.design/courses/enrolled
+
+    "I would like my design routines to grow more methodical, and myself to become better at articulating my gut feelings (primarily for clarity of thought — but also in order to communicate with others)."
+
+
+    TODO: Checkout kubelens and kubectx (and maybe kubeens?)
+
+        - https://github.com/ahmetb/kubectx
+
+    

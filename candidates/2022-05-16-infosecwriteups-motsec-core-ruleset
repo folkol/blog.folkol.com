@@ -1,0 +1,27 @@
+https://infosecwriteups.com/module-2-owasp-modsecurity-core-rule-set-pentesting-bypassing-cloud-web-application-firewall-1526e53cb721?gi=5aa6a30a1404
+
+Q. What is Core Rule Set & why it is utilized by all the cloud WAFs?
+A. We will try to understand more about the core rule set along with its working and will try to implement the mod security on the apache server and learn why it is utilized by major WAFs.
+
+Introduction
+Before starting with the setup of WAF over the cloud we need to understand the Core Rule Set which we will be enabled in the cloud WAFs. Since CRS is open source I reported to security@coreruleset.org and a few things from the report were rejected and the rest accepted which are mentioned below in the blog.
+Later I will be showing the security flaws which were not accepted and why I consider them as valid reasons and also I will set up the cloud WAF and bypass the CRS rules.
+
+Objective
+- Definition of ModSecurity & OWASP ModSecurity Core Rule Set.
+- Working of Core Rule Set.
+- Why use OWASP CRS.
+- Implementation of CRS on Apache.
+- CRS configuration and paranoid levels?
+- CRS & Cloud WAF
+- Summary
+
+Description
+- ModSecurity: It is an open-source, cross-platform web application firewall (WAF) engine for Apache, IIS and Nginx. Every engine requires a set of rules and regulations to perform actions.
+- OWASP CRS: OWASP Core Rule Set is a set of generic attack detection rules for use with ModSecurity or compatible Web Application Firewall (WAF). Any compatible WAF can use CRS rules hence all the cloud providers use these generic rule set to provide WAF on the cloud.
+The CRS protects web applications from a wide range of security risks with a minimum of false positives when it is fine-tuned properly.
+
+Why use OWASP CRS?
+These rules are generic in nature and any compatible WAF engine can use CRS hence all the major cloud providers like Amazon AWS, Microsoft Azure, Google Cloud, Akamai, etc. all have a CRS offering of some sort.
+Hence we need to understand the working of CRS before enabling it for production applications.
+

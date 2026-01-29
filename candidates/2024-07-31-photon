@@ -1,0 +1,96 @@
+# Photon
+
+https://www.youtube.com/watch?v=HqZstqwWq5E
+
+- Spark was a 'better hadoop', came out of Berkley.
+- DataBricks was created to productify Spark
+- Photon (query engine for Spark running in DataBricks) uses partial code gen, predicates themselves -- not whole query like Hyper
+- Spark and Hadoop both write map-output to disk, hoping for the OS to cache these until they are fetched by the next stage. In practice, this is significant overhead and we changed it to in-memory with option to spill to disk in Photon.
+> We modified the shuffle phase to materialize map outputs in memory, with the option to spill them to disk. —https://15799.courses.cs.cmu.edu/fall2013/static/papers/p13-xin.pdf
+- Databricks' workloads were becoming CPU bound. Fewer disk stalls because of NVMe SSD caching and adaptive shuffling + better filtering to skip reading data
+- JVM became bottleneck, GC slowdown for heaps over 64GB and JIT codegen limited for large methods
+- Photon: Single-threaded C++ execution engine embedded in to Databricks Runtime (DBR) via JNI.
+- Accelerate execution of query plans over "raw / uncurated" files in a data lake.
+- Photon:
+	- shared-disk / disaggregated storage
+	- pull-based vectorized query processing
+	- precompiled primitives + expression fusion
+	- shuffle-based distributed query execution
+	- sort-merge + hash joins
+	- unified query optimizer + adaptive optimizations
+- "Photon has no notion of network or workers, it is only a library of kernels to perform computations"
+
+- Photon (actually, Spark) query execution:
+	- like dremel, bunch of 0-stage workes pull data from storage
+	- unlike dremel, workers partition the output and store it locally
+	- next-stage workers connect to all previous workers and pull from them
+- Photon is a pull-based vectorized engine that uses precompiled primitives for operator kernels
+	- converts physical plan into a list of pointers to functions that perform low-level operations on column batches
+- Databricks: It is easier to build/maintain a vectorized engine than a JIT engine
+- with codegen, engineers write tooling and observability hooks instead of writing the engine
+- Hyper (Tableau? Or maybe hyper-db) uses code gen, LLVM IR. But LLVM IR -> when you crash, you don't have symbols and you don't have pretty stack traces
+- Auto-vectorization works pretty well, becaues kernels are pretty small, but sometimes we use intrinsics.
+
+- Photon: Vectorized query processing
+	- Each 'GetNext' invocation on a Photon operator produces 'a column batch'
+	- one or more 'column vectors' with a 'position list' vector
+	- each column vector includes a null bitmap
+	- Databricks: Position list vectors performs better than 'active row' bitmap, despite indirection
+- Not doing HyPer-style operator fusion (holistic-optimization of the query). Partially because of the engineering effort -- but also because we can collect per-operator statistics and show the user
+- Instead, photon engineers fuse expression primitives to avoid excessive function calls '"horizontal" fusion within a single operator'
+- query plan -> segment on pipeline breakers -> within a pipeline, fuse stuff if needed
+- "Vectorwise": Precompiled primitives
+- without statistics, the DBMS has to be more dynamic in its memory allocations
+	- instead of operators spilling its own memory to disk when it runs out of space, operators request for more memory from the manager who then decides what operators to release memory
+	- simple heuristic that releases memory from the operator that has the least allocated but enough to satisfy request
+- Postgres: guess, and if fails -- double the memory and try again
+- Other systems just crash
+- Catalyst Query Optimizer: Cascades-style query optimizer for Spark SQL written in Scala that executes transformations in per-defined stages similiar to Microsoft SQL Server
+	- Logical -> Logical (analysis and optimization rules)
+	- Logical -> Physical (strategies)
+	- Physical -> Physical (preparation rules)
+	- Traverse the original query plan bottom-up to convert it into a new Photon-specific physical plan (the spark engine is row based, photon is column based -- so might need pivoting)
+	- "where do I begin converting to Photon, and how far up can I go"
+- Runtime adaptations:
+	- Query-level adaptivity ("Macro")
+		- Re-evaluate query plan decisions at the end of each shuffle stage
+		- Similar to Dremel approach we discussed last class
+		- This is provided by DBR wrapper
+	- Batch-level adaptivity ("Micro")
+		- Specialized code paths inside of an operator to handle the contents of a single tuple batch
+		- This is done by Photon during execution
+
+- Spark: dynamic query optimization
+	- Spark changes the query plan before a stage starts based on observed data in the shuffle buffers
+	- examples:
+		- Dynamically switch between shuffle vs broadcast join
+		- Dynamically Coalesce partitions
+		- Dynamically optimize skewed joins
+
+- Spark: Partition Coalescing
+	- Overallocate output partitions
+	- After shuffle completes, combine small ones to one
+	- Adjust workers for this (Note: we can do this since we can allocate multiple shuffles to one worker after the stage)
+- Maybe we can let the shuffle server do this as well?
+- Photon: batch-level adaptivity
+	- Separate primitives for ASCII vs UTF-8
+	- No NULL values in column (elide branching to check null vector)
+	- No inactive rows in batch (elide lookups in position lists)
+- 
+
+
+
+
+
+
+
+
+
+
+- Q: are database clients creating the query plan, generally?
+- Q: How fast or slow is WASM (with JIT?) compared to bespoke vectorized code?
+- Q: can rust error libraries capture stack trace when errors are created?
+- 
+
+
+https://people.csail.mit.edu/matei/papers/2015/sigmod_spark_sql.pdf

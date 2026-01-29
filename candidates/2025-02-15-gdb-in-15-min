@@ -1,0 +1,106 @@
+# Give me 15 min and I'll change your view of gdb
+
+https://www.youtube.com/watch?v=PorfLSr3DDI
+
+> gdb, easy to use -- but not that easy to learn
+
+1. start (break at main and run)
+gcc -g hello.c
+gdb a.out
+start
+
+list (program listing)
+
+2. tui mode
+^x^a
+next
+next # some print screw up the monitor
+
+3. repaint
+^l
+
+4. ^x2 (two windows, cycle)
+
+5. tui reg [float],  general purpose or float registers
+
+6. ^x1, back (cycle)
+7. up and down arrow, 
+8. ^p / ^n, prev and next command
+9. python interpreter built in (since 7)
+python print('hello world')
+
+
+python
+import os
+...
+print('my pid is %d' % os.getpid())
+end
+
+define functions that you can run from the command line, and that becomes a first-class gdb command
+
+tightly bound, you can manipulate e.g. gdb breakpoints from python
+
+python print(gdb.breakpoints())
+
+python print (gdb.breakpoints()[0].location)
+
+python gdb.Breakpoint('7')  # breakpoint specifyer
+
+python pretty printers for various structures
+
+10. reversible debugging
+there is built-in
+
+
+gdb -c core.123
+bt
+'no stack information, so clearly this is some kind of stack smashing bug -- so the core dump is of no use'
+
+b main
+b _exit.c:32
+command 3
+run
+end
+
+command 2
+record
+continue
+end
+
+run
+
+n
+
+set pagination off
+
+run
+y
+
+p $pc
+x {memory}
+
+reverse-stepi (because of record)
+
+disas
+
+arrow at the bottom retq
+
+print $sp
+
+print *(long**) $sp
+
+watch-point / data breakpoint
+
+watch *(long**) ...
+
+run backwards!
+
+reverse-continue
+
+print i
+35
+
+array is 32
+
+used sizeof array instead of sizeof array / sizeof array[0]
+

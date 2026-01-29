@@ -1,0 +1,20 @@
+Null Byte, 6 step framework
+
+- pre-engagement
+    - understand the assignment and the scope, PC/IoT/whatever?
+- reconnaissance
+    - use tools such as nmap to scan local networks
+    - shodan
+- vulnerability assessment
+    - narrow down the targets to devices vulnerable to known exploits
+    - nessus
+- exploitation
+    - for example command injectio
+- post exploitation
+    - postenum.sh
+    - escalation
+- reporting
+    - gather knowledge
+    - organize it
+    - publish report
+

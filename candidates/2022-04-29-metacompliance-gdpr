@@ -1,0 +1,95 @@
+Previously, most people did not care about how their personal data was handled. This led to companies hoarding it and selling it. (Not care, or were oblivious to that it happened.)
+
+With GDPR, two fundamental changes were introduced:
+- individuals now own their personal data, they are the 'data subjects'
+- privacy principles are based on risks, the higher the risks to the data subject, the stronger the protection needs to be. If strong enough protection can't be put into place, the risks have to be reduced in some other way (for example from data minimization)
+
+Personal data have to be protected, organisations have to take care of their personal data — and demonstrate how this is done.
+You personally have to take responsibility for all personal data you use, "yes, you personally".
+Your organisation is responsible for making sure that you have all the tools you need to protect the personal data.
+
+You have to read your policies, adhere to your standards and follow your privacy training.
+
+>> https://www.quora.com/Is-it-true-that-under-GDPR-an-individual-cannot-be-held-responsible-for-a-data-breach
+>>> No.
+>>> Individuals have been charged and fined for causing breaches, but in those cases they had specifically disobeyed their employers security policies for their own reasons.
+>>> The UK regulator publishes details of cases it has prosecuted recently…
+>>> Leo Kirk
+>>> Dannyelle Shaw
+>>> Michelle Shipsey
+>>> Individuals can also be data-processors (maybe as a self-employed IT contractor, for example) and again that would make them personally liable
+>>> GDPR does make it clear that personal or domestic activity is not in scope, so a family Christmas-Card mailing list on your home computer is not subject to GDPR, for example.
+
+>>> What constitutes a breach of GDPR?
+>>> The GDPR defines a personal data breach as 'a breach of security leading to the accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to, personal data transmitted, stored or otherwise processed'. ... This type of breach is most common with patients' records.
+>>> The GDPR introduces a duty on all organisations to report certain types of personal data breach to the relevant supervisory authority. You must do this within 72 hours of becoming aware of the breach, where feasible.
+>>> If the breach is likely to result in a high risk of adversely affecting individuals’ rights and freedoms, you must also inform those individuals without undue delay.
+>>> You should ensure you have robust breach detection, investigation and internal reporting procedures in place. This will facilitate decision-making about whether or not you need to notify the relevant supervisory authority and the affected individuals.
+>>> You must also keep a record of any personal data breaches, regardless of whether you are required to notify.
+
+>> https://www.reddit.com/r/gdpr/comments/7fvjnm/are_individuals_liable_under_gdpr_for_a_breach/
+>>> https://gdpr-info.eu/art-83-gdpr/
+
+In the metacompliance introduction to GDPR, the video states "Well, it means that you are responsible for protecting all the personal information you use. Yes, you, personally!", what is this supposed to mean? I understand that I need to follow our Policies, but surely I am — on a personal level — liable under the GDPR? If I have misunderstood something and this really is the case, can someone please refer me to the article or recital where this is explained?
+
+The site doesn't work very well, at least not on Safari on Mac.
+- I can't use Browser history (back/forward) to navigate the site (I end up at error pages if I try).
+- I've had issues with videos that stopped suddenly and videos that did not load.
+- I could not re-watch a video (clicking "Why GDPR Matters" gave me a blank page, even after reloading the app — I had to download the transcript and read it instead).
+
+============
+
+Information that can be used on its own, or together with other information, to identify/contact/locate an individual.
+
+"Directly or indirectly identifiable personal information"
+
+name, personal interests, email address, physical address, nationality
+
+It is vital that everybody understands what personal data is, and how to protect it accordingly.
+
+>> https://gdpr-info.eu/issues/personal-data/
+
+    The term ‘personal data’ is the entryway to the application of the General Data Protection Regulation (GDPR). Only if a processing of data concerns personal data, the General Data Protection Regulation applies. The term is defined in Art. 4 (1). Personal data are any information which are related to an identified or identifiable natural person.
+
+>> https://gdpr-info.eu/art-4-gdpr/
+
+    ‘personal data’ means any information relating to an identified or identifiable natural person (‘data subject’); an identifiable natural person is one who can be identified, directly or indirectly, in particular by reference to an identifier such as a name, an identification number, location data, an online identifier or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural or social identity of that natural person;
+
+
+# Sensitive personal data
+
+Why not use the GDPR terms such as "special categories"?
+
+https://gdpr-info.eu/art-9-gdpr/
+
+    "Processing of personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, or trade union membership, and the processing of genetic data, biometric data for the purpose of uniquely identifying a natural person, data concerning health or data concerning a natural person’s sex life or sexual orientation shall be prohibited."
+
+    unless:
+        - explicit consent for this specified purpose
+        - some other things
+
+    https://gdpr-info.eu/recitals/no-51/
+        - 
+
+https://www.imy.se/en/individuals/data-protection/introduktion-till-gdpr/what-is-actually-meant-by-personal-data/what-is-meant-by-sensitive-personal-data/
+    - The General Data Protection Regulation makes a difference between "general" personal data and sensitive personal data. Sensitive data is data that reveals a person's race or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership and personal data concerning a person's health and sex life. Data concerning health may for example comprise sick leave, pregnancy and doctor's visits. Handling such data is normally prohibited but there are exceptions. Sensitive personal data must also be protected more than other data.
+
+Sales leads with contact information.
+- directly identifiable if it is all in same spreadsheet
+- indirectly if spread out
+- name, email, contact phone, shoe size, preferred style
+- YES: correct
+
+Cross-selling opportunities
+- age and gender details, but not names
+- NO:, no name?
+- if it could be cross referenced with other data it would be pin pointed
+
+- care insurance
+- cross selling
+- customer profile
+    - age and gender details
+    - NO: Because the exported dataset ITSELF doesn't contain information to identify the persons, but be cautious because if the recipient has got additional information this could be used to bind the information to a person <-- Article 4, 1 does not say "the information must be stored together with identifier all the time to be considered personal data", my interpretation is that it is personal data anyway. Is this incorrect? If so, can someone please refer me to the article or recital that explain this?
+
+Pseudonymized
+- YES: correct

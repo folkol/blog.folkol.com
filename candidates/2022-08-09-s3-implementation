@@ -1,0 +1,255 @@
+## Strong consistency
+
+https://www.allthingsdistributed.com/2021/04/s3-strong-consistency.html
+
+## Amazon's Dynamo Paper
+
+https://www.allthingsdistributed.com/2007/10/amazons_dynamo.html
+
+"Dynamo is internal technology developed at Amazon to address the need for an incrementally scalable, highly-available key-value storage system."
+
+"The technology is designed to give its users the ability to trade-off cost, consistency, durability and performance, while maintaining high-availability."
+
+"Let me emphasize the internal technology part before it gets misunderstood: Dynamo is not directly exposed externally as a web service; however, Dynamo and similar Amazon technologies are used to power parts of our Amazon Web Services, such as S3."
+
+Many techniques in Dynamo comes from Operating Systems and distributed systems research:
+- DHTs (Distributed Hash Tables?)
+- Consistent Hashing
+- Versioning
+- Vector Clocks
+- Quorum
+- Anti-entropy based recovery
+
+As far as the author knows, Dynamo was the first system to combine all these.
+
+"At Amazon scale (tens of thousands of servers, 2007), small and large components fail continuously and the way persistent state is managed in the face of these failures drives the reliability and scalability of the software systems."
+
+To achieve this level of availability, Dynamo sacrifices consistency under certain failure scenarios. It makes extensive use of object versioning and application-assisted conflict resolution in a manner that provides a novel interface for developers to use.
+
+"Dealing with failures in an infrastructure comprised of millions of components is our standard mode of operation; there are always a small but significant number of server and network components that are failing at any given time. As such Amazon’s software systems need to be constructed in a manner that treats failure handling as the normal case without impacting availability or performance."
+
+"There are many services on Amazon’s platform that only need primary-key access to a data store. For many services, such as those that provide best seller lists, shopping carts, customer preferences, session management, sales rank, and product catalog, the common pattern of using a relational database would lead to inefficiencies and limit scale and availability. Dynamo provides a simple primary-key only interface to meet the requirements of these applications."
+
+Dynamo uses a synthesis of well known techniques to achieve scalability and availability: 
+- Data is partitioned and replicated using consistent hashing 
+- consistency is facilitated by object versioning
+- The consistency among replicas during updates is maintained by a quorum-like technique and a decentralized replica synchronization protocol.
+- Dynamo employs a gossip based distributed failure detection and membership protocol.
+	Gossip-style failure detection: instead of flooding, we send our list of heartbeats to one random member. And occationally broadcast (or send to known gossip-host) to recover from network partitioning and for initial connection.
+
+Dynamo is a completely decentralized system with minimal need for manual administration. Storage nodes can be added and removed from Dynamo without requiring any manual partitioning or redistribution.
+
+"In the past year, Dynamo has been the underlying storage technology for a number of the core services in Amazon’s e-commerce platform. It was able to scale to extreme peak loads efficiently without any downtime during the busy holiday shopping season. For example, the service that maintains shopping cart (Shopping Cart Service) served tens of millions requests that resulted in well over 3 million checkouts in a single day and the service that manages session state handled hundreds of thousands of concurrently active sessions."
+
+- how an eventually consistent system can be used in production
+- how to tune these systems for very strict performance demands
+
+Paper structure:
+- section 2: background
+- section 3: related work
+- section 4: 
+
+## https://www.youtube.com/watch?v=m_NvhgfD2Hw
+
+Skipping business requirement.
+
+Tradeoffs
+- consistency
+- availability
+- cost-effectiveness
+- performance
+
+Eventual... consistency.
+
+Inspired: Apache Cassandra, followed the architecture. DynamoDB is 'second generation', also inspired by Cassandra.
+
+The multi-master problem.
+- single master: atomic commits
+- multi-master: race condition
+
+Dumb (or conservative) solution: 
+- confirm write to all nodes
+- speed congruent to slowes node, consider network partition and offline.
+
+Optimizations:
+- consensus algorithms: Paxos, RAFT (only wait for a handful of nodes)
+- 'hot' node
+- looks like a single node
+
+Dynamo authors on inconsistency:
+- "So what?" Does it matter?
+	- bank: yes
+	- shopping cart: not really
+	- resolve inconsistencies
+		- choose one?
+		- delete both?
+		- ask the user
+		- merge! Will be correct almost all the time!
+
+Session state inconsistencies:
+- last write wins
+
+"Mostly accurate datastore"
+- Eventually... consistent is fine.
+
+Are those inviolable requirements inviolable?
+
+## https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf
+
+
+
+## Øredev 2015 - Christopher Batey - DYNAMO: the paper that changed the database world
+
+https://www.youtube.com/watch?v=hMt9yFp0JKM
+
+RIAK, Cassandra, DynamoDB.
+
+- Intro to scaling databases
+- Dynamo
+	- Consistent hashing
+	- Replication
+	- Consistency
+	- Conflict Resolution
+
+reading group
+
+Takeaways:
+- understand the rough limits of systems based on their architecture
+	- if single-master
+		- there will probably be some downtime
+		- consistency will probably be pretty cheap
+- be interested in databases
+
+Q: "Which NoSQL DB should I use?"
+A: Why do you think you need a NoSQL DB?
+
+Q: Mongo or Cassandra?
+A: ...
+
+Axis of a DB
+
+           ^
+D          |
+a          |
+t Full SQL |
+a          |
+m Column   |
+o          |
+d Document |
+e          |
+l   KV     |
+           +-------------------------------------->
+             SingleServer M/Slave M/M P2P
+					Architecture
+
+Dynamo paper describes a KV store
+
+KV: key to value
+Document: The database understand the structure
+Column: You can manipulate columns separately
+Full SQL Graph: 
+
+M/M: 
+P2P: 
+
+Single node DB: You can fit everything in RAM, ad-hoc will work.
+Horizontal scaling: sharding M/Slave or P2P
+
+"CAP Theorem", isn't the best to describe real systems... but a starting point.
+- often used in marketing, and often incorrectly
+
+pick 2: consistency*, availability, partitions
+
+*special type, "linerizable consistency"
+availabilty: means 'full availability'. Any available node will always be able to serve any request.
+partitions/partition tolerant: If you run on two or more servers, you have to have partition tolerance. RabbitMQ, partition the network, and let it merge. It will toss half the data.
+
+PAC-ELC
+
+	### https://en.wikipedia.org/wiki/PACELC_theorem
+
+	in case of partitioning, choose between availability and consistency, else in case of non-partition — choose between latency and consistency.
+
+In general, in dynamo systems, we are not talking about linearazable consistency but something less.
+
+scaling reads: single master write
+scaling writes: sharding
+
+P2P, consistent hashing.
+can either be done on the server, or on the client. Most dynamo systems do it on the client. (They get updated about the topology, and they do the hashing themselves.)
+
+A piece of data doesn't live on a single node on a dynamo system.
+The client doesn't need to do this, the node receiving the call will do this.
+- cassandra have fancier strategies than his, it walks the ring — but it avoids nodes on the same rack
+
+Consistent Hashing: Master?
+- for couchbase, if the 'master shard' is unavailable — you can't write it (but you can read from replicas).
+
+CH: No master
+- we can read or write to any node in the 'walked nodes'
+
+CH: Quorums
+- write with W=1 means 'take this stuff, write to N nodes, and get ack from at least one of them before returning'
+- read=1, read from at least one.
+- we can make sure that write and read numbers overlap (like 2/3), note that this is not linearizable consistency! We don't know which order they happened, and if multiple writes are ongoing.
+
+### https://en.wikipedia.org/wiki/Linearizability
+
+"Informally, this means that the unmodified list of events is linearizable if and only if its invocations were serializable, but some of the responses of the serial schedule have yet to return.[1]" —Linearizability: A Correctness Condition for Concurrent Objects.
+
+CH: Sloppy Quorums
+- 'hinted handoff', (Cassandra have a concept that have this name, but not the concept described in the paper.).
+- complexity of conflicts, unavoidable in non-single-master systems
+- conflicts are resolved on read
+- conflict: the data model
+	- key value? Replace the entire value.
+	- column family? Replace individual columns.
+- distinction between dynamo and dynamodb, the dynamodb and the cassandra is more like a column store. RIAK is more like a dynamo store, but has got 'Conflict-free replicated data type - Wikipedia's which are kinda awful.
+- conflict: clock time?
+	- LWW: 'last write wins'
+	- servers may not be in sync
+	- even if they are in sync, we can lose data
+	- read-update-write might overwrite updates
+	- with column family, we can update individual properties, with KV we need to update all
+
+- alternatives to LWW
+	- AWS had KV stores with LWW for some things that we may lose, like session state
+	- for other things, that they wanted to not lose, they used vector clocks
+	- first write: {A:1}, when second write {A:1, B:2}
+	- third write: {A:1, C:1}, this is missing B2 so we know that there is a conflict (this is how couchbase does it)
+		- if everything is present in the vector clock, and the numbers are greater
+		- on read, we get both
+			[[{A:1, B:1}, ...],
+			 [{A:1, C:1}, ...]]
+		- when D reads, it has to merge
+	- downsides is that vector clock grows fast, it also requires read before write
+	- CFDTs can do this automatically
+
+- conflict: immutable
+	- immutable data modelling, very commin in C*
+	- very common with cassandra
+	- stolen from event sourcig
+	- akka persistance (basically event source + recurrent snapshotting)
+	- instead of having a distributed mutable value, we have a log
+
+- Avoiding another database: Dynamo++
+	- for many systems, a combination have multiple databases. For example Cassandra for most things, but mysql for things like tickets, etc.
+	- Support CAS, Compare-and-swap or Compare-and-set.
+	- the major algorithm is Paxos
+	- RAFT is a simpler version of Paxos (for distributed consensus)
+	- RAMP is something different (Read Atomic Multipartition)
+
+- Summary
+	- Dynamo inspired systems to emphasise A over everything
+	- You need a strategy for conflicts
+	- The benefit? Production Cassandra clusters with PBs and millions of ops/s
+	- interesting and approachable papers
+	- a domain that we all understand, a basket service at Amazon
+	- a great vector clock example: Two conflicting baskets — they put all in!
+	- 'the cassandra ring'
+	- if you don't think about conflicts, you will eventually have an interesting discussion with customers because you WILL LOSE DATA
+
+- Questions
+	- response times?: How does the replication affect the latency.
+		- configurable on a per-query basis
+

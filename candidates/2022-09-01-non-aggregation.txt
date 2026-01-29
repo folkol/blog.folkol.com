@@ -1,0 +1,12 @@
+Approximate Aggregation Techniques for Sensor Databases, https://ieeexplore.ieee.org/document/1320018
+- Their work focused more on the logical decoupling of routing and aggregation, along with the necessary sketch properties for correctness using multipath routing, namely having an associative, commutative, and idempotent aggrega- tion operation.
+    - duplicate insensitive
+    - associative: order of operations doesn't matter
+    - commutative: order of operands doesn't matter
+    - idempotent: duplicate-insensitive
+
+https://www.cc.gatech.edu/grads/r/rocky/docs/rocky_netagg.pdf
+    - duplicate sensitivity: sensitive = median | average | count, insensitive
+      = min | max | count distinct
+        - projections are insensitive
+    - idempotence = "same as its power", p ** 2 = p

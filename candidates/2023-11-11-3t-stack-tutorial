@@ -1,0 +1,101 @@
+#-all Official 3T Stack Tutorial, https://www.youtube.com/watch?v=YkOSUVzOAA4
+
+Next.js / tRPC / TypeScript / Tailwind / Prisma
+
+THANK YOU @zombiefacesupreme FOR THE TIMESTAMPS
+[0:00] Introduction & Install
+[3:45] Setting up Github, Vercel, & Planetscale
+[11:30] Setting up Clerk, CAT BREAK, & Axiom
+[21:15] From Prisma Schema to tRPC Procedure
+[30:30] Style skeleton
+[37:15] Creating posts & connecting them to users
+[48:15] The PostView component
+[59:30] Relative time with dayjs
+[1:04:00] Next/Image
+[1:08:00] Loading spinner & handling loading states
+[1:19:15] tRPC Context, auth state, and private procedures
+[1:27:00] Zod, useMutation, sorting the feed, and onSuccess
+[1:38:00] Rate limiting with Upstash
+[1:43:45] Error handling with Zod & react-hot-toast
+[1:52:30] Routing -- Profile View & Post View
+[1:57:30] Creating profileRouter 
+[2:06:00] Using tRPC's createProxySSGHelpers
+[2:14:45] The Layout
+[2:19:15] The Profile Page
+[2:28:00] The Profile Feed
+[2:38:45] The Post Page
+[2:47:15] Github CI
+[2:52:45] Domain Name Redirect
+[2:55:15] Conclusion
+
+## Introduction and install
+
+Twitter clone where you can only post emojis
+
+- initialize
+- get it on GitHub
+- get it deployed
+
+Deploy early and often, makes it easier to find out what is wrong when something goes wrong.
+
+create-t3-app, create.t3.gg
+
+	$ npx create-t3-app@latest
+
+goal: modular + typesafe without compromising
+
+pnpm is better, but npm is ok -- yarn is kinda dead
+
+npm run dev, seems to work
+get it deployed: vercel.com (login with github)
+	- failed, login with email
+
+removed old project (3y old)
+added github (personal)
+selected repo: tutorials
+	custom root folder: xharacter
+
+src/env.mjs, we validate ENV variable that we are running with -- for example DATABASE_URL
+
+planetscale database:
+
+"PlanetScale is the world’s most advanced MySQL platform"
+- continue with github
+- create database, try to keep them near where the vercel functions are being deployed (read: us east)
+- connect: Prisma link
+
+- password name: xcharacter-tutorial
+- ...
+- default it is configured for sqlite, but we want it to use planetscale mysql
+- planetscale isn't using traditional relations, because it is using Vitess under the hood
+(- we need special ids for relations)
+- npx prisma studio <-- check the db, require schema
+- npx prisma db push <-- sync from local models
+- planetscale db:s can have branches, for example 'dev'
+- copy DATABASE_URL='mysql://xxx:yyyy@aws.connect.psdb.cloud/xharacterdb?sslaccept=strict' and paste into project settings + deploy
+- might have to deploy too early, if so -- 'reployed' in vercel
+- Logs in vercel
+- Still got 404
+- "Redeploy"
+- Had to change to 'next.js'
+- Worked!
+
+
+- clerk.dev, user management
+- auth with github
+- next.js quickstart
+	$ npm install @clerk/nextjs
+- add to .env
+- add to vercel project
+- _app.tsx <-- Wraps everything
+- Add clerk wrapper here
+- note: ClerkProvider needs access to private headers, so everything wrapped in this component will opt in to dynamic rendering. Make sure that ISR (Incremental Static Regeneration) and Static stuff is not wrapped by this.
+- we can do auth on the edge with clerk middleware
+- middleware.ts, magic name that tells next to run this as middleware before anything else
+- 
+
+
+
+## Words
+Planetscale: Vitess + Kubernetes, https://planetscale.com/blog/what-makes-up-a-planetscale-database#it-all-begins-with-vitess-and-kubernetes
+Vitess: horisontally scaling MySQL-compatible platform originally designed to support scalability at YouTube

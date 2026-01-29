@@ -1,0 +1,684 @@
+# KQuery DIY
+
+## Kotlin Hello World
+
+install asdf java corretto 22 (Amazon)
+install direnv
+
+## create new project (idea / kotlin)
+
+Apache Arrow started as a specification for a memory format for columnar data, with implementations in Java and C++. The memory format is efficient for vectorized processing on modern hardware such as CPUs with SIMD (Single Instruction, Multiple Data) support and GPUs.
+
+- higher level languages can call into modules made in C++ or Rust without copying data
+- data can be transferred between processes without much serialization overhead
+- it should make it easier to build connectors, drivers and integrations
+
+### Arrow Memory Model
+
+- tabular
+- each column is represented by a single vector holding raw data along with separate vectors/bitmaps for null values and offets for where to find the values in case of variable-width types
+
+### Inter-Process Communication (IPC)
+
+- Contains metadata such as schema information
+- Arrow uses Google Flatbuffers to define the metadata format
+
+### Compute Kernels
+
+- evaluate expressions on the data
+- Dremio recently donated 'Gandiva', which is a java library that compiles expressions down to LLVM (and supports SIMD)
+
+### Arrow Flight Protocol
+
+- arrow has defined the flight procol for efficiently streaming arrow data over the network
+- flight is baesd on gRPC and Google Protocol Buffers
+
+- methods:
+	- handshake
+	- listflights
+	- getflightinfo
+	- getschema
+	- doget
+	- doput
+	- doexchange
+	- doaction
+	- listactions
+
+- (proposal) arrow flight SQL
+
+### Query Engines
+
+- the rust implementation of Arrow contains an in-memory query engine named DataFusion
+- ballista: distributed compute platform built primarily in rust, powered by Apache Arrow
+- foundational technologies of Ballista:
+	- Apache Arrow for memory model and type systme
+	- Apache Arrow Flight protocol for efficient data transfer
+	- Apache Arrow Flight SQL protocol for use by BI tools and JDBC clients
+	- Google Protocol Buffers for serializing query plans
+	- Docker for packaging up executors along with user-defined code
+	- Kubernets for deployment and management of the executor docker containers
+
+## Choosing a type system
+
+- the first step in building a query engine is to choose a type system to represent the different types of data that the query engine will be processing
+- one option is to invent a proprietary format
+- one option is to the use type system of the data source
+- we choose Arrow
+- there might be conversions needed for 'data source types' and 'query engine types'
+
+### Row based or Columnar
+
+- depends on the operations you want to perform on the data
+- group by or filtering -> row based
+- within-column operations / SIMD -> column based
+- most engines nowadays use column based
+
+- pure row based -> volcano model (basically iterators over rows)
+- the overhead can be reduced by iterating over batches of rows
+- if the batches are columns, enable SIMD
+- maybe GPU?
+
+### Interoperability
+
+- we might want to be usable from Python or Java, or through JDBC
+- Apache Arrow!
+
+### Type System
+
+- We will use Apache Arrow as the basis for our Type System
+- The following classes are used
+	- schema: provide metadata for a data source or the results of a query. A schema consists of zero or more fields.
+	- field: name + data type + nullability for a field within a schema
+	- FieldVector: columnar storage for data for a field
+	- ArrowType: represents a data type
+- KQuery introduces some helpers to work with these (abstracts over Arrow types)
+
+- create object ArrowTypes
+- add dependency: org.apache.arrow:arrow-vector:12.0.1
+- maybe add dependency: org.apache.arrow:arrow-memory-netty
+- introduce 'ColumnVector' that abstracts over FieldVector
+
+- Add LiteralValueVector (same for all values in column)
+- Add RecordBatch (assumed schema from .pojo)
+
+
+### Data Sources
+
+- we want to support multiple data sources, so create an interface
+- schema + optional list of columns to get
+
+- data sources examples
+	- csv: human readable
+	- JSON
+	- Parquet, record shredding and assembly from the Dremel paper
+		- data stored in batches
+	- Orc: Optimized Row Columnar, similar to Parquet -- stores data in columnar batches called 'stripes'
+
+### Serialization of Logical Plans
+
+- Json / whatever / substrait?
+- Maybe protobufs
+
+### Logical Expressions
+
+- for run-time evaluation of expressions over the data
+- typical expression types
+	- literal value
+	- column reference
+	- math expression
+	- comparison expression
+	- boolean expression
+	- aggregate expression
+	- scalar function
+	- aliased expressoin
+
+- these can be combined to form deep trees
+- when forming a query plan, we need to know expressions by name and also their output types
+- added interafce LogicalExpression
+
+- added more types, basically copy-paste
+
+### Logical Plans
+
+With the logical plans (expression types?) in place, we can implement some logical plans for various transformations.
+
+- added csv data source using univocity parsers
+
+### DataFrame api
+
+- a data frame is an abstraction over a query plan
+- DataFrame interace with .project, .filter, etc.
+- a way to create the initial DataFrame (usually through execution context)
+
+
+### Physical Plans
+
+- The logical plans defined in chapter five specify what to do but not how to do it, and it is good practice to have separate logical and physical plans, although it is possible to combine them to reduce complexity.
+- One reason to keep logical and physical plans separate is that sometimes there can be multiple ways to execute a particular operation, meaning that there is a one-to-many relationship between logical plans and physical plans.
+- For example, there could be separate physical plans for single-process versus distributed execution, or CPU versus GPU execution.
+- Also, operations such as Aggregate and Join can be implemented with a variety of algorithms with different performance trade-offs. When aggregating data that is already sorted by the grouping keys, it is efficient to use a Group Aggregate (also known as a Sort Aggregate) which only needs to hold state for one set of grouping keys at a time and can emit a result as soon as one set of grouping keys ends. If the data is not sorted, then a Hash Aggregate is typically used. A Hash Aggregate maintains a HashMap of accumulators by grouping keys.
+- Joins have an even wider variety of algorithms, including Nested Loop Join, Sort-Merge Join, and Hash Join.
+
+- Physical plans return iterators over record batches.
+
+
+### Physical Expressions
+
+- code that evaluates their logical counterparts
+- there could be multiple physical per logical (add for different types, etc)
+- physical expresions are evaluated against record batches and the results are columns
+
+
+### Column Expressions
+
+- evalutes to a reference to a ColumnVector in the RecordBatch being processed
+- uses index instead of names to avoid lookup
+
+### Literal Expressions
+
+- boxed literal value
+- using LiteralValueVector we can implement LiteralValue for various types
+
+
+### Aggregate Expressions
+
+- so far, expressions have produced one output column from one or more input column
+- aggregate expressions are more complex, and aggregate values across multiple batches of data and then produce one final value
+- introduce AggregateExpression and Accumulator
+
+
+### Physical Plans
+
+- With the physical expressions in place, we can now implement the physical plans for the various transformations that the query engine will support.
+
+- Hash Aggregate
+
+### Join Operators
+
+- there are many kinds, equijoin, inner joins, left/right, outer, cross
+- KQuery does not implement join
+
+### SubQueries
+
+- Subqueries are queries within queries
+- They can be correlated or uncorrelated (involving a join to other relations or not)
+- when a subquery returns a single value then it is known as a scalar subquery
+
+### Scalar Subqueries
+
+- They can be used in most places a literal value could be used
+- correlated subqueries are translated into joins before execution, see chapter 9
+- uncorrelated subqueries can be executed individually and the resulting value can be substituted into the top-level query
+
+### Exists and in-subqueries
+
+- syntax for semi-joins and anti-joins
+- correlated subqueries are typically converted into joins during logical plan optimizations (see chapter 9)
+- KQuery does not yet implement subqueries
+
+### Creating Physical Plans
+
+- With our physical plans in place, the next step is to build a query planner to create physical plans from logical plans, which we cover in the next chapter.
+- We have defined logical and physical query plans, and now we need a query planner that can translate the logical plan into the physical plan.
+- The query planner may choose different physical plans based on configuration options or based on the target platform's hardware capabilities. For example, queries could be executed on CPU or GPU, on a single node, or distributed in a cluster.
+
+- Maybe? the tree is rooted in a plan, and can have plan children -- but once 'expr' it will just be an expr subtree
+
+
+- actually tried to execute it
+	- Caused by: java.lang.RuntimeException: No DefaultAllocationManager found on classpath. Can't allocate Arrow buffers. Please consider adding arrow-memory-netty or arrow-memory-unsafe as a dependency.
+- failed again: Failed to initialize MemoryUtil. Was Java started with `--add-opens=java.base/java.nio=ALL-UNNAMED`?
+- https://arrow.apache.org/docs/java/install.html
+- tried with unsafe, same problem
+- added VM options: --add-opens=java.base/java.nio=ALL-UNNAMED
+- maybe check how to make a kotlin module?
+
+
+### Query Optimization
+
+- typically on the logic plan
+- rule based makes 'common sense transformations' of the plan, such as predicate pushdown
+- e.g. visitor pattern that walks the tree and creates a copy -- with any modifications needed
+- The goal of the projection push-down rule is to filter out columns as soon as possible after reading data from disk and before other phases of query execution, to reduce the amount of data that is kept in memory (and potentially transfered over the network in the case of distributed queries) between operators.
+
+- added projection pushdown
+
+- other rule based optimizations
+	- predicate pushdown
+	- eliminate common subexpressions proj(expr1, expr1 + expr2) -> proj(x, x + expr2) after proj(expr1)
+	- converting correlated subqueries to joins
+		select x from foo where exists (select * from bar where ...)
+		-> select x from foo join bar on foo.id = bar.id
+
+- cost-based optimizations: using statistics about the underlying data to choose physical implementation
+
+### Query Execution
+
+- start with doing the query with Spark to get a reference result
+- also uses cast
+- testing on NYC Open Data Yellow Cab
+
+
+
+### Batch Sizes
+
+run with optimization, 3 times -- take time of last one
+
+1 5699
+10 2282
+100 1713
+1000 1610
+10000 1638
+100000 1648
+
+
+### SqlParser (Pratt)
+
+> Here is a bare-bones implementation of a Pratt parser. In my opinion, it is beautiful in its simplicity. Expression parsing is performed by a simple loop that parses a "prefix" expression followed by an optional "infix" expression and keeps doing this until the precedence changes in such a way that the parser recognizes that it has finished parsing the expression. Of course, the implementation of parsePrefix and parseInfix can recursively call back into the parse method and this is where it becomes very powerful.
+
+- copied code from the companion repo
+
+### SQL Query Planner
+
+Copied some code, but basically:
+- tokenize
+- parse with pratt parser
+- convert to sql tree
+- build query plan, assuming SELECT...
+
+### Parallel query execution
+
+- base case: one thread per input-partition
+
+Adding dependency: org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1
+
+
+
+### Combining results
+
+> For simple queries consisting of projection and selection operators, the results of the parallel queries can be combined (similar to a SQL UNION ALL operation), and no further processing is required. More complex queries involving aggregates, sorts, or joins will require a secondary query to be run on the results of the parallel queries to combine the results. The terms "map" and "reduce" are often used to explain this two-step process. The "map" step refers to running one query in parallel across the partitions, and the "reduce" step refers to combining the results into a single result.
+
+> For this particular example, it is now necessary to run a secondary aggregation query almost identical to the aggregate query executed against the partitions. One difference is that the second query may need to apply different aggregate functions. For the aggregate functions min, max, and sum, the same operation is used in the map and reduce steps, to get the min of the min or the sum of the sums. For the count expression, we do not want the count of the counts. We want to see the sum of the counts instead.
+
+
+### Smarter Partitioning
+
+> Although the strategy of using one thread per file worked well in this example, it does not work as a general-purpose approach to partitioning. If a data source has thousands of small partitions, starting one thread per partition would be inefficient. A better approach would be for the query planner to decide how to share the available data between a specified number of worker threads (or executors).
+
+> Some file formats already have a natural partitioning scheme within them. For example, Apache Parquet files consist of multiple "row groups" containing batches of columnar data. A query planner could inspect the available Parquet files, build a list of row groups and then schedule reading these row groups across a fixed number of threads or executors.
+
+> It is even possible to apply this technique to unstructured files such as CSV files, but this is not trivial. It is easy to inspect the file size and break the file into equal-sized chunks, but a record could likely span two chunks, so it is necessary to read backward or forwards from a boundary to find the start or end of the record. It is insufficient to look for a newline character because these often appear within records and are also used to delimit records. It is common practice to convert CSV files into a structured format such as Parquet early on in a processing pipeline to improve the efficiency of subsequent processing.
+
+#### Partition Keys
+
+> One solution to this problem is to place files in directories and use directory names consisting of key-value pairs to specify the contents.
+
+/mnt/nyxtaxi/csv/year=2019/month=1/tripdata.csv
+/mnt/nyxtaxi/csv/year=2019/month=2/tripdata.csv
+...
+/mnt/nyxtaxi/csv/year=2019/month=12/tripdata.csv
+
+> Given this structure, the query planner could now implement a form of "predicate push down" to limit the number of partitions included in the physical query plan. This approach is often referred to as "partition pruning".
+
+
+
+### Parallel Joins
+
+> When performing an inner join with a single thread, a simple approach is to load one side of the join into memory and then scan the other side, performing lookups against the data stored in memory. This classic Hash Join algorithm is efficient if one side of the join can fit into memory.
+
+> The parallel version of this is known as a Partitioned Hash Join or Parallel Hash Join. It involves partitioning both inputs based on the join keys and performing a classic Hash Join on each pair of input partitions.
+
+- https://github.com/Themiscodes/Partitioned-Hash-Join
+- https://ieeexplore.ieee.org/document/6544839
+- https://15721.courses.cs.cmu.edu/spring2016/papers/balkesen-icde2013.pdf
+
+> In this paper we demonstrate through experimental analysis of different algorithms and architectures that hardware still matters.
+
+### Distributed Query Execution
+
+> To somewhat over-simplify the concept of distributed query execution, the goal is to be able to create a physical query plan which defines how work is distributed to a number of "executors" in a cluster. Distributed query plans will typically contain new operators that describe how data is exchanged between executors at various points during query execution.
+
+#### Embarrassingly Parallel Operators
+
+> Certain operators can run in parallel on partitions of data without any significant overhead when running in a distributed environment. The best examples of these are Projection and Filter. These operators can be applied in parallel to each input partition of the data being operated on and produce a corresponding output partition for each one. These operators do not change the partitioning scheme of the data.
+
+#### Distributed Aggregates
+
+> Let's use the example SQL query that we used in the previous chapter on Parallel Query Execution and look at the distributed planning implications of an aggregate query.
+
+SELECT passenger_count, MAX(max_fare)
+FROM tripdata
+GROUP BY passenger_count
+
+
+N.b. 'gradle projects found, add them?' <-- golden
+
+
+##### Distributed Joins
+
+> Joins are often the most expensive operation to perform in a distributed environment. The reason for this is that we need to make sure that we organize the data in such a way that both input relations are partitioned on the join keys. For example, if we joining a customer table to an order table where the join condition is customer.id = order.customer_id, then all the rows in both tables for a specific customer must be processed by the same executor. To achieve this, we have to first repartition both tables on the join keys and write the partitions to disk. Once this has completed then we can perform the join in parallel with one join for each partition. The resulting data will remain partitioned by the join keys. This particular join algorithm is called a partitioned hash join. The process of repartitioning the data is known as performing a "shuffle".
+
+
+### Distributed Query Scheduling
+
+Distributed query plans are fundamentally different to in-process query plans because we can't just build a tree of operators and start executing them. The query now requires co-ordination across executors which means that we now need to build a scheduler.
+
+At a high level, the concept of a distributed query scheduler is not complex. The scheduler needs to examine the whole query and break it down into stages that can be executed in isolation (usually in parallel across the executors) and then schedule these stages for execution based on the available resources in the cluster. Once each query stage completes then any subsequent dependent query stages can be scheduled. This process repeats until all query stages have been executed.
+
+The scheduler could also be responsible for managing the compute resources in the cluster so that extra executors can be started on demand to handle the query load.
+
+
+### Producing a Distributed Query Plan
+
+As we have seen in the previous examples, some operators can run in parallel on input partitions and some operators require data to be repartitioned. These changes in partitioning are key to planning a distributed query. Changes in partitioning within a plan are sometimes called pipeline breakers and these changes in partitioning define the boundaries between query stages.
+
+
+
+Parallel (green threads) in Kotlin:
+- ~4s with coretto
+- ~
+
+
+q (SQLite)
+- ~2 minutes
+
+duckdb:
+- ~2 seconds
+
+polars:
+- 0.5 seconds
+
+$ time polars -c "SELECT VendorID, MAX(fare_amount) FROM (SELECT VendorID, fare_amount FROM read_csv('yc-01.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-02.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-03.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-04.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-05.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-06.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-07.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-08.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-09.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-10.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-11.csv') UNION ALL SELECT VendorID, fare_amount FROM read_csv('yc-12.csv')) as u GROUP BY VendorID"
+
+
+
+GraalVM
+$ time native-image --no-fallback --verbose --add-opens=java.base/java.nio=ALL-UNNAMED -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/folkol/code/query-engines/kqu
+
+
+failed to build
+--no-fallback -> succeeded building
+
+Caused by: java.lang.RuntimeException: No DefaultAllocationManager found on classpath. Can't allocate Arrow buffers. Please consider adding arrow-memory-netty or arrow-memory-unsafe as a dependency.
+
+tried with arrow-memory-netty instead of arrow-memory-unsafe
+- 
+
+--strict-image-heap
+https://github.com/oracle/graal/issues/5134
+
+gave up, for now. Can't seem to load the memory classes.
+-XX:+PrintCompilation -Xlog:compilation*=info:file=compilation.log:time,uptime,level,tags
+
+
+resource-config.json
+{
+  "resources":[
+    {"pattern":"META-INF/org/apache/logging/log4j/core/config/plugins/Log4j2Plugins.dat"}, 
+    {"pattern":"META-INF/services/org.apache.logging.log4j.spi.Provider"}, 
+    {"pattern":"META-INF/services/org.apache.logging.log4j.util.PropertySource"}, 
+    {"pattern":"org/slf4j/impl/StaticLoggerBinder.class"}
+  ]
+}
+
+Warning: Resource access method java.lang.ClassLoader.getResources invoked at org.slf4j.LoggerFactory.findPossibleStaticLoggerBinderPathSet(LoggerFactory.java:303)
+Warning: Resource access method java.lang.ClassLoader.getResources invoked at org.apache.arrow.memory.CheckAllocator.scanClasspath(CheckAllocator.java:58)
+Warning: Resource access method java.lang.ClassLoader.getResources invoked at kotlinx.coroutines.internal.FastServiceLoader.loadProviders$kotlinx_coroutines_core(FastServiceLoader.kt:94)
+Warning: Aborting stand-alone image build due to accessing resources without configuration.
+
+
+java -agentlib:native-image-agent=config-output-dir=./config ...
+java -agentlib:native-image-agent ...
+mv config/* .
+$ native-image -H:ResourceConfigurationFiles=resource-config.json ...
+
+ 1 experimental option(s) unlocked:
+ - '-H:ResourceConfigurationFiles': Use a resource-config.json in your META-INF/native-image/<groupID>/<artifactID> directory instead. (origin(s): command line)
+
+...
+
+ 2 experimental option(s) unlocked:
+ - '-H:ResourceConfigurationFiles': Use a resource-config.json in your META-INF/native-image/<groupID>/<artifactID> directory instead. (origin(s): command line)
+ - '-H:ReflectionConfigurationFiles': Use a reflect-config.json in your META-INF/native-image/<groupID>/<artifactID> directory instead. (origin(s): command line)
+
+ Worked! Read + understand warnings...
+
+
+Trying with epsilon gc and pgo:
+ --pgo-instrument ...
+ --pgo ...
+
+default.iprof
+
+
+
+$ native-image --pgo-instrument -march=native --gc=epsilon -R:MaximumHeapSizePercent=90 -H:ResourceConfigurationFiles=resource-config.json -H:ReflectionConfigurationFiles=reflect-config.json --verbose ...
+./mainkt
+$ native-image --pgo -march=native --gc=epsilon -R:MaximumHeapSizePercent=90 -H:ResourceConfigurationFiles=resource-config.json -H:ReflectionConfigurationFiles=reflect-config.json --verbose ...
+
+running with 8 partision to build the profiling file
+
+
+with march native, gc epsilon and pgo:
+20s
+
+same, without gc=epsilon
+11.8s (!)
+
+plain java comparison:
+14s
+
+
+
+
+
+Parallel Joins
+
+When performing an inner join with a single thread, a simple approach is to load one side of the join into memory and then scan the other side, performing lookups against the data stored in memory. This classic Hash Join algorithm is efficient if one side of the join can fit into memory.
+
+The parallel version of this is known as a Partitioned Hash Join or Parallel Hash Join. It involves partitioning both inputs based on the join keys and performing a classic Hash Join on each pair of input partitions.
+
+
+
+
+HashAggregate: groupBy=[passenger_count], aggr=[MAX(max_fare)]
+  Exchange:
+    HashAggregate: groupBy=[passenger_count], aggr=[MAX(max_fare)]
+      Scan: tripdata.parquet
+
+
+> Exchange can be write to shared storate, or maybe stream node-to-node.
+
+
+In the remainder of this chapter, we will discuss the following topics, referring to Ballista and the design that is being implemented in that project.
+
+- Producing a distributed query plan
+- Serializing query plans and exchanging them with executors
+- Exchange intermediate results between executors
+- Optimizing distributed queries
+
+- As we have seen in the previous examples, some operators can run in parallel on input partitions and some operators require data to be repartitioned.
+- These changes in partitioning are key to planning a distributed query.
+- Changes in partitioning within a plan are sometimes called pipeline breakers and these changes in partitioning define the boundaries between query stages.
+
+- aggregations are split into two parts, the one that is done in parallel and the final one that is combining their results
+
+- full plan
+Query Stage #4:
+  Projection: #customer.id, #total_amount
+    HashAggregate: groupBy=[customer.id], aggr=[MAX(max_fare) AS total_amount]
+      Query Stage #3: repartition=[]
+        HashAggregate: groupBy=[customer.id], aggr=[MAX(max_fare) AS total_amount]
+          Join: condition=[customer.id = order.customer_id]
+            Query Stage #1: repartition=[customer.id]
+              Scan: customer
+            Query Stage #2: repartition=[order.customer_id]
+              Scan: order
+
+- The query scheduler needs to send fragments of the overall query plan to executors for execution.
+- Ballista uses protobuf
+
+- Apache Arrow provides an IPC (Inter-process Communication) format for exchanging data between processes. Because of the standardized memory layout provided by Arrow, the raw bytes can be transferred directly between memory and an input/output device (disk, network, etc) without the overhead typically associated with serialization.
+- However, the metadata about the data, such as the schema (column names and data types) does need to be encoded using Google Flatbuffers. This metadata is small and is typically serialized once per result set or per batch so the overhead is small.
+- Apache Arrow IPC defines the data encoding format but not the mechanism for exchanging it. Arrow IPC could be used to transfer data from a JVM language to C or Rust via JNI for example.
+
+- Apache Arrow provides a Flight protocol which is intended for this exact purpose. 
+
+- custom code / UDF, needs to be made available to the executors
+
+- https://www.usenix.org/system/files/conference/hotos15/hotos15-paper-mcsherry.pdf
+> Our hope is to shed light on this issue so that future research is directed toward distributed systems whose scalability comes from advances in system design rather than poor baselines and low expectations.
+
+- https://charlesreid1.com/wiki/Hilbert_Sort
+- https://en.wikipedia.org/wiki/Borůvka%27s_algorithm
+- https://www.usenix.org/system/files/conference/hotos15/hotos15-paper-mcsherry.pdf
+
+
+- How select a way to distribute a computation?
+- One answer is to build a mechanism to determine the cost of executing a particular query plan and then create some subset of all possible combinations of query plan for a given problem and determine which one is most efficient.
+- query costs: in time, memory, specialized hardware -- and $$$
+- Query costs can be computed upfront using an algorithm if enough information is known ahead of time about the data, such as how large the data is, the cardinality of the partition of join keys used in the query, the number of partitions, and so on. This all depends on certain statistics being available for the data set being queried.
+- Another approach is to just start running a query and have each operator adapt based on the input data it receives. Apache Spark 3.0.0 introduced an Adaptive Query Execution feature that does just this.
+
+- Benchmarks: TPC-DS ("Transactional Processing Council -- Decision Support")). TPC is a bunch of database companies.
+
+- Andy Pavlov: https://www.youtube.com/playlist?list=PLSE8ODhjZXjasmrEd2_Yi1deeE360zv5O
+
+
+VendorID MAX
+1 386983.63 
+2 6300.9 
+6 148.02 
+
+
+
+
+
+
+
+
+## https://andygrove.io/how_to_build_a_modern_distributed_compute_platform/
+
+
+- Abstract Syntax Tree = description of the query as expression nodes, converted to logical plan.
+- Logical Query Plan == Abstract Query Plan, converted to a physical plan
+- Physical Query Plan == Concrete Query Plan, actually executed
+
+
+
+### TODO: Strip companion repo et al
+
+- copy how-query-engines-work
+- remove everything that isn't needed for examples/parallelquery to work
+- add to query-engines
+- Distill DataFusion?
+
+- basic scenario / query: 2+ workers, aggregate with count (so that partial aggregate and final aggregate needs different functions)
+
+
+#### "How Query Engines work" / "kquery"
+
+- early commit, "first query worked" @ 61811487ca2d3c947235538872dfbaac89b6d46f
+- build.rs: gprc compilation
+- can't build, seems to reference 'arrow' at ../
+- Removed all local references and used 'latest versions'
+- get protoc
+- $ cd jvm && ./gradlew publishToMavenLocal
+- $ ./dev/build-all.sh
+- Unsupported Gradle JVM, use 14 or upgrade Gradle
+- java.util.Lists::reversed requires 21
+- upgraded wrapper $ ./gradlew wrapper --gradle-version 8.5 and set local Java 21 $ asdf local java corretto-21.0.4.7.1
+- tried gradle 8.4...
+- got it running, drove it with client df test (which did not work, so I converted to a class with main method...), but still failed because the protobuf version did not have a schema -- and the executor didn't recognize any columns because of that
+- scrapped kquery
+
+
+
+#### Spark
+
+- $ git clone https://github.com/apache/spark.git
+- ./build/mvn -DskipTests clean package
+
+- basic scenario: spark master + 2 executors + one client program
+- massive project
+	$ git ls-files | wc -l
+	   23694
+	$ git ls-files ':*src/main*' | xargs wc -l | tail -n 1
+	  872840 total
+	$ git ls-files -z | xargs -0 -- wc -l | grep total | tail -n 1
+	  195108 total
+  	$ # invoked wc multiple times...
+	$ git ls-files -z | xargs -0 -- wc -l | grep total | sum
+		3178225
+$ did not compile, "[ERROR] PROTOC FAILED: dyld: Symbol not found: __ZTTNSt3__118basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEE"
+
+./build/mvn -DskipTests clean package
+
+Standalone mode requires a standalone Spark cluster. It requires a master node (can be started using SPARK_HOME/sbin/start-master.sh script) and at least one worker node (can be started using SPARK_HOME/sbin/start-slave.sh script).
+
+SparkConf should use master node address to create (spark://host:port).
+
+
+
+
+#### Spark, first commit
+
+$ gco df29d0ea4c8b7137fdd1844219c7d489e3b0d9c9
+$ git ls-files ':!third_party' | xargs wc -l | tail -n 1
+    5469 total
+$ installed java 7 and scala 2.7.7 (asdf local)
+$ did not work because of missing libnexus.a
+$ checked out later version (e2f21279bedd5c1879c48ac90f58e4be92f2ac85)
+$ ./run SparkLR 192.168.8.142
+$ checked out alpha-0.1
+$ installed scala 2.8
+$ did not work...
+$ checked out v1.0.0
+$ installed Scala 2.10
+$ install sbt failed (404), do it manually
+$ doing it in docker/ubuntu instead
+$ libnexus: NeXus scientific data file format - development libraries
+
+
+	Client:
+    val sc = new SparkContext(args(0), "SparkLR")
+    var w = ...
+    val gradient = sc.accumulator(Vector.zeros(D))
+    for (p <- sc.parallelize(data, numSlices)) {
+      gradient +=  scale * p.x
+    }
+    w -= gradient.value
+    println("Final w: " + w)
+
+    SparkContext: scheduler.start
+    parallelize -> sc.runTasks
+    	scheduler.runTasks
+
+    works if running with local or local[20]
+
+    asm for bytecode manipulation
+
+
+Spark history:
+https://spark.apache.org/history.html
+Apache Spark started as a research project at the UC Berkeley AMPLab in 2009, and was open sourced in early 2010. Many of the ideas behind the system were presented in various research papers over the years.
+
+After being released, Spark grew into a broad developer community, and moved to the Apache Software Foundation in 2013. Today, the project is developed collaboratively by a community of hundreds of developers from hundreds of organizations.
+
+- used mesos cluster shortly after open sourced
+
+- nexus.jar
+	- /* ----------------------------------------------------------------------------
+	 * This file was automatically generated by SWIG (http://www.swig.org).
+	 * Version 1.3.36
+	 *
+	 * Do not make changes to this file unless you know what you are doing--modify
+	 * the SWIG interface file instead.
+	 * ----------------------------------------------------------------------------- */
+
+
+https://people.csail.mit.edu/matei/papers/2010/hotcloud_spark.pdf
+
+
+#### Ballista
+

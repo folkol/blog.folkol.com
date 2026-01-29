@@ -1,0 +1,29 @@
+https://www.youtube.com/watch?v=Dbytx0ivH7Q
+
+
+https://doc.rust-lang.org/std/#a-tour-of-the-rust-standard-library
+
+!-type, also called Never.
+
+
+Rc and RefCell in Rust (https://www.youtube.com/watch?v=5DAPPzRqVZE)
+
+	Rc: Reference counter
+		- Single-threaded reference counting pointer
+	RefCell: When you reference something that you want to put on Rc.
+		- 'RefCell is a mutable memory location with dynamically checked borrow rule'
+
+	Maybe you want to use Arc (Atomic Rc).
+
+
+StructOpt vs Clap?
+
+	https://www.youtube.com/watch?v=05Buc7gAYzw
+
+	Builder style API.
+	Derive API (popularized by StructOp)
+	With v3, StructOp is merged with Clap.
+
+	Clap v3.
+
+

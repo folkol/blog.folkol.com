@@ -1,0 +1,89 @@
+# https://www.youtube.com/watch?v=YtebGVx-Fxw
+
+Surprise is somewhat inversely related to probability, just 1/p doesn't check out because — for example — the surprise of getting a guaranteed result would be 1.
+
+We instead chose log(1/p).
+
+Nice curve, 0 for p1-values, and increases rapidly closer to p0-values.
+
+Note: When calculating the Surprise for 2 outputs (like flipping a coin), then it is customary to use log2 for the calculations.
+
+Note: Surprise can be greater than 1.
+
+2 heads and one tail?
+.9 * .9 * .1
+Surprise = log(1/p) = log(1/p)
+log(1/.9*.9*.1) = log2(1) - log2(.9*.9*.1)
+log(1) - [log(.9) + log(.9) + log(.1)]
+0 - log(.9) - log(.9) - log(.1)
+.15 + .15 + 3.32 = 3.62
+
+Note: The surprise of these three coin tosses is just the sum of their individual surprises.
+
+This works out, because surprise for individual coin tosses adds up — which increases the surprise with the number of coin tosses. But coin tosses will reduce the probabiliy with number of tosses as well, since p<1, and multiplying <1-values can never increase.
+
+Total surprise of 100 number of coin tosses:
+
+heads: 0.9 * 100 * 0.15 (expected number of heads times surprise per head)
+tails: 0.1 * 100 * 3.32 (expected number of tails times surpise per tail)
+total surprise: add these, 46.7
+
+Expected surprise PER TOSS, 46.7/100 = 0.47.
+
+Entropy (of the coin): expected surprise per coin toss = event.
+
+Note: AVERAGE amount of surprise per coin toss.
+
+"In fancy statistics notation, we say that Entropy is the Expected Value of the Surprise."
+
+Note that the 100 above (number of coin tosses) cancel out, so the Entropy of the coin toss is the expected value of the surprise of the coin toss which is:
+
+E(Surprise) = 0.9 * 0.15 + 0.1 * 3.32
+
+"And yes, expecting surptise sounds silly, but it's not the silliest thing I've heard" :D
+
+Entropy = E(Surprise) = ∑xP(X=x)
+- sum all [specific values] times [probability of this specific value]
+- sum of all [surprise for certain outcome] times [probability of observing this outcome]
+
+
+Now, personally, once I saw that Entropy was just the average Surprise that we could expect... Entropy went from something that I had to memorize into something that I could derive. Because now, we can plug the equation for Surprise in for x, the specific value
+
+Surprise: log(1/p(x))
+Expected value: ∑xP(X=x) = 'sum of all specific values times their probabilities'
+- plug the equation for surprise in for x
+(- plug in the probability of the surprise)
+
+
+∑xP(X=x) = ∑log(1/p(x))P(X=x) = ∑log(1/p(x))p(x)
+
+We end up with the equation for entropy!
+
+Entropy = ∑log(1/p(x))*p(x)
+           surprise    probability of surprise
+
+This is not the form of the equation that you find out in the wild, though. First, we have to swap the order of the terms
+
+Entropy = ∑p(x)*log(1/p(x))
+
+And then we have to use the properties of logs to turn the fraction into subtraction
+
+Entropy = ∑p(x)*(log(1) - log(p(x)))
+Entropy = ∑p(x)*log(1) - p(x)*log(p(x))
+Entropy = ∑p(x)*log(1) - p(x)*log(p(x))
+Entropy = ∑p(x)*0 - p(x)*log(p(x))
+Entropy = ∑- p(x)*log(p(x))
+Entropy = -∑p(x)*log(p(x))
+
+This is the form of the equation that Claude Shannon first published in 1948.
+
+
+The entropy of a chicken area is the entropy of 'pickup up a chicken'. It is highest when we don't know anything (similar number of chickens.)
+
+
+
+TODO: 3D Plot of entropy for 'number of orange chickens times number of blue chickens'.
+
+
+...as a result, we can use Entropy to quantify the similarity or difference in the number of orange and blue chickens in each area.
+

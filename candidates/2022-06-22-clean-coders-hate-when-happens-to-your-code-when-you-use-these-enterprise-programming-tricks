@@ -1,0 +1,119 @@
+https://www.youtube.com/watch?v=FyCYva9DhsI
+
+Kevlin Henney
+
+some books
+97 things every programmer should know
+
+WordFriday on Facebook
+
+'code written by some stranged on the internet is always perfect', or 'taking on needless dependencies'. Fragile Development Guide.
+
+'fake oreilly covers' (o'reilly = o rly)
+
+'developer vs programmer'
+- there are a lot of developers that can't program
+
+I've yet to see any problem, however complicated, which, when you lookec at it in the right way, did not become still more complicated. —Anderson's law
+
+If you say to people that 'this will take 6 months', they sure will fill those 6 months.
+
+'FizzBuzz in Haskell by Embedding a Domain-Specific Language' —Maciej Piróg
+
+If you can't dazzle people with brilliance — baffle them with bullshit!
+
+A work of art is the unique result of a unique temperament. —Oscar Wilde
+
+Cargo Cult Programming, add structure that doesn't do anything.
+
+Signal-to-noise-ratio.
+
+Comments
+Rob Pike: Notes on Programming in C, 'big block comment i = i + 1;'
+
+A common fallacy is to assume authors of incomprehensible code will somehow be able to express themselves lucidly and clearly in comments.
+
+If you need a large blob of shit (copyright, etc), but it in the end of the file and add a small reference in the top.
+
+Clean Code —Uncle Bob, use wildcards
+
+When all you have is a hammer, everything beings to look like thumb.
+(...or everything begins to look like a screw!)
+
+The name is not a mere label, the name is part of your design.
+
+"noiseWords"
+
+Object-oriented assembler.
+
+Refactoring, improving the design of existing code. —Martin Fowler
+
+When you communicate with others, try to see which words they use and which words you use. Are the words the right ones?
+
+Names matter.
+
+Refactoring (noun): a change made to the internal structure of software to make it easier to understand and cheaper to modify without changing its observable behaviour.
+
+Refactor (verb): to restructure software by applying a serires of refactorings without changing the observable behaviour of the software.
+
+- rename
+- remove
+- move
+
+A few smells:
+
+- Singleton Configuration
+- Singletons
+- Verbose Naming
+- Noisy Logging
+	- we log everything
+	- so you log the act of logging?
+	- no, that would be silly! ...
+	- so you log that assigment there?
+	- no...
+- log and throw
+- repetition and duplication
+- unnecessary code
+- mixed levels of abstraction
+	- business logic
+	- bitshifting
+	- socket connection
+- legacy coding habits
+- programming by coincidence
+- programming by superstition
+
+"Stringly typed language/system"
+
+Poor code is seldom malicious, stupid or random. Pick a set of axioms ('style guides'), and the poor code will follow systematically.
+
+If you can't construct the object, don't return an invalid object — throw. ("That's why constructors were originally created".)
+
+TODO: Age histogram for lines of code.
+TODO: touched-n-times per line of code.
+
+Homeophatic Naming, diluted until it doesn't say anything.
+
+"Wrong kind of failed binding".
+
+aside:
+	- Programmer Anarchy
+	- why is the 'duct tape programmer' winning?
+	- ATDD, Fit or Gherkin
+	- Test-Driven Development —Kent Beck. Revisit it.
+		- Avoid testing implementation details, test behaviors.
+		- Test the public API.
+	- Unit Test = Unit of isolation is the test, not the class. Kent Beck.
+	- "Dependency is the key problem in software development at all scales" —Beck
+	- Code Smells
+		- Duplicated Code, Parallel Inheritance Hierarchies
+		- Long Method, Lazy Class
+		- Large Class, Speculative Generality
+		- Long Parameter List, Message Chains
+		- Divergent Change, Inappropriate Intimacy
+		- Shotgun Surgery, Data Class
+		- Feature Envy, Redused Bequest
+		- Data Clumps, Comments
+		- Primitive Obsession, Temporary Field
+		- Switch Statements, Middle Man
+	- POJO etc, objects without any dependencies. "Leaf objects".
+	- ATDD = Acceptance TDD

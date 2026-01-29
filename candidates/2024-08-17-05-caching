@@ -1,0 +1,27 @@
+# Caching! (As in CPU cache)
+
+> How many bytes per cycle can a CPU read in?
+
+- In order to add: Loop overhead / maintenance, loads and stores.
+
+> Multiplier 4/5: Cache
+
+> Understanding the cache layout of your target machine is a big part of performance oriented programming
+
+- Main memory / BUS can't feed the CPU fast enough, need faster caches near-CPU.
+- Register file in the core of the CPU, maybe a few hundred values
+- Part of the register file is called 'a register' in assembly language
+
+latencies and sizes
+- register file: 0, 1K
+- L1 cache (per-core): a few instructions, 32K
+- L2 cache (per-core): ~14 cycles, 256K
+- L3 cache (shared): ~80 cycles, 8M
+- RAM: ~150+, ~16G
+
+- managed in 'cache lines' (64bytes)
+
+> ...how much performance we lose by falling out of L1 cache, or maybe even L2 cache, or -- heaven forbid -- fall out to main memory
+
+- push out to L2: change to using more than L1-size integers
+- core contention in L3

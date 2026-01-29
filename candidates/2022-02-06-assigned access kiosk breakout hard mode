@@ -1,0 +1,31 @@
+# https://www.youtube.com/watch?v=aBMvFmoMFMI
+
+"Kiosk Mode" (Assigned Access): Win10 or 11, can set desktop on "one app mode".
+
+Target: Get shell.
+
+Can't rightclick.
+
+Filtering on file name...
+
+Rename cmd.exe -> msedge.exe.
+
+It worked...
+
+ffs
+
+
+whoami
+
+runas /user:admin cmd.exe
+it's allowed...
+
+'kiosk edge' -> ctrl+p for print dialog -> click help -> opens a real edge... -> open file / downloads dialog -> open explorer.exe
+
+Trick: clobber msedge.exe, but it seems like path is not part of this.. :P
+
+A.k.a. "any executable named msedge.exe" xD
+
+
+- enumerate files where I can write
+

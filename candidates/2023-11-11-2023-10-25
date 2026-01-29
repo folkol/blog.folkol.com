@@ -1,0 +1,73 @@
+javascript is just a DSL for C++
+javascript is a configuration language for C++
+
+total cost of ownership
+liefcycle analysis
+
+
+
+
+
+# DuckDB, https://www.youtube.com/watch?v=AjsB6lM2-zw
+
+Analysis workflow: CSV -> Pandas + NumPy in Jupyter
+
+In-process OLAP DBMS, embeddable. No client-server.
+Lightweight.
+
+OLTP vs OLAP
+
+OLTP: transactional data, many clients
+OLAP: data analysis
+
+Difference: how the data is stored, row-wise or column-wise.
+
+Research: column databases.
+
+Optimized for reading and analysing per-column.
+
+- columnar database
+- vectorized processing
+- MVCC to be ACID compliant 
+- friendlier sequel, exclude/replace/all
+- Bindings for Python/R/Java, etc
+- Integrations with Pandas, Parquet, Arrow
+- "You can think of DuckDB as the SQLite for Analytics"
+
+				Transactional		Analytical
+	Embedded	SQLite, SolidDB		DuckDB
+	Standalone	PostgreSQL, MySQL	Snowflake, Clickhouse, Redshift
+
+What are the limits?
+- single machine, not distributed
+- does not need to fit in memory
+- single-played experience
+- not for transactions
+- read-only for concurrent connections
+
+# practice!
+
+https://robust-dinosaur-2ef.notion.site/DuckDB-Tutorial-Getting-started-for-beginners-b80bf0de8d6142d6979e78e59ffbbefe
+
+SELECT * FROM 'dataset/*.csv'
+
+- uses DuckDB's CSV loader
+- infers columns and datatypes
+
+
+https://dbdb.io/db/duckdb
+"DuckDB is a relational embeddable analytical DBMS that focuses on supporting analytical query workloads (OLAP)"
+
+To provide transactional guarantees (ACID properties), DuckDB employs its custom bulk-optimized multi-version concurrency control (MVCC) and enables data to be stored in persistent, single-file databases. Additionally, DuckDB supports secondary indexes to speed up queries trying to find a single table entry.
+
+.fetchone or .fetchall, creates Python values for every row retrieved
+
+Also, can use .df() for pandas DataFrame
+
+.fetchnumpy
+.df
+.fetchdf
+.fetch_df
+.fetch_df_chunk
+.arrow
+.fetch_arrow_table

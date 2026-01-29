@@ -1,0 +1,81 @@
+# Playing around with multi-modal models
+
+Image of Coltsfoot / Tussilago in grass
+
+Prompt:
+Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis.
+
+
+
+
+ChatGPT
+The image shows a white and brown dog sitting on a cozy couch, wrapped in a soft blanket with a calm and relaxed expression.
+The sentiment conveyed is one of warmth, comfort, and peaceful contentment.
+
+llava:7b
+The image displays a bicycle rider on a road, wearing a helmet and carrying a backpack.
+
+The image conveys a sense of adventure and outdoor activity.
+
+llava:13b
+The image appears to be a photograph taken indoors during the daytime. It features a person partially visible on the left side of the frame, with their back turned to the camera. On the right side, there
+is a blurred background which seems to be an interior space with natural light coming in from a window or another opening. The overall sentiment of the image seems to be calm and serene due to the soft
+lighting and the lack of any dramatic action taking place.
+
+$ OLLAMA_HOST=192.168.8.130 ollama run mistral-small3.1
+>>> Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis. Here is the image: ~/Downloads/IMG_0265.HEIC
+I'm sorry, but I can't directly view or analyze images. However, if you describe the image to me, I can help you with a high-level description and a sentiment analysis based on that description.
+
+$ OLLAMA_HOST=192.168.8.130 ollama run granite3.2-vision:2b
+>>> Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis. Here is the image: ~/Downloads/IMG_0265.jpg
+
+The image appears to be a photograph of a person standing in front of a building with a clear sky in the background. The person seems to be looking at something on their phone or tablet, possibly reading a
+message or browsing the internet. Sentiment analysis suggests that the person might be feeling neutral or focused on their task.
+
+
+
+
+
+pip3 install shell-gpt
+$ /Users/folkol/Library/Python/3.9/bin/sgpt
+Please enter your OpenAI API key:
+Hello! How can I assist you today with programming or system administration tasks?
+$ /Users/folkol/Library/Python/3.9/bin/sgpt 'Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis. Here is the image: ~/Downloads/IMG_0265.HEIC'
+I'm unable to view or analyze images directly. However, you can describe the image to me, and I can help with a sentiment analysis or further discussion based on your description.
+
+
+
+gpt4.1 (openai playground)
+This image shows three small yellow flowers blooming among a bed of dry, brown grass and stems. The bright flowers create a hopeful and uplifting contrast in an otherwise dull and lifeless setting.
+
+gpt4o
+This image displays three bright yellow flowers emerging amidst a tangle of dry, brown grass. The vibrant flowers evoke a sense of renewal and optimism, contrasting with their barren surroundings.
+
+gpt4.5 preview
+The image depicts three yellow flowers blossoming among dry, brown grassy foliage. These flowers convey a sense of resilience and optimism amid a seemingly harsh and lifeless environment.
+
+
+
+$ OLLAMA_HOST=192.168.8.130 ollama run llava "describe this image: /Users/folkol/Downloads/IMG_0265.jpg"
+Added image '/Users/folkol/Downloads/IMG_0265.jpg'
+ The image shows a group of yellow wildflowers, commonly known as dandelions, growing in a field with tall brown grass. There are three dandelions prominently displayed in the foreground. In the background,
+there is a dense cover of dry vegetation and a few straw-like plants. The overall scene suggests a natural, possibly rural, setting during what appears to be late spring or early summer. The photograph has
+a realistic style with no visible filters or artistic manipulations. There are no texts present in the image.
+
+
+
+
+>>> /clear
+Cleared session context
+>>> Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis. Here is the image: ~/Downloads/IMG_0265.HEIC.
+ The image depicts an interior scene with natural light illuminating the space. In the foreground, there's a portion of a person wearing a dark shirt and pants seated at a table or counter. The atmosphere
+appears calm and inviting, possibly indicating a sense of comfort or relaxation.
+
+>>> /clear
+Cleared session context
+>>> Describe this image with two sentences. One sentence with a high level description of the contents, and one sentence with a sentiment analysis. Here is the image: /Users/folkol/Downloads/IMG_0265.jpg.
+Added image '/Users/folkol/Downloads/IMG_0265.jpg'
+ The image shows three small yellow flowers blooming in a field that appears somewhat dried out or devoid of verdant vegetation. The flowers stand out against the backdrop of brownish vegetation.
+
+The sentiment analysis of the image suggests a feeling of resilience, as these small flowers have found life and beauty even in an environment that is not lush or nourishing.
+

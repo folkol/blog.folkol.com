@@ -1,0 +1,13 @@
+binary heap in array
+'tree' in array
+always append to 'next slot to keep it balanced'
+
+0
+1 2
+3 5 4 6
+7 9 11 13   8 10 12 14
+15
+
+
+keep: read [0]
+remove: tmp = [0], then swap with smallest child

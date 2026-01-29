@@ -1,0 +1,168 @@
+{"timestamp": "2026-01-29T22:35:33.782058", "source": "/Users/folkol/Documents/notes/spark-dissect/README", "status": "idea"}
+{"timestamp": "2026-01-29T22:35:39.837393", "source": "/Users/folkol/Documents/notes/2025-12-22-arch-zoom", "status": "idea"}
+{"timestamp": "2026-01-29T22:37:45.457503", "source": "/Users/folkol/Documents/notes/2025-12-22-try-agentic-blog-posts-from-notes", "status": "idea"}
+{"timestamp": "2026-01-29T22:46:32.338649", "source": "/Users/folkol/Documents/notes/escape-velocity/README", "status": "idea"}
+{"timestamp": "2026-01-29T22:46:46.231242", "source": "/Users/folkol/Documents/notes/lsm-trees", "status": "idea"}
+{"timestamp": "2026-01-29T22:46:56.375995", "source": "/Users/folkol/Documents/notes/2024-11-30-tinybench-archeology", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-11-30-tinybench-archeology"}
+{"timestamp": "2026-01-29T22:47:00.718341", "source": "/Users/folkol/Documents/notes/2025-02-15-gdb-in-15-min", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-02-15-gdb-in-15-min"}
+{"timestamp": "2026-01-29T22:47:33.851485", "source": "/Users/folkol/Documents/notes/2024-08-01-spark-overview", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-01-spark-overview"}
+{"timestamp": "2026-01-29T22:47:36.381704", "source": "/Users/folkol/Documents/notes/2024-12-28-criterion.js", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-12-28-criterion.js"}
+{"timestamp": "2026-01-29T22:47:39.467006", "source": "/Users/folkol/Documents/notes/3b1b-a-manim-demo-with-ben-sparks", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-12-28-3b1b-a-manim-demo-with-ben-sparks"}
+{"timestamp": "2026-01-29T22:48:00.747476", "source": "/Users/folkol/Documents/notes/performance-aware-programming/12-opcode-patterns-in-8086-arithmetic", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-18-12-opcode-patterns-in-8086-arithmetic"}
+{"timestamp": "2026-01-29T22:48:31.183153", "source": "/Users/folkol/Documents/notes/performance-aware-programming/05-caching", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-05-caching"}
+{"timestamp": "2026-01-29T22:48:32.629438", "source": "/Users/folkol/Documents/notes/performance-aware-programming/04-single-instruction-multiple-data", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-04-single-instruction-multiple-data"}
+{"timestamp": "2026-01-29T22:48:34.764998", "source": "/Users/folkol/Documents/notes/performance-aware-programming/03-instructions-per-clock", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-03-instructions-per-clock"}
+{"timestamp": "2026-01-29T22:48:41.980201", "source": "/Users/folkol/Documents/notes/performance-aware-programming/02-waste", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-16-02-waste"}
+{"timestamp": "2026-01-29T22:49:02.753498", "source": "/Users/folkol/Documents/notes/2024-08-16-notes", "status": "idea"}
+{"timestamp": "2026-01-29T22:49:10.376256", "source": "/Users/folkol/Documents/notes/nanotrusting-the-nanotime", "status": "idea"}
+{"timestamp": "2026-01-29T22:49:15.943709", "source": "/Users/folkol/Documents/notes/the-rust-performance-book", "status": "idea"}
+{"timestamp": "2026-01-29T22:49:19.993083", "source": "/Users/folkol/Documents/notes/kquery-work-notes", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-01-kquery-work-notes"}
+{"timestamp": "2026-01-29T22:49:26.143259", "source": "/Users/folkol/Documents/notes/2024-07-31-photon", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-07-31-photon"}
+{"timestamp": "2026-01-29T22:49:43.662307", "source": "/Users/folkol/Documents/notes/git-performance-issues-on-large-repositories", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-07-21-git-performance-issues-on-large-repositories"}
+{"timestamp": "2026-01-29T22:49:54.320885", "source": "/Users/folkol/Documents/notes/pratt-paper", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-06-28-pratt-paper"}
+{"timestamp": "2026-01-29T22:50:00.952398", "source": "/Users/folkol/Documents/notes/convention-raw-pointers-and-ownership-plus-ascii-tshirt", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-06-28-convention-raw-pointers-and-ownership-plus-ascii-tshirt"}
+{"timestamp": "2026-01-29T22:50:10.263939", "source": "/Users/folkol/Documents/notes/primagen-algo-2", "status": "idea"}
+{"timestamp": "2026-01-29T22:50:15.000923", "source": "/Users/folkol/Documents/notes/bigquery-dremel", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2024-03-29-bigquery-dremel"}
+{"timestamp": "2026-01-29T22:50:20.704689", "source": "/Users/folkol/Documents/notes/longevity-of-cut-off-wheels", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-longevity-of-cut-off-wheels"}
+{"timestamp": "2026-01-29T22:50:24.600788", "source": "/Users/folkol/Documents/notes/2023-10-25", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-2023-10-25"}
+{"timestamp": "2026-01-29T22:50:30.274974", "source": "/Users/folkol/Documents/notes/3t-stack-tutorial", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-3t-stack-tutorial"}
+{"timestamp": "2026-01-29T22:50:50.033303", "source": "/Users/folkol/Documents/notes/2023-10-22", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-22-2023-10-22"}
+{"timestamp": "2026-01-29T22:50:55.173686", "source": "/Users/folkol/Documents/notes/hashmap-quadratic-probing", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-22-hashmap-quadratic-probing"}
+{"timestamp": "2026-01-29T22:51:09.449990", "source": "/Users/folkol/Documents/notes/google-ajax-xssi-json-header", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-08-google-ajax-xssi-json-header"}
+{"timestamp": "2026-01-29T22:51:32.530745", "source": "/Users/folkol/Documents/notes/x123", "status": "idea"}
+{"timestamp": "2026-01-29T22:51:35.057600", "source": "/Users/folkol/Documents/notes/corespotlightd", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-08-17-corespotlightd"}
+{"timestamp": "2026-01-29T22:51:39.491613", "source": "/Users/folkol/Documents/notes/bevy game engine", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-08-06-bevy game engine"}
+{"timestamp": "2026-01-29T22:51:44.097846", "source": "/Users/folkol/Documents/notes/transformers-language-model", "status": "idea"}
+{"timestamp": "2026-01-29T22:51:48.006227", "source": "/Users/folkol/Documents/notes/jetbrains-navigation-plugin", "status": "idea"}
+{"timestamp": "2026-01-29T22:51:51.437473", "source": "/Users/folkol/Documents/notes/all-rust-features-explained", "status": "idea"}
+{"timestamp": "2026-01-29T22:51:54.726127", "source": "/Users/folkol/Documents/notes/rust-lang-blog", "status": "idea"}
+{"timestamp": "2026-01-29T22:52:00.194188", "source": "/Users/folkol/Documents/notes/a-firehouse-of-rust-for-busy-people", "status": "idea"}
+{"timestamp": "2026-01-29T22:52:04.426881", "source": "/Users/folkol/Documents/notes/statquest-machine-learning", "status": "idea"}
+{"timestamp": "2026-01-29T22:52:22.222842", "source": "/Users/folkol/Documents/notes/linux-login-process", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2023-04-29-linux-login-process"}
+{"timestamp": "2026-01-29T22:52:33.646360", "source": "/Users/folkol/Documents/notes/3b1b-on-convolutions", "status": "idea"}
+{"timestamp": "2026-01-29T22:53:04.594008", "source": "/Users/folkol/Documents/notes/id-software-core-principles", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-11-06-id-software-core-principles"}
+{"timestamp": "2026-01-29T22:53:11.798556", "source": "/Users/folkol/Documents/notes/music-from-old-spotify-lists", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-11-05-music-from-old-spotify-lists"}
+{"timestamp": "2026-01-29T22:53:17.449203", "source": "/Users/folkol/Documents/notes/sketch-data-structure", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-28-sketch-data-structure"}
+{"timestamp": "2026-01-29T22:53:33.922318", "source": "/Users/folkol/Documents/notes/fladdermus", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-28-fladdermus"}
+{"timestamp": "2026-01-29T22:53:38.763438", "source": "/Users/folkol/Documents/notes/non-aggregation.txt", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-01-non-aggregation.txt"}
+{"timestamp": "2026-01-29T22:54:26.671551", "source": "/Users/folkol/Documents/notes/build-custom-keyboard", "status": "idea"}
+{"timestamp": "2026-01-29T22:54:31.156822", "source": "/Users/folkol/Documents/notes/blogs", "status": "idea"}
+{"timestamp": "2026-01-29T22:54:35.362079", "source": "/Users/folkol/Documents/notes/introduction-to-ext4", "status": "idea"}
+{"timestamp": "2026-01-29T22:54:37.504776", "source": "/Users/folkol/Documents/notes/gzip padding", "status": "idea"}
+{"timestamp": "2026-01-29T22:55:16.129705", "source": "/Users/folkol/Documents/notes/s3-implementation", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-09-s3-implementation"}
+{"timestamp": "2026-01-29T22:55:54.298938", "source": "/Users/folkol/Documents/notes/aws-services-summary", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-09-aws-services-summary"}
+{"timestamp": "2026-01-29T22:56:05.143962", "source": "/Users/folkol/Documents/notes/heraldik namnskick", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-07-heraldik namnskick"}
+{"timestamp": "2026-01-29T22:56:12.099571", "source": "/Users/folkol/Documents/notes/2022-07-23", "status": "idea"}
+{"timestamp": "2026-01-29T22:56:16.347272", "source": "/Users/folkol/Documents/notes/cache-coherence-protocols-nesoacademy", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-07-26-cache-coherence-protocols-nesoacademy"}
+{"timestamp": "2026-01-29T22:57:25.516943", "source": "/Users/folkol/Documents/notes/theo-tech-stack", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-07-05-theo-tech-stack"}
+{"timestamp": "2026-01-29T22:57:29.818214", "source": "/Users/folkol/Documents/notes/game-shoot-em-up-duel-on-small-planets", "status": "idea"}
+{"timestamp": "2026-01-29T22:57:40.086777", "source": "/Users/folkol/Documents/notes/macos-menu-bar-app", "status": "idea"}
+{"timestamp": "2026-01-29T22:57:45.128089", "source": "/Users/folkol/Documents/notes/casey-muratori-papers-I-have-loved", "status": "idea"}
+{"timestamp": "2026-01-29T22:58:52.669199", "source": "/Users/folkol/Documents/notes/the-little-cs-book-bigmachine.io", "status": "idea"}
+{"timestamp": "2026-01-29T22:58:56.702940", "source": "/Users/folkol/Documents/notes/bell-labs-the-unix-operating-system", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-25-bell-labs-the-unix-operating-system"}
+{"timestamp": "2026-01-29T22:59:09.633646", "source": "/Users/folkol/Documents/notes/you-are-not-stupid-how-to-easily-learn-difficult-things", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-23-you-are-not-stupid-how-to-easily-learn-difficult-things"}
+{"timestamp": "2026-01-29T22:59:18.900374", "source": "/Users/folkol/Documents/notes/clean-coders-hate-when-happens-to-your-code-when-you-use-these-enterprise-programming-tricks", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-22-clean-coders-hate-when-happens-to-your-code-when-you-use-these-enterprise-programming-tricks"}
+{"timestamp": "2026-01-29T22:59:44.695923", "source": "/Users/folkol/Documents/notes/100-web-development-things", "status": "idea"}
+{"timestamp": "2026-01-29T23:00:03.234120", "source": "/Users/folkol/Documents/notes/binary-heap-in-array", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-binary-heap-in-array"}
+{"timestamp": "2026-01-29T23:00:05.394379", "source": "/Users/folkol/Documents/notes/ 3b1b-tips-to-be-a-better-problem-solver", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19- 3b1b-tips-to-be-a-better-problem-solver"}
+{"timestamp": "2026-01-29T23:00:10.256411", "source": "/Users/folkol/Documents/notes/exact-closed-form-expression-for-fib", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-exact-closed-form-expression-for-fib"}
+{"timestamp": "2026-01-29T23:00:14.366169", "source": "/Users/folkol/Documents/notes/browser-reflow", "status": "idea"}
+{"timestamp": "2026-01-29T23:00:32.601253", "source": "/Users/folkol/Documents/notes/how-is-aws-vpc-implemented", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-how-is-aws-vpc-implemented"}
+{"timestamp": "2026-01-29T23:00:39.988649", "source": "/Users/folkol/Documents/notes/how-to-learn-aws-starting-points-per-role", "status": "idea"}
+{"timestamp": "2026-01-29T23:00:42.865819", "source": "/Users/folkol/Documents/notes/amazon-global-network-overview", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-amazon-global-network-overview"}
+{"timestamp": "2026-01-29T23:00:44.814736", "source": "/Users/folkol/Documents/notes/10x-dev-zipfs-law", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-10x-dev-zipfs-law"}
+{"timestamp": "2026-01-29T23:00:47.015032", "source": "/Users/folkol/Documents/notes/most-common-numbers-used-by-humans", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-most-common-numbers-used-by-humans"}
+{"timestamp": "2026-01-29T23:00:50.674562", "source": "/Users/folkol/Documents/notes/aws-iam", "status": "idea"}
+{"timestamp": "2026-01-29T23:00:54.104996", "source": "/Users/folkol/Documents/notes/hdd-track-size", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-17-hdd-track-size"}
+{"timestamp": "2026-01-29T23:00:57.080765", "source": "/Users/folkol/Documents/notes/# ECMA-262", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-10-# ECMA-262"}
+{"timestamp": "2026-01-29T23:01:00.806450", "source": "/Users/folkol/Documents/notes/javascript-engines-how-do-they-even", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-04-javascript-engines-how-do-they-even"}
+{"timestamp": "2026-01-29T23:01:07.533978", "source": "/Users/folkol/Documents/notes/age quod agis", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-age quod agis"}
+{"timestamp": "2026-01-29T23:01:13.689151", "source": "/Users/folkol/Documents/notes/tommy emmanuel practice skill and music", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-tommy emmanuel practice skill and music"}
+{"timestamp": "2026-01-29T23:01:20.978199", "source": "/Users/folkol/Documents/notes/drive the surprising truth about what motivates us daniel pink", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-drive the surprising truth about what motivates us daniel pink"}
+{"timestamp": "2026-01-29T23:01:24.876459", "source": "/Users/folkol/Documents/notes/mbox-file-format", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-mbox-file-format"}
+{"timestamp": "2026-01-29T23:01:33.143490", "source": "/Users/folkol/Documents/notes/better-pbpaste", "status": "idea"}
+{"timestamp": "2026-01-29T23:01:36.517764", "source": "/Users/folkol/Documents/notes/goodbye-useeffects", "status": "idea"}
+{"timestamp": "2026-01-29T23:01:42.347521", "source": "/Users/folkol/Documents/notes/chrome-university", "status": "idea"}
+{"timestamp": "2026-01-29T23:01:46.805614", "source": "/Users/folkol/Documents/notes/deep-foundations-of-advanced-javascript", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-28-deep-foundations-of-advanced-javascript"}
+{"timestamp": "2026-01-29T23:01:49.718784", "source": "/Users/folkol/Documents/notes/infosecwriteups-motsec-core-ruleset", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-16-infosecwriteups-motsec-core-ruleset"}
+{"timestamp": "2026-01-29T23:01:58.917374", "source": "/Users/folkol/Documents/notes/mdn-getting-started-with-the-web", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-15-mdn-getting-started-with-the-web"}
+{"timestamp": "2026-01-29T23:02:00.519040", "source": "/Users/folkol/Documents/notes/firebase-security-checklist", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-15-firebase-security-checklist"}
+{"timestamp": "2026-01-29T23:02:02.998954", "source": "/Users/folkol/Documents/notes/the-5-most-important-css-concepts-for-beginners", "status": "idea"}
+{"timestamp": "2026-01-29T23:02:05.367323", "source": "/Users/folkol/Documents/notes/elon-musk-principle-for-knowledge-acquisition", "status": "idea"}
+{"timestamp": "2026-01-29T23:02:11.335780", "source": "/Users/folkol/Documents/notes/statquest-entropy-for-datascience", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-14-statquest-entropy-for-datascience"}
+{"timestamp": "2026-01-29T23:02:13.214868", "source": "/Users/folkol/Documents/notes/statquest-expected-values-main-ideas", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-13-statquest-expected-values-main-ideas"}
+{"timestamp": "2026-01-29T23:02:17.208915", "source": "/Users/folkol/Documents/notes/s3 TTBF folkol.com", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-11-s3 TTBF folkol.com"}
+{"timestamp": "2026-01-29T23:02:20.635367", "source": "/Users/folkol/Documents/notes/better-tree-tool", "status": "idea"}
+{"timestamp": "2026-01-29T23:02:31.304067", "source": "/Users/folkol/Documents/notes/skotten i sarajevo scotsman in", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-05-skotten i sarajevo scotsman in"}
+{"timestamp": "2026-01-29T23:02:49.354855", "source": "/Users/folkol/Documents/notes/metacompliance-gdpr", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-29-metacompliance-gdpr"}
+{"timestamp": "2026-01-29T23:02:53.444779", "source": "/Users/folkol/Documents/notes/terraform-custom-ca", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-28-terraform-custom-ca"}
+{"timestamp": "2026-01-29T23:02:59.467499", "source": "/Users/folkol/Documents/notes/intermediate language disassembly .net ildasm", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-27-intermediate language disassembly .net ildasm"}
+{"timestamp": "2026-01-29T23:03:01.610848", "source": "/Users/folkol/Documents/notes/bit-buketten", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-25-bit-buketten"}
+{"timestamp": "2026-01-29T23:03:03.438477", "source": "/Users/folkol/Documents/notes/overlay vs underlay networks", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-25-overlay vs underlay networks"}
+{"timestamp": "2026-01-29T23:03:09.541170", "source": "/Users/folkol/Documents/notes/dribbble-top-10-bad-designs", "status": "idea"}
+{"timestamp": "2026-01-29T23:03:13.562600", "source": "/Users/folkol/Documents/notes/whois-scripting", "status": "idea"}
+{"timestamp": "2026-01-29T23:03:18.700912", "source": "/Users/folkol/Documents/notes/ram disk on mac", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-ram disk on mac"}
+{"timestamp": "2026-01-29T23:03:27.195711", "source": "/Users/folkol/Documents/notes/bo-on-motivation-velocity-and-daniel-pink", "status": "idea"}
+{"timestamp": "2026-01-29T23:03:30.370174", "source": "/Users/folkol/Documents/notes/miessler-2022-03-22", "status": "idea"}
+{"timestamp": "2026-01-29T23:03:38.904722", "source": "/Users/folkol/Documents/notes/security-discussion-2022-03-22", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-security-discussion-2022-03-22"}
+{"timestamp": "2026-01-29T23:03:41.118607", "source": "/Users/folkol/Documents/notes/spotlight-indexing-on-macos", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-spotlight-indexing-on-macos"}
+{"timestamp": "2026-01-29T23:03:46.338028", "source": "/Users/folkol/Documents/notes/triangulation vs fingerprinting?", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-12-triangulation vs fingerprinting?"}
+{"timestamp": "2026-01-29T23:03:55.507934", "source": "/Users/folkol/Documents/notes/virtual networking and overlays", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-03-30-virtual networking and overlays"}
+{"timestamp": "2026-01-29T23:04:00.829125", "source": "/Users/folkol/Documents/notes/api-mocking-react-development", "status": "idea"}
+{"timestamp": "2026-01-29T23:04:06.867360", "source": "/Users/folkol/Documents/notes/integration-tests-are-a-scam", "status": "idea"}
+{"timestamp": "2026-01-29T23:04:08.651849", "source": "/Users/folkol/Documents/notes/navigating-code-in-vscode", "status": "idea"}
+{"timestamp": "2026-01-29T23:04:13.321404", "source": "/Users/folkol/Documents/notes/integrated-tests-are-a-scam", "status": "idea"}
+{"timestamp": "2026-01-29T23:04:15.658438", "source": "/Users/folkol/Documents/notes/rijndael s-box aes", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-03-01-rijndael s-box aes"}
+{"timestamp": "2026-01-29T23:04:29.164991", "source": "/Users/folkol/Documents/notes/limitations of causally and totally ordered communication", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-23-limitations of causally and totally ordered communication"}
+{"timestamp": "2026-01-29T23:04:31.399026", "source": "/Users/folkol/Documents/notes/ramblings 2022 02", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-11-ramblings 2022 02"}
+{"timestamp": "2026-01-29T23:04:32.998575", "source": "/Users/folkol/Documents/notes/baby aes rijndael visualized", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-10-baby aes rijndael visualized"}
+{"timestamp": "2026-01-29T23:04:41.561146", "source": "/Users/folkol/Documents/notes/gcp kms", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-08-gcp kms"}
+{"timestamp": "2026-01-29T23:04:44.856835", "source": "/Users/folkol/Documents/notes/20 things I've learned in my 20 yeras as a software engineer", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-07-20 things I've learned in my 20 yeras as a software engineer"}
+{"timestamp": "2026-01-29T23:04:48.669506", "source": "/Users/folkol/Documents/notes/assigned access kiosk breakout hard mode", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-06-assigned access kiosk breakout hard mode"}
+{"timestamp": "2026-01-29T23:05:06.889349", "source": "/Users/folkol/Documents/notes/stock image to match your content microsoft spy", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-02-stock image to match your content microsoft spy"}
+{"timestamp": "2026-01-29T23:05:09.363415", "source": "/Users/folkol/Documents/notes/tunnelblick keeps passphrase around", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-01-tunnelblick keeps passphrase around"}
+{"timestamp": "2026-01-29T23:05:12.444530", "source": "/Users/folkol/Documents/notes/github wikis not indexed", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-28-github wikis not indexed"}
+{"timestamp": "2026-01-29T23:05:16.129189", "source": "/Users/folkol/Documents/notes/auth0", "status": "idea"}
+{"timestamp": "2026-01-29T23:05:21.333374", "source": "/Users/folkol/Documents/notes/The shortest pencil is longer than the longest mem", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-The shortest pencil is longer than the longest mem"}
+{"timestamp": "2026-01-29T23:05:26.699561", "source": "/Users/folkol/Documents/notes/The Absolute Beginner's Guide to Emacs", "status": "idea"}
+{"timestamp": "2026-01-29T23:05:28.836675", "source": "/Users/folkol/Documents/notes/google serps and knowledge graph", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-google serps and knowledge graph"}
+{"timestamp": "2026-01-29T23:05:32.774394", "source": "/Users/folkol/Documents/notes/uniform-cost search vs djikstras (don't add all no", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-uniform-cost search vs djikstras (don't add all no"}
+{"timestamp": "2026-01-29T23:05:41.100279", "source": "/Users/folkol/Documents/notes/Fermats theory: Light travels the path that takes", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-Fermats theory: Light travels the path that takes"}
+{"timestamp": "2026-01-29T23:05:45.073053", "source": "/Users/folkol/Documents/notes/smarter every day coast guard", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-19-smarter every day coast guard"}
+{"timestamp": "2026-01-29T23:05:47.016873", "source": "/Users/folkol/Documents/notes/understanding-digital-signatures", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-19-understanding-digital-signatures"}
+{"timestamp": "2026-01-29T23:05:50.286028", "source": "/Users/folkol/Documents/notes/scratch/2022-01", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-17-2022-01"}
+{"timestamp": "2026-01-29T23:06:06.708252", "source": "/Users/folkol/Documents/notes/5 remarkably powerful hacks to become more articulate", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-17-5 remarkably powerful hacks to become more articulate"}
+{"timestamp": "2026-01-29T23:06:10.201960", "source": "/Users/folkol/Documents/notes/8 python coding tips from the google python style guide", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-16-8 python coding tips from the google python style guide"}
+{"timestamp": "2026-01-29T23:06:12.393301", "source": "/Users/folkol/Documents/notes/coordinate compression and studying techniques", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-14-coordinate compression and studying techniques"}
+{"timestamp": "2026-01-29T23:06:21.511717", "source": "/Users/folkol/Documents/notes/bluetooth experiment/7", "status": "idea"}
+{"timestamp": "2026-01-29T23:06:26.812065", "source": "/Users/folkol/Documents/notes/bluetooth experiment/README", "status": "idea"}
+{"timestamp": "2026-01-29T23:06:28.571957", "source": "/Users/folkol/Documents/notes/JavaScript type coercion explained", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-14-JavaScript type coercion explained"}
+{"timestamp": "2026-01-29T23:06:34.448649", "source": "/Users/folkol/Documents/notes/purplesec cyber security statistics", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-purplesec cyber security statistics"}
+{"timestamp": "2026-01-29T23:06:36.162797", "source": "/Users/folkol/Documents/notes/ui design erik kennedy/README", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-README"}
+{"timestamp": "2026-01-29T23:06:40.051329", "source": "/Users/folkol/Documents/notes/gender-neutrality-in-ancient-hunter-groups", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-gender-neutrality-in-ancient-hunter-groups"}
+{"timestamp": "2026-01-29T23:06:47.508254", "source": "/Users/folkol/Documents/notes/why-crypto-prime-factors", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-11-why-crypto-prime-factors"}
+{"timestamp": "2026-01-29T23:06:49.574972", "source": "/Users/folkol/Documents/notes/rust cli", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-11-rust cli"}
+{"timestamp": "2026-01-29T23:06:52.395221", "source": "/Users/folkol/Documents/notes/rust rust rust", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-rust rust rust"}
+{"timestamp": "2026-01-29T23:07:01.403124", "source": "/Users/folkol/Documents/notes/mastering-key-bindings-in-emacs", "status": "idea"}
+{"timestamp": "2026-01-29T23:07:03.330481", "source": "/Users/folkol/Documents/notes/how does webpack work", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-how does webpack work"}
+{"timestamp": "2026-01-29T23:07:06.499588", "source": "/Users/folkol/Documents/notes/webpack and stty modes", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-webpack and stty modes"}
+{"timestamp": "2026-01-29T23:07:08.140331", "source": "/Users/folkol/Documents/notes/fool of all trades", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-fool of all trades"}
+{"timestamp": "2026-01-29T23:07:12.704976", "source": "/Users/folkol/Documents/notes/tankar", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-tankar"}
+{"timestamp": "2026-01-29T23:07:18.189469", "source": "/Users/folkol/Documents/notes/dev mem", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-09-dev mem"}
+{"timestamp": "2026-01-29T23:07:26.300024", "source": "/Users/folkol/Documents/notes/Null Byte, 6 step framework", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2021-11-16-Null Byte, 6 step framework"}
+{"timestamp": "2026-01-29T23:07:32.620935", "source": "/Users/folkol/Documents/notes/main", "status": "idea"}
+{"timestamp": "2026-01-29T23:07:37.095413", "source": "/Users/folkol/Documents/notes/ideas", "status": "idea"}
+{"timestamp": "2026-01-29T23:07:44.743101", "source": "/Users/folkol/Documents/notes/cgp", "status": "idea"}
+{"timestamp": "2026-01-29T23:07:50.994554", "source": "/Users/folkol/Documents/notes/top 10 algorithms for the coding interview for software engineer", "status": "idea"}
+{"timestamp": "2026-01-29T23:07:53.307445", "source": "/Users/folkol/Documents/notes/python packaging", "status": "idea"}
+{"timestamp": "2026-01-29T23:08:00.278766", "source": "/Users/folkol/Documents/notes/2020-10-11", "status": "idea"}
+{"timestamp": "2026-01-29T23:08:03.158446", "source": "/Users/folkol/Documents/notes/pipenv crash course", "status": "idea"}
+{"timestamp": "2026-01-29T23:08:08.986389", "source": "/Users/folkol/Documents/notes/14342.md", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2020-08-07-14342.md"}
+{"timestamp": "2026-01-29T23:08:20.116326", "source": "/Users/folkol/Documents/notes/2025-12-20-1brc-rust-jon", "status": "idea"}
+{"timestamp": "2026-01-29T23:08:24.070011", "source": "/Users/folkol/Documents/notes/2025-12-21-identify-blog-post-candidates-form-notes", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-12-21-identify-blog-post-candidates-form-notes"}
+{"timestamp": "2026-01-29T23:08:30.288778", "source": "/Users/folkol/Documents/notes/2025-07-12-large-language-models", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-07-12-large-language-models"}
+{"timestamp": "2026-01-29T23:08:37.371992", "source": "/Users/folkol/Documents/notes/2025-04-21-multi-modal-models", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-04-21-multi-modal-models"}
+{"timestamp": "2026-01-29T23:08:45.250079", "source": "/Users/folkol/Documents/notes/2025-07-12-nessie-catalog", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-07-12-nessie-catalog"}
+{"timestamp": "2026-01-29T23:08:47.265132", "source": "/Users/folkol/Documents/notes/2025-05-10-ollama-model-timings", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-05-10-ollama-model-timings"}
+{"timestamp": "2026-01-29T23:08:54.476335", "source": "/Users/folkol/Documents/notes/2025-01-05.2", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-01-05-2025-01-05.2"}
+{"timestamp": "2026-01-29T23:08:56.386292", "source": "/Users/folkol/Documents/notes/notes-2025-01-05", "dest": "/Users/folkol/code/blog.folkol.com/candidates/2025-01-05-notes-2025-01-05"}

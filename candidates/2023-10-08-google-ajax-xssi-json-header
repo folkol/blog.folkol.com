@@ -1,0 +1,154 @@
+AJAX responses begin with )]}'
+
+/// `DataPreprocessor` that trims Google's typical `)]}',\n` XSSI JSON header.
+        (data.prefix(6) == Data(")]}',\n".utf8)) ? data.dropFirst(6) : data
+
+facebook uses for(;;);
+
+
+https://www.hacksplaining.com/prevention/xssi
+
+
+XSSI attacks:
+    Cross Site Script Inclusion (XSSI) is an attack technique (or a vulnerability) that enables attackers to steal data of certain types across origin boundaries, by including target data using SCRIPT tag in an attackerss Web page as below:
+
+    <!-- attacker's page loads external data with SCRIPT tag -->
+    <SCRIPT src="http://target.example.jp/secret"></SCRIPT>
+
+Just to be clear, included scripts don't have to be a JS file or be served with text/javascript or with .js extension. The attack, in fact, abuses the fact that;
+browsers are lenient and only block them if the script is served with an image type (image/), a video type (video/), an audio (audio/*) type, or text/csv
+
+https://web.archive.org/web/20210620094905/https://blog.cm2.pw/h1-xssi/
+
+    Menu
+    Article XSSI
+    HackerOne XSSI – Stealing Multi Line Strings
+
+     Prakash
+    Prakash
+
+    19 Jan 2018 • 4 min read
+    I assume you already know what XSSI is. If not, here's a brief introduction cited from Identifier based XSSI attacks:
+
+    Cross Site Script Inclusion (XSSI) is an attack technique (or a vulnerability) that enables attackers to steal data of certain types across origin boundaries, by including target data using SCRIPT tag in an attackerss Web page as below:
+
+    <!-- attacker's page loads external data with SCRIPT tag -->
+    <SCRIPT src="http://target.example.jp/secret"></SCRIPT>
+    Since browsers do not prevent pages of a domain from referencing resources in other domains, it's possible to include scripts from third domains and observe it's side effects. Yeah, only side effects- we cannot read contents of included script from third domains.
+
+    Just to be clear, included scripts don't have to be a JS file or be served with text/javascript or with .js extension. The attack, in fact, abuses the fact that;
+
+    browsers are lenient and only block them if the script is served with an image type (image/), a video type (video/), an audio (audio/*) type, or text/csv
+
+    Note: FF 49 does execute scripts with text/csv and doesn't support X-Content-Type-Options either.
+
+    The issue I first reported to HackerOne was kind of theoretical. The attack has already been described in Identifier based XSSI attacks as CSV with quotations theft. The idea is to make the contents of CSV file valid JavaScript statements. The vulnerable endpoint I reported was:
+
+    https://hackerone.com/settings/bounties.csv
+
+    You can find it under Settings > Payments as "Download as CSV". It was a newly launched feature. Clicking on the link sent a simple GET request which popped up a download dialog box. The contents of CSV file was like;
+
+    report_id,report_title,program_name,total_amount,amount,bonus_amount,currency,awarded_at,status
+    1234,Sample report,Sample Program,100.0,100.0,0.0,USD,2017-01-01 12:30:00 UTC,confirmed
+    1234,Sample report,Sample Program,100.0,100.0,0.0,USD,2017-01-01 12:30:00 UTC,confirmed
+    1234,Sample report,Sample Program,100.0,100.0,0.0,USD,2017-01-01 12:30:00 UTC,confirmed
+    This seemed almost a valid JavaScript in itself. And since I could control report_title, I quickly checked if I could leak its contents using XSSI. The first line of CSV contains comma separated values of fields which, in fact, form valid JavaScript variable names. Therefore, I only had to define variables with these names in my page and include it later so as to prevent premature termination.
+
+    The POC I created was as follows:
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset='utf-8'/>
+        <script>
+            var report_id,report_title,program_name,total_amount,amount,bonus_amount,currency,awarded_at,status;
+        </script>
+      </head>
+      <body>
+        <script src='https://hackerone.com/settings/bounties.csv'></script>
+      </body>
+    </html>
+    What I did was purely theoretical- I used Burp Suite to modify report_title on the fly and made it a valid JavaScript. I used backticks to capture multiple lines. The authors of Identifier based XSSI attacks have already talked about reading multi line strings and have also shown an example using function definition.
+
+    The response as seen when modified to form valid JavaScript statements;
+
+    This makes Sample a JavaScript variable which holds information about all reports (in CSV) except the last one.
+
+    After about an hour, I found another endpoint vulnerable to XSSI. This time, I prepared a working POC which didn't require modifying contents on the fly. The vulnerable endpoint was;
+
+    https://hackerone.com/reports/12345/export/raw?include_internal_activities=true
+
+    Yes, it's not a CSV file. Yet, it was possible to make it a valid JavaScript file. It's a part of "Export" feature which allows you to view or download raw reports. When clicked, a GET request is sent as shown above.
+
+    Though it was an XHR request which also contained an anti-CSRF token, direct GET requests also yielded the same result.
+
+    Full response of a direct GET request as seen in browser;
+
+    To leak report contents cross-domain, it must all be valid JavaScript statements. So, I submitted a demo report;
+
+    Title:         demo`
+    Weakness:      Information Disclosure
+    Severity:      Medium
+    Link:          https://hackerone.com/reports/12345
+    Date:          2017-01-01 12:00:55 +0000
+    By:            @mikkocarreon
+
+    Details:
+    To avoid hackbot duplicate message, I had to create this one again :(
+
+
+    Timeline:
+    2017-01-01 12:00:60 +0000: @mikkocarreon (bug duplicate)
+    And, it worked :D`
+    The first line is a labeled statement i.e. "Title" followed by user supplied TITLE. Labeled statements are valid JavaScript statements and following that is my own input. To capture multi line string, I made use of backticks again. Then after, I posted a comment with backtick at the end to terminate my string literal.
+
+    Now, I could just embed above URL in my SCRIPT tag and get its content leaked. Here's a video POC I made during my reporting where I used Tagged Template Literals;
+
+
+    And here's a live version of my POC: http://cm2.pw/h1csv
+    Here's what it looked like;
+    h1-xssi
+
+    I've seen only 2 ways to handle multi line strings in JavaScript (excluding concatenation & backslash escaping). ECMAScript 6 also introduced arrow functions which shortens the characters required for function definition. For example, you could do;
+    arrow_functions
+    Template literals, again, are much shorter and easier way to handle multi line strings which I used in my POCs.
+
+    If you're reading about XSSI for the first time, you may not realize its impact. XSSI, depending on the content of data, can be exploited accordingly. Here, for example, an attacker could have been able to read reports of other users. Let's say, for instance, Facebook stores user information in a JS file under user.js. If it responds to normal GET requests, anyone would be able to read your information if you visit their malicious site/page. Some more real life examples can be found at;
+
+    https://www.scip.ch/en/?labs.20160414
+    Your Script in My Page: What Could Possibly Go Wrong
+
+    To remediate the issue, developers or website owners can do one or any combination of;
+    – Switch to POST method
+    – Use secret tokens as in CSRF Protection
+    – Make URL unpredictable
+    – Strict referer checking
+
+    If the data is supposed to be retrieved via ajax requests for further processing, one can also;
+    – Use Parser-Breaking syntax like for(;;)
+    – Use custom HTTP header
+
+    Link to original report: https://hackerone.com/reports/207266
+
+    Thanks
+    Special thanks to @albinowax for his feedback and thorough proof-reading and to @garethheyes as well.
+
+    Share
+    Topic XSSI JavaScript ECMAScript
+    Show Comments
+    Referrer Policy
+
+    There are, atm, 5 different ways referrer policy can be delivered as…
+
+    19 Jan 2018
+
+    Stealing CSVs Cross-domain
+
+    Back in 2008, Chris Evans found it was possible to steal data…
+
+    19 Jan 2018
+
+
+    Topics
+
+    JavaScript: 4 XSSI: 3 CORS: 2 MSIE: 1 ECMAScript: 1 Referer: 1 Flash: 1 CSRF: 1 MS Edge: 1 SSRF: 1 OSRF: 1 XSS: 1

@@ -1,0 +1,2482 @@
+# https://leftasexercise.com/2019/12/30/virtual-networking-labs-virtual-ethernet-networks-with-vlan-tags/
+
+## https://www.stratoscale.com/blog/networking/network-virtualization-overlay-networks-cloud-environments-part-1/
+
+How do we create connectivity between these entities? Here we’ll use the same terminology as OpenStack and call these entities a ‘project’. Each project may have multiple virtual networks. A physical network will host a number of virtual networks  and each virtual network must be isolated from other virtual networks, in the same manner as a physical network.
+
+Overlay networking separates the virtual networking from the physical underlay, providing the equivalent paradigm as the hypervisor and virtual machine provide for the compute functions.
+
+The most common ways of creating this overlay in the cloud are Virtual Local Area Networks – VLANs and Virtual eXtensible Local Area Networks VXLANs.
+
+### VLAN – A Native Layer2 Overlay
+In fact, VLANs have been around for years, but in this case ‘virtual’ did not refer to virtual machines. A LAN is defined as a single broadcast domain. VLANs allow segmenting this broadcast domain into multiple, isolated, broadcast domains. Each VLAN is identified by a VLAN ID (12 bits). The VLAN ID is encoded in a packet in a VLAN tag that is placed after the source MAC address of the L2 header. The administrator of a network configures a switch’s port with the relevant VLAN IDs, to create the virtual broadcast domain.
+
+### VXLAN – Overlay over IP
+
+VXLAN (Virtual eXtensible Local Area Network) implements  a Layer 2 overlay scheme by tunneling over  a Layer 3 network. Each overlay network is called a VXLAN segment. VXLAN was also designed to overcome the 4095 virtual networks limitation of the VLAN  based overlay. 
+
+A VM packet that is encapsulated in a UDP/IP packet. The VXLAN header follows the UDP header and  contains a VXLAN Network Identifier (VNI) field.The VNI is often referred to as segment ID. Since each VXLAN segment is identified by a 24-bit segment ID, up to 16M VXLAN segments can coexist.
+
+The VM’s packet is encapsulated by the virtual switch on the host. The virtual switch, in this case, realizes the VTEP (VXLAN tunnel endpoint). It need to determine the destination VTEP and encapsulate the L2 packet. Determining the destination endpoint can be achieved in two ways:
+
+- configuration
+- flood and learn
+
+There is some additional cost of this overlay in terms of performance. A MAC header, an IP header, a UDP header and a VXLAN header are added to each L2 packet produced by a VM.
+
+The MTU of the network should be adjusted to accommodate the resulting frame size. In addition, some of the legacy TCP/IP processing – offload that is provided by the host’s NICs – may not work.
+
+#### VxLAN and Broadcast/Multicast
+
+The virtual network is a layer 2 network and therefore may need to handle BUM (broadcast,unknown and multicast) packets.
+
+BUM packets need to be replicated to multiple VTEPs. In a physical networks, this is handled by the physical switches. With VXLAN the switches will not be aware of this due to the encapsulation. They will not perform the replication.
+
+TODO: Find YouTube video about VxLAN.
+
+One approach is to  replicate all BUM packets to all destinations at the VTEP , but this entails intensive processing which usually results in lower performance. Another solution is to send the encapsulating  IP packet as an IP multicast group.  However, multicast is not trivial to manage. If the physical network involves routers you will also need to set up a multicast routing protocol.
+
+Overlay on overlay, broadcast storm?
+
+In virtual networks all the physical network elements can be present in virtualized forms – virtual routers, load balancers, firewalls and so on. Since they are implemented as software they can run anywhere on the cloud. When the virtual entities need to connect to physical entities, for example to connect to a physical firewall, a bridging function must be added between the physical and virtual components. For example,  some physical switches and routers can terminate the VXLAN tunnel. Once they terminate, the traffic is sent as normal L2 traffic to the physical server. To send the reply, the physical switches re-encapsulate the packet as VXLAN to reach the correct VM, connecting the virtual network to entities that reside on the physical one.
+
+VXLAN solves the limitations of the VLAN overlay method. Note however, that it works just as well over a single IP subnet and can therefore be used in L2 data-centers in place of the VLAN overlay.
+
+
+## Virtual Networking labs, virtual Ethernet networks with VLAN tags
+
+https://leftasexercise.com/2019/12/30/virtual-networking-labs-virtual-ethernet-networks-with-vlan-tags/
+
+An introduction to virtual Ethernet networks
+
+Today, essentially every Ethernet network you will come across is a switched network, where every server is more or less directly connected to a switch, and the switches are connected to each other to propagate traffic through your data center. A naive approach would be to use layer 2 switches to combine all Ethernet networks into one large broadcast domain, where every node is connected to every other node by a sequence of switches. This approach, however, creates a very large broadcast domain and is difficult to maintain as changes to the topology need to be done by a physical rearrangement. It might therefore be beneficial to have some way of dividing your physical Ethernet network into two or more logical (“virtual”) networks.
+
+    Broadcast domain: The set of hosts that are reachable by Ethernet broadcast. ("Computers connected by switch es"?)
+    Ethernet networks: Unclear, but "connect ethernet networks with switches to create one large broadcast domain"
+
+    Naive approach: Connect all ethernet networks (segments?) into one large broadcast domain by chaining switches.
+    This approach, however, creates a very large broadcast domain and is difficult to maintain as changes to the topology need to be done by a physical rearrangement
+
+Configure ports to be part of 'virtual network segments'.
+How chain switches? One might configure connections per VLAN, but this will blow your hardware requirements up. Instead, 'trunking' is used. With trunking, different VLANs can share the same physical connection by 'tagging' the frames.
+
+Hosts and access ports are 'VLAN-tag unaware', switches and trunk ports are 'VLAN-tag aware'.
+
+VLAN Tag id: 12 bits = ~4k VLAN IDs / VIDs.
+
+Trunk ports (tagging) and access ports (not tagging).
+This virtual network can be configured entirely in software.
+
+Switches are normally not password protected, plug cable to console port and go.
+https://www.cisco.com/c/en/us/solutions/small-business/resource-center/networking/how-to-setup-network-switch.html#~setup-guide
+
+
+### VID 1 reserved
+
+https://networkengineering.stackexchange.com/questions/24404/vlan-0-1-and-4095-are-reserved-what-are-they-reserved-for
+
+    The Wikipedia article you mention gives a succinct explanation:
+        https://en.wikipedia.org/wiki/IEEE_802.1Q#Frame_format
+
+        VLAN identifier (VID): a 12-bit field specifying the VLAN to which the frame belongs. The hexadecimal values of 0x000 and 0xFFF are reserved. All other values may be used as VLAN identifiers, allowing up to 4,094 VLANs. The reserved value 0x000 indicates that the frame does not carry a VLAN ID; in this case, the 802.1Q tag specifies only a priority and is referred to as a priority tag. On bridges, VID 0x001 (the default VLAN ID) is often reserved for a management VLAN; this is vendor-specific. The VID value 0xFFF is reserved for implementation use; it must not be configured or transmitted. 0xFFF can be used to indicate a wildcard match in management operations or filtering database entries.
+
+    As you can see, there isn't really a usable VLAN 0 or 4095. Cisco uses VLAN 1 as a default VLAN, and management protocols (STP, CDP, DTP, etc) are sent on VLAN 1.
+
+    You can use VLAN 1 for simple installations where there is no VLAN trunking, but good practice is to not put user data on VLAN 1 in a multi-VLAN environment.
+
+    lab setup, ansible fails with /usr/bin/python not found
+    https://www.toptechskills.com/ansible-tutorials-courses/how-to-fix-usr-bin-python-not-found-error-tutorial/
+
+    We need to make sure that the devices are allowed to switch into promiscuous mode as the VLAN code requires this
+
+
+## Virtual networking labs – overlay networks
+
+"In the last post, we have looked at virtual networking on the Ethernet level. In modern cloud environments, a second class of virtual networks has gained importance, which uses higher level protocols to tunnel Ethernet frames. These networks are called overlay networks, and we will start to look at them in this post."
+
+### VxLan — the basics
+
+The VLAN technology that we have looked at in the last post is useful, but has some limitations. First, there is the maximum number of possible VLANs (4096). In practice, certain VLAN ranges need to be reserved for internal purposes, further limiting the number of available VLANs. In cloud environments with a large number of tenants, this limit can easily be reached if we try to implement all virtual networks via VLAN. In addition, VLAN tags inserted by the tenants could conflict with the VLAN tags inserted by the host operating systems.
+
+To solve these problems, a new standard called VXLAN was developed a couple of years back, which is described (though not defined, as this is an informational RFC) in RFC 7348. The basic idea of VXLAN is actually quite simple. On each host involved, we create a virtual network device. When an Ethernet frame needs to be transmitted via this device, the host creates a UDP packet, puts the Ethernet frame as payload into this packet and sends it to the target host. The target host receives the packet, strips off the headers, and re-injects the payload (i.e. the original Ethernet frame) into the networking stack of the target system. Thus Ethernet frames travels on top of UDP, and the virtual Ethernet networks logically sits on top of the layer 3 IP network used to exchange the UDP packets, leading to the name overlay network.
+
+To be able to isolate different VXLANs from each other, a 24 bit VXLAN network identifier (VNI) is used. The implementation needs to make sure that Ethernet frames are only delivered within the same VNI, thus isolating the different VXLAN networks from each other. A host that is able to provide VXLAN devices and to participate in the exchange of UDP packets is called a VXLAN tunnel endpoint (VTEP). Thus to send an Ethernet frame over VXLAN, a VTEP needs to
+
+    - Add a VXLAN header that contains the VNI, so that the receiving VTEP can make sure that the frame is only delivered within the correct VNI
+    - Pass the resulting data as payload to the own IP stack, which will add a UDP, IP and Ethernet header to be able to transmit the frame over an existing layer 2 network
+
+To be able to locate the UDP target address to which we have to send an encapsulated Ethernet frame, each VTEP needs to maintain a table containing mapping between the IP addresses of other VTEPs and the corresponding MAC addresses. A VTEP typically learns how to populate this table and uses IP multicast to ask other VTEPS to resolve unknown MAC addresses, similar to the ARP protocol.
+
+When VXLAN is used, there are a few points that should be kept in mind.
+- First, we do of course add quite a bit of overhead. For every Ethernet frame that is being exchanged, we add a second Ethernet header, an IP header and a UDP header, plus the processing time it takes on the host to travel the networking stack up and down once more.
+- In addition, there is a problem with the MTU (maximum transfer unit) configured for the VXLAN endpoints. As the Ethernet frames on the physical network are longer than the Ethernet frames on the overlay network (as we need the additional headers), we will have to increase the MTU on the physical network to account for this in order to avoid unnecessary fragmentation.
+- Also, using VXLAN implies that your Ethernet frames flow in clear text over the IP connection, so if you want to use VXLAN across unsecure network areas, then you should use some form of encryption like IPSec.
+
+
+
+#### Lab
+
+To see this in action, let us first implement a very basic scenario. Assume that we have two hosts (virtual machines provided by VirtualBox in our case) that are part of the same layer 3 network. On each host, we ask the Linux kernel to create a virtual device of type VXLAN. To this virtual device, we can assign IP addresses as usual. Any Ethernet frames sent to the device will be encapsulated using the VXLAN protocol and will be sent to the peer, where the Linux kernel will strip off the outer header and re-inject the Ethernet frame. So the Linux kernel acts as a VTEP on both sides.
+
+    https://www.vagrantup.com/docs/providers/virtualbox/networking
+    boxA.vm.network "private_network", ip: "192.168.50.4", virtualbox__intnet: "myNetwork"
+
+    https://www.vagrantup.com/docs/multi-machine
+
+        https://www.vagrantup.com/docs/vagrantfile#load-order
+        https://www.vagrantup.com/docs/vagrantfile/tips#loop-over-vm-definitions
+
+        ENV["LC_ALL"] = "en_US.UTF-8"
+        Vagrant.configure("2") do |config|
+            ...
+        end
+
+    »Communication Between Machines
+
+        In order to facilitate communication within machines in a multi-machine setup, the various networking options should be used. In particular, the private network can be used to make a private network between multiple machines and the host.
+
+    Primary machine:
+
+        config.vm.define "web", primary: true do |web|
+          # ...
+        end
+
+    Autostart false on vagrant up
+
+        config.vm.define "db_follower", autostart: false
+
+
+    DHCP vs static ip:
+
+        config.vm.network "private_network", type: "dhcp"
+        config.vm.network "private_network", ip: "192.168.50.4"
+
+    https://www.virtualbox.org/manual/ch06.html#network_hostonly
+
+    Vagrant VirtualBox Host-Only Networks:
+        named: config.vm.network "private_network", type: "dhcp", name: "vboxnet3"
+
+    Vagrant VirtualBox Internal Network:
+        config.vm.network "private_network", ip: "192.168.50.4", virtualbox__intnet: true
+            The virtualbox__ prefix tells Vagrant to only use this option with the VitualBox provider.
+
+
+    https://man7.org/linux/man-pages/man8/ip-link.8.html
+
+        remote | group
+
+TODO: Show linux device hierarchy (cross-namespace?)
+
+    ip link add type vxlan id 100 remote 192.168.50.5 dstport 4789 dev enp0s8
+    ip addr add 192.168.60.4/24 dev vxlan0
+    ip link set vxlan0 up
+
+    $ man ip
+    ip - show / manipulate routing, network devices, interfaces and tunnels
+        link   - network device.
+
+        RFC (mind)map?
+        - overview of rfc:s (maybe filtered on 'tech/it'?)
+        - superceded by, etc?
+        - crossed out?
+        - standardized or not?
+
+
+    Linux Network Devices
+        - interfaces are 'interfaces into device drivers'
+        - device = device driver
+
+        https://www.oreilly.com/library/view/linux-network-administrators/1565924002/ch03s02.html
+
+        https://www.youtube.com/watch?v=SSLpvcIOPK0
+
+            - ip link  # show network interfaces
+                - devicename#
+                - UP,LOWER_UP (this is up, the underlying is also up)
+            - ip addr  # list interfaces, list IP address
+            - ip link set (reconfigure, MTU/promiscious/etc)
+            - ifdown/ifup, take interface up and down
+            - ifquery, useful!
+
+        https://www.kernel.org/doc/html/latest/driver-api/driver-model/device.html
+
+            - The Basic Device Structure
+            - The bus driver that discovers the devices uses this to register the device with the core
+                int device_register(struct device * dev);
+                - parent
+                - name
+                - bus_id
+                - bus
+
+        https://www.kernel.org/doc/html/v4.14/driver-api/infrastructure.html
+
+            sysfs
+
+                - The kernel provides a representation of its model in userspace through the sysfs virtual file system. It is usually mounted in the /sys directory and contains the following subdirectories:
+
+                    - block - all block devices available in the system (disks, partitions)
+                    - bus - types of bus to which physical devices are connected (pci, ide, usb)
+                    - class - drivers classes that are available in the system (net, sound, usb)
+                    - devices - the hierarchical structure of devices connected to the system
+                    - firmware - information from system firmware (ACPI)
+                    - fs - information about mounted file systems
+                    - kernel - kernel status information (logged-in users, hotplug)
+                    - module - the list of modules currently loaded
+                    - power - information related to the power management subsystem
+
+
+        https://en.wikipedia.org/wiki/Linux_kernel
+        https://www.youtube.com/watch?v=tCo3HOBwNE0
+        https://www.youtube.com/watch?v=yQ1XPe6gbK8
+        https://www.youtube.com/watch?v=juGNPLdjLH4
+            - lwn.net/Kernel/LDD3
+            - Linux Device Drivers, Third Edition
+                - LDD3 chapter files
+                - Title page  PDF
+                - Copyright and credits   PDF
+                - Table of Contents   PDF
+                - Preface PDF
+                - Chapter 1: An Introduction to Device Drivers    PDF
+                - Chapter 2: Building and Running Modules PDF
+                - Chapter 3: Char Drivers PDF
+                - Chapter 4: Debugging Techniques PDF
+                - Chapter 5: Concurrency and Race Conditions  PDF
+                - Chapter 6: Advanced Char Driver Operations  PDF
+                - Chapter 7: Time, Delays, and Deferred Work  PDF
+                - Chapter 8: Allocating Memory    PDF
+                - Chapter 9: Communicating with Hardware  PDF
+                - Chapter 10: Interrupt Handling  PDF
+                - Chapter 11: Data Types in the Kernel    PDF
+                - Chapter 12: PCI Drivers PDF
+                - Chapter 13: USB Drivers PDF
+                - Chapter 14: The Linux Device Model  PDF
+                - Chapter 15: Memory Mapping and DMA  PDF
+                - Chapter 16: Block Drivers   PDF
+                - Chapter 17: Network Drivers PDF
+                - Chapter 18: TTY Drivers PDF
+                - Index   PDF
+
+            - The Linux Device Model, https://static.lwn.net/images/pdf/LDD3/ch14.pdf
+                - power management and system shutdown, ordered traversal of system hardware
+                - communications with userspace, sysfs
+                - hotpluggable devices
+                - device classes
+                - object lifecycles
+
+                The Linux device model is a complex data structure.
+
+                    Buses           Devices         Classes
+                    USB             pci             Input devs
+                    driver device   dev 0:10        Mouse
+                    usb-hus         usb 2
+                                    port 1
+                                    dev 1:1-0
+
+                Forthemostpart,theLinuxdevicemodelcodetakescareofalltheseconsiderations without imposing itself upon driver authors. It sits mostly in the background; direct interaction with the device model is generally handled by bus-level logic and various otherkernelsubsystems.Asaresult,manydriverauthorscanignorethedevice model entirely, and trust it to take care of itself.
+
+                kobject
+                    reference counting
+                    sysfs representation
+                    data structure glue
+                    hotplug event handling
+
+        https://0xax.gitbooks.io/linux-insides/content/Initialization/linux-initialization-4.html
+
+
+        https://www.youtube.com/results?search_query=linux+boot+up+process+step+by+step
+
+            https://www.youtube.com/watch?v=mHB0Z-HUauo
+
+                ~2010
+
+                BIOS
+                    - POST
+                    - Boot an OS from a storage device
+                        - MBR
+                            - Bootloader (first step?)
+                            - LILO, GRUB(2)
+                    - Maybe create initrd (initial ram disk)
+                    - RAM-based file system
+                - Bootloader loads the kernel
+                    - /boot/vmlinuz (z = compressed)
+                    - The kernel may be a compressed file
+                    - linuxrc, linux run command
+                        - look for hardware, get shit online
+                        - let's use the real disk
+                - File system is mounted
+                    - Kernel runs init
+
+        https://github.com/0xAX/linux-insides/blob/master/Initialization/linux-initialization-3.md
+        https://github.com/0xAX/linux-insides/blob/master/Booting/linux-bootstrap-1.md
+
+            - press on
+            - motherboard signas the power supply
+            - motherboard power good-signal
+            - starts CPU
+            - CPU reset (data in registers)
+                - IP          0xfff0
+                - CS selector 0xf000
+                - CS base     0xffff0000
+            - starts in real mode
+            - first instrution at "reset vector" @ 0xfffffff0 (16 bytes below 4GB)
+            - it is a jmp instruction that usually points to BIOS
+                - example: https://www.coreboot.org
+                - deflates BIOS
+            - POST
+            - find bootable device
+                - if MBR, check magic number 0x55 and 0xaa
+                - copy sector to 0x7c00 and jmp
+            - boot loader (GRUB 2, syslinux) is loaded into mem and jmp
+                - should suppot linux boot protocol, https://github.com/torvalds/linux/blob/v4.16/Documentation/x86/boot.txt
+            - prepares memory and loads kernel (real mode)
+                - _start @ https://github.com/torvalds/linux/blob/v4.16/arch/x86/boot/header.S
+            - align segment registers
+            - stack setup
+            - BSS setup
+                - In computer programming, the block starting symbol (abbreviated to .bss or bss) is the portion of an object file, executable, or assembly language code that contains statically allocated variables that are declared but have not been assigned a value yet. It is often referred to as the "bss section" or "bss segment".
+            - jmp to main, calll main
+            - https://github.com/torvalds/linux/blob/v4.16/arch/x86/boot/main.c
+                - void main(void)
+                    copy_boot_params();  // Copy boot header into zeropage
+                    console_init();  // Initialize the early-boot console
+                    init_heap();
+                    if (validate_cpu()) {... die();)}
+                    set_bios_mode();  // CPU Mode
+                    detect_memory();  // Detect memory layout
+                    keyboard_init();  // Set keyboard repeat rate and query lock flags
+                    query_ist();
+                    query_apm_bios();
+                    set_video();  // Set video mode
+                    go_to_protected_mode();  // Do the last things and invoke protected mode
+
+
+                https://www.cs.cmu.edu/~410/doc/minimal_boot.pdf
+
+            Device Drivers:
+                Black boxes that make a particular piece of hardware respond to a well-defined internal programming interface.
+
+            Splitting the Kernel
+                Process management
+                Memory management
+                Filesystems
+                Device Control
+                Networking
+
+            Device classes
+                char module = stream of bytes
+                block module = accessed by-block, can host a file system
+                network modules = interfaces may be physical interfaces or software interfaces, transmits packets
+
+
+            linux(master)$ vim Documentation/networking/netdevices.rst
+
+
+        Linux Subsystems:
+
+            - system
+                system iterfaces
+                device model
+                system run
+                generic HW access
+                device access and bus drivers
+                electronics: I/O
+            - processing
+                processes
+                threads
+                synchronization
+                scheduler
+                interrupt context
+                CPU specific
+                electronics: CPU
+            - memory
+                memory access
+                virtual memory
+                memory mapping
+                logical memory
+                page allocator
+                physical memory operations
+                electronics: memory
+            - storage
+                files and directories access
+                virtual file system
+                page cache/swap/networking storage
+                logical file systems
+                block devices
+                disk controller drivers
+                electronics: disk controllers
+            - networking
+                socket access
+                protocol families
+                networking storage
+                protocols
+                virtual network device
+                network device drivers
+                electronics: network controllers
+            - human interface
+                HI char devices
+                security
+                HI subsystems
+                abstract devices and HID class drivers
+                electornics: user peripherals
+
+            Simplified: https://en.wikipedia.org/wiki/Device_file#/media/File:Simplified_Structure_of_the_Linux_Kernel.svg
+
+
+        ip command
+
+            - https://www.youtube.com/watch?v=eeStxoGeLJ0
+
+            - replaces ifconfig
+            - bring interfaces up/down
+            - manage routing tables
+
+            - ip - show / manipulate routing, network devices, interfaces and tunnels
+            - ip [ OPTIONS ] OBJECT { COMMAND }
+                - common objects
+                - ip link  # Display and modify network interfaces
+                - ip addr  # Display and modify ip addresses
+                - ip route  # Display and alter routing table
+
+
+            TODO: Check ip command
+
+    L2: broadcast / MAC / ethernet
+    L3: routed / IP
+
+def: VTEP = Virtual Tunnel End Point
+
+Tunneled Logical Ethernet Connection
+
+
+https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking
+
+
+
+"Did you not have storm control for BUM traffic at both sites?"
+    https://en.wikipedia.org/wiki/Broadcast,_unknown-unicast_and_multicast_traffic
+
+
+https://www.cs.usfca.edu/~srollins/courses/cs682-s08/web/notes/mcast.html
+    IP Multicast uses UDP for communication, therefore it is unreliable. To join a multicast group, a host sends a join message, using the Internet Group Management Protocol (IGMP), to its first-hop router. Groups are identified by a single class D IP address (in the range 224.0. 0.0 to 239.255. 255.255).
+
+
+The multicast mechanism is used to initially discover the mapping of IP addresses to Ethernet addresses. However, this is typically only required once, because the VTEP is able to learn this mapping by storing it in a forwarding database (FDB). To see this mapping, switch to boxA and run
+
+bridge fdb show dev vxlan0
+
+
+
+
+Open vSwitch?
+
+https://msandbu.wordpress.com/2015/12/03/software-defined-networking-difference-between-vxlan-and-nvgre/
+
+Introduction to Open vSwitch, https://www.youtube.com/watch?v=rYW7kQRyUvA
+
+    Open vSwitch is an open source OpenFlow capable virtual switch that is typically used with hypervisors to interconnect virtual machines within a host and virtual machines between different hosts across networks. It is also used on some dedicated switching hardware. It can be a critical piece in an SDN solution.
+
+    OpenFlow: A communications protocol that gives access to the forwarding plane of a netword switch or router over the network.
+
+    Forwarding plane: Sometimes called the dat plane or user plane. Defines the part of the router architecture that decides what to do with packets arriving on an inbound interface.
+
+https://www.sidorenko.io/post/2018/11/openstack-networking-open-vswitch-and-vxlan-introduction/
+
+    # Vagrantfile
+    Vagrant.configure('2') do |config|
+      config.vm.box = 'bento/centos-7.5'
+
+      config.vm.provision "shell", inline: <<~SHELL
+        yum install -y openvswitch
+        systemctl start openvswitch
+        systemctl enable openvswitch
+      SHELL
+
+      config.vm.define 'node1' do |node|
+        node.vm.hostname = 'node1'
+        node.vm.network 'private_network', ip: '192.168.50.11'
+      end
+
+      config.vm.define 'node2' do |node|
+        node.vm.hostname = 'node2'
+        node.vm.network 'private_network', ip: '192.168.50.12'
+      end
+    end
+
+    vagrant up
+    Failed... ACCESSDENIED
+    Added , virtualbox__intnet: "myNetwork"
+    Worked...
+
+    vagrant ssh node1
+    sudo ovs-vsctl show
+
+    Open vSwitch introduction
+        Maybe you are already familiar with Linux bridges, where you can create a layer 2 bridge of several interfaces so it behaves in the end like a switched network. Open vSwitch goes several steps further: it’s an open source mature switch implementation, which runs on Linux. You can create multiple switches, VLANs, make interconnections, plug interfaces of your KVM VMs. One of most important features of Open vSwitch is: it’s a distributed switch. It means: you can run several VMs on several KVM hypervisor nodes and have Open vSwitch connecting them together:
+
+    VXLAN and GRE
+        In order to pass traffic of virtual tenant networks between nodes it should be encapsulated and transferred via existing IP network on the physical connection. Common Open vSwitch deployments use VXLAN or GRE protocols for this purpose.
+
+
+
+Pritunl vs OpenVPN
+
+    https://www.paloaltonetworks.com/cyberpedia/what-is-a-site-to-site-vpn
+
+        Site-to-site VPNs and remote access VPNs may sound similar, but they serve entirely different purposes.
+
+        A site-to-site VPN is a permanent connection designed to function as an encrypted link between offices (i.e., “sites”). This is typically set up as an IPsec network connection between networking equipment.
+        A remote access VPN is a temporary connection between users and headquarters, typically used for access to data center applications. This connection could use IPsec, but it is also common to use an SSL VPN to set up a connection between a user’s endpoint and a VPN gateway.
+
+What is IPSec
+
+    https://www.youtube.com/watch?v=-JrXllTuI2s
+
+        "For VPN-use"
+
+        Purpose is two main things:
+            - privacy (through encryption)
+            - data integrity (hashing / HMAC)
+
+        generally deployed when traffic passes untrusted network
+        build logical tunnel
+            two endpoints of 'the IPSec tunnel'
+
+            IKEv1 (Internet Key Exchange, old version)
+            IKEv2 (Cisco et al use this)
+
+        Router authentication?
+            - https://www.youtube.com/watch?v=CuxyZiSCSfc
+
+                IPSec:
+                    - Confidentiality (encrytion)
+                    - Data integrity (HMAC)
+                    (- Authentication)
+                    (- Anti-replay support)
+
+                    Router 1: Sourced from NET1 and dst to NET2, encrypt + encapsulate + forward
+                    Router 2: Unpacks it, send it on the network.
+
+                        Encapsulating Security Payload (ESP) is a member of the IPsec protocol suite.
+
+https://mattermost.com/blog/openvpn-to-pritunl-vpn/
+
+    OpenVPN is a widely used software and protocol which was also our selection to be used as a quick and reliable solution to access our internal infrastructure. After using it a while, we needed a better solution in terms of:
+
+    High availability (HA)
+    Auditing
+    Supporting better access control (e.g., only SREs can access production servers and only developers can access development accounts)
+    Working with SSO, particularly OneLogin
+    After some investigation, we ended up with Pritunl because:
+
+    It’s built on the OpenVPN protocol
+    It’s open source
+    The Pritunl client can be installed on any platform
+    Its pricing is reasonable for our scale
+    It hides the complete configuration (user and server management) overhead behind the scenes of the web interface
+
+
+
+#### RFC7348, https://datatracker.ietf.org/doc/html/rfc7348
+
+"The scenarios described above lead to a requirement for an overlay network.  This overlay is used to carry the MAC traffic from the individual VMs in an encapsulated format over a logical "tunnel"."
+
+1.1.  Acronyms and Definitions
+
+ACL              Access Control List
+ECMP             Equal-Cost Multipath
+IGMP             Internet Group Management Protocol
+IHL              Internet Header Length
+MTU              Maximum Transmission Unit
+PIM              Protocol Independent Multicast
+SPB              Shortest Path Bridging
+STP              Spanning Tree Protocol
+ToR              Top of Rack
+TRILL            Transparent Interconnection of Lots of Links
+VLAN             Virtual Local Area Network
+VM               Virtual Machine
+VNI              VXLAN Network Identifier (or VXLAN Segment ID)
+VTEP             VXLAN Tunnel End Point.  An entity that originates and/or terminates VXLAN tunnels
+VXLAN            Virtual eXtensible Local Area Network
+VXLAN Segment    VXLAN Layer 2 overlay network over which VMs communicate
+VXLAN Gateway    an entity that forwards traffic between VXLANs
+
+
+A key characteristic of Layer 2 data center networks is their use of Virtual LANs (VLANs) to provide broadcast isolation.
+
+#### STP:
+1. elect one switch as root bridge
+2. each other switch choose the lowest-path to this bridge
+    - 'selects a root port' which selects the shortest path
+3. there will be no loops, but 'suboptimal paths' will be kept as backup
+
+https://www.computernetworkingnotes.com/ccna-study-guide/layer-2-switching-loops-in-network-explained.html
+What problem may layer 2 network loops cause?
+Image result for why is layer 2 loops bad network
+In nutshell, a layer 2 switching loop creates three major problems; broadcast storm, duplicate frames, and unstable CAM table
+
+google:
+Another problem is that the File Server can receive multiple copies of the same Ethernet frame arriving via different paths, which leads to additional overhead. Layer 2 Switching loops may cause serious problem to network performance. Layer 2 Switching loops are prevented in networks using Spanning Tree Protocol.
+
+https://en.wikipedia.org/wiki/Switching_loop
+A switching loop or bridge loop occurs in computer networks when there is more than one layer 2 path between two endpoints (e.g. multiple connections between two network switches or two ports on the same switch connected to each other). The loop creates broadcast storms as broadcasts and multicasts are forwarded by switches out every port, the switch or switches will repeatedly rebroadcast the broadcast messages flooding the network.[1] Since the layer-2 header does not include a time to live (TTL) field, if a frame is sent into a looped topology, it can loop forever.
+
+A physical topology that contains switching or bridge loops is attractive for redundancy reasons, yet a switched network must not have loops. The solution is to allow physical loops, but create a loop-free logical topology using link aggregation, shortest path bridging, spanning tree protocol or TRILL on the network switches.
+
+
+
+### https://www.guru99.com/collision-broadcast-domain.html
+
+Collision domain vs broadcast domain?
+
+Collision domain: Shared medium where frames collide (Wi-Fi, or early ethernet).
+Broadcast domain: Logical division of computer network where nodes can reach eachother with broadcasts at datalink layer.
+
+A broadcast domain either in the same LAN segment or which can bridge to other LAN networks.
+
+- This Domain contains all devices which can reach each other at the data link layer with the help of broadcast. Every port on a switch or in a hub should be in the same broadcast domain.
+- However, all port on a router are in the distinct broadcast domains, and routers never broadcast from one Domain to another.
+
+
+
+## What are network overlays?
+
+"Network overlays are a method of using software virtualization to create additional layers of network abstraction (or software-based network overlays) that can be run on top of the physical network, often providing new applications or security benefits."
+
+Kinds of overlay networks.
+- VxLAN
+- VPNs
+- IP Multicast(?)
+- VMWare NSX
+- Alcatel's Nuage
+
+
+
+## IP Multicast
+
+The most common transport layer protocol to use multicast addressing is User Datagram Protocol (UDP). ... IP multicast is always available within the local subnet. Achieving IP multicast service over a wider area requires multicast routing. Many networks, including the Internet, do not support multicast routing.
+
+
+### Overlays and SDN
+
+The term “overlay” has become somewhat of a loaded term in the SDN world, because in some ways it implies using a pure software solution to manage the network. One criticism of overlays is they can introduce performance overhead by adding more layers of software and processing. To work well with a wide range of hardware, specific software code or “agents” must be installed on the network.
+
+
+
+
+## https://docs.docker.com/network/overlay/
+
+Seems like Swarm overlay is vxlan.
+
+
+TODO: Sort out IPSec
+TODO: Sort out requirements for VxLAN
+
+
+
+https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking
+https://www.kernel.org/doc/Documentation/networking/vxlan.txt
+
+
+
+# Pritunl (StrongSwan / IPSec) link dropping return traffic.
+
+https://knowledgebase.paloaltonetworks.com/KCSArticleDetail?id=kA10g000000ClGcCAK
+
+    IPSec Traffic Being Discarded
+     29681
+    Created On 09/25/18 17:36 PM - Last Modified 02/07/19 23:55 PM
+    VPNS
+
+
+    Resolution
+    Issue
+    The IPSec SA is up. The show vpn flow command shows 0 decap packets. The IPSec session in the session table shows discard-flow.
+
+    Cause
+    The IPSec packets coming into the PAN device were not ingressing the same interface where the IPSec tunnel was terminated, but instead entering on another interface and  being routed to the tunnel.   As a result, the IPSec session was in a discard-flow state and dropping all packets coming in on the VPN.
+
+    Resolution
+    The tunnel was moved to terminate directly on the ingress interface. The IPSec tunnel started seeing decap packet counters incrementing in the show vpn flow command ouput and traffic through the VPN worked fine.
+
+    owner: mrajdev
+
+
+https://www.juniper.net/documentation/us/en/software/junos/vpn-ipsec/topics/topic-map/security-route-based-ipsec-vpns.html
+
+    We recommend that you use route-based VPN when you want to configure VPN between multiple remote sites. Route-based VPN allows for routing between the spokes between multiple remote sites; it is easier to configure, monitor, and troubleshoot.
+
+
+https://support.huawei.com/enterprise/en/doc/EDOC1000178025/426cffd9/about-this-document
+
+    The switch considers all passwords starting and ending with %^%#, %#%#, %@%@ or @%@% as ciphertext and attempts to decrypt them. If you configure a plaintext password that starts and ends with %^%#, %#%#, %@%@ or @%@%, the switch decrypts it and records it into the configuration file (plaintext passwords are not recorded for the sake of security). Therefore, do not set a password starting and ending with %^%#, %#%#, %@%@ or @%@%.
+
+
+    https://support.huawei.com/enterprise/en/doc/EDOC1000178025/a96e28ca/overview-of-ipsec
+
+        Definition
+
+            Internet Protocol Security (IPSec), defined by the Internet Engineering Task Force (IETF), is a series of open network security protocols and services provided on an IP network. Figure 1-1 shows the IPSec protocol framework.
+
+            IPSec protocol framework                AH
+            Security Protocols  ESP
+            Encryption          DES|3DES|AES
+            Authentication      MD5|SHA1|SHA2       MD5|SHA1|SHA2
+            Key exchange        IKE (ISAKMP, DH)
+
+                ISAKMP: The Internet Security Association and Key Management Protocol (ISAKMP) defines the procedures for authenticating a communicating peer, creation and management of Security Associations, key generation techniques, and threat mitigation (e.g. denial of service and replay attacks).
+
+            IPSec protects IP packets using two security protocols: Authentication Header (AH) and Encapsulating Security Payload (ESP).
+                AH provides data origin authentication, data integrity, and anti-replay.
+                ESP provides samt as AH + encryption.
+
+                *) Parameterized on algos above.
+
+
+
+
+
+    https://support.huawei.com/enterprise/en/doc/EDOC1000178025/c8a93c0/ipsec-fundamentals
+
+        PSec establishes bidirectional security associations between IPSec peers to form a secure IPSec tunnel, imports data flows to be protected to the tunnel, and then uses security protocols to encrypt and authenticate the data passing through the tunnel to securely transmit the data over the Internet.
+
+
+
+
+    https://support.huawei.com/enterprise/en/doc/EDOC1000178025/69c0729f/overview-of-bgp-mpls-ip-vpn
+
+        Definition
+
+        A BGP/MPLS IP VPN is a Layer 3 virtual private network (L3VPN). It uses the Border Gateway Protocol (BGP) to advertise VPN routes and Multiprotocol Label Switching (MPLS) to forward VPN packets on backbone networks. The VPN carries Internet Protocol (IP) packets.
+
+
+
+https://docs.vmware.com/en/VMware-NSX-T-Data-Center/3.2/administration/GUID-4F830C52-A6D5-4E67-B156-CD4FFF6B807E.html
+
+
+# IPsec explanation based on STrongswan implementation
+
+https://www.youtube.com/watch?v=D-Esrw8wxA4
+
+Architecture:
+    Basic concepts:
+        - Security Association (SA)
+        - Security Association Database (SADB)
+    Fundamental security protocols
+        - ESP/AH
+    Protocol modes:
+        - transport
+        - tunnel
+    Various cryptographic primitives with AH/ESP:
+        - Encryption: DES/3DES/AES-CBC
+        - Integrity: HMAC|MDC|SHA1|SHA2
+    Key Management Procedures:
+        - IKEv1
+        - IKEv2
+        - ISAKMP
+
+    Security Association (SA) is a set of IPSec specifications that are negotiated between devices that are establishing an IPSec relationship.
+        - Thrse specifications include preferences for the type of authentication, encryption and security protocol that should be used when establishing the IPSec connection.
+        - A single SA protects data in one direction.
+        - A SA is uniquely identified by:
+            - Security Parameter Index (SPI)
+            - IPv4 or IPv6 destination address
+            - security protocol (AH or ESP) identifier
+        - Security associations are stored in a security association database (SADB)
+    Security Associations (SAs) require keying material for authentication and for encryption. The managing of this keying material is called key management.
+    The internet key exchange (IKE) protocol is used to exchange SAs between two devices.
+        - IKE is based on Internet Security Association and Key Management Protocol (ISAKMP)
+        - Two versions of IKE are defined (v1 and v2), but at present IKEv2 is mostly used.
+
+
+TestBed
+
+    Two VMs on a network
+
+        they can ping eachother
+
+    IPSec configuration files:
+
+        - /etc/ipsec.conf          # IPSec tunnel parameters
+            conn blue-to-red    
+                authby=secret      # auth method
+                auto=route         # 
+                keyexchange=ikev2  # key exchange protocol
+                ike=aes256-sha2_245-modp1024!  # IKE SA proposal (modp = DH group?)
+                left=192.168.56.100  # IP of both ends of tunnel
+                right=192.168.56.101
+                type=transport     # IPSec mode (tunnel or transport)
+                esp=aes256-sha2_256!
+                #ah=sha1-sha245-modp1024
+        - /etc/ipsec.secrets  # Cryptographic secrets
+
+IKE & IPSec negotiation
+    - IKE Phase I (IKE SA negotiation) creates a secure channel between the teo IKE peers. IKE SA is negotiated during phase I and the Diffie-Hellman key agreement is always performed in this phase.
+    - IKE Phase II (IPSec SA negotiation) negotiates the IPSec security assosiations and generates the required key material for IPSec (encryption and integrity keys). Peers authenticate each other in this phase. A new Diffie-Hellman agreement may be done in phase 2, or the keys may be derived from the phase 1.
+    - Re-keying (IKE or IPSec) is invoked by sending CREATE_CHILD_SA
+    - IKE tunnel termination is performed by sending IKE INFORMATIONAL message with payload "delete"
+
+$ # change conf, change to different IKE SA proposal for one of the machines
+$ sudo ipsec restart
+$ sudo ipsec up red-to-blue
+...
+NO_PROPOSAL_CHOSEN notify error
+(Note: Inconsistency of encryption algos...)
+
+$ sudo ipsec stroke loglevel ike 4  # https://wiki.strongswan.org/projects/strongswan/wiki/Ipsecstroke
+
+$ tcpdump -i eth0 -w ike.pcap
+
+# We can decrypt traffic if we have encryption parameters, which we can find in the IKE logs after increasing log level
+
+    SK_ei: ...
+    SK_er: ...
+    SK_ai: ...
+    SK_ar: ...
+
+        https://datatracker.ietf.org/doc/html/rfc4306
+
+AH vs ESP
+    - AH: integrity authentication. Authentication Header.
+    - ESP: AH + privacy. Encrypts payload by adding ESP header + ESP trailed to each packet.
+
+
+Tunnel vs transport mode
+    - Transport mode can only be used between end-points of a communication.
+    - Tunnel mode an be used between arbitrary peers.
+
+    internal user --- perimeter router --- tunnel --- perimeter router --- internal user
+                  ---------------------- transport -----------------------
+
+    The difference between the two modes is protocol stack construction.
+
+    Transport mode: IP header|IPSec header|Data
+    Tunnel mode: IP header|IPSec header|IP header|Data
+
+    - transport mode just adds a security specific header (+trailer)
+    - tunnel mode encapsulates IP packets
+
+    - transport mode:
+        Frame
+            Ethernet II
+                Internet Protocol Version 4
+                    Authentication header
+                        Transmission Control Protocol
+                            HTTP
+    - tunnel mode:
+        Frame
+            Ethernet II
+                Internet Protocol Version 4
+                    Authentication Header
+                        Internet Protocol Version 4
+                            Transmission Control Protocol
+                                HTTP
+
+    "In case of tunnel mode, additional IP outer header is added and security protocol header (AH | ESP) is located between outer and inner IP header. In this case IP adresses of both headers are the same, but tunnel mode can be used to secure connection between two subnets."
+
+IPSec with preshared secret
+
+    /etc/ipsec.conf    # "authby=secret"
+    /etc/ipsec.secret  # 192.168.56.100 192.168.56.101 : PSK ""
+    "ipsec showhostkey"
+
+    - pre-shared key (PSK) IKEv2 authentication uses pre-sahred secretes stored in host's memory. Secret's shareing is out of scope for IPSec.
+    - The shared key is exchanged during IPSec SA negotiation and used by preers to authenticate each other.
+    - The easiest, but not recommended, type of authentication.
+
+    "mismatch PSKs = authentication failed"
+
+    ping ...  # traffic is encrypted by ESP now
+
+    sudo ip xfrm state
+        ...  # encryption and integrity key material generated for SA
+        ...  # same, but for other way
+
+    decrypt with wireshark
+
+IPSec with CA certificates (PKI)
+
+    IKEv2 initiator             IKEv2 responder
+        HDR,SAi1,KEi,Ni ->
+            <-- HDR, SAr1, KEr, Nr, CERTREQ
+        HDR,SK{IDi, CERT, CERTREQ, AUTH, SAi2, TSi, TSR ->
+            <-- HDR DK{IDr, CERT, AUTH, SAr2, RSi, TSr
+
+    CERTREQ payload contains information of supported CAs
+    CERT payload contains peer's certificated signed by CA
+
+    During IKE AUTH exchange peers authenticate each other. In SA_INIT response responder sends CERTREQ payload. Then initiator sends its certificate in CERT with its identity (IDi). Responder uses public key from CA certificate to authenticate initiator. Inthe last message, responder sends its certificate (CERT) with its identity (IDr), ow responder is authenticate by initiator (if certificate is authorized by the same CA).
+
+    gen-cert-auth.sh:
+        ipsec pki --gen --type rsa --size 4096 --outfor pem >private/strongswanKey.pem
+        ipse pki --self --ca --lifetime 3650 --in private/strongswanKey.pem --type rsa --dn "C=CH, O=StrongSwan, CN=Root CA" --outform pem >cacerts/strongswanCert.pem
+
+    CA Certificate and private key need to be delivered to each IPSec peer.
+        WTF, no?
+
+    generate-cert.sh:
+        ipsec pki --gen --type rsa --size 2048 --outofrm pem >client2Key.pem
+        chmod
+        ipsec pki --pub --in client2Key.pem --type rsa | ipsec pki --issue --lifetime 730 --cacert strongswanCert.pem --cakey strongswanKey.pem --dn "C=CH, O=strongSwan, CN=device2" --san device2 --flag serverAuth --flag ikeIntermediate --outform pem >client2Cert.pem
+
+    ipsec.conf:
+        type=tunnel
+        leftcert=client1cert.pem
+        leftid="C=CH, O=strongSwan, CN=device1"
+        rightid="C=CH, O=strongSwan, CN=device2"
+
+    ipsec.secrets:
+        : RSA client1Key.pem
+
+    sudo ipsec statusall
+        status of IKE cahron daemon
+        ...
+        connections:
+        ...
+        security associations:
+        ...
+
+
+
+# Multi Region VPN Connection Using Strongswan
+
+https://www.youtube.com/watch?v=AF3bGRqnKfk
+
+
+# strongSwan Installation Documentation
+
+https://wiki.strongswan.org/projects/strongswan/wiki/kernelmodules
+
+
+
+# Kernel Network Stack Made Easy — IPSec implementation in the Linux Kernel Stack
+
+http://kernelspec.blogspot.com/2014/10/ipsec-implementation-in-linux-kernel.html
+
+
+
+
+
+
+# Configuring an IPSec VPN Connection
+
+https://opengear.zendesk.com/hc/en-us/articles/216374923-Configuring-an-IPsec-VPN-connection
+
+"Note: In IPsec parlance, "Left" always refers to the device you are currently configuring, and "Right" refers to the device at the other end of the tunnel."
+
+
+
+# UDP vs IP
+
+https://stackoverflow.com/questions/7463808/udp-vs-ip-difference
+
+UDP has got ports for multiplexing. (Also: UDP has got checksum, IPv6 it's optional?)
+
+
+
+# Internet Key Exchange
+
+https://en.wikipedia.org/wiki/Internet_Key_Exchange
+
+"In computing, Internet Key Exchange (IKE, sometimes IKEv1 or IKEv2, depending on version) is the protocol used to set up a security association (SA) in the IPsec protocol suite."
+
+
+# Where is SADB stored?
+
+https://superuser.com/questions/1369778/ipsec-database-location
+
+    Yes, the "database" is stored by the IPsec peers themselves. (Although they're called "databases", they're just short single tables – not too different from the routing table.)
+
+    If the OS performs IPsec ESP/AH processing in kernel, then the SPD/SAD will be stored in kernel as well (maintained by the userspace IKE software).
+
+    On modern Linux systems using the Netkey interface, you can use ip xfrm policy and ip xfrm state to see the current state of both databases.
+    Most BSDs appear to use setkey -DP and setkey -D. (Note: These tools might also be present on Linux and will show the same data, but they are practically obsolete there.)
+    Windows lets you see the databases via the IPsec 'snap-in' inside mmc.
+
+(With pritunl, maybe in mongo?)
+
+
+Oracle Glossary
+
+    https://docs.oracle.com/cd/E19683-01/806-4075/6jd69oam2/index.html#glossary-58
+
+
+
+
+# About IPSec VPN tunnel authentication methods
+
+https://www.watchguard.com/help/docs/help-center/en-US/Content/en-US/Fireware/mvpn/general/mobile_vpn_tunnel_auth_c.html
+
+- Pre-shared key
+- Certificate
+
+# IPsec VPN: Authentication by certificate
+
+https://documentation.stormshield.eu/SNS/v4/en/Content/HowTo_-_IPSec_VPN_-_Authentication_by_certificate/HT-IPSec-certificate.htm
+
+
+# Differences between IKEv1 and IKEv2
+
+https://www.kareemccie.com/2016/12/differences-between-ikev1-and-ikev2.html
+
+- IKEv2 is an enhancement to IKEv2
+- IKEv2 is more scalable by using proposals (automatically create different combinations of policies or SA)
+- IKEv2 supports EAP authentication
+- IKEv2 is having built-in NAT traversal (optional in v1)
+- IKEv2 support MOBIKE (allow for use in mobile?)
+- IKEv1 require symmetric authentication (RSA vs PSK)
+- IKEv2 allow you to use separate keys in each direction
+- IKEv2 has got support for more algorithms
+- IKEv2 support Flex VPN
+- IKEv2 support 4 messages whereas IKEv1 works in two modes (Mia Mode: 6 messages, Aggressive Mode: 3 message)
+- IKEv2 is not backwards compatible
+
+IKE: Internet Key Exchange
+
+# Digital Ocean: Set up an IKEv2 VPN Server with StrongSwan on Ubuntu 18.04
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-18-04-2
+
+
+# Network lessons: Internet Protocol Security
+
+https://networklessons.com/cisco/ccie-routing-switching/ipsec-internet-protocol-security
+
+
+
+# What is IPse, CloudFlare
+
+https://www.cloudflare.com/en-gb/learning/network-layer/what-is-ipsec/
+
+    Within the term "IPsec," "IP" stands for "Internet Protocol" and "sec" for "secure."
+    IPsec is secure because it adds encryption* and authentication to this process.
+
+    Users can access an IPsec VPN by logging into a VPN application, or "client." This typically requires the user to have installed the application on their device.
+
+    How does IPsec work?
+    1. Key exchange.
+    2. Packet headers and trailers.
+    3. Authentication.
+    4. Encryption.
+        IPsec encrypts the payloads within each packet and each packet's IP header (unless transport mode is used instead of tunnel mode — see below). This keeps data sent over IPsec secure and private.
+    5. IPsec uses UDP because this allows IPsec packets to get through firewalls.
+    6. Decryption.
+
+    What protocols are used in IPsec?
+    1. Authentication Header (AH). Trusted source + no tampering.
+    2. Encapsulating Security Protocol (ESP). Encrypts IP header and payload — unless transport mode is used in which case it only encrypts the payload. Adds header and trailer.
+    3. Security Association (SA). SA refers to protocol parameters, for example Internet Key Exchange (IKE).
+    4. Internet Protocol (IP). Not actually part of the suite, but IPsec runs on top of IP.
+
+    IPsec tunnel mode vs IPsec transport mode.
+    IPsec tunnel mode is used between two dedicated routers, wich each router acting as one end of a virtual "tunnel" through a public network. In IPsec tunnel mode, the original IP header containing the final destination of the packet is encrypted, in addition to the packet payload. To tell intermediary routers where to send the packets, IPsec adds a new IP header. At the end of the tunnel, the router decrypt the IP headers to deliver the packets to their destinations.
+
+     In transport mode, the payload of each packet is encrypted, but the original IP header is not. Intermediary routers are this able to view the final destination of each packet — unless a separeate tunneling protocol such as GRE is used.
+
+     What port does IPsec use?
+     'IPsec usually uses port 500'? (What about 500 + 4500?)
+
+
+
+
+
+# cradlepoint CONNECT: What routes are created when I configure an IPSec tunnel?
+
+https://customer.cradlepoint.com/s/article/What-routes-are-created-when-I-configure-an-IPSec-tunnel
+
+- with policy based tunnel, routes are added for remote network.
+- kernel (or router) does the actual encryption.
+- UDP:500 is used for the actual transport.
+
+
+# Opportunistic Encryption Using IPsec by Paul Wouters, Libreswan IPSec VPN Project
+
+https://www.youtube.com/watch?v=Me_rl6N1m7c&t=1567s
+
+Some history, s/wan.
+
+DNSSEC, must be active in nearest node — so basically you must run DNS on the phone or the computer.
+
+OPPORTUNISTIC IPsec AT IETF
+    - RFC 7619 "NULL Authentication for IKEv2" (Aug 2015)
+        - IKEv2 (2008) already allowed asymmetrical authentication
+        - Allow Anonymous client to Authenticated Server
+        - Allow Anonymous to Anonymous
+    - draft-antony-ipsecme-oppo-nat (Mar 2015)
+        - NAT-Traversal support for Opportunistic IPsec
+
+
+LINUX IPsec IMPLEMENTATION
+    XFRM/NETKEY interaction with userland
+        - xfrm is an IP framework for transforming packets (such as
+       encrypting their payloads). This framework is used to implement
+       the IPsec protocol suite (with the state object operating on the
+       Security Association Database, and the policy object operating on
+       the Security Policy Database). It is also used for the IP Payload
+       Compression Protocol and features of Mobile IPv6. — man ip xfrm
+
+    NETKEY (according to packt)
+
+        Choosing the Kernel IPsec Stack
+        A more difficult choice is that of the IPsec kernel stack. There are currently three IPsec stacks in use, the most widely deployed being KLIPS. The upcoming alternative is the NETKEY stack, which is currently included in the 2.6 kernel. NETKEY is a rewrite from scratch of KAME. NETKEY can be used with the traditional KAME userland tool Racoon, which has been ported to Linux and is called ipsec-tools. The third commercially deployed stack is the USAGI stack, a patched KLIPS stack that adds IPv6 support to the IPsec code and was mostly used by SuSE Linux, Germany's biggest Linux distribution.
+
+        There are a few other obscure IPsec stacks out there, but these are mostly scientific experiments or personal hobby projects, and have not gotten any large scale deployment or extensive scrutiny from the Open Source community. They should clearly not be used for production environments where money or lives are at stake.
+
+        KLIPS, the Openswan Stack
+        KLIPS was the first available...
+
+    1. IPSec in the kernel has policies (SPD) and states (SAD)
+        - packets matching policies without a linked state cause ACQUIREs
+            - if TCP, store packet — else drop packet 
+        - packets matching policies with linked state cause encryption/decryption
+    2. Userland (libreswan) processes ACQUIRES
+        - perform IKE negotiation with remote peer "ikedaemon"
+        - send IPSec policy and encryption/authentication keys to the kernel
+        - 3.x kernel caches the triggering TCP packets, before it was gone
+    3. Kernel processes netlink messages
+        - installed received crypto keys in state, link crypto state to policy
+        - if TCP triggered, send out cached packet
+
+    "IPsec gateways"
+    "ip xfrm"
+    "we poke a hole for the UDP packets"
+
+    NAT ips can't be an endpoint because the server can't distinguish them.
+    The kernel could fake one.
+    We want a method where we don't have to configure IP locally, and we don't have conflicts. (And we don't have to have 10k endpoints locally for each connection.)
+
+    t @ 37:24
+    100.64.0.2 was given by the remote server to the client
+        - installed policy ("standard 3-rule policy"), but also installed policy for pre-NAT address.
+        - 
+
+
+    Auth?
+        failureshunt=drop
+        negotationshunt=hold
+
+        "We like having these options, but we don't want to bother the users with this... They will make the wrong choices, they will copy old configuration from google searches"
+
+        libreswan is using its own NSS database only for IPSec
+
+        "you can put a single IP in the 'private-or-clear' so that the ??? will trigger."
+
+        linux-nat-include-ipsec-kversion-8.h
+            2.4 to 3
+            everytime you guys changed the API, we had to add a #macro
+
+            tcpdump for outgoing will see the plain text, and after tcpdump sees it — it will be encrypted, and for the incoming packets it is the other way around. This made people think that their tunnel only worked half-half. If you want to abvoid this, run tcpdump on another machine.
+
+            TODO: Check exactly where in the packet-stack-traversal these hooks are (tcpdump vs xfrm) so that we can understand the output better.
+
+            Will this also mean that tcpdump will not even see dropped incoming packets?
+
+            we predate the old init system, so 'start' don't have to worry about which init system is in use
+
+            "See, it's encrypted. (UDP / ESP)"
+
+
+
+
+
+# LINUX Journal, Creating VPN with IPse and SSL/TLS
+
+https://www.linuxjournal.com/article/9916
+
+
+
+# https://en.wikipedia.org/wiki/TUN/TAP
+
+In computer networking, TUN and TAP are kernel virtual network devices. Being network devices supported entirely in software, they differ from ordinary network devices which are backed by physical network adapters.
+
+
+TUN: Datagrams / IP / routed ('network layer' / 'layer 3')
+TAP: Ethernet frames / broadcasted ('data link layer' / 'layer 2')
+
+
+# strongSwan, route-based VPNs
+
+https://wiki.strongswan.org/projects/strongswan/wiki/RouteBasedVPN
+
+Generally IPsec processing is based on policies. After regular route lookups are done, the OS kernel consults its SPD for a matching policy and if one is found that is associated with an IPsec SA, the packet is processed (e.g. encrypted and sent as ESP packet). Refer to IPsecDocumentation for details.
+
+    SPD: Security Policy Database
+
+        https://wiki.strongswan.org/projects/strongswan/wiki/IPsecDocumentation
+
+            - 
+
+        I think the OP is asking about IPsec VPN, not openVPN. As far as I can tell, IPsec binds a virtual IP to the outbound NIC(eth0, wlan0) as a secondary IP. —https://askubuntu.com/questions/33405/creating-tun-device-for-ipsec
+
+
+
+Depending on the operating system it is also possible to configure route-based VPNs. Here IPsec processing does not (only) depend on negotiated policies but may e.g. be controlled by routing packets to a specific interface.
+
+Most of these approaches also allow easy capture of plaintext traffic, which, depending on the operating system, might not be that straight-forward with policy-based VPNs (see CorrectTrafficDump). Another advantage this approach could have is that the MTU can be specified for the tunneling devices allowing to fragment packets before tunneling them in case PMTUD does not work properly.
+
+VTI Devices on Linux
+
+    Note: On newer kernels (4.19+), XFRM interfaces provide a better solution than VTI devices, see below for details.
+
+    VTI devices act like a wrapper around existing IPsec policies. This means you can't just route arbitrary packets to a VTI device to get them tunneled, the established IPsec policies have to match too. However, you can negotiate 0.0.0.0/0 traffic selectors on both ends to allow tunneling anything that's routed via VTI device.
+
+    VTI: Virtual Tunnel Interface
+
+    "Both strongSwan and Libreswan have its origins in the FreeS/WAN project. Open/Libreswan are still much closer to its origin, where strongSwan these days is basically a complete reimplementation."
+
+
+
+# IPsec implementation in Linux Kernel Stack (2014)
+
+http://kernelspec.blogspot.com/2014/10/ipsec-implementation-in-linux-kernel.html
+
+Parameterized:
+    - AH vs ESP
+    - tunnel vs transport mode
+
+Authentication Header (AH) protocol: Authencation + data integrity for IP datagrams.
+
+ESP: Authentication + data integrity + confidentiality for IP datagrams.
+
+IPSec operation modes:
+Transport or Tunnel.
+
+Transport mode: Only payload is encrytped.
+Tunnel mode: Payload and original headers encrypted, new headers added.
+
+    Tunnel mode is used to create VPNs for network-to-network communications (e.g. between routers to link sites), host-to-network communicastions (e.g. remote user access) and host-to-host communications (e.g. privat chat).
+
+Security Policy: A rule that decides whether a given flow needs to g o for IPSec processing or not. If no policy matches, the packet takes the default flow in the network stack.
+
+Security Association (SA): A bundle of algorithms and parameters (e.g. keys) that is being used to encrypt and authenticate a particular flow  in one direction.
+    IPsec uses the Security Parameter Index (SPI: an index into the security association database — SADB), along with the destination address in the packet header, which together uniquely identify a security association for that packet.
+
+    As we discussed, the IPSec implementation is spread across user space and kernel space of Linux. The kernel space part does the actual job of IPSec.
+
+The user space part of IPSec Architecture.
+ipsec configuration, either manually or with IKE. Implementations like racoon, strongswan, openswan.
+
+Uspace–Kspace communication: NETLINK_XFRM (a netlink socket).
+Table with important netlink messages that XFRM supports to manage SAD and SPD from user space:
+
+XFRM_MSG_NEWSA: To add a new SA to SAD
+XFRM_MSG_DELSA: To delete a new SA to SAD
+XFRM_MSG_GETSA: To get a new SA to SAD
+XFRM_MSG_FLUSHSA: To flush SAD
+XFRM_MSG_NEWPOLICY: To add a new policy to SPD
+XFRM_MSG_DELPOLICY: To delete a new policy from SPD
+XFRM_MSG_GETPOLICY: To get a new policy to SPD
+XFRM_MSG_FLUSHPOLICY: To flush SPD.
+
+    SAD: Security Association Database 
+    SPD: Security Policy Database 
+
+
+IPSec kernel part
+
+    XFRM framework of the Kernel
+
+        - This is the 'IPSec coordinator'.
+        - The actual Psec performs inside this framework.
+        - It internally calls the protocol specific implementations of AH and ESP protocols (net/ipv4/esp4.c, net/ipv6/esp6.c). Though most of the XFRM framework is common for both ipv4 and ipv6 (net/xfrm), the protocol to XFRM linking part is implemented in net/ipv4/xfrm4_policy.c and net/ipv6/xfrm6_policy.c.
+        - XFRM initialization is done by two methods, xfrm4_init() and xfrm6_init().
+
+    "The XFRM Device interface allows NIC drivers to offer to the stack access to the hardware offload."
+
+    - No limitation on xfrm mode (tunnel, transport and beet). Bound-End-to-End.
+
+    Kernel crypto:
+        - acrypto (async), cryptd, prcypto(multicore) layers have already implemented most algorithms.
+        - There are two IPsec stacks used in the kernel
+            - native netkey stack(async)
+            - traditional KLIPS stack(async)
+
+            So, an IPsSec developer may not need to know all the complicated mathematics of cryptography — just all crypto APIs! ;)
+
+        To start with, the core object in XFRM is 'net->xfrm',  i.e. each network namespace has got a separete xfrm object. This object will be ref:ed to access the hash tables (remember: hash tables) of SPD and SAD. Also, holds the state garbage collector (state_gc_work).
+
+        Data structure: Info in SPD indicates 'what' to do with arriving datagram; info in the SAD indicates 'how' to do it.
+
+    Kernel code flow:
+
+        Database lookup
+            - xfrm_lookup: SPD lookup + SAD lookup
+            - Once the routing decision is taken, the packet is given to xfrm_lookup, i.e. the dst_entry onbject is already set in the packet (skb->dstm, socket buffer destination)
+            - i.e. IPsec is done post-routing
+
+        Packet transmission:
+            - transport_layer_sendmsg (does TCP/UDP specific jobs are done here before route lookup)
+            - ip_route_output_slow
+                - xfrm_looup
+            - ip_local_output
+            - ip_local_out
+                LOCAL_OUT netfilter applies here
+                Calls skb->dst->output, which is xfrm4_outut in case of ipv4
+            - xfrm4_output
+            - esp_output(/ah_output)
+            - ip_output
+            - dev_queue_xmit
+                EGRESS QoS comes here
+            - dev->ndo_start_xmit
+
+        Packet reception
+            - netif_receive_skb
+            - ip_rcv
+                Netfilter PRE_ROUTING applies here
+            - ip_receive_finish
+                ip_route_input_noref, which finds the route entry and set dst->ourput for local delivery, forwarding, etc.
+            - ip_local_deliver
+                LOCAL_IN netfilter part here
+            - ip_local_deliver_finish
+                Based on the protocol field of IP header (IPPROTO_AH, IPPROTO_ESP), packet will be given to xfrm4_rcv
+            - xfrm4_rcv
+            - xfrm_input
+                - xfrm_state_lookup
+                - esp_input (/ah_input)
+                - Once again, applies PRE_ROUTING, but for the decapsulated packet
+            - xfrm4_rcv_encap_finish
+                Will do the route lookup again for the decapsulated packet using ip_route_input_noref. Again route lookup should decide for local_delivery
+            - ip_local_delivery
+                Again, the LOCAL_IN netfilter for decapsulated packet
+                no the protocol field will be TCP/UDP and the packet flow in the native reception methods of the TCP/UDP and deliceres to the socket
+            - transport_layer_rcvmsg
+                To userspace.
+
+
+# Where is tcpdump in the network stack?
+
+https://superuser.com/questions/925286/does-tcpdump-bypass-iptables
+
+This is a nice question.
+
+    As a matter of fact, tcpdump is the first software found after the wire (and the NIC, if you will) on the way IN, and the last one on the way OUT.
+
+    Wire -> NIC -> tcpdump -> netfilter/iptables
+
+    iptables -> tcpdump -> NIC -> Wire
+
+        EDIT
+
+            Perhaps I should add a few details. tcpdump is based on libpcap, a library which creates a packet socket. When a regular packet is received in the network stack, the kernel first checks to see whether there is a packet socket interested in the newly arrived packet and, if there is one, it forwards the packet to that packet socket. If the option ETH_P_ALL is chosen, then all protocols go thru the packet socket.
+
+
+        Packet socket:
+
+            PF_INET | PF_PACKET
+
+            https://medium.com/@qre0ct/difference-between-pf-inet-sockets-and-pf-packet-sockets-5a58ab9fe8e3
+
+            Linux provides Packet sockets to sniff the link layer packet at the application, generally also known as raw sockets, but i would like to make a distinction here that packet socket are use to send and receive the packets at data link layer(layer 2) and where as raw sockets are use to send the raw packet till layer 3 and can only receive specific protocols like icmp at application layer.
+
+                raw socket: Implement IPv4 in userspace
+
+                raw socket: layer 3
+                packet socket: layer 2
+
+            tcpdump -> libpcap -> packet socket -> duplicated to kernel
+
+
+
+# Netdev 0x12 — IPsec/IKE tutorial/lab
+
+https://www.youtube.com/watch?v=7oldcYljp4U
+
+    xfrm = transform
+
+    connect/sendmsg
+        ip_route_output_flow
+            xfrm_lookup_route
+                - finding the SA from the destination cache
+                - xfrm: 0x0 # &xfrm_state
+
+            GSO: Generic Segmentation Offload, like jumboframes
+            GRO: Counterpart of GSO. Try to coalesce small packets in the same flow a into a large packet before sending it up the stack.
+
+            Much interface with drivers and NAPI (New API, but pretty old).
+
+    https://developer.ibm.com/tutorials/l-tasklets/
+
+    https://legacy.netdevconf.info/0x12/session.html?ipsecike-tutoriallab
+
+        https://www.files.netdevconf.info/d/39697c805e994b169748/
+
+        ESP in UDP
+
+        "Retransmission layer fighting."
+
+
+        IKE is the command channel.
+
+        If you ever see a packet for this destination, give me (IKE) a call and I will negotiate parameters ('ACQUIRE').
+
+            TLS1.3 was the first version with mandatory perfect forward secrecy.
+
+        "Highly insecure": IKEv1 aggressive mode with weaked pre shared key. Stick with main mode if you need IKEv1.
+            IKEv2 has only one mode, 'the initial exchanges'.
+
+        https://jvns.ca/blog/2018/07/11/netdev-day-1--ipsec/
+
+        https://libreswan.org/wiki/History
+
+        Broken: DH G1 modp768
+
+
+
+# Multicast vs multicast routing vs anycast vs broadcast
+
+https://en.wikipedia.org/wiki/Multicast_routing
+
+
+http://www.steves-internet-guide.com/introduction-multicasting/
+
+    Understanding IP Multicasting
+        multicast-iconWhat is IP Multicasting? -IP multicasting allows a host to send a single packet to thousands of hosts across a routed network i.e. The Internet.
+
+        It is used mainly for audio (radio) and video distribution.
+
+        In Networking a packet can be sent to:
+
+            - A single host –Unicast = (TCP and UDP)
+            - All hosts -Broadcast – (UDP only)
+            - A group of hosts – Multicast -(UDP only)
+
+        Multicasting is different from IP broadcasting as:
+
+            - Broadcasting uses a single IP address. Host bits set to all 1’s. There are a range of multicast addresses
+            - Broadcast messages are not sent through routers but multicast messages are.
+            - All hosts will receive broadcasts by default
+            - A host must be configured to receive multicast messages.
+
+                Subnet Zero and the All-Ones Subnet:
+
+                    https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/13711-40.html
+
+                        Introduction
+
+                        Subnetting breaks down a given network address into smaller subnets. Coupled with other technologies like Network Address Translation (NAT) and Port Address Translation (PAT), it allows for the more efficient use of available IP address space, thereby alleviating the problem of address depletion to a great extent. Subnetting has guidelines regarding the use of the first and the last subnets, known as subnet zero and the all-ones subnet, respectively. This document discusses subnet zero and the all-ones subnet and their uses.
+
+                        Subnet Zero
+
+                            If a network address is subnetted, the first subnet obtained after subnetting the network address is called subnet zero.
+                            Consider a Class B address, 172.16.0.0. By default the Class B address 172.16.0.0 has 16 bits reserved for representing the host portion, thus allowing 65534 (216-2) valid host addresses. If network 172.16.0.0/16 is subnetted by borrowing three bits from the host portion, eight (23) subnets are obtained. The table below is an example showing the subnets obtained by subnetting the address 172.16.0.0, the resulting subnet mask, the corresponding broadcast addresses, and the range of valid host addresses.
+                            Subnet Address  Subnet Mask Broadcast Address   Valid Host Range
+                            172.16.0.0  255.255.224.0   172.16.31.255   172.16.0.1 to 172.16.31.254
+                            172.16.32.0 255.255.224.0   172.16.63.255   172.16.32.1 to 172.16.63.254
+                            172.16.64.0 255.255.224.0   172.16.95.255   172.16.64.1 to 172.16.95.254
+                            172.16.96.0 255.255.224.0   172.16.127.255  172.16.96.1 to 172.16.127.254
+                            172.16.128.0    255.255.224.0   172.16.159.255  172.16.128.1 to 172.16.159.254
+                            172.16.160.0    255.255.224.0   172.16.191.255  172.16.160.1 to 172.16.191.254
+                            172.16.192.0    255.255.224.0   172.16.223.255  172.16.192.1 to 172.16.223.254
+                            172.16.224.0    255.255.224.0   172.16.255.255  172.16.224.1 to 172.16.255.254
+                            In the example above, the first subnet (subnet 172.16.0.0/19) is called subnet zero.
+                            The class of the network subnetted and the number of subnets obtained after subnetting have no role in determining subnet zero. It is the first subnet obtained when subnetting the network address. Also, when you write the binary equivalent of the subnet zero address, all the subnet bits (bits 17, 18, and 19 in this case) are zeros. Subnet zero is also known as the all-zeros subnet.
+
+                        https://www.ietf.org/rfc/rfc950.txt
+                        https://www.ietf.org/rfc/rfc1878.txt
+
+                        https://en.wikipedia.org/wiki/Broadcast_storm
+
+        Multicast Addresses
+
+            - IPv4 Multicast addresses use the reserved class D address range: 224.0.0.0 through 239.255.255.255
+            - The addresses range between 224.0.0.0 and 224.0.0.255 is reserved for use by routing and maintenance protocols inside a network.
+            - These addresses aren’t forwarded by routers. Many of the multicast addresses are reserved see Muticast Space Registry
+
+            collision domain: where packets collide (shared medium / switch port)
+            broadcast domain: where broadcasts end up (switched network)
+
+        How Multicasting Works
+            On a small home or office network any host can send and receive multicast datagrams.
+            Multicasting-Home-Network
+            Note: multicast uses UDP and are sent through switches and hubs.
+            To receive a multicast message a host must be configured to receive on that multicast address.
+            All hosts that are configured to receive packets on a particular address are part of a multicast group.
+
+        Multicast Groups
+
+            - A host that is configured to receive datagrams sent to a multicast address becomes part of a multicast group for that address.
+            - A group can have 1 to an unlimited number of hosts. Neither hosts or routers maintain a list of individual group members.
+            - A host can be part of multiple multicast groups and can send to multiple multicast addresses.
+            - A host can send datagrams to a multicast group address even though there are no members of that group, and a host doesn’t need to be a member of a group to send multicast datagrams to that group.
+            - Note: Multicast packets are sent through switches.
+
+        Multicast on the internet, or routed multicast.
+            On the Internet multicast packets need to be forwarded by routers.
+            A router will determine if any of the hosts on a locally attached network are configured to receive multicast datagrams using IGMP (Internet Group Management Protocol).
+                TODO: IGMP
+            Routers will listen for IGMP messages and periodically  send queries on the local subnet. using the multicast group address 224.0.0.1 (Reserved All hosts address).
+            Multicast routers do not keep track of which hosts are part of a group, but only need to know if any hosts on that subnet are part of a group.
+            If a router receives a multicast datagram from another network and has no members for that group address on any of it’s subnets it drops the packet.
+
+        Viewing Multicast Packets
+            - On a typical home network there are a variety of protocols that use multicast.
+            - The SSDP (Simple Service Discovery Protocol) uses multicast address 239.255.255.250 on UDP port 1900.
+
+            https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol
+
+
+# Multicast Explained
+
+https://tldp.org/HOWTO/Multicast-HOWTO-2.html
+
+Every IP datagram whose destination address starts with "1110" is an IP Multicast datagram.
+The remaining 28 bits identify the multicast "group" the datagram is sent to.
+Following with the previous analogy, you have to tune your radio to hear a program that is transmitted at some specific frequency, in the same way you have to "tune" your kernel to receive packets sent to an specific multicast group. When you do that, it's said that the host has joined that group in the interface you specified. 
+
+There are some special multicast groups, say "well known multicast groups", you should not use in your particular applications due the special purpose they are destined to:
+    - 224.0.0.1 is the all-hosts group. If you ping that group, all multicast capable hosts on the network should answer, as every multicast capable host must join that group at start-up on all it's multicast capable interfaces.
+    - 224.0.0.2 is the all-routers group. All multicast routers must join that group on all it's multicast capable interfaces.
+    - 224.0.0.4 is the all DVMRP routers, 224.0.0.5 the all OSPF routers, 224.0.013 the all PIM routers, etc.
+
+All this special multicast groups are regularly published in the "Assigned Numbers" RFC.
+
+In any case, range 224.0.0.0 through 224.0.0.255 is reserved for local purposes (as administrative and maintenance tasks) and datagrams destined to them are never forwarded by multicast routers. Similarly, the range 239.0.0.0 to 239.255.255.255 has been reserved for "administrative scoping" (see section 2.3.1 for information on administrative scoping).
+
+By now, it should be obvious that multicast traffic is handled at the transport layer with UDP, as TCP provides point-to-point connections, not feasibles for multicast traffic.
+
+TTL has got a double meaning in multicast. It is decremented, as usual, when forwarded to another network. But it can also be filtered if router ports (or, any interface really) has got a 'threshold level'.
+You can view TTL as the 'depth' traversed by packets. Neighbour networks, neghbour's neighbour, etc.
+
+A list of TTL thresholds and their associated scope follows:
+
+TTL     Scope
+----------------------------------------------------------------------
+   0    Restricted to the same host. Won't be output by any interface.
+   1    Restricted to the same subnet. Won't be forwarded by a router.
+ <32         Restricted to the same site, organization or department.
+ <64 Restricted to the same region.
+<128 Restricted to the same continent.
+<255 Unrestricted in scope. Global.
+
+Loopback.
+
+When the sending host is Level 2 conformant and is also a member of the group datagrams are being sent to, a copy is looped back by default. This does not mean that the interface card reads its own transmission, recognizes it as belonging to a group the interface belongs to, and reads it from the network. On the contrary, is the IP layer which, by default, recognizes the to-be-sent datagram and copies and queues it on the IP input queue before sending it.
+
+This feature is desirable in some cases, but not in others. So the sending process can turn it on and off at wish.
+
+Joining a Multicast Group.
+
+Broadcast is (in comparison) easier to implement than multicast. It doesn't require processes to give the kernel some rules regarding what to do with broadcast packets. The kernel just knows what to do: read and deliver all of them to the proper applications.
+
+With multicast, however, it is necessary to advise the kernel which multicast groups we are interested in. That is, we have to ask the kernel to "join" those multicast groups. Depending on the underlying hardware, multicast datagrams are filtered by the hardware or by the IP layer (and, in some cases, by both). Only those with a destination group previously registered via a join are accepted.
+
+Some considerations: first, note that you don't just join a group. You join a group on a particular network interface. Of course, it is possible to join the same group on more than one interface. If you don't specify a concrete interface, then the kernel will choose it based on its routing tables when datagrams are to be sent. It is also possible that more than one process joins the same multicast group on the same interface. They will all receive the datagrams sent to that group via that interface.
+
+As said before, any multicast-capable hosts join the all-hosts group at start-up , so "pinging" 224.0.0.1 returns all hosts in the network that have multicast enabled.
+
+Leaving a Multicast Group.
+
+When a process is no longer interested in a multicast group, it informs the kernel that it wants to leave that group. It is important to understand that this doesn't mean that the kernel will no longer accept multicast datagrams destined to that multicast group. It will still do so if there are more precesses who issued a "multicast join" petition for that group and are still interested. In that case the host remains member of the group, until all the processes decide to leave the group.
+
+Even more: if you leave the group, but remain bound to the port you were receiving the multicast traffic on, and there are more processes that joined the group, you will still receive the multicast transmissions.
+
+The idea is that joining a multicast group only tells the IP and data link layer (which in some cases explicitly tells the hardware) to accept multicast datagrams destined to that group. It is not a per-process membership, but a per-host membership.
+
+Mapping of IP Multicast Addresses to Ethernet/FDDI addresses.
+
+Both Ethernet and FDDI frames have a 48 bit destination address field. In order to avoid a kind of multicast ARP to map multicast IP addresses to ethernet/FDDI ones, the IANA reserved a range of addresses for multicast: every ethernet/FDDI frame with its destination in the range 01-00-5e-00-00-00 to 01-00-5e-ff-ff-ff (hex) contains data for a multicast group. The prefix 01-00-5e identifies the frame as multicast, the next bit is always 0 and so only 23 bits are left to the multicast address. As IP multicast groups are 28 bits long, the mapping can not be one-to-one. Only the 23 least significant bits of the IP multicast group are placed in the frame. The remaining 5 high-order bits are ignored, resulting in 32 different multicast groups being mapped to the same ethernet/FDDI address. This means that the ethernet layer acts as an imperfect filter, and the IP layer will have to decide whether to accept the datagrams the data-link layer passed to it. The IP layer acts as a definitive perfect filter.
+
+Full details on IP Multicasting over FDDI are given in RFC 1390: "Transmission of IP and ARP over FDDI Networks". For more information on mapping IP Multicast addresses to ethernet ones, you may consult draft-ietf-mboned-intro-multicast-03.txt: "Introduction to IP Multicast Routing".
+
+If you are interested in IP Multicasting over Token-Ring Local Area Networks, see RFC 1469 for details.
+
+    Fiber Distributed Data Interface
+    FDDI (Fiber Distributed Data Interface) is a network standard that uses fiber optic connections in a local area network (LAN) that can extend in range up to 200 kilometers (124 miles). The FDDI protocol is based on the token ring protocol. A FDDI LAN can support thousands of users.
+
+# https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch21lev1sec4.html
+
+    https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch01.html
+        Chapter 1. Introduction
+        Section 1.1. Introduction
+        Section 1.2. A Simple Daytime Client
+        Section 1.3. Protocol Independence
+        Section 1.4. Error Handling: Wrapper Functions
+        Section 1.5. A Simple Daytime Server
+        Section 1.6. Roadmap to Client/Server Examples in the Text
+        Section 1.7. OSI Model
+        Section 1.8. BSD Networking History
+        Section 1.9. Test Networks and Hosts
+        Section 1.10. Unix Standards
+        Section 1.11. 64-Bit Architectures
+        Section 1.12. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch01lev1sec12.html
+
+            intro/daytimetcpsrv.c
+             1 #include     "unp.h".
+             2 #include     <time.h>
+
+             3 int
+             4 main(int argc, char **argv)
+             5 {
+             6     int     listenfd, connfd;
+             7     struct sockaddr_in servaddr;
+             8     char    buff[MAXLINE];
+             9     time_t ticks;
+
+            10     listenfd = Socket(AF_INET, SOCK_STREAM, 0);
+
+            11     bzeros(&servaddr, sizeof(servaddr));
+            12     servaddr.sin_family = AF_INET;
+            13     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
+            14     servaddr.sin_port = htons(13); /* daytime server */
+
+            15     Bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
+
+            16     Listen(listenfd, LISTENQ);
+
+            17     for ( ; ; ) {
+            18         connfd = Accept(listenfd, (SA *) NULL, NULL);
+
+            19         ticks = time(NULL);
+            20         snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
+            21         Write(connfd, buff, strlen(buff));
+
+            22         Close(connfd);
+            23     }
+            24 }
+        Chapter 2. The Transport Layer: TCP, UDP, and SCTP
+        Section 2.1. Introduction
+        Section 2.2. The Big Picture
+        Section 2.3. User Datagram Protocol (UDP)
+        Section 2.4. Transmission Control Protocol (TCP)
+        Section 2.5. Stream Control Transmission Protocol (SCTP)
+        Section 2.6. TCP Connection Establishment and Termination
+        Section 2.7. TIME_WAIT State
+        Section 2.8. SCTP Association Establishment and Termination
+        Section 2.9. Port Numbers
+        Section 2.10. TCP Port Numbers and Concurrent Servers
+        Section 2.11. Buffer Sizes and Limitations
+        Section 2.12. Standard Internet Services
+        Section 2.13. Protocol Usage by Common Internet Applications
+        Section 2.14. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch02lev1sec14.html
+
+        Chapter 3. Sockets Introduction
+        Section 3.1. Introduction
+        Section 3.2. Socket Address Structures
+        Section 3.3. Value-Result Arguments
+        Section 3.4. Byte Ordering Functions
+        Section 3.5. Byte Manipulation Functions
+        Section 3.6. inet_aton, inet_addr, and inet_ntoa Functions
+        Section 3.7. inet_pton and inet_ntop Functions
+        Section 3.8. sock_ntop and Related Functions
+        Section 3.9. readn, writen, and readline Functions
+        Section 3.10. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch03lev1sec10.html
+
+            TCP sockets provide a byte stream to an application: There are no record markers. The return value from a read can be less than what we asked for, but this does not indicate an error. To help read and write a byte stream, we developed three functions, readn, writen, and readline, which we will use throughout the text. However, network programs should be written to act on buffers rather than lines.
+        Chapter 4. Elementary TCP Sockets
+        Section 4.1. Introduction
+        Section 4.2. socket Function
+        Section 4.3. connect Function
+        Section 4.4. bind Function
+        Section 4.5. listen Function
+        Section 4.6. accept Function
+        Section 4.7. fork and exec Functions
+        Section 4.8. Concurrent Servers
+        Section 4.9. close Function
+        Section 4.10. getsockname and getpeername Functions
+        Section 4.11. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch04lev1sec11.html
+
+            All clients and servers begin with a call to socket, returning a socket descriptor. Clients then call connect, while servers call bind, listen, and accept. Sockets are normally closed with the standard close function, although we will see another way to do this with the shutdown function (Section 6.6), and we will also examine the effect of the SO_LINGER socket option (Section 7.5).
+        Chapter 5. TCP Client/Server Example
+        Section 5.1. Introduction
+        Section 5.2. TCP Echo Server: main Function
+        Section 5.3. TCP Echo Server: str_echo Function
+        Section 5.4. TCP Echo Client: main Function
+        Section 5.5. TCP Echo Client: str_cli Function
+        Section 5.6. Normal Startup
+        Section 5.7. Normal Termination
+        Section 5.8. POSIX Signal Handling
+        Section 5.9. Handling SIGCHLD Signals
+        Section 5.10. wait and waitpid Functions
+        Section 5.11. Connection Abort before accept Returns
+        Section 5.12. Termination of Server Process
+        Section 5.13. SIGPIPE Signal
+        Section 5.14. Crashing of Server Host
+        Section 5.15. Crashing and Rebooting of Server Host
+        Section 5.16. Shutdown of Server Host
+        Section 5.17. Summary of TCP Example
+        Section 5.18. Data Format
+        Section 5.19. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch05lev1sec19.html
+
+            accept + fork: children don't understand if parent dies — and other way around
+            SO_KEEPALIVE, let we have to send data to see if the connection is dead
+        Chapter 6. I/O Multiplexing: The select and poll Functions
+        Section 6.1. Introduction
+        Section 6.2. I/O Models
+        Section 6.3. select Function
+        Section 6.4. str_cli Function (Revisited)
+        Section 6.5. Batch Input and Buffering
+        Section 6.6. shutdown Function
+        Section 6.7. str_cli Function (Revisited Again)
+        Section 6.8. TCP Echo Server (Revisited)
+        Section 6.9. pselect Function
+        Section 6.10. poll Function
+        Section 6.11. TCP Echo Server (Revisited Again)
+        Section 6.12. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec12.html
+
+            There are five different models for I/O provided by Unix:
+                - Blocking
+                - Nonblocking
+                - I/O multiplexing
+                - Signal-driven I/O
+                - Asynchronous I/O
+        Chapter 7. Socket Options
+        Section 7.1. Introduction
+        Section 7.2. getsockopt and setsockopt Functions
+        Section 7.3. Checking if an Option Is Supported and Obtaining the Default
+        Section 7.4. Socket States
+        Section 7.5. Generic Socket Options
+        Section 7.6. IPv4 Socket Options
+        Section 7.7. ICMPv6 Socket Option
+        Section 7.8. IPv6 Socket Options
+        Section 7.9. TCP Socket Options
+        Section 7.10. SCTP Socket Options
+        Section 7.11. fcntl Function
+        Section 7.12. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch07lev1sec12.html
+
+            There are many socket options, some of them very general (SO_ERROR), and some of them only applicable to specific sockets (like the 10 multicast-specific options).
+            TCP sockets has got recv and send buffers.
+            UDP has got recv buffers.
+        Chapter 8. Elementary UDP Sockets
+        Section 8.1. Introduction
+        Section 8.2. recvfrom and sendto Functions
+        Section 8.3. UDP Echo Server: main Function
+        Section 8.4. UDP Echo Server: dg_echo Function
+        Section 8.5. UDP Echo Client: main Function
+        Section 8.6. UDP Echo Client: dg_cli Function
+        Section 8.7. Lost Datagrams
+        Section 8.8. Verifying Received Response
+        Section 8.9. Server Not Running
+        Section 8.10. Summary of UDP Example
+        Section 8.11. connect Function with UDP
+        Section 8.12. dg_cli Function (Revisited)
+        Section 8.13. Lack of Flow Control with UDP
+        Section 8.14. Determining Outgoing Interface with UDP
+        Section 8.15. TCP and UDP Echo Server Using select
+        Section 8.16. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch08lev1sec16.html
+
+            UDP is (compared to TCP) missing detection of lost packages and retransmitting, verify responses as being fom the correct peer, and the like.
+                - can anyone inject UDP packages through firewall when we call out?
+            UDP sockets can generate asynchronous errors. TCP sockets always report these to the application, but in UDP the socket must be 'connected' to receive these.
+            UDP has no flow control, which might be a problem with bulk transfer of data.
+        Chapter 9. Elementary SCTP Sockets
+        Section 9.1. Introduction
+        Section 9.2. Interface Models
+        Section 9.3. sctp_bindx Function
+        Section 9.4. sctp_connectx Function
+        Section 9.5. sctp_getpaddrs Function
+        Section 9.6. sctp_freepaddrs Function
+        Section 9.7. sctp_getladdrs Function
+        Section 9.8. sctp_freeladdrs Function
+        Section 9.9. sctp_sendmsg Function
+        Section 9.10. sctp_recvmsg Function
+        Section 9.11. sctp_opt_info Function
+        Section 9.12. sctp_peeloff Function
+        Section 9.13. shutdown Function
+        Section 9.14. Notifications
+        Section 9.15. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch09lev1sec15.html
+
+            Multihorned, can have more than one association.
+            Can subscribe to transport events.
+        Chapter 10. SCTP Client/Server Example
+        Section 10.1. Introduction
+        Section 10.2. SCTP One-to-Many-Style Streaming Echo Server: main Function
+        Section 10.3. SCTP One-to-Many-Style Streaming Echo Client: main Function
+        Section 10.4. SCTP Streaming Echo Client: str_cli Function
+        Section 10.5. Exploring Head-of-Line Blocking
+        Section 10.6. Controlling the Number of Streams
+        Section 10.7. Controlling Termination
+        Section 10.8. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch10lev1sec8.html
+
+            Can use streaming mode to avoid head-of-line blocking problem.
+        Chapter 11. Name and Address Conversions
+        Section 11.1. Introduction
+        Section 11.2. Domain Name System (DNS)
+        Section 11.3. gethostbyname Function
+        Section 11.4. gethostbyaddr Function
+        Section 11.5. getservbyname and getservbyport Functions
+        Section 11.6. getaddrinfo Function
+        Section 11.7. gai_strerror Function
+        Section 11.8. freeaddrinfo Function
+        Section 11.9. getaddrinfo Function: IPv6
+        Section 11.10. getaddrinfo Function: Examples
+        Section 11.11. host_serv Function
+        Section 11.12. tcp_connect Function
+        Section 11.13. tcp_listen Function
+        Section 11.14. udp_client Function
+        Section 11.15. udp_connect Function
+        Section 11.16. udp_server Function
+        Section 11.17. getnameinfo Function
+        Section 11.18. Re-entrant Functions
+        Section 11.19. gethostbyname_r and gethostbyaddr_r Functions
+        Section 11.20. Obsolete IPv6 Address Lookup Functions
+        Section 11.21. Other Networking Information
+        Section 11.22. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch11lev1sec22.html
+            The set of functions that an application calls to convert a hostname into an IP address and vice versa is called the resolver.
+            The two functions gethostbyname and gethostbyaddr are the historical entry points
+            With the move to IPv6 and threaded programming models, the getaddrinfo and getnameinfo functions are more useful, with the ability to resolve IPv6 addresses and their thread-safe calling conventions.
+            The commonly used function dealing with service names and port numbers is getservbyname, which takes a service name and returns a structure containing the port number. This mapping is normally contained in a text file. Additional functions exist to map protocol names into protocol numbers and network names into network numbers, but these are rarely used.
+            The resolver functions have names that begin with res_; the res_init function is an example.
+
+        Chapter 12. IPv4 and IPv6 Interoperability
+        Section 12.1. Introduction
+        Section 12.2. IPv4 Client, IPv6 Server
+        Section 12.3. IPv6 Client, IPv4 Server
+        Section 12.4. IPv6 Address-Testing Macros
+        Section 12.5. Source Code Portability
+        Section 2.6. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch12lev1sec6.html
+            Dual-stack hosts will convert datagrams from IPv4->IPv6 and vice versa.
+            Dual-stack clients will convert addresses in DNS A records. "Connect" for a IPv4->IPv6-mapped address will still send a IPv4 SYN packet.
+
+        Chapter 13. Daemon Processes and the inetd Superserver
+        Section 13.1. Introduction
+        Section 13.2. syslogd Daemon
+        Section 13.3. syslog Function
+        Section 13.4. daemon_init Function
+        Section 13.5. inetd Daemon
+        Section 13.6. daemon_inetd Function
+        Section 3.7. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch13lev1sec7.html
+            Daemons are processes that run in the background independent of control from all terminals.
+                - long running program with no controlling terminal, often performs chores or provides eservices.
+
+                    https://www.quora.com/In-UNIX-programming-what-is-the-controlling-terminal-What-is-the-intuition-behind-having-background-and-foreground-process-groups
+                        - Processes are grouped together into process groups. Process groups are grouped together into sessions. A session may or may not have a controlling terminal (ctty).
+                        - The ctty controls processes by sending signals to them, hence the name. A process will never receive a signal from a terminal that is not its ctty, although it may receive a signal from a process that is running with a different ctty.
+
+        Chapter 14. Advanced I/O Functions
+        Section 14.1. Introduction
+        Section 14.2. Socket Timeouts
+        Section 14.3. recv and send Functions
+        Section 14.4. readv and writev Functions
+        Section 14.5. recvmsg and sendmsg Functions
+        Section 14.6. Ancillary Data
+        Section 14.7. How Much Data Is Queued?
+        Section 14.8. Sockets and Standard I/O
+        Section 14.9. Advanced Polling
+        Section 14.10. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch14lev1sec10.html
+            Three main ways to set timeout on a socket operation:
+                - Use the alarm function and the SIGALRM signal
+                - Use the time limit that is provided by select
+                - Use the newer SO_RCVTIMEO and SO_SNDTIMEO socket options
+            Sockets can be used with the C standard I/O library, but doing this adds another level of buffering to that already being performed by TCP. Indeed, a lack of understanding of the buffering performed by the standard I/O library is the most common problem with the library. Since a socket is not a terminal device, the common solution to this potential problem is to set the standard I/O stream to unbuffered, or to simply avoid standard I/O on sockets completely.
+            Many vendors provide advanced ways to poll for many events without the overhead required by select and poll. While writing nonportable code should be avoided whenever possible, sometimes the benefits of performance improvements outweigh the risk of nonportability.
+
+        Chapter 15. Unix Domain Protocols
+        Section 15.1. Introduction
+        Section 15.2. Unix Domain Socket Address Structure
+        Section 15.3. socketpair Function
+        Section 15.4. Socket Functions
+        Section 15.5. Unix Domain Stream Client/Server
+        Section 15.6. Unix Domain Datagram Client/Server
+        Section 15.7. Passing Descriptors
+        Section 15.8. Receiving Sender Credentials
+        Section 15.9. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch15lev1sec9.html
+            Unix domain sockets are an alternative to IPC when the client and server are on the same host. The advantage in using Unix domain sockets over some form of IPC is that the API is nearly identical to a networked client/server. The advantage in using Unix domain sockets over TCP, when the client and server are on the same host, is the increased performance of Unix domain sockets over TCP on many implementations.
+
+        Chapter 16. Nonblocking I/O
+        Section 16.1. Introduction
+        Section 16.2. Nonblocking Reads and Writes: str_cli Function (Revisited)
+        Section 16.3. Nonblocking connect
+        Section 16.4. Nonblocking connect: Daytime Client
+        Section 16.5. Nonblocking connect: Web Client
+        Section 16.6. Nonblocking accept
+        Section 6.7. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch16lev1sec7.html
+            Can use select to do non blocking I/O.
+            Non blocking connects let us do other processing while TCP connection is established. (Non-portable.)
+
+        Chapter 17. ioctl Operations
+        Section 17.1. Introduction
+        Section 17.2. ioctl Function
+        Section 17.3. Socket Operations
+        Section 17.4. File Operations
+        Section 17.5. Interface Configuration
+        Section 17.6. get_ifi_info Function
+        Section 17.7. Interface Operations
+        Section 17.8. ARP Cache Operations
+        Section 17.9. Routing Table Operations
+        Section 17.10. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch17lev1sec10.html
+            - Socket operations (Are we at the out-of-band mark?)
+            - File operations (set or clear the nonblocking flag)
+            - Interface operations (return interface list, obtain broadcast address)
+            - ARP table operations (create, modify, get, delete)
+            - Routing table operations (add or delete)
+            - STREAMS system (Chapter 31)
+
+        Chapter 18. Routing Sockets
+        Section 18.1. Introduction
+        Section 18.2. Datalink Socket Address Structure
+        Section 18.3. Reading and Writing
+        Section 18.4. sysctl Operations
+        Section 18.5. get_ifi_info Function (Revisited)
+        Section 18.6. Interface Name and Index Functions
+        Section 18.7. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch18lev1sec7.html
+            Routing sockets (AF_ROUTE) can be used to add or delete routes, or to listen to updates regarding 'route stuff'.
+            Listing routing table is sysctl.
+
+        Chapter 19. Key Management Sockets
+        Section 19.1. Introduction
+        Section 19.2. Reading and Writing
+        Section 19.3. Dumping the Security Association Database (SADB)
+        Section 19.4. Creating a Static Security Association (SA)
+        Section 19.5. Dynamically Maintaining SAs
+        Section 19.6. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch19lev1sec6.html
+            Key management sockets are used to communicate SAs to the kernel, key management daemons, and to other security consumers such as routing daemons.
+            SAs can be installed statically or dynamically via a key negotiation protocol. Dynamic keys can have associated lifetimes; when the soft lifetime is reached, the key management daemon is informed. If an SA is not replaced before the hard lifetime is reached, the SA can no longer be used.
+            Ten messages are exchanged between the process and kernel on key management sockets. Each message type has associated extensions, some required and some optional. Each message that is sent by a process is echoed to all other open key management sockets, removing any extensions containing sensitive data.
+            Communicate cryptographic information with the kernel.
+            Three types of operations:
+                - Send message to kernel and others with open key sockets
+                - Read message from kernel or others with open key sockets
+                - Dump SADB, for debug — and might not be available.
+
+        Chapter 20. Broadcasting
+        Section 20.1. Introduction
+        Section 20.2. Broadcast Addresses
+        Section 20.3. Unicast versus Broadcast
+        Section 20.4. dg_cli Function Using Broadcasting
+        Section 20.5. Race Conditions
+        Section 0.6. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch20lev1sec6.html
+            Broadcasting sends a datagram that all hosts on the attached subnet receive.
+            The disadvantage in broadcasting is that every host on the subnet must process the datagram, up through the UDP layer in the case of a UDP datagram, even if the host is not participating in the application.
+            Using a version of our UDP echo client that sends a broadcast to the daytime server and then prints all the replies that are received within five seconds, we looked at race conditions with the SIGALRM signal. Since the use of the alarm function and the SIGALRM signal is a common way to place a timeout on a read operation, this subtle error is common in networking applications. We showed one incorrect way to solve the problem, and three correct ways:
+                - Using pselect
+                - Using sigsetjmp and siglongjmp
+                - Using IPC (typically a pipe) from the signal handler to the main loop
+
+        Chapter 21. Multicasting
+        Section 21.1. Introduction
+        Section 21.2. Multicast Addresses
+        Section 21.3. Multicasting versus Broadcasting on a LAN
+        Section 21.4. Multicasting on a WAN
+        Section 21.5. Source-Specific Multicast
+        Section 21.6. Multicast Socket Options
+        Section 21.7. mcast_join and Related Functions
+        Section 21.8. dg_cli Function Using Multicasting
+        Section 21.9. Receiving IP Multicast Infrastructure Session Announcements
+        Section 21.10. Sending and Receiving
+        Section 21.11. Simple Network Time Protocol (SNTP)
+        Section 21.12. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch21lev1sec12.html
+            A multicast application starts by joining the multicast group assigned to the application.
+            This tells the IP layer to join the group, which in turns tells the datalink layer to receive multicast frames that are sent to the corresponding hardware layer multicast address.
+            Multicasting on a WAN requires multicast-capable routers and a multicast routing protocol. Until all the routers on the Internet are multicast-capable, multicast is only available to a subset of Internet users. We use the term "IP multicast infrastructure" to describe the set of all multicast-capable systems on the Internet.
+            Nine socket options provide the API for multicasting:
+                RECV:
+                    - Join an any-source multicast group on an interface
+                    - Leave a multicast group
+                    - Block a source from a joined group
+                    - Unblock a blocked source
+                    - Join a source-specific multicast group on an interface
+                    - Leave a source-specific multicast group
+                SEND:
+                    - Set the default interface for outgoing multicasts
+                    - Set the TTL or hop limit for outgoing multicasts
+                    - Enable or disable loopback of multicasts
+            A multicast datagram should be received only by those interfaces interested in the datagram, that is, by the interfaces on the hosts running applications wishing to participate in the multicast group. 
+            Also, broadcasting is normally limited to a LAN, whereas multicasting can be used on a LAN or across a WAN. Indeed, applications multicast across a subset of the Internet on a daily basis.
+            You cannot multicast on the public Internet, but you can multicast across the public Internet to another site by using a tunnel that supports multicast.
+            Multicast routing is very different from unicast routing, and all the routers in the path of the multicast packets need to have multicast routing configured.
+            As an end-user, you cannot multicast across the Internet, unless using a tunnel.
+            As a larger organization, like a video provider or an ISP, it is certainly possible to forward multicast packets across their domain boundary (i.e. across an Internet).
+            Essentially, to forward multicast packets within your own domain (or Autonomous System, AS), you use the PIM protocol and multicast routing. To forward those multicast packets to another AS (like another ISP), you would need a peering agreement with them and use the Multicast Source Discovery Protocol (MSDP), configured on both ends.
+            While you won't propagate your multicast across the global Internet, crossing network boundaries with multicast packets is not impossible.
+            PIM and MSDP are advanced, CCIE-level concepts. Here is a good Cisco white paper about it : https://www.cisco.com/c/en/us/td/docs/ios/solutions_docs/ip_multicast/White_papers/mcst_ovr.html#wp1015335
+
+
+        Chapter 22. Advanced UDP Sockets
+        Section 22.1. Introduction
+        Section 22.2. Receiving Flags, Destination IP Address, and Interface Index
+        Section 22.3. Datagram Truncation
+        Section 22.4. When to Use UDP Instead of TCP
+        Section 22.5. Adding Reliability to a UDP Application
+        Section 22.6. Binding Interface Addresses
+        Section 22.7. Concurrent UDP Servers
+        Section 22.8. IPv6 Packet Information
+        Section 22.9. IPv6 Path MTU Control
+        Section 22.10. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch22lev1sec10.html
+
+        Chapter 23. Advanced SCTP Sockets
+        Section 23.1. Introduction
+        Section 23.2. An Autoclosing One-to-Many-Style Server
+        Section 23.3. Partial Delivery
+        Section 23.4. Notifications
+        Section 23.5. Unordered Data
+        Section 23.6. Binding a Subset of Addresses
+        Section 23.7. Determining Peer and Local Address Information
+        Section 23.8. Finding an Association ID Given an IP Address
+        Section 23.9. Heartbeating and Address Failure
+        Section 23.10. Peeling Off an Association
+        Section 23.11. Controlling Timing
+        Section 23.12. When to Use SCTP Instead of TCP
+        Section 23.13. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch23lev1sec13.html
+
+        Chapter 24. Out-of-Band Data
+        Section 24.1. Introduction
+        Section 24.2. TCP Out-of-Band Data
+        Section 24.3. sockatmark Function
+        Section 24.4. TCP Out-of-Band Data Recap
+        Section 4.5. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch24lev1sec5.html
+
+        Chapter 25. Signal-Driven I/O
+        Section 25.1. Introduction
+        Section 25.2. Signal-Driven I/O for Sockets
+        Section 25.3. UDP Echo Server Using SIGIO
+        Section 25.4. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch25lev1sec4.html
+
+        Chapter 26. Threads
+        Section 26.1. Introduction
+        Section 26.2. Basic Thread Functions: Creation and Termination
+        Section 26.3. str_cli Function Using Threads
+        Section 26.4. TCP Echo Server Using Threads
+        Section 26.5. Thread-Specific Data
+        Section 26.6. Web Client and Simultaneous Connections (Continued)
+        Section 26.7. Mutexes: Mutual Exclusion
+        Section 26.8. Condition Variables
+        Section 26.9. Web Client and Simultaneous Connections (Continued)
+        Section 26.10. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch26lev1sec10.html
+
+        Chapter 27. IP Options
+        Section 27.1. Introduction
+        Section 27.2. IPv4 Options
+        Section 27.3. IPv4 Source Route Options
+        Section 27.4. IPv6 Extension Headers
+        Section 27.5. IPv6 Hop-by-Hop Options and Destination Options
+        Section 27.6. IPv6 Routing Header
+        Section 27.7. IPv6 Sticky Options
+        Section 27.8. Historical IPv6 Advanced API
+        Section 27.9. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch27lev1sec9.html
+
+        Chapter 28. Raw Sockets
+        Section 28.1. Introduction
+        Section 28.2. Raw Socket Creation
+        Section 28.3. Raw Socket Output
+        Section 28.4. Raw Socket Input
+        Section 28.5. ping Program
+        Section 28.6. traceroute Program
+        Section 28.7. An ICMP Message Daemon
+        Section 8.8. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch28lev1sec8.html
+            Raw sockets provide three capabilities:
+                - We can read and write ICMPv4, IGMPv4, and ICMPv6 packets.
+                - We can read and write IP datagrams with a protocol field that the kernel does not handle.
+                - We can build our own IPv4 header, normally used for diagnostic purposes (or by hackers, unfortunately).
+            Two commonly used diagnostic tools, ping and traceroute, use raw sockets.
+
+        Chapter 29. Datalink Access
+        Section 29.1. Introduction
+        Section 29.2. BSD Packet Filter (BPF)
+        Section 29.3. Datalink Provider Interface (DLPI)
+        Section 29.4. Linux: SOCK_PACKET and PF_PACKET
+        Section 29.5. libpcap: Packet Capture Library
+        Section 29.6. libnet: Packet Creation and Injection Library
+        Section 29.7. Examining the UDP Checksum Field
+        Section 29.8. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch29lev1sec8.html
+
+        Chapter 30. Client/Server Design Alternatives
+        Section 30.1. Introduction
+        Section 30.2. TCP Client Alternatives
+        Section 30.3. TCP Test Client
+        Section 30.4. TCP Iterative Server
+        Section 30.5. TCP Concurrent Server, One Child per Client
+        Section 30.6. TCP Preforked Server, No Locking Around accept
+        Section 30.7. TCP Preforked Server, File Locking Around accept
+        Section 30.8. TCP Preforked Server, Thread Locking Around accept
+        Section 30.9. TCP Preforked Server, Descriptor Passing
+        Section 30.10. TCP Concurrent Server, One Thread per Client
+        Section 30.11. TCP Prethreaded Server, per-Thread accept
+        Section 30.12. TCP Prethreaded Server, Main Thread accept
+        Section 30.13. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch30lev1sec13.html
+
+        Chapter 31. Streams
+        Section 31.1. Introduction
+        Section 31.2. Overview
+        Section 31.3. getmsg and putmsg Functions
+        Section 31.4. getpmsg and putpmsg Functions
+        Section 31.5. ioctl Function
+        Section 31.6. Transport Provider Interface (TPI)
+        Section 31.7. Summary https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch31lev1sec7.html
+
+
+        Appendix A. IPv4, IPv6, ICMPv4, and ICMPv6 https://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/app01.html
+        Section A.1. Introduction
+        Section A.2. IPv4 Header
+        Section A.3. IPv6 Header
+        Section A.4. IPv4 Addresses
+        Section A.5. IPv6 Addresses
+        Section A.6. Internet Control Message Protocols (ICMPv4 and ICMPv6)
+
+
+# VNPaaS with endpoint group
+
+https://docs.openstack.org/neutron/rocky/admin/vpnaas-scenario.html
+
+IPSec site-to-site connections will support multiple local subnets, in addition to the current multiple peer CIDRs.
+
+The multiple local subnet feature is triggered by not specifying a local subnet, when creating a VPN service.
+
+
+# IPSec site-to-site VPN
+
+https://www.paloaltonetworks.com/cyberpedia/what-is-a-site-to-site-vpn
+
+    - A site-to-site VPN is a permanent connection designed to function as an encrypted link between offices (i.e., “sites”). This is typically set up as an IPsec network connection between networking equipment.
+    - A remote access VPN is a temporary connection between users and headquarters, typically used for access to data center applications. This connection could use IPsec, but it is also common to use an SSL VPN to set up a connection between a user’s endpoint and a VPN gateway.
+
+
+# Setup IPSec L2L site to site VPN
+
+https://ep.gnt.md/index.php/how-to-setup-ipsec-l2l-site-to-site-vpn-connection-with-strongswan-ubuntu-cisco/
+
+
+
+# IGMP
+
+https://www.youtube.com/watch?v=MaTkt-wNHRg
+
+Without igmp on router, all is broadcast.
+With igmp on, only 'ports where someone sent igmp messages lately' will get the traffic.
+'lately' is as responses to igmp querier (configured on the router)
+
+Wireless, data is bad.
+
+'Look at the spectrum display'! "chanalyzer 4" "paired channels" "uses up a lot of our rftime" "rfspace"
+    "It's just a dumb switch, it doesn't know anything about anything."
+    "Turn ethernet off, which still has it on... believe it or not"
+
+    Analyze WiFi Density: A Chanalyzer Tutorial
+        
+        https://www.youtube.com/watch?v=ZeuHxoaYcEM
+
+        "raw radio frequency activity"
+
+        "If I turn on a wireless transmitter, it will look at the band".
+
+        "color density"
+
+
+        "Sometimes, a wifiscanner (that uses your normal wifi adapter) isn't enough — use a spectrum analyzer such as wi-spy"
+
+# OpenStack IGMP With Dragonflow
+
+"Dragonflow is a distributed SDN controller for OpenStack® Neutron™ supporting distributed Switching, Routing, DHCP and more."
+
+This blueprint describes the addition of an IGMP application and improvement in virtual multicast packet handling to Dragonflow. We describe how Dragonflow can implement multicast routers using OVS, by handling IGMP and multicast packets while ensuring that only group members within the tenant network receive packets of a multicast group.
+
+Problem Description
+
+Currently, multicast packets are treated as broadcast packets. They are duplicated and sent to every VM on the subnet. Additionally, multicast packets cannot be routed across to other subnets in the same network.
+
+
+TODO:
+
+Install Strongswan on computer at elastx.
+
+https://www.digitalocean.com/community/tutorials/how-to-set-up-an-ikev2-vpn-server-with-strongswan-on-ubuntu-18-04-2
+
+
+
+# pritunl site-to-site
+
+"Pritunl is a distributed enterprise vpn server built using the OpenVPN protocol. Documentation and more information can be found at the home page pritunl.com"
+
+    https://www.vpnunlimited.com/help/vpn-protocols/open-vpn-protocol
+
+        OpenVPN
+
+
+
+    https://openvpn.net/community-resources/openvpn-protocol/
+
+        Negotate keys over TLS
+        UDP or TCP
+
+    https://openvpn.net/vpn-server-resources/site-to-site-routing-explained-in-detail/
+
+        "A site-to-site setup is where two (or more) different networks are connected together using one OpenVPN tunnel."
+
+        "However, routers should all have one thing in common: the ability to route traffic using static routes. With that capability comes the means to send traffic from one network to another, through a gateway system that provides connectivity to the other network."
+
+        "An OpenVPN Access Server with a Linux VPN gateway client forms such a gateway system, to form a bridge between two networks. If your network equipment is then properly adjusted as well, then a site-to-site setup that works transparently for all devices in the two networks can be achieved."
+
+        https://openvpn.net/access-server/
+
+        main office has got openvpn access server subsidiary office has got linux openvpn vpn client routers in the offices are configured to route 'vpn traffic'
+
+        Step by step description of how traffic flows
+
+            We have created a series of pictures that show how a request from a client computer in the subsidiary office reaches an application server at the headquarter office, and how a response gets sent back. Each step of the process is shown clearly with highlighted lines and relevant network information. Simply go through the images to see a step by step progression. It's worth noting that this type of setup still allows other VPN clients to log on to the OpenVPN Access Server and gain access to any of the devices in these 2 networks. Also, a site-to-site setup need not be limited to one subsidiary network, it can be multiple just as easily.
+
+            - A user (10.0.60.105) on the subsidiary network wants to access a server (192.168.70.200) on the main network. The request goes from his computer on to the network to the local router.
+            - The routing table on the local router redirects the request to the OpenVPN Linux Gateway client. It functions as a gateway to headquarters.
+            - The OpenVPN Linux Gateway client sends toe request through an encrypted VPN tunnel to the OpenVPN Access Server on the main network.
+            - The OpenVPN Access Server decrypts the VPN traffic and sends the request on the network and it reaches the target server via the main network.
+            - The server on the right now wants to send the reply back to the client. It sends the reply on the network and it reaches the router on the main network.
+            - The routing table on the local router redirects the replies to the OpenVPN Access Server. It functions as a gateway to the subsidiary office.
+            - The OpenVPN Access Server sends the reply through an encrypted VPN tunnel to the OpenVPN Linux Gateway client.
+            - The OpenVPN Linux Gateway client decrypts the VPN traffic and sends the reply on the network and it reaches the user via the network.
+
+        How to set up OpenVPN Access Server for site-to-site.
+
+            https://openvpn.net/faq/what-are-the-main-differences-between-openvpn-open-source-and-openvpn-access-server/
+
+                We are assuming that you already have an OpenVPN Access Server installation working, and that it is installed in your private network behind a router with Internet access and has a private IP address, with port forwarding set up so that it can be reached from the outside, and with appropriate settings made so that it is actually reachable with an OpenVPN client program from the outside.
+
+                    - openvpn server working
+                    - installed on private network behind a router with internet access
+                    - has a private ip address
+                    - port forwarding set up so that it can be reached from the outside
+                    - set up so that it can actually be reached from the outside by the OpenVPN client program
+
+                    - in other words, you have OpenVPN set up so that clients can connect
+
+                    Further reading: https://openvpn.net/vpn-server-resources/openvpn-access-server-installation-options/
+
+                Important note: it is required for site-to-site to work that the subnets are different in the two networks.
+
+                    - VPN Settings / Should VPN clients have access to private subnets: Yes, using routing
+                    - allow access frmo the private subnets: checked
+                    - user permissions: Create new user and password. If using external auth (PAM/RADIUS/LDAP), make sure the account exists therel
+                    - check box for auto-login privileges, show (more settings) -> configure VPN gateway: YES
+                        - enter subnet of remote network where the linux openvpn client gateway system resides
+                    - update router on main office, add route for 'remote subnet' through openvpn server
+                    - openvpn access server has got:
+                        - ip 192.168.70.222
+                        - vpn client subnet: 172.16.0.0/20
+                        - site-to-site-connection running to subnet 10.0.60.0/24
+
+                        - to make the router aware of these extra subnets, look up the documentation of your router device and look up how to add static routes:
+                            - 172.16.0.0 mask 255.255.240.0 through gateway 192.168.79.222
+                            - 10.0.60.0 mask 255.255.255.0 through gateway 192.168.79.222
+
+                        - there are tables online where you can lookup CIDR -> subnet notation
+
+                        - With the new static routes in place, whenever traffic now arrives at the router that has as a destination an IP address somewhere in 172.16.0.0/20 or 10.0.60.0.24, it will know that it should forward this to the openvpn access server at IP address 192.168.70.222. It will then forward it to where it needs to go, as it knows how to contact those two subnets.
+
+        How to set up the openvpn linux gateway client
+
+            "We prefer Ubuntu LTS on a VM or dedicated hardware to handle the role as VPN Client+gateway"
+
+            "If you have a Linux machine that can connect to the OpenVPN Access Server, and you can enable IP forwarding, then you should be able to set up the VPN gateway easily."
+
+            - machine with openvpn connection (openvpn open source client program: apt install openvpn)
+            - ip forwarding
+
+            With the client program now installed, it is going to check for any *.conf files in the /etc/openvpn directory and at system startup try to connect them and keep them connected.
+
+            What we need next is to obtain the auto-login connections profile for the user account created for site-to-site-connectivity and save it in the /etc/openvpn directory.
+                - go to the openvpn access server's client UI using a web browser, click the connect dropdown meny and switch it to login
+                - enter username and passord for the user account you created
+                - you will be presented with a list of files available for this user account
+                - locate the auto-login profile and download it, it will be called client.ovpn
+
+                    - with openvpn access server you can create an auto-login profile that does not require credentials
+                    - copy/move/paste the config into /etc/openvpn/headquarters.conf (name not important, but extension is)
+                    - reboot the linux client os
+                    - the connection should be auto-established, and the connection should be visible in the AS gui (current users)
+                    - next, enable IP forwarding
+                        - ubuntu: /etc/sysctl.conf and uncomment net.ipv4.ip_forward=1, reboot
+                    - as far as the linux openvpn client gateway is concerned, this is it
+                    - configure routes (in the router on the subsidiary network) to forward packets to this linux machine — and you're done
+                        - network 172.16.0.0 mask 255.255.240.0 through gateway 10.0.60.55
+                        - network 192.168.70.0 mask 255.255.255.0 through gateway 10.0.60.55
+                    - the vpn client gateway knows where it should forward these packages from its routing table
+
+                        - Microsoft System Center Configuration Manager (SCCM) is a Windows product that enables the management, deployment and security of devices and applications across an enterprise.
+
+                        https://openvpn.net/vpn-server-resources/setting-your-client-to-automatically-connect-to-your-vpn-when-your-computer-starts/
+
+                            - ensure you have the appropriate connect client downloaded
+                            - VPN Administrator will need to enable auto-login for the profile in question ("Allow Auto-login")
+                            - go to client UI and download auto-login profile
+                            - click openvpn icon on your device ribbon bar
+                            - settings -> reconnet on reboot
+
+        Troubleshooting
+
+            - security groups
+            - firewall settings
+            - source checking
+            - static routes can be wrong so that they forward from LAN to WAN instead of keeping the traffic on the LAN
+
+            - https://openvpn.net/vpn-server-resources/troubleshooting-reaching-systems-over-the-vpn-tunnel/
+                - Connection path problems
+                - Amazon AWS specific settings
+                - Microsoft Azure specific settings
+                - Tools used to diagnose connection problems
+                    - tcpdump
+                    - wireshark
+                    - ping
+                    - traceroute
+                - before you begin
+                    - check all static routes
+                    - if you are using 'layer 3 operating mode' in server, make sure you do not use the same dynamic ip address range you are using for your remote network (e.g. if your VPN side LAN has a network of 192.168.3.0/24, do NOT use the same address range inside VPN settings. Instead use something that does not conflict with the remote network, 10.0.0.0/24)
+                    - if installed server one ESXi, make sure that he NIC type is not set to 'flexible', shut down the sever, remove the NIC and re-add the NIC as another supported type (preferably VMXNET3). If you have it set to flexible, some very strange intermittent problems may occur.
+                    - ensure that jumbo frames are NOT enabled on any nodes on your network (VPN Server, VPN client and the destination server your client is trying to connect to)
+                        - "In computer networking, jumbo frames are Ethernet frames with more than 1500 bytes of payload, the limit set by the IEEE 802.3 standard.[1] Commonly, jumbo frames can carry up to 9000 bytes of payload, but smaller and larger variations exist and some care must be taken using the term. Many Gigabit Ethernet switches and Gigabit Ethernet network interface controllers and some Fast Ethernet switches and Fast Ethernet network interface cards can support jumbo frames."
+                    - if a (software or hardware) firewall is in place, especially if the firewall is whitelisting connections, consider uding UDP or multi-daemon mode inside the Access Server. Running TCP based connections over a TCP based VPN can result in intermittent connection failures as well as performance problems, and as such is not recommended as the primary method for establishing a VPN link between two nodes
+                    - Make sure your VPN client is using a reliable internet connections that has a low error packet rage, if your clients are using a less reliable internet connection (sattelite internet, 3D mobile / aircard), then it is very important that you configure your server to use UDP or multidaemon mode.
+                    - Use a network cable tester
+                    - make sure that your hardware firewall software/firmware is up-to-date, and update them if necessary.
+                    - disable any internet security and antivirus related products installed on your client's coputers while trying to identify your network issue(s), some internet security and antivirus products are known to cause interference with VPN connections and should be disabled during our testing to rule out this possibility.
+                - learning how to diagnose with an example situation
+                - using traceroute on the client
+                - using tcpdump and ping to test the path
+                - conclusion: ...
+
+                TODO: Plot map of ipv4 addresses? Show subnets with colors? region / owner? color-treemap?
+
+
+
+
+# Install and configure Pritunl VPN Server on Ubuntu 20.04
+
+https://computingforgeeks.com/install-and-configure-pritunl-vpn-server-on-ubuntu/
+
+    Features
+        - simple to install and configure
+        - supports multi-cloud VPN peering
+        - offers up to five layers of authentication making it more secure
+        - supports wireguard, giving clients the option to connect with openvpn or wireguard
+        - quickly and easily scale to thousands of users
+        - supports all OpenVPN clients with official clients for most devices and platforms
+        - create multi-cloud site-to-site links with VPC peering. VPC peering available for AWS, Google CLoud, Azure and Oracle Cloud
+        - Interconnet AWS VPC netwroks across AWS regions and provide reliable remote access with automatic failover that can scale horizontally
+        - pritunl is built on MongoDB, a reliable and scalable database that can be quickly deployed
+
+    Architecture
+        - Built on MongoDB
+
+    Install Pritunl VPN on Ubuntu 20.04
+        - update your system
+        - add pritunl and mongodb repositories and public keys
+            - echo "deb http://repo.pritunl.com/stable/apt focal main" | sudo tee /etc/apt/sources.list.d/pritunl.list
+            - echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+            - curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | apt-key add -
+            - apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+            - sudo apt update
+            - sudo apt install -y 
+            - sudo apt --assume-yes install pritunl mongodb-server
+        - 
+
+        Timeouts...
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m1s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m11s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m21s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m31s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m41s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [41m51s elapsed]
+            ...
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [1h1m41s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [1h1m51s elapsed]
+            openstack_blockstorage_volume_v2.volume_1: Still creating... [1h2m1s elapsed]
+
+
+        vagrant@ubuntu-focal:~$ sudo pritunl setup-key
+        cf088fe1235142eeb03708fb1e06e46d
+        vagrant@ubuntu-focal:~$ sudo pritunl default-password
+        [undefined][2022-02-25 14:32:19,367][INFO] Getting default administrator password
+        Administrator default password:
+          username: "pritunl"
+          password: "5a4fCKLqURos"
+        859vIJ8KW7rwqPZtKVBIIos63Tn5GhfiXE2KbD9zdMD9NMsyyC/GgE+rxNXSwn16
+
+        tXXRsDL927FzocwSeLAJB0zSLEZhs1QRCRRjqdjV07/cbmBXgXXM5qA+o+IVKWTb
+        elastx:2987345980235
+
+            connect test success (from mac):
+                2022-02-25 17:22:21.698941 *Tunnelblick: This computer's apparent public IP address changed from 82.196.111.67 before connection to 89.45.234.131 after connection
+                disconnect: 2022-02-25 17:23:01.087686 *Tunnelblick: Expected disconnection occurred.
+                     + 1/1 users online
+
+
+            ubuntu@vm2:~$ sudo openvpn --config vpn.ovpn
+                Fri Feb 25 16:36:35 2022 OpenVPN 2.4.7 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Jul 19 2021
+                Fri Feb 25 16:36:35 2022 library versions: OpenSSL 1.1.1f  31 Mar 2020, LZO 2.10
+                Enter Auth Username: elastx
+                Enter Auth Password: *************
+                Fri Feb 25 16:36:40 2022 Outgoing Control Channel Authentication: Using 160 bit message hash 'SHA1' for HMAC authentication
+                Fri Feb 25 16:36:40 2022 Incoming Control Channel Authentication: Using 160 bit message hash 'SHA1' for HMAC authentication
+                Fri Feb 25 16:36:40 2022 TCP/UDP: Preserving recently used remote address: [AF_INET]89.45.234.131:14665
+                Fri Feb 25 16:36:40 2022 UDP link local: (not bound)
+                Fri Feb 25 16:36:40 2022 UDP link remote: [AF_INET]89.45.234.131:14665
+                Fri Feb 25 16:36:40 2022 WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
+                Fri Feb 25 16:36:40 2022 VERIFY OK: depth=1, O=6218fe2ccfcfee84bfceafa6, CN=6218fe2ccfcfee84bfceafb3
+                Fri Feb 25 16:36:40 2022 VERIFY KU OK
+                Fri Feb 25 16:36:40 2022 Validating certificate extended key usage
+                Fri Feb 25 16:36:40 2022 NOTE: --mute triggered...
+                Fri Feb 25 16:36:40 2022 4 variation(s) on previous 3 message(s) suppressed by --mute
+                Fri Feb 25 16:36:40 2022 [6218fe2dcfcfee84bfceafb8] Peer Connection Initiated with [AF_INET]89.45.234.131:14665
+
+
+
+
+
+
+        add server
+            safespringlab: UDP/14665
+
+        add org: testorg
+        add user:
+            testuser
+            pin: 12345678
+        add server:
+            testserver
+            13079 udp
+            dns: 8.8.8.8
+            virtualnetwork: 192.168.222.0/24
+
+        configure pritunl client on ubuntu:
+            sudo tee /etc/apt/sources.list.d/pritunl.list << EOF
+            deb https://repo.pritunl.com/stable/apt focal main
+            EOF
+            sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+            sudo apt-get update
+            sudo apt-get install pritunl-client-electron
+
+        ubuntu@vm2:~$ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+        Executing: /tmp/apt-key-gpghome.xnsfth1aXN/gpg.1.sh --keyserver hkp://keyserver.ubuntu.com:80 --recv 7568D9BB55FF9E5287D586017AE645C0CF8E292A
+        gpg: key 7AE645C0CF8E292A: public key "Pritunl <contact@pritunl.com>" imported
+        gpg: Total number processed: 1
+        gpg:               imported: 1
+
+        ubuntu@vm2:~$ cat /etc/resolv.conf
+        # This file is managed by man:systemd-resolved(8). Do not edit.
+        #
+        # This is a dynamic resolv.conf file for connecting local clients to the
+        # internal DNS stub resolver of systemd-resolved. This file lists all
+        # configured search domains.
+        #
+        # Run "resolvectl status" to see details about the uplink DNS servers
+        # currently in use.
+        #
+        # Third party programs must not access this file directly, but only through the
+        # symlink at /etc/resolv.conf. To manage man:resolv.conf(5) in a different way,
+        # replace this symlink by a static file or a different symlink.
+        #
+        # See man:systemd-resolved.service(8) for details about the supported modes of
+        # operation for /etc/resolv.conf.
+
+        nameserver 127.0.0.53
+        options edns0 trust-ad
+
+        download testuser.ovnp
+        copy to vm
+        sudo apt-get install network-manager  network-manager-openvpn
+        sudo nmcli connection import type openvpn file testuser.ovpn 
+
+        ubuntu@vm2:~$ sudo nmcli connection import type openvpn file testuser.ovpn
+        Connection 'testuser' (87c16dfa-a970-436d-89fd-fd591c32ad16) successfully added.
+
+        retry with server on 89.45.234.131 (safespring lab vpn)
+
+
+
+        When receiving a public key, gpg connects to TCP port 11371, which not commonly opened up when you are behind a strict firewall. Luckily, most key servers also listen on port 80, allowing to get the public keys through that port.19 Sept 2016
+
+        Key server time out when trying to add a GPG public key
+
+        start server
+
+        soft reboot from console
+
+
+        set ubuntu password so I can access console
+        jKbh/eEtvvQacD
+
+        

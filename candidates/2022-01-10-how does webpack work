@@ -1,0 +1,13 @@
+From commit 1:
+
+"The goal of webpack is to bundle CommonJs modules into javascript files which can be loaded by <script>-tags."
+
+"Webpack first principles"
+"Goes back to the beginning"
+"Webpack time machine"
+"Webpack without the cruft"
+
+
+
+admin(era-2733-npm-audit-fails){mota}$ npm i --save-dev webpack@latest webpack-cli@latest webpack-dev-server@latest webpack-merge@latest
+can't find process in @blueprintjs/core, bump it.

@@ -1,0 +1,1788 @@
+{
+  "/Users/folkol/Documents/notes/spark-dissect/README": {
+    "status": "idea",
+    "mtime_ns": 1766447052346475922,
+    "size": 83356,
+    "sha256": "8079a9ec4b7321caf36b7aebe77b7744b838d3d3a967b28abb002e4d2fce846c"
+  },
+  "/Users/folkol/Documents/notes/2025-12-22-arch-zoom": {
+    "status": "idea",
+    "mtime_ns": 1766447039811862855,
+    "size": 221,
+    "sha256": "3816471a79bb8d9b1f92a1f4e60b81d4f4a7d732e570c3d93da75c98dab95292"
+  },
+  "/Users/folkol/Documents/notes/2025-12-20-1brc-rust-jon": {
+    "status": "idea",
+    "mtime_ns": 1766447011461352827,
+    "size": 1001,
+    "sha256": "41e1f5b397bee4f66fa071b7e8b6ad85ddfa399f3f4a387cab85dc22d180279b",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/2025-12-22-try-agentic-blog-posts-from-notes": {
+    "status": "idea",
+    "mtime_ns": 1766447006860801253,
+    "size": 3285,
+    "sha256": "2822a17b4bfd45636a5c93b86b597fcc110d3d0dd1d6dc5575a3edeed91d420d"
+  },
+  "/Users/folkol/Documents/notes/2025-12-21-identify-blog-post-candidates-form-notes": {
+    "status": "accepted",
+    "mtime_ns": 1766446964540433835,
+    "size": 84406,
+    "sha256": "adbc4b6b85ffff935e62314afafd40edd2bed605bbfa01b5731d808ea22e0aff",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-12-21-identify-blog-post-candidates-form-notes"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/hello-world.md": {
+    "status": "rejected",
+    "mtime_ns": 1756245161508830738,
+    "size": 59,
+    "sha256": "b0687092f4aafc0acab63d62066b69e8e66ce42d4706af49d44325e7151ee1a9"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/26-introduction-to-rdtsc": {
+    "status": "rejected",
+    "mtime_ns": 1755978811203942328,
+    "size": 125,
+    "sha256": "2e01a5c3e4ccddce23747c8d7ad7628393cab70ecb106cd824dafd157de479f7"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/data.json": {
+    "status": "rejected",
+    "mtime_ns": 1755974524828082252,
+    "size": 10530358,
+    "sha256": "ffbbf0c708d20fba1ce3b71f6930a6e62769aa980177d3b511043b5dffd6de3c"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/25-initial-haversine-distance-processor-code-review": {
+    "status": "rejected",
+    "mtime_ns": 1755974266504494850,
+    "size": 84,
+    "sha256": "1d1255c37def13ac67227d60edb8d91faa8c9de2ae1282ff262f2d7e977df79f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/24-haversine-distance-processor": {
+    "status": "rejected",
+    "mtime_ns": 1755974235918474760,
+    "size": 113,
+    "sha256": "2375d5b43c482205bbe7930b90c3cb7c86c671f8ace05cbd790652f0b3b6af10"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/release/deps/json_parser-10486aa43d931eca.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970886622435020,
+    "size": 309,
+    "sha256": "edfda143f1a7ddc05fbbf5e3c0c21b61c9a1602ac2dc14e467e0e1bef64603b4"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-a625f403ac43e9b6.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970756737661839,
+    "size": 305,
+    "sha256": "e688738c4dae62ad25f169a9c0aae2c7b256948ae40dc7cec5c01f5fdee0a7c9"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-0svmp4s6id774/s-hafttuq6wh-1v51n3l.lock": {
+    "status": "rejected",
+    "mtime_ns": 1755970756717644895,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/libjson_parser-a4c844cae811a731.rmeta": {
+    "status": "rejected",
+    "mtime_ns": 1755970753861819478,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/libjson_parser-bc3d116c1cb648bc.rmeta": {
+    "status": "rejected",
+    "mtime_ns": 1755970753861816228,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-a4c844cae811a731.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970753849007547,
+    "size": 314,
+    "sha256": "9b863b2519da377fa25445ff8ddeb19632eab7631a8723425ef022856d8fd94f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-bc3d116c1cb648bc.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970753849007631,
+    "size": 314,
+    "sha256": "51baf8fb835c2c631061c36e6a623f395fa2e80eb6b72fc2621c297231d3a4ab"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-1ty6iry8e25pv/s-hafttt0m84-07nah2m.lock": {
+    "status": "rejected",
+    "mtime_ns": 1755970753843625465,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-2z9otty8ntj1m/s-hafttt0m85-12mgtp1.lock": {
+    "status": "rejected",
+    "mtime_ns": 1755970753843625507,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/src/main.rs": {
+    "status": "rejected",
+    "mtime_ns": 1755970753645371544,
+    "size": 16698,
+    "sha256": "2f7c79d592f31ee81135ef7a3a56b4e7361bd578894dff1a375da046aa17d018"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/release/json-parser.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970596945717704,
+    "size": 208,
+    "sha256": "551aade8c6eb2be8c9d81a662da5396c5004d42fb864dbcc5d1c13c928326632"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/json-parser.d": {
+    "status": "rejected",
+    "mtime_ns": 1755970293166333618,
+    "size": 206,
+    "sha256": "d59226eedc20cb0ef9bac4d043be1da5e16ddaadd23d1cca1b2e88f237b580e9"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/CACHEDIR.TAG": {
+    "status": "rejected",
+    "mtime_ns": 1755970115403531273,
+    "size": 177,
+    "sha256": "6d9d1d216e0f83abc5e5662ca62c92b4f23009466b54fa27321a69acdb778bb2"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/Cargo.lock": {
+    "status": "rejected",
+    "mtime_ns": 1755970113199012465,
+    "size": 155,
+    "sha256": "1fa2bf011fd1a6b351bf57d556503eeed51ac33efa34e3b8b96518cde35dc9b6"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/Cargo.toml": {
+    "status": "rejected",
+    "mtime_ns": 1755970112366007687,
+    "size": 82,
+    "sha256": "9555e3de7610f70c02ffd06352f697ae2dd05f3bfdfea7d41da4a0d9d5d41545"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/23-reference-implementation.py": {
+    "status": "rejected",
+    "mtime_ns": 1755969572804299354,
+    "size": 1138,
+    "sha256": "4bd4efc9d26946ff42a3844a911635b9023429fc7a53f4a9c41a7756445bac09"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/23-generate-haversine-pairs.py": {
+    "status": "rejected",
+    "mtime_ns": 1755968344666989196,
+    "size": 314,
+    "sha256": "a1476cc75fafa84cd9a2c5dcad0abfba181b48489552692bccbbc4ffad96bdf6"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/23-generating-haversine-input-json": {
+    "status": "rejected",
+    "mtime_ns": 1755967090288388541,
+    "size": 38,
+    "sha256": "4b98c1f5064d216f3183c34446e6fb84fd08f346b3618af18e862ec2d375cf37"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/22-from-8086-to-x64": {
+    "status": "rejected",
+    "mtime_ns": 1755964189500618443,
+    "size": 207,
+    "sha256": "5376120a54034b730a0a44c8d033bf05a6a08e5ce981d65b368da32eed672017"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/21-estimating-cycles": {
+    "status": "rejected",
+    "mtime_ns": 1755960216812923819,
+    "size": 553,
+    "sha256": "5cd93b2518008964f4441994fdf1c81e5ab37c0091ac643160c993655bdcd702"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/20-the-stack": {
+    "status": "rejected",
+    "mtime_ns": 1755959214428476488,
+    "size": 82,
+    "sha256": "1185760b7965cf4184f59d98717bb2d9493b743fc464858efa79d9db09fa39b5"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/19-other-common-instructions": {
+    "status": "rejected",
+    "mtime_ns": 1755957491042467616,
+    "size": 1220,
+    "sha256": "e588712913821f7f5a4e9283818af496e6487dbf6b8e5e724ffc05a9d61b06fb"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/18-simulating-real-programs": {
+    "status": "rejected",
+    "mtime_ns": 1755956651138200136,
+    "size": 86,
+    "sha256": "dac4e157e2fd893480c7547f96fa3a29915394303209e4c2a05901c69ca06673"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/17-simulating-memory": {
+    "status": "rejected",
+    "mtime_ns": 1755954873643976954,
+    "size": 94,
+    "sha256": "8243c2697e05fda0ed42861bb88c992685569e2960799b196fcbfeadca727b8f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/16-simulating-conditional-jumps": {
+    "status": "rejected",
+    "mtime_ns": 1755954325910077340,
+    "size": 237,
+    "sha256": "dcc9e25ec1f3fd75db41bbf8f7983f8d37d0cfdeb9501ed7666505b03150ed6b"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/15-simulating-add-sub-cmp": {
+    "status": "rejected",
+    "mtime_ns": 1755953757101710255,
+    "size": 46,
+    "sha256": "b2787d70b9e3d6ed47ac9cf28ae23fb02e007b5d035a4e8f2a4dd611312d7e04"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/15-simularing-non-memory-movs": {
+    "status": "rejected",
+    "mtime_ns": 1755951344213729953,
+    "size": 48,
+    "sha256": "9f287c1b63ce99c1c984a2f52dcfae5ceaf7c83c5b9af1104d63affffc09628b"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/14-using-reference-decoder-as-a-shared-lib": {
+    "status": "rejected",
+    "mtime_ns": 1755947523074918962,
+    "size": 143,
+    "sha256": "3f732bdc3a31f6be1128b09876311f3cd20d0f04067f28d002c5d4f4b912fbd6"
+  },
+  "/Users/folkol/Documents/notes/2025-07-12-escape-velocity": {
+    "status": "rejected",
+    "mtime_ns": 1755892557588424375,
+    "size": 1255,
+    "sha256": "3a652b541b55157ed7d32f8105ae653dc5155ee6cf1b00344aae931960f30441"
+  },
+  "/Users/folkol/Documents/notes/leetcode/pareto/README": {
+    "status": "rejected",
+    "mtime_ns": 1752320545830792492,
+    "size": 19429,
+    "sha256": "65810f0ac0f0f692def67c1b34180317e552517b17d2b233a36ab76024e1a6de"
+  },
+  "/Users/folkol/Documents/notes/2025-03-23-fabric-and-local-models": {
+    "status": "rejected",
+    "mtime_ns": 1752320534592979004,
+    "size": 2991,
+    "sha256": "35b5e430256660f5dfd96d271c3d5e1e170a6f2d63e18ae6e913d1ba992b6bd8",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/2025-07-12-large-language-models": {
+    "status": "accepted",
+    "mtime_ns": 1752320530997244469,
+    "size": 851,
+    "sha256": "7a68aba7c3a70386a95c43df3604a11404a926864a4eb1decb13d758c87faadb",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-07-12-large-language-models"
+  },
+  "/Users/folkol/Documents/notes/2025-04-05-how-does-fabric-work": {
+    "status": "rejected",
+    "mtime_ns": 1752320502153250435,
+    "size": 467,
+    "sha256": "bce808da6edf2b4c6ccda1452286bce2e5626699b21655f07bdb7f6eb1401959",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/2025-04-21-multi-modal-models": {
+    "status": "accepted",
+    "mtime_ns": 1752320468850271087,
+    "size": 5224,
+    "sha256": "d5db4545c673788729df3340f6463d78802b09076484c59371e8998c7f805bc2",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-04-21-multi-modal-models"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/2025-06-29-chatgpt-recaps": {
+    "status": "rejected",
+    "mtime_ns": 1752316517788970804,
+    "size": 22752,
+    "sha256": "93f105b837f5737663c78e7e74c46d1ce3389312b84114e9a905ccd984880873",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/2025-07-12-nessie-catalog": {
+    "status": "accepted",
+    "mtime_ns": 1752316508572775608,
+    "size": 476,
+    "sha256": "1f4b90d0fa51a2516b842f5922afc3e2eb86293942aa29f450f951042f9d12b9",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-07-12-nessie-catalog"
+  },
+  "/Users/folkol/Documents/notes/escape-velocity/README": {
+    "status": "idea",
+    "mtime_ns": 1752316470777965952,
+    "size": 132,
+    "sha256": "5daae9fe19c21bd4a2ec5e82585466d841ece450aa6b4c02410d56e1f4ff3927"
+  },
+  "/Users/folkol/Documents/notes/2025-05-10-ollama-model-timings": {
+    "status": "accepted",
+    "mtime_ns": 1746867060400404480,
+    "size": 7349,
+    "sha256": "1bbcca25ebb3b1a49febc601a22de2bcad59adf775ee60e1fb9c7f81cc2a09f1",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-05-10-ollama-model-timings"
+  },
+  "/Users/folkol/Documents/notes/lsm-trees": {
+    "status": "idea",
+    "mtime_ns": 1739636237000000000,
+    "size": 2564,
+    "sha256": "ba090cb646acaddcf6dee2802dd3e56351429c3d216bbd28e9c2f5392a9fb696"
+  },
+  "/Users/folkol/Documents/notes/2024-11-30-tinybench-archeology": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-11-30-tinybench-archeology",
+    "mtime_ns": 1739636224000000000,
+    "size": 4908,
+    "sha256": "2b6c5708dc076d443cae6ec66c9d26abbb817c5bc42a778ac27344ac31e5088d"
+  },
+  "/Users/folkol/Documents/notes/2025-02-15-gdb-in-15-min": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-02-15-gdb-in-15-min",
+    "mtime_ns": 1739634377000000000,
+    "size": 1524,
+    "sha256": "2355a4b9b8e05f1ae8e63da3b3fad65f9ff7829a472230e38eeae6d89a77cbaa"
+  },
+  "/Users/folkol/Documents/notes/leetcode/pareto/README 2.txt": {
+    "status": "rejected",
+    "mtime_ns": 1738431242000000000,
+    "size": 8571,
+    "sha256": "deeb6b7cac179e035e3902efed7f1130882ff34bed51067fb020d151a64205a5"
+  },
+  "/Users/folkol/Documents/notes/2025-01-05.2": {
+    "status": "accepted",
+    "mtime_ns": 1736091413000000000,
+    "size": 651,
+    "sha256": "10c508088ce9822bf3e61fda0cef0b28d5d72e6df4c5b51555bf78bfca11eaec",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-01-05-2025-01-05.2"
+  },
+  "/Users/folkol/Documents/notes/notes-2025-01-05": {
+    "status": "accepted",
+    "mtime_ns": 1736091398000000000,
+    "size": 124,
+    "sha256": "3dc81201b3ab51035d8dab7dceb189d5559e485647322e0c6caa8f0897ee8b91",
+    "changed_since": false,
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2025-01-05-notes-2025-01-05"
+  },
+  "/Users/folkol/Documents/notes/2024-08-01-spark-overview": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-01-spark-overview",
+    "mtime_ns": 1736091262000000000,
+    "size": 290829,
+    "sha256": "46dce1393c3cb8c81e0131c89c37ce86c3471a2437f17d2a315f60a530de57b3"
+  },
+  "/Users/folkol/Documents/notes/2024-12-28-criterion.js": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-12-28-criterion.js",
+    "mtime_ns": 1735402635000000000,
+    "size": 3066,
+    "sha256": "c95ea29364e7acb613cc336634196843e3718baa9939a16c088ddc6a4869ab0a"
+  },
+  "/Users/folkol/Documents/notes/3b1b-a-manim-demo-with-ben-sparks": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-12-28-3b1b-a-manim-demo-with-ben-sparks",
+    "mtime_ns": 1735390674000000000,
+    "size": 838,
+    "sha256": "4f3397616164a986459b6fdf0181a87d6dabff57e1f5bc39059aaf15028ed360"
+  },
+  "/Users/folkol/Documents/notes/2024-11-30-vitest-history": {
+    "status": "rejected",
+    "mtime_ns": 1732983562000000000,
+    "size": 21,
+    "sha256": "6d1101b706c9a35556a32860e74f84afc1026457c5addfbb4b241dbe83424273"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/part1_disassembler.py": {
+    "status": "rejected",
+    "mtime_ns": 1724183516000000000,
+    "size": 6752,
+    "sha256": "5e5b237f9a0c42100b146fa7337f057bfb6b6fc9eaf3a9a2c9f77497ec075ccb"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/reference": {
+    "status": "rejected",
+    "mtime_ns": 1724182797000000000,
+    "size": 2065,
+    "sha256": "fe5d7b5f0a571097c6cfbce9a94f24879d0e67fd3626d9e67a1aeda79442bc69"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/test_cmp_imm": {
+    "status": "rejected",
+    "mtime_ns": 1724181005000000000,
+    "size": 5,
+    "sha256": "ce61c6a17df791303c8106592ba6e78c71749a688e60bcd625fdae49a70a1d4c"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/test_cmp_imm.asm": {
+    "status": "rejected",
+    "mtime_ns": 1724181002000000000,
+    "size": 19,
+    "sha256": "f8b2afcb0e8403c2ae9f17e61fc69160e13d0e12aafedca4e6120caf4a18b92f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/13-8086-decoder-code-review": {
+    "status": "rejected",
+    "mtime_ns": 1724092768000000000,
+    "size": 101,
+    "sha256": "7e16557a0ec1470c84f9792a0c9ff2e5c9bf23e0cc3b780bfebb9bb0d0325ee1"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/part1_disassembler.cc": {
+    "status": "rejected",
+    "mtime_ns": 1724005517000000000,
+    "size": 12263,
+    "sha256": "82770fb1113780a13a8e47841846875d8ccd9f6f6d4a8ac6305f29163bcc3669"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_41.asm": {
+    "status": "rejected",
+    "mtime_ns": 1723990606000000000,
+    "size": 2065,
+    "sha256": "9c4e18f62119703baa2a9ad5fd9008968e1c4ee09dd75c5de816cad5d1d6b2ed"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/12-opcode-patterns-in-8086-arithmetic": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-18-12-opcode-patterns-in-8086-arithmetic",
+    "mtime_ns": 1723990030000000000,
+    "size": 545,
+    "sha256": "bd45df8aa4a76bbc87a8422f586ae760e4664aaaaffe377e09fdce3de2832d39"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/11-decoding-multiple-instructions-and-suffixes": {
+    "status": "rejected",
+    "mtime_ns": 1723980115000000000,
+    "size": 213,
+    "sha256": "75bade31e9327f0acfc5e2dd7b06f2ebae8b4068f9e50a1b35d98b5e34c25022"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/10-instruction-decoding-on-8086": {
+    "status": "rejected",
+    "mtime_ns": 1723976659000000000,
+    "size": 6077,
+    "sha256": "2e0ca8d9705770fcee4f5e800191787180b5246ee4b373ca666652f7466662a8"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_39.asm": {
+    "status": "rejected",
+    "mtime_ns": 1723974901000000000,
+    "size": 665,
+    "sha256": "716c4abd25c4b9d91fba582b7146924457caf2b28790a15121928b3675e4a894"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_38.asm": {
+    "status": "rejected",
+    "mtime_ns": 1723928878000000000,
+    "size": 293,
+    "sha256": "45cd862a7fb9c5d4e8759df331a6e4ca5a63b8778d458f9ad182e7f927d71349"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_37.asm": {
+    "status": "rejected",
+    "mtime_ns": 1723928864000000000,
+    "size": 183,
+    "sha256": "79275b51619bcd081d111d6e226f69f8ca45c2b0ca6d0e9af0f5e82b8cec301a"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/09-clean-code-horrible-performance": {
+    "status": "rejected",
+    "mtime_ns": 1723918369000000000,
+    "size": 688,
+    "sha256": "90e7ab380353aac265c5ea4b4d326739efddcaa7e8b5f85ab04683434cc3364e"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/08-haversine-distance": {
+    "status": "rejected",
+    "mtime_ns": 1723913295000000000,
+    "size": 1032,
+    "sha256": "cec02e4fa203d57991354ed43e0ea53ae0caec1b3299b67d035e7769a1de57c7"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/07-python-revisited": {
+    "status": "rejected",
+    "mtime_ns": 1723910336000000000,
+    "size": 203,
+    "sha256": "2868e1b9b6bdedd58555b8fe8097f12cdb79f18d5debe101a9404bbe00215c62"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/06-multithreading": {
+    "status": "rejected",
+    "mtime_ns": 1723908171000000000,
+    "size": 359,
+    "sha256": "4c91221c3ffa14c9308f94e3a70ed480d775e834858b6820518b42286aaa298f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/05-caching": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-05-caching",
+    "mtime_ns": 1723905263000000000,
+    "size": 940,
+    "sha256": "533a1a54cc38dae3eab6958e8daa034869a4c98dbc50f37bf9afb82ae5f15f73"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/04-single-instruction-multiple-data": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-04-single-instruction-multiple-data",
+    "mtime_ns": 1723849040000000000,
+    "size": 941,
+    "sha256": "a2df013f9fd200e7242ab6cff88674271ebb0c59f66984823bbd0864d2481b2b"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/03-instructions-per-clock": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-17-03-instructions-per-clock",
+    "mtime_ns": 1723846451000000000,
+    "size": 574,
+    "sha256": "e0bf2bbf395f2ec9b7208ba99949bd4e975987bd775d3f43a3233c071d752f4c"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/02-waste": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-16-02-waste",
+    "mtime_ns": 1723844953000000000,
+    "size": 617,
+    "sha256": "b588249b691c7815e8ae531db9c538f58016653e4a5de3fae337798a64e7203f"
+  },
+  "/Users/folkol/Documents/notes/performance-aware-programming/01-introduction": {
+    "status": "rejected",
+    "mtime_ns": 1723842487000000000,
+    "size": 1313,
+    "sha256": "abfa0ea89127705a12c83074db799b2c4d5b31257845be23175fccc08558b292"
+  },
+  "/Users/folkol/Documents/notes/2024-08-16-notes": {
+    "status": "idea",
+    "mtime_ns": 1723840974000000000,
+    "size": 79,
+    "sha256": "9f38fcaa0f7ffe5ca1e7877518d03efcb6739693af5ffd03644988567be36dee"
+  },
+  "/Users/folkol/Documents/notes/nanotrusting-the-nanotime": {
+    "status": "idea",
+    "mtime_ns": 1723840948000000000,
+    "size": 5735,
+    "sha256": "4e6dca32f3e37434a78ae9fe90cb70e47fd030875b7a952fc4a4572985b504f5"
+  },
+  "/Users/folkol/Documents/notes/the-rust-performance-book": {
+    "status": "idea",
+    "mtime_ns": 1723492073000000000,
+    "size": 24888,
+    "sha256": "019bb33dd7f11c569ff70e3582a9a8a22bb6bc37d22b8615bcff937576f6ac56"
+  },
+  "/Users/folkol/Documents/notes/kquery-work-notes": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-08-01-kquery-work-notes",
+    "mtime_ns": 1722549429000000000,
+    "size": 32605,
+    "sha256": "fb7b147c4123667b8a3cead041af0824c6fc7a3808b4420c3be76913542f6e74"
+  },
+  "/Users/folkol/Documents/notes/2024-07-31-photon": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-07-31-photon",
+    "mtime_ns": 1722462133000000000,
+    "size": 5699,
+    "sha256": "5638e187f1302be6f09a04aaac9ef4fb82911cc1d071676452a29bfe528a9ee4"
+  },
+  "/Users/folkol/Documents/notes/2024-07-31-bookdb-review": {
+    "status": "rejected",
+    "mtime_ns": 1722457942000000000,
+    "size": 8925,
+    "sha256": "90e32e848ead99a8a3bfce4fd5c7deb7f035ffa4f74ad8997730759cea581a65"
+  },
+  "/Users/folkol/Documents/notes/comprehensive-rust-course": {
+    "status": "rejected",
+    "mtime_ns": 1721938837000000000,
+    "size": 47129,
+    "sha256": "328adc3b174cda87907a333583d7949d56560728fe33c3c9116a9280d021c0a6"
+  },
+  "/Users/folkol/Documents/notes/java-how-fast-can-you-parse-1-billion-rows": {
+    "status": "rejected",
+    "mtime_ns": 1721583058000000000,
+    "size": 2882,
+    "sha256": "eea324481591e2212fbae8a4191f0ccadcc56b71d7f64d3667515c7ea895be6d"
+  },
+  "/Users/folkol/Documents/notes/git-performance-issues-on-large-repositories": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-07-21-git-performance-issues-on-large-repositories",
+    "mtime_ns": 1721569034000000000,
+    "size": 94,
+    "sha256": "4f820d235f113ddf026f56bf20c3adb1aeeaebab187df03ce4f8f3ffffd68a7d"
+  },
+  "/Users/folkol/Documents/notes/automatic-rebase-history": {
+    "status": "rejected",
+    "mtime_ns": 1719596790000000000,
+    "size": 202,
+    "sha256": "8e9e466eb8ff75e5d8da3a5c46826307374fac59ba2ca32b10ed9ab52744c8f8"
+  },
+  "/Users/folkol/Documents/notes/pratt-paper": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-06-28-pratt-paper",
+    "mtime_ns": 1719596774000000000,
+    "size": 16900,
+    "sha256": "81ac589fcbc780db8f6336bca20744c39d6ce719fce6a12bd0429a18ad8d2963"
+  },
+  "/Users/folkol/Documents/notes/convention-raw-pointers-and-ownership-plus-ascii-tshirt": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-06-28-convention-raw-pointers-and-ownership-plus-ascii-tshirt",
+    "mtime_ns": 1719596756000000000,
+    "size": 7821,
+    "sha256": "e556f32323bffeb2aaff12b360609fe3ff9b7ca619a9eed746e5c6cd86c010bd"
+  },
+  "/Users/folkol/Documents/notes/bambu-printer-starting-kit": {
+    "status": "rejected",
+    "mtime_ns": 1719596637000000000,
+    "size": 300,
+    "sha256": "f8632daa7983a3ef93a9b4fc07cb336fe0c2b7089bb5cad8efe9376440f7c58e"
+  },
+  "/Users/folkol/Documents/notes/primagen-algo-2": {
+    "status": "idea",
+    "mtime_ns": 1716137633000000000,
+    "size": 977,
+    "sha256": "af839ff836f307e2f3e8292a7884dd55be156cf1569c7c60d7c748103ad2df61"
+  },
+  "/Users/folkol/Documents/notes/bigquery-dremel": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2024-03-29-bigquery-dremel",
+    "mtime_ns": 1711709178000000000,
+    "size": 19313,
+    "sha256": "ecbdbbcb25e6af81dd9a1f5a850b36d677a51bb05481851e08e85ffdf11fec2e"
+  },
+  "/Users/folkol/Documents/notes/longevity-of-cut-off-wheels": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-longevity-of-cut-off-wheels",
+    "mtime_ns": 1699714277000000000,
+    "size": 1236,
+    "sha256": "11cae24bc5ff4a5809d33027be75f22e9830aff7017f34d8004abf2c2b785552"
+  },
+  "/Users/folkol/Documents/notes/2023-10-25": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-2023-10-25",
+    "mtime_ns": 1699713663000000000,
+    "size": 1935,
+    "sha256": "1570415b4005d384aaed3372c949a12bd8ae0feee9cf153cfa60b87cc54870f2"
+  },
+  "/Users/folkol/Documents/notes/3t-stack-tutorial": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-11-11-3t-stack-tutorial",
+    "mtime_ns": 1699713663000000000,
+    "size": 3557,
+    "sha256": "d769bf8deb9f037d7ca3c0a6f994222364d28b9b589c1669294172b90920b407"
+  },
+  "/Users/folkol/Documents/notes/2023-10-22": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-22-2023-10-22",
+    "mtime_ns": 1698000314000000000,
+    "size": 791,
+    "sha256": "5ce37ceb3d21b6aca856db0678016dc7bac99e4d29467f158a9b4a628847d62c"
+  },
+  "/Users/folkol/Documents/notes/hashmap-quadratic-probing": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-22-hashmap-quadratic-probing",
+    "mtime_ns": 1698000304000000000,
+    "size": 214,
+    "sha256": "34f10786515c420f880b2f57ad32c3adec98c6bc4a9884215ef9679b5f1820d2"
+  },
+  "/Users/folkol/Documents/notes/aes": {
+    "status": "rejected",
+    "mtime_ns": 1696765649000000000,
+    "size": 68,
+    "sha256": "310d8eebbaf6b22e227546526741b8d231d2a57f93f1d1eea96039777a70486e"
+  },
+  "/Users/folkol/Documents/notes/google-ajax-xssi-json-header": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-10-08-google-ajax-xssi-json-header",
+    "mtime_ns": 1696764984000000000,
+    "size": 8432,
+    "sha256": "506a90cdc819dc097f682039bc5018f821f8c95fce6a361396206dfade64b8fe"
+  },
+  "/Users/folkol/Documents/notes/bean-vs-bean": {
+    "status": "rejected",
+    "mtime_ns": 1696702978000000000,
+    "size": 20297,
+    "sha256": "17e410fc49fcdde7babd7247c4284ab9aa3a1080d0d8cd793b00d57cb92fc8b6"
+  },
+  "/Users/folkol/Documents/notes/jakarta-or-microprofile": {
+    "status": "rejected",
+    "mtime_ns": 1696702758000000000,
+    "size": 19365,
+    "sha256": "97b9bc886da4b1f022fad0487be1f32168fbf044b75e1e9143abd54c60ea02bb"
+  },
+  "/Users/folkol/Documents/notes/x123": {
+    "status": "idea",
+    "mtime_ns": 1694277492000000000,
+    "size": 229,
+    "sha256": "79ea70c1e942d5f39a0a9f704bb4edf83986f2bbbdbfafbf2fe89f412cac6cf3"
+  },
+  "/Users/folkol/Documents/notes/corespotlightd": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-08-17-corespotlightd",
+    "mtime_ns": 1692279177000000000,
+    "size": 284,
+    "sha256": "7ed767acf5169e2821ae9062d0e96544eb8a5e1b6e3d5bdb25c4bcf72e7c270f"
+  },
+  "/Users/folkol/Documents/notes/bevy game engine": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-08-06-bevy game engine",
+    "mtime_ns": 1691277285000000000,
+    "size": 1340,
+    "sha256": "8791afd6f676a8160743fc379363eb942d57b44d97dd3d610ac85b70d753fa81"
+  },
+  "/Users/folkol/Documents/notes/transformers-language-model": {
+    "status": "idea",
+    "mtime_ns": 1689969161000000000,
+    "size": 1110,
+    "sha256": "1b1c2c9245350818d5d7357c284df3d8d1a8f74d6a78173434e359d4da441f96"
+  },
+  "/Users/folkol/Documents/notes/jetbrains-navigation-plugin": {
+    "status": "idea",
+    "mtime_ns": 1689969145000000000,
+    "size": 167,
+    "sha256": "817468f3bad8b87ad4ee6e2e8972361cd3a27781b611d6ef62c1ba7448ccb9fb"
+  },
+  "/Users/folkol/Documents/notes/all-rust-features-explained": {
+    "status": "idea",
+    "mtime_ns": 1689969121000000000,
+    "size": 2666,
+    "sha256": "dd22fdef05e435ae9c2a59ecdb48b540fadbc7fc5a2f9e5e3bb8c33508652c7f"
+  },
+  "/Users/folkol/Documents/notes/rust-lang-blog": {
+    "status": "idea",
+    "mtime_ns": 1687016326000000000,
+    "size": 11424,
+    "sha256": "d7a4607f1702f90d1c1e6a495121790268cfed6a485d1c089ef0f499af39d29b"
+  },
+  "/Users/folkol/Documents/notes/a-firehouse-of-rust-for-busy-people": {
+    "status": "idea",
+    "mtime_ns": 1687008239000000000,
+    "size": 593,
+    "sha256": "8ce42a3e80d2d302aa8c62aebcea3fb29d6d3f74d82a4416e246abb0f432a3d9"
+  },
+  "/Users/folkol/Documents/notes/statquest-machine-learning": {
+    "status": "idea",
+    "mtime_ns": 1686937425000000000,
+    "size": 4630,
+    "sha256": "5a7d55a56453674d95e5953978cebbead56abbc5d23237c565d7e3366d86e9c7"
+  },
+  "/Users/folkol/Documents/notes/linux-login-process": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2023-04-29-linux-login-process",
+    "mtime_ns": 1682762652000000000,
+    "size": 1107,
+    "sha256": "c2b230669dec8ba735fa02d4e51d684d451aeef1a4cd4030e1469e1336504a00"
+  },
+  "/Users/folkol/Documents/notes/the-typescript-handbook": {
+    "status": "rejected",
+    "mtime_ns": 1673808129000000000,
+    "size": 5939,
+    "sha256": "1648cf4314ad76f27f9199fd48dde78b314dba6b6c260d7813d73e0da3c8d121"
+  },
+  "/Users/folkol/Documents/notes/3b1b-on-convolutions": {
+    "status": "idea",
+    "mtime_ns": 1668984353000000000,
+    "size": 218,
+    "sha256": "2b729efd4e50b4f5660869e20cd35f8ea772cd4417b15f2025b26baa1bedfde2"
+  },
+  "/Users/folkol/Documents/notes/c64-info": {
+    "status": "rejected",
+    "mtime_ns": 1668287776000000000,
+    "size": 127,
+    "sha256": "55b293bb2433d0192d9eddc5b9f8fb256acb7206cf8ef966550526bcf50cf150",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/solving-problems-the-clojure-way": {
+    "status": "rejected",
+    "mtime_ns": 1667766643000000000,
+    "size": 2887,
+    "sha256": "9d5cf76db9a66a95cc54f349eb87c0ccb6289ffcaaab66a262b147c2cb6806c3"
+  },
+  "/Users/folkol/Documents/notes/id-software-core-principles": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-11-06-id-software-core-principles",
+    "mtime_ns": 1667748068000000000,
+    "size": 5730,
+    "sha256": "6617923024d8454ec996603df40ed135c2158043b6cdde01c3e215a9e8cd5c05"
+  },
+  "/Users/folkol/Documents/notes/music-from-old-spotify-lists": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-11-05-music-from-old-spotify-lists",
+    "mtime_ns": 1667664377000000000,
+    "size": 383,
+    "sha256": "dade4d75ad8385790728618961e659f1b52012a45eb55a2c37fc908298bcb137"
+  },
+  "/Users/folkol/Documents/notes/sketch-data-structure": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-28-sketch-data-structure",
+    "mtime_ns": 1664385709000000000,
+    "size": 70,
+    "sha256": "20f3df331c483a75a6bcebcbac915b58129b8c5d56a5b3a0debc1e1419f083e2"
+  },
+  "/Users/folkol/Documents/notes/fladdermus": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-28-fladdermus",
+    "mtime_ns": 1664384800000000000,
+    "size": 38,
+    "sha256": "94d83d77d73fff9638d44e5168ae392a86246978063de2f8475871829a0ce278"
+  },
+  "/Users/folkol/Documents/notes/non-aggregation.txt": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-09-01-non-aggregation.txt",
+    "mtime_ns": 1662026114000000000,
+    "size": 790,
+    "sha256": "1b4931020bd27542e7518a23a8f23b20cbba5c782a64943d638cca401f438a9e"
+  },
+  "/Users/folkol/Documents/notes/todos": {
+    "status": "rejected",
+    "mtime_ns": 1660996636000000000,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/build-custom-keyboard": {
+    "status": "idea",
+    "mtime_ns": 1660993357000000000,
+    "size": 466,
+    "sha256": "2b58ffd1e975631e48fc482d01e092fea80dfed67c35f6692f989901db6f149e"
+  },
+  "/Users/folkol/Documents/notes/blogs": {
+    "status": "idea",
+    "mtime_ns": 1660988909000000000,
+    "size": 70,
+    "sha256": "4019779040c0e1134fb18d7bc56ad29d85d0d4f3b4f0bde0b3df567099fbc61f"
+  },
+  "/Users/folkol/Documents/notes/introduction-to-ext4": {
+    "status": "idea",
+    "mtime_ns": 1660341700000000000,
+    "size": 7081,
+    "sha256": "200a3187fb0f322ed7d831b6b1a691aaf7a3f70a81906a97b5ae9a2fb1a91236"
+  },
+  "/Users/folkol/Documents/notes/gzip padding": {
+    "status": "idea",
+    "mtime_ns": 1660055201000000000,
+    "size": 854,
+    "sha256": "7614743cc634d40027d171d472a8dfdf2d86dc8495754eeebbe06aeb634af1c0"
+  },
+  "/Users/folkol/Documents/notes/encoding": {
+    "status": "rejected",
+    "mtime_ns": 1660055187000000000,
+    "size": 1168,
+    "sha256": "a752741af6fbe3f2d374b5bf7d284cdd29a4161489c3629382018a84dfd4a506"
+  },
+  "/Users/folkol/Documents/notes/s3-implementation": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-09-s3-implementation",
+    "mtime_ns": 1660055177000000000,
+    "size": 11260,
+    "sha256": "9aa0ec70b8c81ffbcc0336962b0bb4f277bce96e9f930c16c8d9341198138672"
+  },
+  "/Users/folkol/Documents/notes/backtobackswe": {
+    "status": "rejected",
+    "mtime_ns": 1660055173000000000,
+    "size": 574,
+    "sha256": "6e9d422229011504ea5069942732199e411bcdbe168e05261beaedf22fcf3419"
+  },
+  "/Users/folkol/Documents/notes/pexels.com": {
+    "status": "rejected",
+    "mtime_ns": 1660055165000000000,
+    "size": 22,
+    "sha256": "c397b990c26b62d52b34d0362e6839e16188ddc169fdc41e521526fc3a010b31"
+  },
+  "/Users/folkol/Documents/notes/vercel deploy": {
+    "status": "rejected",
+    "mtime_ns": 1660055159000000000,
+    "size": 59,
+    "sha256": "2796882feeb27a19f01d1b5b44f34cc94ba3845cb1cef2172dbaca2a9d579142"
+  },
+  "/Users/folkol/Documents/notes/aws-services-summary": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-09-aws-services-summary",
+    "mtime_ns": 1660055146000000000,
+    "size": 8786,
+    "sha256": "88880af447f6df2c079ba3a7504e7e1aeb3d5f7df5efd742d696e7e1d7a55a7a"
+  },
+  "/Users/folkol/Documents/notes/heraldik namnskick": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-08-07-heraldik namnskick",
+    "mtime_ns": 1659871054000000000,
+    "size": 62,
+    "sha256": "5f73bfaf28501aa3b0596f7335efc9a660429408a94f0aeb0d43d28fd9ad475e"
+  },
+  "/Users/folkol/Documents/notes/2022-07-28": {
+    "status": "postponed",
+    "mtime_ns": 1659106680000000000,
+    "size": 2000,
+    "sha256": "358c00a7e9b1d4c277369e25fc879f7865e21788b08a140bbeac1a480f3150f3",
+    "changed_since": false
+  },
+  "/Users/folkol/Documents/notes/2022-07-23": {
+    "status": "idea",
+    "mtime_ns": 1658868352000000000,
+    "size": 7094,
+    "sha256": "59e16d34aa6f56d7471159b4707631d70907ed90bb59fb2a8f1664d71581f67c"
+  },
+  "/Users/folkol/Documents/notes/cache-coherence-protocols-nesoacademy": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-07-26-cache-coherence-protocols-nesoacademy",
+    "mtime_ns": 1658868349000000000,
+    "size": 6743,
+    "sha256": "85d90baf9e39f339c4544d082d37a8b07f5759751e27130e7b6a8c3a311552ce"
+  },
+  "/Users/folkol/Documents/notes/hugo-tutorials": {
+    "status": "postponed",
+    "mtime_ns": 1658253442000000000,
+    "size": 4300,
+    "sha256": "1c87c50feec52244582d2c93e63681cd23faa4794cb4f003132e2c5121cb8eea"
+  },
+  "/Users/folkol/Documents/notes/theo-tech-stack": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-07-05-theo-tech-stack",
+    "mtime_ns": 1657026712000000000,
+    "size": 1813,
+    "sha256": "f2972010970fc0e1afbff15616a789d63e12b0b85619ec65e11ab38f19e99dd5"
+  },
+  "/Users/folkol/Documents/notes/game-shoot-em-up-duel-on-small-planets": {
+    "status": "idea",
+    "mtime_ns": 1656604177000000000,
+    "size": 148,
+    "sha256": "8b3f7177957a85c9fbee75dbff687878f747c85481cb1840be8d69ec857374f4"
+  },
+  "/Users/folkol/Documents/notes/macos-menu-bar-app": {
+    "status": "idea",
+    "mtime_ns": 1656604125000000000,
+    "size": 529,
+    "sha256": "a5efe098ece7e6312afd8c8d00753ef72dcc0a50ff3b4819920eee086c6d5615"
+  },
+  "/Users/folkol/Documents/notes/casey-muratori-papers-I-have-loved": {
+    "status": "idea",
+    "mtime_ns": 1656197812000000000,
+    "size": 3056,
+    "sha256": "4d86494054047c8e827e552e363d444143fb9a81f861cc59be40d77e5a740883"
+  },
+  "/Users/folkol/Documents/notes/the-thirty-million-lines-problem": {
+    "status": "rejected",
+    "mtime_ns": 1656191052000000000,
+    "size": 220,
+    "sha256": "442012ded35ad5213b1841504da8fdc847f034cadbbbd56802e009b4a25a7b86"
+  },
+  "/Users/folkol/Documents/notes/simple-code-that-is-fast-followup": {
+    "status": "rejected",
+    "mtime_ns": 1656187222000000000,
+    "size": 2887,
+    "sha256": "ee36ccd1e7ae51509b65150c0c774ff31b3831916a76f40005c78690e4c66c51"
+  },
+  "/Users/folkol/Documents/notes/the-little-cs-book-bigmachine.io": {
+    "status": "idea",
+    "mtime_ns": 1656160345000000000,
+    "size": 112,
+    "sha256": "17e5d6b3deb8d80b76625132ca042266163bce8a9149be65f84044e292371abc"
+  },
+  "/Users/folkol/Documents/notes/bell-labs-the-unix-operating-system": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-25-bell-labs-the-unix-operating-system",
+    "mtime_ns": 1656154473000000000,
+    "size": 4415,
+    "sha256": "4a88a6268dff71b5b0fd0399cd82a8c60aa1241cdf7d7de888efaff235d1346f"
+  },
+  "/Users/folkol/Documents/notes/learn-sass-in-20-min": {
+    "status": "rejected",
+    "mtime_ns": 1655983537000000000,
+    "size": 1185,
+    "sha256": "1cb3934cba9d84eadf1287c57b6157ad9646c4703e18324d70cbe67a9b750c48"
+  },
+  "/Users/folkol/Documents/notes/you-are-not-stupid-how-to-easily-learn-difficult-things": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-23-you-are-not-stupid-how-to-easily-learn-difficult-things",
+    "mtime_ns": 1655983534000000000,
+    "size": 2792,
+    "sha256": "773dad1900154c9e3f5831ad33c2cda1a4624e591e83fb854d8ffa0d80b0b764"
+  },
+  "/Users/folkol/Documents/notes/clean-coders-hate-when-happens-to-your-code-when-you-use-these-enterprise-programming-tricks": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-22-clean-coders-hate-when-happens-to-your-code-when-you-use-these-enterprise-programming-tricks",
+    "mtime_ns": 1655912765000000000,
+    "size": 3885,
+    "sha256": "6b000b124748fb329b5c3197832d974379b1bb462151a05d18d639575836d7d5"
+  },
+  "/Users/folkol/Documents/notes/primeagen-developer-workflow": {
+    "status": "rejected",
+    "mtime_ns": 1655901094000000000,
+    "size": 731,
+    "sha256": "9eebbe6bc79a9eac6bafecaa276ad89b21e154f9bc058567db43a5bcc90633dc"
+  },
+  "/Users/folkol/Documents/notes/100-web-development-things": {
+    "status": "idea",
+    "mtime_ns": 1655900423000000000,
+    "size": 2481,
+    "sha256": "c52924f45600fca215d3103bec0d875c9a572f43bd2b33f8c77894238a6f23fd"
+  },
+  "/Users/folkol/Documents/notes/how-to-not-learn-russian-and-how-to": {
+    "status": "postponed",
+    "mtime_ns": 1655669068000000000,
+    "size": 1254,
+    "sha256": "8a1f3a3df08ded3e4b533f28846b03ed0e6f515f15a1152b0c7e3b421d54a42e"
+  },
+  "/Users/folkol/Documents/notes/ecmascript-standard": {
+    "status": "rejected",
+    "mtime_ns": 1655657028000000000,
+    "size": 163880,
+    "sha256": "221307660497ab63043f083181ef7b2b699a1e915f95e4fb9827118943d5500d"
+  },
+  "/Users/folkol/Documents/notes/binary-heap-in-array": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-binary-heap-in-array",
+    "mtime_ns": 1655649768000000000,
+    "size": 193,
+    "sha256": "5167fa89eafdbcc6ead311fbd0d43487d044be7665ead508fbdc6c16f752d70b"
+  },
+  "/Users/folkol/Documents/notes/ 3b1b-tips-to-be-a-better-problem-solver": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19- 3b1b-tips-to-be-a-better-problem-solver",
+    "mtime_ns": 1655649743000000000,
+    "size": 388,
+    "sha256": "c74f5b93afc3e5b8bf4b45da71f9ad31483357db7696a103964fd371266709cf"
+  },
+  "/Users/folkol/Documents/notes/max-histogram-area": {
+    "status": "rejected",
+    "mtime_ns": 1655649737000000000,
+    "size": 6443,
+    "sha256": "d2358e1addae92afe0d68ccfa4375d169b6e0a0b5603053d8c1300f412f4681a"
+  },
+  "/Users/folkol/Documents/notes/exact-closed-form-expression-for-fib": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-exact-closed-form-expression-for-fib",
+    "mtime_ns": 1655649732000000000,
+    "size": 331,
+    "sha256": "ea350a3cb4efead5c99e1c82388fc8a577ea1dbcdfa22644661694d84587f06c"
+  },
+  "/Users/folkol/Documents/notes/browser-reflow": {
+    "status": "idea",
+    "mtime_ns": 1655649656000000000,
+    "size": 873,
+    "sha256": "c05ddca4b4e3269db27d1fbaa73088feeb7221d2a675a765f8c69d9ed329c846"
+  },
+  "/Users/folkol/Documents/notes/preparations-for-funnel-meet-and-greet": {
+    "status": "rejected",
+    "mtime_ns": 1655649577000000000,
+    "size": 2770,
+    "sha256": "58efb7b5a508da8317b040515612dc1a295768578b7cdf195466dc60382e4a37"
+  },
+  "/Users/folkol/Documents/notes/how-is-aws-vpc-implemented": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-19-how-is-aws-vpc-implemented",
+    "mtime_ns": 1655594256000000000,
+    "size": 12262,
+    "sha256": "86a11047d08608e37927e0739352c52b7512ac1d310685558e7b2a216aa11a7e"
+  },
+  "/Users/folkol/Documents/notes/how-to-learn-aws-starting-points-per-role": {
+    "status": "idea",
+    "mtime_ns": 1655589623000000000,
+    "size": 3939,
+    "sha256": "a79b13fed8efbff178eb4dff63d0b2f305cb49943c1ceef97ef4d601ac95c71e"
+  },
+  "/Users/folkol/Documents/notes/amazon-global-network-overview": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-amazon-global-network-overview",
+    "mtime_ns": 1655587070000000000,
+    "size": 119,
+    "sha256": "17e48d5acd310d6c260a403a7c65408baf4994c8f8e93f7e71355f1e780c9a2b"
+  },
+  "/Users/folkol/Documents/notes/10x-dev-zipfs-law": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-10x-dev-zipfs-law",
+    "mtime_ns": 1655572829000000000,
+    "size": 1526,
+    "sha256": "681e5ab1467f650ccd4de6643658026ec015578cb48aa41468990a5cd5f0582d"
+  },
+  "/Users/folkol/Documents/notes/most-common-numbers-used-by-humans": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-18-most-common-numbers-used-by-humans",
+    "mtime_ns": 1655552644000000000,
+    "size": 659,
+    "sha256": "d12a4e78e8d90a9b70e85715eb09b7e27c7bb1ac6dfc4293d0baac3c5fde3911"
+  },
+  "/Users/folkol/Documents/notes/aws-iam": {
+    "status": "idea",
+    "mtime_ns": 1655495848000000000,
+    "size": 11853,
+    "sha256": "79a7cab165cdc6b7576f9e34a1e30cfd58f6f40b2b2c646f008a8b6129f7b67d"
+  },
+  "/Users/folkol/Documents/notes/hdd-track-size": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-17-hdd-track-size",
+    "mtime_ns": 1655475973000000000,
+    "size": 3582,
+    "sha256": "7ca990815ca48e588943b0bd5fcc4103d617a88054c0cdf0eecc0b1a6b8786bf"
+  },
+  "/Users/folkol/Documents/notes/# ECMA-262": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-10-# ECMA-262",
+    "mtime_ns": 1654854677000000000,
+    "size": 187,
+    "sha256": "6d5470b6425dc5bd9b67d05b39d4d7a9280c8bd7e8e7998f1c1f4b63b740419a"
+  },
+  "/Users/folkol/Documents/notes/javascript-engines-how-do-they-even": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-04-javascript-engines-how-do-they-even",
+    "mtime_ns": 1654337741000000000,
+    "size": 1695,
+    "sha256": "8e2de79b29f27d779d7b1ef5693da682b5d9274f4b2214372e306e2f9cf72a15"
+  },
+  "/Users/folkol/Documents/notes/Interview with ex-google senior leader who joined": {
+    "status": "rejected",
+    "mtime_ns": 1654332074000000000,
+    "size": 2360,
+    "sha256": "b4e606cc88fd01b2514aa3742d590ffceb38706edb71ed995031b96b9012bf69"
+  },
+  "/Users/folkol/Documents/notes/age quod agis": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-age quod agis",
+    "mtime_ns": 1654259349000000000,
+    "size": 12005,
+    "sha256": "b46290c1ee29626b2c1c350ee407bfd9bf17727a4383646fdd7f6aeb3c579390"
+  },
+  "/Users/folkol/Documents/notes/react-concepts": {
+    "status": "rejected",
+    "mtime_ns": 1654259338000000000,
+    "size": 1711,
+    "sha256": "c80e99bac1a46b2943a7efbcb42ebabed66908dc6844faf94cf11cac0b51ad64"
+  },
+  "/Users/folkol/Documents/notes/tommy emmanuel practice skill and music": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-tommy emmanuel practice skill and music",
+    "mtime_ns": 1654259103000000000,
+    "size": 1536,
+    "sha256": "c6bc5d3095caab7adfbed26d2af848b6052e538f23e4f18883f51d1a92ab249f"
+  },
+  "/Users/folkol/Documents/notes/drive the surprising truth about what motivates us daniel pink": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-drive the surprising truth about what motivates us daniel pink",
+    "mtime_ns": 1654259083000000000,
+    "size": 234,
+    "sha256": "d2034ef05700cc550358e61fadbeb33fc0c88a7eb90645f8fc1c7ec97658d57a"
+  },
+  "/Users/folkol/Documents/notes/you-dont-know-js-yet": {
+    "status": "rejected",
+    "mtime_ns": 1654258902000000000,
+    "size": 164,
+    "sha256": "43b7d1a4e1311adfbd2d6053500c0003fb46a1db07833c3ef47ccf9b335657e2"
+  },
+  "/Users/folkol/Documents/notes/mbox-file-format": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-06-03-mbox-file-format",
+    "mtime_ns": 1654258864000000000,
+    "size": 362,
+    "sha256": "4f044beb779cd96dafebd78d6ecd1984fdefd41b258655e1346fe848042bec54"
+  },
+  "/Users/folkol/Documents/notes/angular-vs-angularjs": {
+    "status": "rejected",
+    "mtime_ns": 1654258754000000000,
+    "size": 1922,
+    "sha256": "65a91857c3a54f7e19dc014142cb53bbabdb2b2f5de439ee8ee6799c468ded7c"
+  },
+  "/Users/folkol/Documents/notes/better-pbpaste": {
+    "status": "idea",
+    "mtime_ns": 1654249433000000000,
+    "size": 126,
+    "sha256": "0fa02f46154ad09b846f63e0fdd23c59b30287583c9aa358bd06599809e1a6f5"
+  },
+  "/Users/folkol/Documents/notes/goodbye-useeffects": {
+    "status": "idea",
+    "mtime_ns": 1654242734000000000,
+    "size": 336,
+    "sha256": "86431136ad499ad6d9eeaa3b6624b333a9b2c3b4fb55413e66c2718bd2132c99"
+  },
+  "/Users/folkol/Documents/notes/chrome-university": {
+    "status": "idea",
+    "mtime_ns": 1653776289000000000,
+    "size": 22627,
+    "sha256": "5db8cf65e12d4511eb612d6e6db764b7069889acbc6c5a7a24ce386406f576cf"
+  },
+  "/Users/folkol/Documents/notes/deep-foundations-of-advanced-javascript": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-28-deep-foundations-of-advanced-javascript",
+    "mtime_ns": 1653748648000000000,
+    "size": 591,
+    "sha256": "50da7617062515152608c63b8c574279c28459ba152062176d84882c36f555bc"
+  },
+  "/Users/folkol/Documents/notes/infosecwriteups-motsec-core-ruleset": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-16-infosecwriteups-motsec-core-ruleset",
+    "mtime_ns": 1652708363000000000,
+    "size": 2066,
+    "sha256": "e68a569d98ce4633d6bb66c7141f45038c9cac3c73198e118d4b850ef7d197c4"
+  },
+  "/Users/folkol/Documents/notes/mdn-getting-started-with-the-web": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-15-mdn-getting-started-with-the-web",
+    "mtime_ns": 1652643380000000000,
+    "size": 3540,
+    "sha256": "c4d046e8c6f50d05dafb78f04d791ce7cc7df1a927df000757f7cac23941deef"
+  },
+  "/Users/folkol/Documents/notes/firebase-security-checklist": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-15-firebase-security-checklist",
+    "mtime_ns": 1652641269000000000,
+    "size": 3369,
+    "sha256": "a3a853be5e8f92ae65f4e282a78b5536cbe16ddcc606d24cb86504210e792cb6"
+  },
+  "/Users/folkol/Documents/notes/the-5-most-important-css-concepts-for-beginners": {
+    "status": "idea",
+    "mtime_ns": 1652629523000000000,
+    "size": 1006,
+    "sha256": "9203838c667810decd74379598b3385b81715af7de85848d899d5743090f80d0"
+  },
+  "/Users/folkol/Documents/notes/elon-musk-principle-for-knowledge-acquisition": {
+    "status": "idea",
+    "mtime_ns": 1652528318000000000,
+    "size": 401,
+    "sha256": "e90b8874cedc5b144a245ebdfa4f8761c4e8430eff789bcbb150237224f971c4"
+  },
+  "/Users/folkol/Documents/notes/sublime-quick-navigation": {
+    "status": "rejected",
+    "mtime_ns": 1652528270000000000,
+    "size": 240,
+    "sha256": "84a7c1641d82b4c1d4927556e242e15352bf5c1db7ddcc1c7f77563f2a6daed3"
+  },
+  "/Users/folkol/Documents/notes/statquest-entropy-for-datascience": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-14-statquest-entropy-for-datascience",
+    "mtime_ns": 1652517999000000000,
+    "size": 3556,
+    "sha256": "458ca0a4689e2d29199443c49726dd651fc0ad6aa39b42a8758a65b72501948a"
+  },
+  "/Users/folkol/Documents/notes/statquest-expected-values-main-ideas": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-13-statquest-expected-values-main-ideas",
+    "mtime_ns": 1652465313000000000,
+    "size": 315,
+    "sha256": "74280aa8a67c40d55558b08a0f3ba6f3e7a1d3d50f5e6f2b4b13a5db52993f0f"
+  },
+  "/Users/folkol/Documents/notes/s3 TTBF folkol.com": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-11-s3 TTBF folkol.com",
+    "mtime_ns": 1652281496000000000,
+    "size": 4897,
+    "sha256": "4487fb6bdb11c4efe6243285efbee66b6b4ae23b89dde4ecff7ef9d4dbc592fa"
+  },
+  "/Users/folkol/Documents/notes/better-tree-tool": {
+    "status": "idea",
+    "mtime_ns": 1652090209000000000,
+    "size": 187,
+    "sha256": "92b9e3b3d54e840be6ffebd512ea725f3d73e38b26da21d8f5be383e63cf48ee"
+  },
+  "/Users/folkol/Documents/notes/funnel-olivia-2022-05-06": {
+    "status": "rejected",
+    "mtime_ns": 1651846858000000000,
+    "size": 0,
+    "sha256": ""
+  },
+  "/Users/folkol/Documents/notes/skotten i sarajevo scotsman in": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-05-05-skotten i sarajevo scotsman in",
+    "mtime_ns": 1651737559000000000,
+    "size": 44,
+    "sha256": "19370fe4103503e263ec3aed8e6344684eb3c03675cff95f6a4fe01aaab3646d"
+  },
+  "/Users/folkol/Documents/notes/all-staff-meeting-logex-2022-05": {
+    "status": "rejected",
+    "mtime_ns": 1651737454000000000,
+    "size": 2484,
+    "sha256": "5824b3bf27541043703f8734e67e4b4bbf684434bf6899ba2cb8ce9063cd756b"
+  },
+  "/Users/folkol/Documents/notes/samtal med jesper one group": {
+    "status": "rejected",
+    "mtime_ns": 1651477991000000000,
+    "size": 364,
+    "sha256": "b372ce4415f44601a4960b2f0402d7b2030eabc74a5e9e3ce950957746503bee"
+  },
+  "/Users/folkol/Documents/notes/metacompliance-gdpr": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-29-metacompliance-gdpr",
+    "mtime_ns": 1651229692000000000,
+    "size": 7506,
+    "sha256": "75c119fec6afae5d8166b527510ff62680600b5099b0a4bb04a105db21a31390"
+  },
+  "/Users/folkol/Documents/notes/terraform-custom-ca": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-28-terraform-custom-ca",
+    "mtime_ns": 1651142435000000000,
+    "size": 137,
+    "sha256": "43d7cd68b3a572b207e3fadf59b360b91504df2dc69b31172b67494d77b8d9bd"
+  },
+  "/Users/folkol/Documents/notes/intermediate language disassembly .net ildasm": {
+    "status": "accepted",
+    "mtime_ns": 1651064821000000000,
+    "size": 7,
+    "sha256": "4e23835c312bb9d3f66d9f2f715e0824a67ecd8d0d8fedbe000d0dd206386c36",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-27-intermediate language disassembly .net ildasm"
+  },
+  "/Users/folkol/Documents/notes/bit-buketten": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-25-bit-buketten",
+    "mtime_ns": 1650882331000000000,
+    "size": 34,
+    "sha256": "c983010a2d84603ebfa3d47b104b9fd5f8106dcc74f0de95b406155152082e14"
+  },
+  "/Users/folkol/Documents/notes/overlay vs underlay networks": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-25-overlay vs underlay networks",
+    "mtime_ns": 1650881749000000000,
+    "size": 51925,
+    "sha256": "a9e7be4151b75d6b55a612f38340a8a3ef3d3b8dca88b35b2584bedf74ab2c9e"
+  },
+  "/Users/folkol/Documents/notes/dribbble-top-10-bad-designs": {
+    "status": "idea",
+    "mtime_ns": 1650629433000000000,
+    "size": 552,
+    "sha256": "4512d52e3bc59d2a474d5f9ccf854f1c6fceb37be2f1eab44a87cfdb79314338"
+  },
+  "/Users/folkol/Documents/notes/whois-scripting": {
+    "status": "idea",
+    "mtime_ns": 1650616159000000000,
+    "size": 3367,
+    "sha256": "9e33c046bf0fc68845c5810ff15a922069aea35408d02fceae6061b3ce8afc0d"
+  },
+  "/Users/folkol/Documents/notes/google doubleclick": {
+    "status": "rejected",
+    "mtime_ns": 1650614648000000000,
+    "size": 198,
+    "sha256": "7cf477f928dc0496612021071e52917f1807cc307d4c8c92c1cffa3c07c5973c"
+  },
+  "/Users/folkol/Documents/notes/ram disk on mac": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-ram disk on mac",
+    "mtime_ns": 1649852565000000000,
+    "size": 504,
+    "sha256": "cf0dbb04534567401dcd55b2213329744ab67b92aca3bf8e049721602996b097"
+  },
+  "/Users/folkol/Documents/notes/bo-on-motivation-velocity-and-daniel-pink": {
+    "status": "idea",
+    "mtime_ns": 1649836222000000000,
+    "size": 494,
+    "sha256": "4ef90086888ab307fa23d9771f60718082efe41f86e96f2da162bc4b9e2b2da4"
+  },
+  "/Users/folkol/Documents/notes/miessler-2022-03-22": {
+    "status": "idea",
+    "mtime_ns": 1649834467000000000,
+    "size": 467,
+    "sha256": "6c9100f8ba8b026f57b25d13858b1333861016f8bc9fb3b7bf89c23cc6e8c848"
+  },
+  "/Users/folkol/Documents/notes/security-discussion-2022-03-22": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-security-discussion-2022-03-22",
+    "mtime_ns": 1649834453000000000,
+    "size": 1310,
+    "sha256": "ec7c81c9854ee9e7e5b2e6a16a52477bd1b3b9dbe032a3893b3cf010f4bb9b41"
+  },
+  "/Users/folkol/Documents/notes/spotlight-indexing-on-macos": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-13-spotlight-indexing-on-macos",
+    "mtime_ns": 1649834425000000000,
+    "size": 21948,
+    "sha256": "75c82d087910242fceb8d72424223ced51fa6487dfb5940700a4bb5aed590ba5"
+  },
+  "/Users/folkol/Documents/notes/backend-as-a-service": {
+    "status": "rejected",
+    "mtime_ns": 1649777826000000000,
+    "size": 1051,
+    "sha256": "a3dac054cc607ec50a88f2e755086a236d97b39f10d0aa0a7d518a3534253b61"
+  },
+  "/Users/folkol/Documents/notes/triangulation vs fingerprinting?": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-04-12-triangulation vs fingerprinting?",
+    "mtime_ns": 1649754553000000000,
+    "size": 32,
+    "sha256": "0f245c3936566ff06cb0508064c76d6bf8892821e984d41e3af3df384abd7715"
+  },
+  "/Users/folkol/Documents/notes/react-js-reconciliation": {
+    "status": "rejected",
+    "mtime_ns": 1648827520000000000,
+    "size": 12570,
+    "sha256": "6287cbd9a88084b6ea269e99019b81c11f7c9cc480c3873665737e436755ddfa"
+  },
+  "/Users/folkol/Documents/notes/virtual networking and overlays": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-03-30-virtual networking and overlays",
+    "mtime_ns": 1648643296000000000,
+    "size": 143313,
+    "sha256": "bbe24555c509c0ea516facbcc25a714fafa127826a68ef06837d87527c9ee487"
+  },
+  "/Users/folkol/Documents/notes/api-mocking-react-development": {
+    "status": "idea",
+    "mtime_ns": 1648225679000000000,
+    "size": 1309,
+    "sha256": "7197c281965e5c8d019e5739cdb6ae78f8b9ce2ef54cf261088f8fad78c2d7b0"
+  },
+  "/Users/folkol/Documents/notes/integration-tests-are-a-scam": {
+    "status": "idea",
+    "mtime_ns": 1648223643000000000,
+    "size": 1502,
+    "sha256": "75f6ca575e9d70a69e7b1283b576e5b66c221317d4b7a06e5b4773f553154bbc"
+  },
+  "/Users/folkol/Documents/notes/navigating-code-in-vscode": {
+    "status": "idea",
+    "mtime_ns": 1648223638000000000,
+    "size": 2424,
+    "sha256": "b7d04f17150a60c6acf9fe052b245a884f5c20136437ddbbbee041939c7e029e"
+  },
+  "/Users/folkol/Documents/notes/integrated-tests-are-a-scam": {
+    "status": "idea",
+    "mtime_ns": 1648128647000000000,
+    "size": 1624,
+    "sha256": "39c607e2352803fa318ba8705652950fc1f14768d10693a38fbfab8f29ece5d8"
+  },
+  "/Users/folkol/Documents/notes/rijndael s-box aes": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-03-01-rijndael s-box aes",
+    "mtime_ns": 1646154784000000000,
+    "size": 9892,
+    "sha256": "d25d19570ed6dea65b67c544dd788c1aafebf53ff22ffd8c531222e8c3572b67"
+  },
+  "/Users/folkol/Documents/notes/avg antivirus call home": {
+    "status": "rejected",
+    "mtime_ns": 1645718335000000000,
+    "size": 510,
+    "sha256": "37e788fc8a6d0326bed1171bf11703637a18b05429246487eef45bc3b0b02c0f"
+  },
+  "/Users/folkol/Documents/notes/attacking pgp black hat": {
+    "status": "rejected",
+    "mtime_ns": 1645708679000000000,
+    "size": 7538,
+    "sha256": "da1f7ff17c670e0c976f8bd110d64cbeacced5f08fda0a016ee396fafaecefe6"
+  },
+  "/Users/folkol/Documents/notes/limitations of causally and totally ordered communication": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-23-limitations of causally and totally ordered communication",
+    "mtime_ns": 1645617253000000000,
+    "size": 3840,
+    "sha256": "ee87f21e76cda3e91899733f0a3438d79ec4b801ee51be41e51e37bd9e224b41"
+  },
+  "/Users/folkol/Documents/notes/ramblings 2022 02": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-11-ramblings 2022 02",
+    "mtime_ns": 1644577435000000000,
+    "size": 4014,
+    "sha256": "2862d7cf3ce4a0a7fac880f8a687d53d8375b18ec60a265a53627eb80c8a5106"
+  },
+  "/Users/folkol/Documents/notes/baby aes rijndael visualized": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-10-baby aes rijndael visualized",
+    "mtime_ns": 1644480902000000000,
+    "size": 687,
+    "sha256": "70014c40792449378c35ec1089a4cc39d19ab87668f0ba41d6df7c6350e3add6"
+  },
+  "/Users/folkol/Documents/notes/chrome phone home": {
+    "status": "rejected",
+    "mtime_ns": 1644480900000000000,
+    "size": 4924,
+    "sha256": "43eb1bdc6a1185181f8c5c929da37519281690004fc4832bc1eb6e17d0f23dd2"
+  },
+  "/Users/folkol/Documents/notes/gcp kms": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-08-gcp kms",
+    "mtime_ns": 1644314150000000000,
+    "size": 2384,
+    "sha256": "212b5b4054cd713e07d08f00bc831d630a2481fff80683c3bb8231824ce62d02"
+  },
+  "/Users/folkol/Documents/notes/20 things I've learned in my 20 yeras as a software engineer": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-07-20 things I've learned in my 20 yeras as a software engineer",
+    "mtime_ns": 1644232281000000000,
+    "size": 2364,
+    "sha256": "364a5691f6461e586c53b77252c06abc75bb315019535c6e3ad332bc3633f22d"
+  },
+  "/Users/folkol/Documents/notes/assigned access kiosk breakout hard mode": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-06-assigned access kiosk breakout hard mode",
+    "mtime_ns": 1644177279000000000,
+    "size": 587,
+    "sha256": "0d4b830d812750fb7cc201287b7d28b5d4ce03637b219d5429a7af6e91ba2835"
+  },
+  "/Users/folkol/Documents/notes/postfix-mail-setup": {
+    "status": "rejected",
+    "mtime_ns": 1643907124000000000,
+    "size": 14652,
+    "sha256": "eb7dacf85b10e27217b93bef267ab0e0b42cf55d0871a9736147f4cb25ce0dff"
+  },
+  "/Users/folkol/Documents/notes/OWASP Web Security Testing": {
+    "status": "rejected",
+    "mtime_ns": 1643800315000000000,
+    "size": 2316,
+    "sha256": "c7bd0110d795f46e0fdd37b0d606b3fb5e55ce7859a60f11e85471b4f52b9856"
+  },
+  "/Users/folkol/Documents/notes/stock image to match your content microsoft spy": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-02-stock image to match your content microsoft spy",
+    "mtime_ns": 1643800165000000000,
+    "size": 35,
+    "sha256": "f890df75e63bbfbf3c2bab9bfdbab3c12e85cb414f853736d999728af0f00158"
+  },
+  "/Users/folkol/Documents/notes/tunnelblick keeps passphrase around": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-02-01-tunnelblick keeps passphrase around",
+    "mtime_ns": 1643723565000000000,
+    "size": 64,
+    "sha256": "843d81f2caed2bffbd4253633b66c07423b2a34dc7f76cb2a5f3a80d3b3524d1"
+  },
+  "/Users/folkol/Documents/notes/github wikis not indexed": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-28-github wikis not indexed",
+    "mtime_ns": 1643400513000000000,
+    "size": 70,
+    "sha256": "5f7d894be1f96fd1a58a6a96b605d0a517e6eba8581524717bfb98d48571f7bc"
+  },
+  "/Users/folkol/Documents/notes/auth0": {
+    "status": "idea",
+    "mtime_ns": 1643194390000000000,
+    "size": 3572,
+    "sha256": "125295a4f2d7b5e5acb688ace4f4d3aefb426ba9fdc6509d2eb14c253d18074c"
+  },
+  "/Users/folkol/Documents/notes/The shortest pencil is longer than the longest mem": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-The shortest pencil is longer than the longest mem",
+    "mtime_ns": 1642844220000000000,
+    "size": 55,
+    "sha256": "6b787d3bd6e4bc569089db273b2c924fb3ebed3b3ff3fcac5c20b702060054f5"
+  },
+  "/Users/folkol/Documents/notes/The Absolute Beginner's Guide to Emacs": {
+    "status": "idea",
+    "mtime_ns": 1642844140000000000,
+    "size": 2667,
+    "sha256": "0a39696f2a38bc98f698bb7c2ed8bf0fda2c99a970268bf51883190417ed32e4"
+  },
+  "/Users/folkol/Documents/notes/google serps and knowledge graph": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-google serps and knowledge graph",
+    "mtime_ns": 1642844120000000000,
+    "size": 153,
+    "sha256": "e05594197516379fe9505d3a198f060a3379a1eb3e74f7a8a78eaab75e9581ed"
+  },
+  "/Users/folkol/Documents/notes/uniform-cost search vs djikstras (don't add all no": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-uniform-cost search vs djikstras (don't add all no",
+    "mtime_ns": 1642844091000000000,
+    "size": 100,
+    "sha256": "53ca272d57b379a2c56816164774448da71de6774ffa3bccf63a9c3a8f0b2e3c"
+  },
+  "/Users/folkol/Documents/notes/Fermats theory: Light travels the path that takes": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-22-Fermats theory: Light travels the path that takes",
+    "mtime_ns": 1642844077000000000,
+    "size": 249,
+    "sha256": "9df5f2526f69ab85aac2940b0677a6cae9d8b5ddc5f7e8ed7e2af99d0242e4be"
+  },
+  "/Users/folkol/Documents/notes/smarter every day coast guard": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-19-smarter every day coast guard",
+    "mtime_ns": 1642580791000000000,
+    "size": 529,
+    "sha256": "e62114f4348d891ba25a06e34cd238de5f3bef046b4d01ff190fa63cc81c2542"
+  },
+  "/Users/folkol/Documents/notes/understanding-digital-signatures": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-19-understanding-digital-signatures",
+    "mtime_ns": 1642580746000000000,
+    "size": 228,
+    "sha256": "092b21b40e06a056f77eeea91a8d050692e31ecb4a0a945c68f95b33e070be35"
+  },
+  "/Users/folkol/Documents/notes/scratch/2022-01": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-17-2022-01",
+    "mtime_ns": 1642418897000000000,
+    "size": 6728,
+    "sha256": "32c26e9c728062d618e37e4b135fce37e8041520f6007728f5917badbe0851a3"
+  },
+  "/Users/folkol/Documents/notes/5 remarkably powerful hacks to become more articulate": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-17-5 remarkably powerful hacks to become more articulate",
+    "mtime_ns": 1642418198000000000,
+    "size": 4931,
+    "sha256": "d6776e7221096174b2466de16249da42a84fa23dd5c845aff91e44b117f24589"
+  },
+  "/Users/folkol/Documents/notes/8 python coding tips from the google python style guide": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-16-8 python coding tips from the google python style guide",
+    "mtime_ns": 1642346688000000000,
+    "size": 927,
+    "sha256": "c91cc9a61f4d32f26d0407e91ed6136378bdda0db9af9c810ed00338ffb0ac62"
+  },
+  "/Users/folkol/Documents/notes/coordinate compression and studying techniques": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-14-coordinate compression and studying techniques",
+    "mtime_ns": 1642197137000000000,
+    "size": 6514,
+    "sha256": "8828742fb1bf58b585c0d0f90931e288bf046123dccdbbe91bea8c6a3dc07b07"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/7": {
+    "status": "idea",
+    "mtime_ns": 1642197109000000000,
+    "size": 2634,
+    "sha256": "cc003593bdbe61a0824fd58b1b793a739427530fd6b0f25a1b654d6cc5cebb7f"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/README": {
+    "status": "idea",
+    "mtime_ns": 1642197106000000000,
+    "size": 2545,
+    "sha256": "ed1b1c3ed041dcbe8105c50337395f1ec46bb0f832bc006b2d1a76d1df179f8d"
+  },
+  "/Users/folkol/Documents/notes/JavaScript type coercion explained": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-14-JavaScript type coercion explained",
+    "mtime_ns": 1642197094000000000,
+    "size": 4784,
+    "sha256": "c75fb21ae5ea4748849d4246f14b06ca8a82954c50e661760f6da7de4b526297"
+  },
+  "/Users/folkol/Documents/notes/scratch/gcloud": {
+    "status": "rejected",
+    "mtime_ns": 1642066077000000000,
+    "size": 8443,
+    "sha256": "68d4ddb2b799c22f7377b5b0c981325a03bda280a76e3aa9ec04d92bedca3dd2"
+  },
+  "/Users/folkol/Documents/notes/purplesec cyber security statistics": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-purplesec cyber security statistics",
+    "mtime_ns": 1642066044000000000,
+    "size": 63,
+    "sha256": "938a935fc0756bf1135a8f33b620408ddf66260ae26dd9736e1474a70872d31c"
+  },
+  "/Users/folkol/Documents/notes/ui design erik kennedy/README": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-README",
+    "mtime_ns": 1642065998000000000,
+    "size": 622,
+    "sha256": "fb640172e20fdf126c8a69b6177190a64abd335871c24ee503e5ea47d4fd8027"
+  },
+  "/Users/folkol/Documents/notes/gender-neutrality-in-ancient-hunter-groups": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-13-gender-neutrality-in-ancient-hunter-groups",
+    "mtime_ns": 1642064745000000000,
+    "size": 163,
+    "sha256": "512bbc25f6f795dfccd72cdc27c44cf8e9f34de6f710b4293717fe8510ea2461"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/6": {
+    "status": "rejected",
+    "mtime_ns": 1642015680000000000,
+    "size": 2737,
+    "sha256": "f9f483699404fe1acc0061c40050ded2344f1982dfde1199bde96b71db3ee6d9"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/5": {
+    "status": "rejected",
+    "mtime_ns": 1642015578000000000,
+    "size": 2550,
+    "sha256": "a6f7fbbb9b4d589743f73b93bac94f7c72f9c82e25eeb26f611bfec24329228a"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/4": {
+    "status": "rejected",
+    "mtime_ns": 1642015478000000000,
+    "size": 126,
+    "sha256": "c8b92b266078bb001258ef5379607b11ac169efd280b76998cb7fc46a6bbb71d"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/3": {
+    "status": "rejected",
+    "mtime_ns": 1642015339000000000,
+    "size": 44076,
+    "sha256": "b10cf436d8191318a927be4a21afc8b0fe8aff19d5288fc8ffc10e789786d10d"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/2": {
+    "status": "rejected",
+    "mtime_ns": 1642015235000000000,
+    "size": 10622,
+    "sha256": "a6d26141e79483cc29ab5bacd0b6a202f74310fa3983dc492abcf4a2d57003f1"
+  },
+  "/Users/folkol/Documents/notes/bluetooth experiment/1": {
+    "status": "rejected",
+    "mtime_ns": 1642015043000000000,
+    "size": 108,
+    "sha256": "57e3efc7f337866eff96a6a9b39d30b3d17d32a9b052c61fec99d1e0d3204b95"
+  },
+  "/Users/folkol/Documents/notes/why-crypto-prime-factors": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-11-why-crypto-prime-factors",
+    "mtime_ns": 1641890104000000000,
+    "size": 595,
+    "sha256": "85d7fb60bce9761c274a7ec0b92576e6f0d12906775f6d217d5a882d2a3f43b0"
+  },
+  "/Users/folkol/Documents/notes/rust cli": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-11-rust cli",
+    "mtime_ns": 1641855849000000000,
+    "size": 1642,
+    "sha256": "2eb3c02eaf3c2eed57298c8a36a054a5220b5277a93b13adbe43b4524626bd68"
+  },
+  "/Users/folkol/Documents/notes/rust rust rust": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-rust rust rust",
+    "mtime_ns": 1641846567000000000,
+    "size": 650,
+    "sha256": "708fd61d3d3da4359ad112cce7d1327e47fb31321bc5f883faae4b7110f0ee8e"
+  },
+  "/Users/folkol/Documents/notes/Easy Rust Video": {
+    "status": "rejected",
+    "mtime_ns": 1641845201000000000,
+    "size": 3806,
+    "sha256": "d7fddef2e3c49588758d4ca47809a018dc1cc1c8add9ede9299ccd05974f7e17"
+  },
+  "/Users/folkol/Documents/notes/mastering-key-bindings-in-emacs": {
+    "status": "idea",
+    "mtime_ns": 1641806124000000000,
+    "size": 1346,
+    "sha256": "6d775549bb273c3b17a13a0f4a557e4971e801ba9665e3e7c72bb1b36255624a"
+  },
+  "/Users/folkol/Documents/notes/how does webpack work": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-how does webpack work",
+    "mtime_ns": 1641803334000000000,
+    "size": 426,
+    "sha256": "6d1b6870f0d948ac9d6b26dda6e5dca2d4abde2fb035925b2d4c09407c21adc0"
+  },
+  "/Users/folkol/Documents/notes/webpack and stty modes": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-webpack and stty modes",
+    "mtime_ns": 1641803327000000000,
+    "size": 464,
+    "sha256": "ad9bb9374ab12a47164d45fb588bdfe2453d216c95e959e78057abdfac1e236d"
+  },
+  "/Users/folkol/Documents/notes/fool of all trades": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-fool of all trades",
+    "mtime_ns": 1641803112000000000,
+    "size": 39,
+    "sha256": "2abeda9a1c3f518e357f89718e43eac3f71c58bdd8fe709c416e4186688bb442"
+  },
+  "/Users/folkol/Documents/notes/tankar": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-10-tankar",
+    "mtime_ns": 1641803089000000000,
+    "size": 147,
+    "sha256": "decd1fed1bf86375f77b8265a9eb2e621a1fdd58c7babe7f7d587201ee4ed5cc"
+  },
+  "/Users/folkol/Documents/notes/rust crash course": {
+    "status": "rejected",
+    "mtime_ns": 1641763774000000000,
+    "size": 45,
+    "sha256": "bfcce68a4dd64e47cc00874a10f119b571ef747c5a6a8ab737d1354abb5a6077"
+  },
+  "/Users/folkol/Documents/notes/dev mem": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2022-01-09-dev mem",
+    "mtime_ns": 1641762555000000000,
+    "size": 666,
+    "sha256": "5aea33e2b5410d167ac4b0934f2ad5572b6dc8482e424235851b4c164dbe931a"
+  },
+  "/Users/folkol/Documents/notes/review followups of security check": {
+    "status": "rejected",
+    "mtime_ns": 1637185723000000000,
+    "size": 7116,
+    "sha256": "788ad2452e77d07a135d255acac2e27a9ceed35ebbb42227335d518fbe53b88d"
+  },
+  "/Users/folkol/Documents/notes/Null Byte, 6 step framework": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2021-11-16-Null Byte, 6 step framework",
+    "mtime_ns": 1637064942000000000,
+    "size": 482,
+    "sha256": "aa3252513c3f2619333db3f61d53809b116410224bb0abf11d4d02be8b63faf2"
+  },
+  "/Users/folkol/Documents/notes/main": {
+    "status": "idea",
+    "mtime_ns": 1636976497000000000,
+    "size": 1449,
+    "sha256": "6d84059cc8c1a538e41f7f30d631958b765af38c4ea59ca33041b76e8a0081c3"
+  },
+  "/Users/folkol/Documents/notes/ideas": {
+    "status": "idea",
+    "mtime_ns": 1636976422000000000,
+    "size": 845,
+    "sha256": "25b78cbb64e7be2c867ac952a1dde4352a12b46d183ec32d6c921b8864fed06c"
+  },
+  "/Users/folkol/Documents/notes/cgp": {
+    "status": "idea",
+    "mtime_ns": 1629198391000000000,
+    "size": 489,
+    "sha256": "3334d11f725b046472b543597014528e372ccada24ffdbf22c5debd81d1fb81b"
+  },
+  "/Users/folkol/Documents/notes/top 10 algorithms for the coding interview for software engineer": {
+    "status": "idea",
+    "mtime_ns": 1607183730000000000,
+    "size": 1968,
+    "sha256": "e751d59b96fe5f6dd92fcbd5c3476fcecdbe946d222e1cff7db622008df7511e"
+  },
+  "/Users/folkol/Documents/notes/python packaging": {
+    "status": "idea",
+    "mtime_ns": 1607183715000000000,
+    "size": 7028,
+    "sha256": "7191eae1f02f1584b0b97e2270e58042a5622fa1070d44195018cc32ed5a8307"
+  },
+  "/Users/folkol/Documents/notes/2020-10-11": {
+    "status": "idea",
+    "mtime_ns": 1603222480000000000,
+    "size": 5582,
+    "sha256": "c8bc4ede8f8d47fed63a5f1c1e31cf3edcdf44f7b95de21b3caad3b59917c976"
+  },
+  "/Users/folkol/Documents/notes/pipenv crash course": {
+    "status": "idea",
+    "mtime_ns": 1596825404000000000,
+    "size": 1268,
+    "sha256": "5870f5e103665f73102f7fdcf9442a07a031591026b2da1d3496ab0f2f4e33e4"
+  },
+  "/Users/folkol/Documents/notes/14342.md": {
+    "status": "accepted",
+    "dest_path": "/Users/folkol/code/blog.folkol.com/candidates/2020-08-07-14342.md",
+    "mtime_ns": 1596824321000000000,
+    "size": 1762,
+    "sha256": "bd546ac9767b9dfa36c278710b236c7d734d32cd1ee3fb4d73da2ab4cfe8b2ca"
+  }
+}

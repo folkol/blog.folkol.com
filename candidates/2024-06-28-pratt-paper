@@ -1,0 +1,171 @@
+# Pratt Parser
+
+https://tdop.github.io
+
+## Survey of the Problem Domain
+
+The approach described below is very simple to understand, trivial to implement, easy to use, extremely efficient in practice if not in theory, yet flexible enough to meet most reasonable syntactic needs of users in both categories (i) and (ii) above. (What is "reasonable" is addressed in more detail below). Moreover, it deals nicely with error detection.
+
+One may wonder why such an "obviously" utopian approach has not been generally adopted already. I suspect the root cause of this kind of oversight is our universal preoccupation with BNF grammars and their various offspring: type 1 [Chomsky 1959], indexed [Aho 1968], macro [Fischer 1968], LR(k) [Knuth 1965], and LL(k) [Lewis 1968] grammars, to name a few of the more prominent ones, together with their related automata and a large body of theorems.
+
+## Three Syntactic Issues
+
+Syntax does not fit semantics in problem and solution domain.
+
+To cope with unanticipated syntactic needs, we adopt the simple expedient of allowing the language implementer to write arbitrary programs. By itself, this would represent a long step backwards; instead, we offer in place of the rigid structure of a BNF-oriented meta-language a modicum of supporting software, and a set of guidelines on how to write modular, efficient, compact and comprehensible translators and interpreters while preserving the impression that one is really writing a grammar rather than a program.
+
+The programmer needs to make up names for each subexpression.
+
+The guidelines are based on some elementary assumptions about the primary syntactic needs of the average programmer.
+
+Semantic objects may require varying degrees of annotation at each invocation, for example loops that does not start at 1 or does not step by 1.
+
+First, the programmer already understands the semantics of both the problem and the solution domains, so that it would seem appropriate to tailor the syntax to fit the semantics. Current practice entails the reverse.
+
+## Lexical Semantics vs Syntactic Semantics
+
+Traditional mechanisms for assigning meaning to programs is to associate semantic rules with phrase-structure. Programmers mental models is about semantic objects, assigningt them meaning or tokens. This suggests that it is more natural to associate semantics with tokens rather than phrase structure.
+
+When a given class of phrases is characterized unambigiously by the presence of a particular token, this makes it easier to grasp.
+
+There are two advantages of separating semantics from syntax in this way. First, phrase-structure rules interact more strongly than individual tokens because rules can share non-terminals whereas tokens have nothing to share. So our assignment of semantics to tokens has a much better chance of being modular than an assignment to rules.
+
+Thus one can tailor the language to one's needs by selecting for a librarty, or writing, the semantics of just those objects that one needs for the task at hand without havingto worry about preordained interactions between two semantic objects at the syntactic level.
+
+Second, the language designed is free to develop the syntax of his language without concern for how it will affect the semantics; instead, the semantics will affect decisions about the syntax.
+
+### Conventions for Linearizing Trees
+
+We argued at the beginning of section 2 that in order to economize on names the programmer resorted to the use of trees. Of necessity (for one-dimensional channels) the trees are mapped into strings for transmission and decoded at the other end. We are concerned with both the human and computer engineering aspects of the coding. 
+
+Every node is labelled with a token whose arguments if any are its subtrees.
+
+Without further debate we shall adopt the following conventions for encoding trees as strings.
+1. The string contains every occurrence of the tokens in the tree, (which we call the semantic tokens, which include procedural items such as if, ;) together with some additional syntactic tokens where necessary.
+2. Subtrees map to contiguous substrings containing no semantic token outside that subtree.
+3. The order of arguments in the tree is preserved. (Naturally these are oriented trees in general.)
+4. A given semantic token in the language, together with any related syntactic tokens, always appear in the same place within the arguments; e.g. if we settle for +a,b, we may not use a+b as well. (This convention is not as strongly motivated as (i)-(iii); without it, however, we must be overly restrictive in other areas more important than this one.)
+
+N.b. basically, we can 'split' on 'known / semantic' tokens.
+
+If we insist that every semantic token take a fixed number of arguments, and that it always precede all of its arguments (prefix notation) we may unambiguously recover the tree from the string (and similarly for postfix) as is well known. 
+
+For a variable number of arguments, the LISP solution of having syntactic tokens (parentheses) at the beginning and end of a subtree's string will suffice.
+
+
+Many people find neither solution particularly easy to read. They prefer...
+
+ab² + cd² = 4 sin (a+b)
+to...
+
+= + * a ↑ b 2 * c ↑ d 2 * 4 sin + a b
+or to...
+
+(= (+ (* a (↑ b 2)) (* c (↑ d 2))) (* 4 (sin (+ a b))))
+although they will settle for...
+
+a*b↑2 + c*d↑2 = 4*sin(a+b)
+in lieu of the first if necessary. (But I have recently encountered some LISP users claiming the reverse, so I may be biased.)
+
+An unambiguous compromise is to require parentheses but move the tokens, as in...
+
+(((a * (b ↑ 2)) + (c * (d ↑ 2))) = (4 * (sin (a + b))))
+This is actually quite readable, if not very writable, but it is difficult to tell if the parentheses balance, and it nearly doubles the number of symbols.
+
+Thus we seem forced inescapably into having to solve the problem that operator precedence was designed for, namely the association problem. Given a substring AEB where A takes a right argument, B a left, and E is an expression, does E associate with A or B?
+
+Crux, the association problem: AEB, does E associate with A or B?
+
+A simple convention would be to say E always associates to the left. However, in print a + b, it is clear that a is meant to associate with +, not print. The reason is that (print a) + b does not make any conventional sense, print being a procedure not normally returning an arithmetic value. The choice of print (a + b) was made by taking into account the data types of print's right argument, +'s left argument, and the types returned by each. Thus the association is a function of these four types (call them aA, rA, aB, rB for the argument and result respectively of A and B) that also takes into account the legal coercions (implicit type conversions) Of course, sometimes both associations make sense,and sometimes neither. Also rA or rB may depend on the type of E, further complicating matters.
+
+One way to resolve the issue is simply to announce the outcome in advance for each pair A and B, basing the choices on some reasonable heuristics. Floyd [1963] suggested this approach, called operator precedence. The outcome was stored in a table. Floyd also suggested a way of encoding this table that would work in a small number of cases, namely that a number should be associated with each argument position by means of precedence functions over tokens; these numbers are sometimes called "binding powers". Then E is associated with the argument position having the higher number. Ties need never occur if the numbers are assigned carefully; alternatively, ties may be broken by associating to the left, say. Floyd showed that Algol 60 could be so treated.
+
+One objection to this approach is that there seems to be little guarantee that one will always be able to find a set of numbers consistent with one's needs. Another obeection is that the programmer has to learn as many numbers as there are argument positions, which for a respectable language may be the order of a hundred. We present an approach to language design which simultaneously solves both these problems, without unduly restricting normal usage, yet allows us to retain the numeric approach to operator precedence.
+
+Idea for reducing cardinality of operator precedence: Assign data types to classes, and then to totally order these classes.
+
+We now insist that the class of the type at any argument that might participate in an association problem not be less than the class of the data type of the result of the function taking that argument. This rule applies to coercions as well.
+
+Finally, we adopt the convention that when all four data types in an association are in the same class, the association is to the left.
+
+These restrictions on the language, while slightly irksome, are certainly not as demanding as the LISP restriction that every expression have parentheses around it. Thus the following theorem should be a little surprising, since it implies that the programmer never need learn any associations!
+
+Theorem 1: Given the above restrictions, every association problem has at most one solution consistent with the data types of the associated operators.
+
+This theorem implies that the programmer need not even think about association except in the homogeneous case (all four types in the same class), and then he just remembers the left-associativity rule.
+
+Gist: More simply, the rule is "always associate to the left unless it doesn't make sense". (Basically like APL, but other side.)
+
+What he does have to remember is how to write expressions containing a given token (e.g. he must know that one writes |x|, not length x) and which coercions are allowed. These sorts of facts are quite modular, being contained in the description of the token itself independently of the properties of any other token, and should certainly be easier to remember than numbers associated with each argument.
+
+Given all of the above, the obvious way to parse strings (i.e. recover their trees) is, for each association problem, to associate to the left unless this yields semantic nonsense.
+
+N.b. parse strings = recover their trees
+
+Unfortunately, nonsense testing requires looking up the types rA and aB and verifying the existence of a coercion from rA to aB. For translation this is not serious, but for interpretation it might slow things down significantly. Fortunately, there is an efficient solution that uses operator precedence functions.
+
+Theorem: Given the above restrictions on a language, there exists an assignment of integers to the argument positions of each token in the language such that the correct association, if any, is always in the direction of the argument position with the larger number, with ties being broken to the left.
+
+Gist: Association of arguments to a token is to the sice with the highest number. Tries choose left.
+
+The non-semantically motivated conventions about and, or, + and ↑ may be implemented by further subdividing the appropriate classes (here the Booleans and Algebraics) into pseudo-classes, e.g. terms < factors < primaries, as in the BNF for Algol 60. Then + is defined over terms, * over factors and ↑ over primaries, with coercions allowed from primaries to factors to terms. To be consistent with Algol, the primaries should be a right associative class.
+
+# Annotation
+
+When a token has more than two arguments, we lose the property of infix notation that the arguments are delimited. 
+
+Accordingly we require that all arguments be delimited by at least one token; such a grammar Floyd [1963] calls an operator grammar.
+
+We shall call the semantic tokens associated with a delimiter its parents.
+
+This is one reason for preferring a procedural embedding of semantics; we can write arbitrary code to find all the arguments when the language designer feels the need to complicate things.
+
+# Implementation
+
+In the preceeding section we argued for lexical semantics, operator precedence and a variety of ways of supplying arguments. In this section we reduce this to practice.
+
+To combine lexical semantics with a procedural approach, we assign to each semantic token a program called its semantic code, which contains almost all the information about the token. 
+
+The left binding power is the only property of the token not in its semantic code.
+
+To return to q0 we require rbp < lbp. If this test fails, then by default the parser returns the last value of left to whoever called it, which corresponds to A getting E in AEB if A had called the parser that read E. If the test succeeds, the parser enters state q0, in which case B gets E instead.
+
+Because of the possibility of there being several recursive calls of the parser running simultaneously, a stack of return addresses and right binding powers must be used. This stack plays essentially the same role as the stacks described explicitly in other parsing schemes.
+
+> These capabilities give the approach the power of a Turing machine, to be used and abused by the language implementer as he sees fit.
+
+Parsing = semantic inverse of templating
+
+The ease with which mandatory and optional delimiters are dealt with constitutes one of the advantages of the top-down approach over the conventional methods for implementing operator precedence.
+
+The major difference between the approach described here and the usual operator precedence scheme is that we have modified the Floyd operator precedence parser to work top-down, implementing the stack by means of recursion, a technique known as recursive descent. 
+
+This would appear to be of no value if it is necessary to implement a stack anyway in order to deal with the recursion. However, the crucial property of recursive descent is that the stack entries are no longer just operators or operands, but the environments of the programs that called the parser recursively.
+
+## Algorithm Properties
+
+Definition: An expression is a string `S` such that there exists a token `t` and an environment `E` in which, if the parser is started with the input at the beginning of `St` (`S`?), it will stop with the input at `t`, and return the `interpretation of S relative to E`.
+
+1. When the semantic code of a token `t` is run, it begins with the input positioned just to the right of that token, and it returns the interpretation of an expression ending just before the final position of the input, and starting either at `t` if `t` is "nud", or if `t` is "led" then at the beginning of the expression of which `left` was the interpretation when the code of `t` started.
+2. When the parser returns the interpretation of an expression `S` relative to environment `E`, `S` is immediately followed by a token with `lbp <= rbp` in `E`.
+3. The "led" of a token is called only if it immediately follows an expression whose interpretation the parser has assigned to the "left".
+4. The "lbp" of a token whose "led" has just been called is greater than the "rbp" of the current environment.
+5. Every expression is either returned by the parser or given to the folowing "led" via "left".
+6. A token used only as a "nud" does not need a left binding power.
+
+# Examples
+
+A string x is written "x" this differs from 'x' only in that x is now assumed to be a token, so that the value of "1+1" is the token 1+1, which does not evaluate to 2 in general. To evaluate a, then b, returning the value of b, write a;b. If the value of a is wanted instead, write a&b. (These are for side-effects.) 
+
+The overhead of this approach is almost negligible. The parser spends possibly four machine cycles or so per token (not counting lexical analysis), and the semantics can be seen to do almost nothing; only when the strings get longer than a computer word need we expect any significant time to be spent by the logical operations. For this particular interpreter, this efficiency is irrelevant; however, for a general purpose interpreter, if we process the program so the lexical items become pointers into a symbol table, then the efficiency of interpreting the resulting string would be no worse than interpreting a tree using a tree-traversing algorithm as in LISP interpreters.
+
+For the next example we describe a translator from the language used in the above to trees whose format is that of the internal representation of LISP s-expressions, an ideal intermediate language for most compilers.
+
+We present a subset of the definitions of tokens of the language L; all of them are defined in L, although in practice one would begin with a host language H (say the target language, here LISP) and write as many definitions in H as are sufficient to define the reast in L.
+
+The is facility is more declarative than imperative in flavor, even though it is a program. This is an instance of the boundary between declaratives and imperatives becoming fuzzy. There do not appear to be any reliable ways of distinguishing the two in general.
+
+# Conclusions
+
+...
+

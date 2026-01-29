@@ -1,0 +1,264 @@
+# aws vpc implementation
+
+https://www.youtube.com/watch?v=3qln2u1Vr2E
+
+Short summary:
+
+Basically, proprietary envelope.
+Routing based on 'lookup in mapping service'.
+
+src -> arp -> trapped -> mapping service -> response to only this -> wrapped in VPC header and wrapped in package to host.
+host gets package -> asks mapping service -> if everything is bon -> deliver to guest
+
+'just IP under the hood'
+
+
+
+General notes:
+
+- 2015, reprise for 2 years ago
+- With VPC, we want to support 'hybrid cloud' since customers have data centers
+- How connect?
+- Unrealistic and unwise to assume big bang migrations
+	- dogfooding / eating your own dog food / drinking your own champagne
+- In the beginning, EC2. They got a random 32 bit number. Other tenants could have a neighbor number.
+- In customer datacenter, the router table have to use /32 addresses since all instances have random IPs.
+- 'double nat', don't say it near a network engineer
+
+VPC requirements
+- customer selected IPs
+- route aggregation to avoid updates for every instance launch or termination
+- conformance with existing network designs
+
+use case:
+- 'create VPC' - API call into our control plane, specify CIDR block
+- create 'VPN gateway', our end of a private connection
+- you create a 'customer gateway', it won't create something physically - but you will tell us about the device of your side, your machine/router. You tell us IP and so on. No we know about the far end of the VPN connection.
+- Create the VPN connection. Our side is done programmatically, we give you the router configuration that you need to install on your side. And now network connectivity can come up.
+- And now, you can create subnets within this VPN, as many as you like. There will be no routing changes for each instance that come up or goes down.
+
+
+"this is just virtual networking"
+"subnets is just a VLAN", etc.
+"VPNC is just VRF (virtual routing and forwarding)"
+
+This does not scale.
+
+VLAN header is 12bit -> only 4096 subnets
+
+But we have millions of customers...
+
+VRF is contraints, large routers have 1-2k VRFs.
+
+Fixed ration if VLANs:VRFs. You get 4k VLANs on a port, you get 1000 VRFs in a box. What if your customer wants more than 4 subnets per VPC?
+
+Large routers have amazingly fast data plane, but gimped control plane.
+
+"We commit config to the router every time a customer makes an API call"
+
+Switch vs dumb switch.
+
+We were operating outside of the common envelope, we had become beta testers again.
+
+"Silos of capacity vs horizontal scaling"
+
+Implementation requirements
+- scale to millions of environments the size of amazon.com
+- any server, anywhere in a region, can host an instance attached to any subnet in any VPC
+
+Concepts:
+- 'server' = physical host in an Amazon datacenter
+- 'instance' = 'amazon EC2 instance/guest owned by a customer', they live on a server
+- 'VPC', virtual private cloud owned by a customer, hosts on this VPC can live on distinct hosts
+- 'VPC ID', identifier for a VPC such as vpc-1a2b3c4d
+- 'mapping service': Not exposed directly exposed to customer, the linchpin around which everything revolves
+	- distributed lookup service, maps VPC + InstanceIP to server.
+
+L2 Ethernet
+
+	- Ethernet switch
+	- guest 10.0.0.2 wants to talk to 10.0.0.3, he'll ARP
+		- L2 src MAC(10.0.0.2)
+		- L2 dst: ff:ff:ff:ff:ff:ff
+		- whohas 10.0.0.3?
+	- the ethernet switch don't know this yet, so it's gonna flood all ports with broadcast
+		- the switch will learn, and forward to the inquirer
+
+VPC:
+	- we will trap the ARP request and query the mapping service
+	- 'who has BLUE+10.0.0.2'?
+	- the mapping service will respond with which host and which MAC
+	- when the package is send, we will trap it and wrap it with a VPC header (tagged to BLUE VPC), wrap it in a IP package and send it on the substrate network
+	- the receiving host will ping the mapping service and ask it to validate the package. It will validate + fill in the src MAC.
+	- unwrap it and deliver to the guest
+
+	for this to work:
+	- they need to have direct IP connectivity to eachother, and they need to be able to talk to the mapping service
+	- we didn't need to change anything on the guests or the host OS, this is plain old vanilla ethernet
+	- the virtual L2 topology is completely decoupled from the physical topology
+
+	- The mapping check in recieve.
+	- reverse mapping
+
+	L3: IP Routing
+	- same as L2, we trap the packet:
+		- wrap in VPC header
+		- wrap in physical header
+		- deliver it
+		- reverse mapping check performed on destination
+		- unwrap + deliver to guest
+
+Caching:
+- a mapping service replicat on each server, a cache. They subscribe to the mapping service.
+
+Getting home (or anywhere, really).
+
+How do we talk outside of the VPC? (For example back to home office.)
+
+src ip and dst ip.
+
+We can't do the same, because we would deliver a 'proprietary amazon wrapper packet' and your server won't know what to do with it.
+
+We have a new kind of thing in the VPC world, we call them 'Edges'.
+
+The mapping service replicas has got routing entries for these outside things. For example VPN routes for your VPN tunnel.
+These will be sent to the edge, the edge will do the same reverse lookup to validate it — and then it will unwrap the AWS headers and re-wrap with IPSEC stuff and send down your VPN tunnel over the open internet. (It's all IPSEC, or at least was 2015...)
+
+	- If Direct Connect, we do almost the same thing but instead of IP SEC headers we wrap as '802.1Q VLAN tags' and hand off to our direct connect router.
+	- VLAN 4k is not a problem for us, we reuse VLAN tags per port, and 4k direct connects per port is not a limitation for us.
+
+Internet:
+- Same story, but how do we wrap/encapsulate it? The reality is that we don't want to encapsulate it, we just want plain IP packets — that's what the internet runs on.
+- we do 1-to-1 NAT, this is where elastic IP addresses enter the story
+- when you map a eIP to your box, this edge is the box that is performing that translation
+- we've got a box now that performs package mangling for us, package translations. Three kinds:
+	- VPN
+	- Direct Connect
+	- Internet
+
+Diversion:
+- blackfoot
+
+VPC as a platform
+- you have always been able to launch EC2 instances in your VPC
+- but now, many services can be launched inside your VPC
+	- RDS dbs
+	- redshift clusters
+	- clients in your home office can access these things from your within your network
+	- these things can access your devices to load data and interact with other applications
+- with EC2, there was no network. We had IPs, but no network.
+- not with VPC, we added network features
+	- VPN and Direct Connect
+	- security groups and egress filtering (we had security groups before, but now we added egress filtering)
+	- network ACLs
+	- routing tables
+	- Elastic Network Interfaces (ENIs). Plug multiple NICs into your EC2 instances, you can make a virtual applicance
+	- multiple IPs per NIC.
+- S3 endpoints, if you wanted to talk to S3 before this, you had to talk over the internet
+- you had to build a internet gateway in your VPC, and you send the traffic out
+	- implemented with new routes in the mapping service
+	- you can route a 'named prefix' (e.g. s3.us-east-1)
+	- 'VPC Endpoint 1a2b3c4d' new header
+
+
+		EC2							VPC
+Simple									Complex
+Limited									Flexible
+
+Default VPC.
+- launch EC2 instances, if you don't configure anything specific — it will end up on the 'default VPC'.
+- we wanted everyone to have a VPC, but we didn't want everyone to be able to mess with VPC to get started
+
+Other:
+-https://books.google.se/books?id=vaNMDwAAQBAJ&pg=PA5&lpg=PA5&dq=aws+vpc+%22mapping+service%22&source=bl&ots=oG0d2PWBaQ&sig=ACfU3U0hXBvpuNfnkCKaZNq8zPllYGKjqQ&hl=en&sa=X&ved=2ahUKEwjzw72o7rf4AhVKs4sKHSBTAdIQ6AF6BAg8EAM#v=onepage&q=aws%20vpc%20%22mapping%20service%22&f=false
+
+- ARP trapped by the hypervisor and queries the mapping service
+- when sending the IP package, trapped by the hypervisor again to find the physical server
+
+- This is the reason why broadcast and multicast does not work in VPCs, and also why you can't package sniff
+
+https://www.linkedin.com/pulse/aws-vpc-behind-scenes-varadarajan-thulasirajan
+- isolation implemented through mapping service, packages are only delivered to the exact host and then the exact guest that is targeted...
+
+https://www.youtube.com/watch?v=xd5sb-KGMO4
+
+
+https://en.wikipedia.org/wiki/Encapsulation_(networking)
+- why not GRE?
+
+- OSI vs reality?
+
+	Telnet|FTP|SMTP|DNS|TIP|SNMP
+	TCP|UDP|IGMP|ICMP
+	IP|IPSEC
+	Ethernet|Token Ring|Frame Relay|ATM
+
+
+https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html
+- software defined virtual network
+	- created by management console
+	- AWS CLI
+	- AWS SDKs
+	- Query API (HTTP requests)
+- VPCs are logically isolated from other VPCs
+- you can specify IP address range, add subnets, add gateways, associate security groups
+- a subnet is a range of IP addresses, you launch AWS resources such as Amazon EC2 instancs into subnets.
+- you can connect subnet to the internet, other VPCs, and your own data centers, and route traffic to and from your subnets using routing tables
+
+- if your account was created after 2013-12-04, it comes with a 'default VPC' that has a 'default subnet' in each AZ.
+- default placement of EC2 instances is the default subnet
+- you can create your own VPCs and subnets, these are called 'nondefault'.
+- CIDR
+- ipv4 and ipv6
+- when you create a VPC, you assign it an IPv4 CIDR block, a IPv6 CIDR block, or both.
+- IPv4 are not reachable from the internet, IPv6 addresses are globally unique and can be configured to remain private or be reachable from the internet
+- VPC can operate in dual-stack mode
+- internet gateway in order to access internet
+- by default, instances that you launch in a nondefault subnet has got private IP and can reach other things on the VPC, but it can not talk to internet
+- you can use NAT device to talk to internet without internet traffic being able to reach you
+- you can optionally connect your VPC to your own network with IPsec AWS Site-to-Site VPN
+- you can connect two VPC as 'peering connections', so you can route traffic between them
+- you can create transit gateway. It acts as a regional virtual router for traffic flowing between its attachments, which can be VPCs, VPN connections, AWS Direct Connect gateways, and transit gateway peering connections
+
+AWS private global network considerations
+- traffic within an AZ, or between AZs in a region, routes over the AWS private global network
+- traffic between regions routes over the AWS private global network (except for China)
+- target packet-loss rate is hourly P99 PLR less than 0.0001%
+
+Default VPC
+- each VPC has a main route table
+- subnets have CIDR block, route and rules for the network ACL
+- internet gateways attached to VPC
+
+- A VPC spans all AZs in a region
+- CIDR block size can be /28 to /16
+- must not overlap with existing CIDRs in this VPC
+- you cannot change size of CIDR block
+- there is a quota on number of CIDR blocks and number of routes
+
+'Create VPC, subnets and other VPC resources'
+'choose number of AZs', An AZ is one or mote discrete data centers with redundant power / networking / connectivity in an AWS Region.
+Choose which AZs your subnets will be created in.
+Choose number of 'public subnets', choose the number of subnets that will be 'public', 'public' subets have route entries to an internet gateway.
+NAT gateways, enables outbound traffic
+VPC endpoints for S3
+DNS options
+
+DHCP options, DNS/NTP
+
+Share VPC.
+
+
+
+Subnets
+- a subnet is a range of IP addresses in your VPC
+- you can launch AWS resources into a specified subnet
+- use public subnets if the need internet access, private otherwise
+- you can protect subets with security groups or network access control lists (ACL)
+
+subnet CIDR must be a subst of the VPC CIDR
+each subnet must reside entirely within one AZ and cannot span zones
+you can optionally add subnets in a 'Local Zone', which is an AWS infrastructure deployment that places compute/storage/database and other select services closer to your end users. A 'Local Zone' enables your end users to run applications that require single-digit millisecond latencies.
+	- some aws resources might not be available in all regions
+	- you must opt in to local zones
+wavelength zones reside on G5 edge locations

@@ -1,0 +1,14 @@
+Manage files that you don't want to persist on disk:
+- Create a RAMdisk
+- Create filesystem on said RAMdisk
+- Exclude this folder from Spotlight indexing
+- 
+
+
+sudo /usr/libexec/PlistBuddy -c "Add :Exclusions:0 string '/path/to/folder'" /System/Volumes/Data/.Spotlight-V100/VolumeConfiguration.plist
+
+sudo launchctl stop com.apple.metadata.mds
+sudo launchctl start com.apple.metadata.mds
+
+sudo defaults write /Volumes/foo/.Spotlight-V100/VolumeConfiguration.plist Exclusions -array-add '/path/to/folder'
+

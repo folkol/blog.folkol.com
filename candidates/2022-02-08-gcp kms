@@ -1,0 +1,70 @@
+# Google KMS, Key Management Service
+
+https://www.youtube.com/watch?v=yQMhUq_sbt0
+
+Generate
+Use
+Rotate
+Destroy
+
+Key Types: AES256 | RSA 2048 | RSA 3072 | RSA 4096 | EC P256 | EC P384
+
+Concepts
+
+Project > Location (global/us-west1/europe-west4) > 
+
+
+https://cloud.google.com/kms/docs/ekm
+- 
+
+
+
+
+
+
+https://security.stackexchange.com/questions/184305/why-would-i-ever-use-aes-256-cbc-if-aes-256-gcm-is-more-secure
+- GCM isn't a panacea either, however. It is strictly speaking correct, but has proven itself to be far from foolproof in practice:
+
+It fails spectacularly if you reuse a nonce. A single repeated nonce allows an adversary to recover its authentication subkey, plus to learn the XOR of the two messages with the same nonce.
+Its nonces are uncomfortably short (96 bits), which can be tricky to use with random nonces.
+
+- CBC doesn't have these problems. Random IVs work just fine (and are in fact required), and if you do repeat an IV you don't get catastrophic failure, you just leak information about equal plaintext prefixes.
+
+https://en.wikipedia.org/wiki/Disk_encryption_theory
+
+man openssl-enc
+- PKCS#5 padding (PKCS#7 padding)
+- A password will be prompted for to derive the key and IV if necessary.
+- The -salt option should ALWAYS be used if the key is being derived from a password unless you want compatibility with previous versions of OpenSSL.
+
+https://crypto.stackexchange.com/questions/2319/what-is-the-largest-performed-possible-bruteforce-attack-to-date
+- ~2**72
+- https://security.stackexchange.com/questions/6141/amount-of-simple-operations-that-is-safely-out-of-reach-for-all-humanity/6149#6149
+https://crypto.stackexchange.com/questions/76738/has-aes-128-been-fully-broken
+- 
+
+NIST Security levels:
+- https://crypto.stackexchange.com/questions/75240/security-levels-in-nist-post-quantum-project-e-g-aes-128-vs-sha-256
+- 
+
+https://crypto.stackexchange.com/questions/63536/how-reassuring-is-64-bit-insecurity/63537#63537
+- 
+
+Gimli permutation in Sponge mode
+- https://cryptojedi.org/papers/gimli-20170627.pdf
+
+200m THs
+2 00 000 000  000 000 000 000
+200000000000000000000
+2e20
+if milli:
+2 000 000 000 000 / 5
+0.4e000 000 000 000
+4e00000000000
+4e11
+
+- One may want to note that 264 2 64 SHA1 evaluations cost about 1M USD on AWS using p3.16xlarge instances. – SEJPM ♦ Oct 28 '18 at 13:20
+
+200m = 200 * 0.001 = 0.2, 
+
+https://en.wikipedia.org/wiki/Micro-

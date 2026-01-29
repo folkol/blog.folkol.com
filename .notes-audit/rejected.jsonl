@@ -1,0 +1,108 @@
+{"timestamp": "2026-01-29T22:40:27.437988", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/hello-world.md"}
+{"timestamp": "2026-01-29T22:40:33.298099", "path": "/Users/folkol/Documents/notes/performance-aware-programming/26-introduction-to-rdtsc"}
+{"timestamp": "2026-01-29T22:42:40.419399", "path": "/Users/folkol/Documents/notes/performance-aware-programming/data.json"}
+{"timestamp": "2026-01-29T22:42:43.726477", "path": "/Users/folkol/Documents/notes/performance-aware-programming/25-initial-haversine-distance-processor-code-review"}
+{"timestamp": "2026-01-29T22:42:45.243970", "path": "/Users/folkol/Documents/notes/performance-aware-programming/24-haversine-distance-processor"}
+{"timestamp": "2026-01-29T22:42:53.084089", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/release/deps/json_parser-10486aa43d931eca.d"}
+{"timestamp": "2026-01-29T22:42:54.958399", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-a625f403ac43e9b6.d"}
+{"timestamp": "2026-01-29T22:42:57.910932", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-0svmp4s6id774/s-hafttuq6wh-1v51n3l.lock"}
+{"timestamp": "2026-01-29T22:43:00.301031", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/libjson_parser-a4c844cae811a731.rmeta"}
+{"timestamp": "2026-01-29T22:43:00.739840", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/libjson_parser-bc3d116c1cb648bc.rmeta"}
+{"timestamp": "2026-01-29T22:43:03.439788", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-a4c844cae811a731.d"}
+{"timestamp": "2026-01-29T22:43:04.808046", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/deps/json_parser-bc3d116c1cb648bc.d"}
+{"timestamp": "2026-01-29T22:43:05.742487", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-1ty6iry8e25pv/s-hafttt0m84-07nah2m.lock"}
+{"timestamp": "2026-01-29T22:43:06.213189", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/incremental/json_parser-2z9otty8ntj1m/s-hafttt0m85-12mgtp1.lock"}
+{"timestamp": "2026-01-29T22:43:09.864492", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/src/main.rs"}
+{"timestamp": "2026-01-29T22:43:11.848712", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/release/json-parser.d"}
+{"timestamp": "2026-01-29T22:43:12.712226", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/debug/json-parser.d"}
+{"timestamp": "2026-01-29T22:43:29.709051", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/target/CACHEDIR.TAG"}
+{"timestamp": "2026-01-29T22:43:36.392680", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/Cargo.lock"}
+{"timestamp": "2026-01-29T22:44:21.304986", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/23/json-parser/Cargo.toml"}
+{"timestamp": "2026-01-29T22:44:26.951693", "path": "/Users/folkol/Documents/notes/performance-aware-programming/23-reference-implementation.py"}
+{"timestamp": "2026-01-29T22:44:28.091668", "path": "/Users/folkol/Documents/notes/performance-aware-programming/23-generate-haversine-pairs.py"}
+{"timestamp": "2026-01-29T22:44:29.536715", "path": "/Users/folkol/Documents/notes/performance-aware-programming/23-generating-haversine-input-json"}
+{"timestamp": "2026-01-29T22:44:34.276467", "path": "/Users/folkol/Documents/notes/performance-aware-programming/22-from-8086-to-x64"}
+{"timestamp": "2026-01-29T22:44:52.072476", "path": "/Users/folkol/Documents/notes/performance-aware-programming/21-estimating-cycles"}
+{"timestamp": "2026-01-29T22:44:54.240434", "path": "/Users/folkol/Documents/notes/performance-aware-programming/20-the-stack"}
+{"timestamp": "2026-01-29T22:45:06.511467", "path": "/Users/folkol/Documents/notes/performance-aware-programming/19-other-common-instructions"}
+{"timestamp": "2026-01-29T22:45:08.481055", "path": "/Users/folkol/Documents/notes/performance-aware-programming/18-simulating-real-programs"}
+{"timestamp": "2026-01-29T22:45:09.725529", "path": "/Users/folkol/Documents/notes/performance-aware-programming/17-simulating-memory"}
+{"timestamp": "2026-01-29T22:45:11.123345", "path": "/Users/folkol/Documents/notes/performance-aware-programming/16-simulating-conditional-jumps"}
+{"timestamp": "2026-01-29T22:45:11.827729", "path": "/Users/folkol/Documents/notes/performance-aware-programming/15-simulating-add-sub-cmp"}
+{"timestamp": "2026-01-29T22:45:12.274481", "path": "/Users/folkol/Documents/notes/performance-aware-programming/15-simularing-non-memory-movs"}
+{"timestamp": "2026-01-29T22:45:14.565646", "path": "/Users/folkol/Documents/notes/performance-aware-programming/14-using-reference-decoder-as-a-shared-lib"}
+{"timestamp": "2026-01-29T22:45:20.255150", "path": "/Users/folkol/Documents/notes/2025-07-12-escape-velocity"}
+{"timestamp": "2026-01-29T22:45:26.446038", "path": "/Users/folkol/Documents/notes/leetcode/pareto/README"}
+{"timestamp": "2026-01-29T22:47:07.894497", "path": "/Users/folkol/Documents/notes/leetcode/pareto/README 2.txt"}
+{"timestamp": "2026-01-29T22:47:41.739001", "path": "/Users/folkol/Documents/notes/2024-11-30-vitest-history"}
+{"timestamp": "2026-01-29T22:47:44.361414", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/part1_disassembler.py"}
+{"timestamp": "2026-01-29T22:47:48.731430", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/reference"}
+{"timestamp": "2026-01-29T22:47:50.604510", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/test_cmp_imm"}
+{"timestamp": "2026-01-29T22:47:51.906415", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/test_cmp_imm.asm"}
+{"timestamp": "2026-01-29T22:47:53.368623", "path": "/Users/folkol/Documents/notes/performance-aware-programming/13-8086-decoder-code-review"}
+{"timestamp": "2026-01-29T22:47:55.462524", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/part1_disassembler.cc"}
+{"timestamp": "2026-01-29T22:47:58.301285", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_41.asm"}
+{"timestamp": "2026-01-29T22:48:02.650357", "path": "/Users/folkol/Documents/notes/performance-aware-programming/11-decoding-multiple-instructions-and-suffixes"}
+{"timestamp": "2026-01-29T22:48:08.911082", "path": "/Users/folkol/Documents/notes/performance-aware-programming/10-instruction-decoding-on-8086"}
+{"timestamp": "2026-01-29T22:48:11.160628", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_39.asm"}
+{"timestamp": "2026-01-29T22:48:12.131124", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_38.asm"}
+{"timestamp": "2026-01-29T22:48:12.998018", "path": "/Users/folkol/Documents/notes/performance-aware-programming/homework/listing_37.asm"}
+{"timestamp": "2026-01-29T22:48:15.021637", "path": "/Users/folkol/Documents/notes/performance-aware-programming/09-clean-code-horrible-performance"}
+{"timestamp": "2026-01-29T22:48:17.579356", "path": "/Users/folkol/Documents/notes/performance-aware-programming/08-haversine-distance"}
+{"timestamp": "2026-01-29T22:48:23.425856", "path": "/Users/folkol/Documents/notes/performance-aware-programming/07-python-revisited"}
+{"timestamp": "2026-01-29T22:48:25.236545", "path": "/Users/folkol/Documents/notes/performance-aware-programming/06-multithreading"}
+{"timestamp": "2026-01-29T22:48:46.860194", "path": "/Users/folkol/Documents/notes/performance-aware-programming/01-introduction"}
+{"timestamp": "2026-01-29T22:49:29.193978", "path": "/Users/folkol/Documents/notes/2024-07-31-bookdb-review"}
+{"timestamp": "2026-01-29T22:49:34.319524", "path": "/Users/folkol/Documents/notes/comprehensive-rust-course"}
+{"timestamp": "2026-01-29T22:49:38.047341", "path": "/Users/folkol/Documents/notes/java-how-fast-can-you-parse-1-billion-rows"}
+{"timestamp": "2026-01-29T22:49:50.837298", "path": "/Users/folkol/Documents/notes/automatic-rebase-history"}
+{"timestamp": "2026-01-29T22:50:06.305603", "path": "/Users/folkol/Documents/notes/bambu-printer-starting-kit"}
+{"timestamp": "2026-01-29T22:51:06.492969", "path": "/Users/folkol/Documents/notes/aes"}
+{"timestamp": "2026-01-29T22:51:21.594996", "path": "/Users/folkol/Documents/notes/bean-vs-bean"}
+{"timestamp": "2026-01-29T22:51:22.834227", "path": "/Users/folkol/Documents/notes/jakarta-or-microprofile"}
+{"timestamp": "2026-01-29T22:52:27.849488", "path": "/Users/folkol/Documents/notes/the-typescript-handbook"}
+{"timestamp": "2026-01-29T22:53:00.385850", "path": "/Users/folkol/Documents/notes/solving-problems-the-clojure-way"}
+{"timestamp": "2026-01-29T22:53:41.119850", "path": "/Users/folkol/Documents/notes/todos"}
+{"timestamp": "2026-01-29T22:55:08.073700", "path": "/Users/folkol/Documents/notes/encoding"}
+{"timestamp": "2026-01-29T22:55:19.901933", "path": "/Users/folkol/Documents/notes/backtobackswe"}
+{"timestamp": "2026-01-29T22:55:33.819643", "path": "/Users/folkol/Documents/notes/pexels.com"}
+{"timestamp": "2026-01-29T22:55:38.307061", "path": "/Users/folkol/Documents/notes/vercel deploy"}
+{"timestamp": "2026-01-29T22:57:56.159604", "path": "/Users/folkol/Documents/notes/the-thirty-million-lines-problem"}
+{"timestamp": "2026-01-29T22:58:04.239134", "path": "/Users/folkol/Documents/notes/simple-code-that-is-fast-followup"}
+{"timestamp": "2026-01-29T22:59:04.099555", "path": "/Users/folkol/Documents/notes/learn-sass-in-20-min"}
+{"timestamp": "2026-01-29T22:59:25.499070", "path": "/Users/folkol/Documents/notes/primeagen-developer-workflow"}
+{"timestamp": "2026-01-29T22:59:58.590445", "path": "/Users/folkol/Documents/notes/ecmascript-standard"}
+{"timestamp": "2026-01-29T23:00:08.216216", "path": "/Users/folkol/Documents/notes/max-histogram-area"}
+{"timestamp": "2026-01-29T23:00:27.980146", "path": "/Users/folkol/Documents/notes/preparations-for-funnel-meet-and-greet"}
+{"timestamp": "2026-01-29T23:01:04.780081", "path": "/Users/folkol/Documents/notes/Interview with ex-google senior leader who joined"}
+{"timestamp": "2026-01-29T23:01:11.657243", "path": "/Users/folkol/Documents/notes/react-concepts"}
+{"timestamp": "2026-01-29T23:01:23.360500", "path": "/Users/folkol/Documents/notes/you-dont-know-js-yet"}
+{"timestamp": "2026-01-29T23:01:29.525057", "path": "/Users/folkol/Documents/notes/angular-vs-angularjs"}
+{"timestamp": "2026-01-29T23:02:09.345554", "path": "/Users/folkol/Documents/notes/sublime-quick-navigation"}
+{"timestamp": "2026-01-29T23:02:27.243219", "path": "/Users/folkol/Documents/notes/funnel-olivia-2022-05-06"}
+{"timestamp": "2026-01-29T23:02:35.759350", "path": "/Users/folkol/Documents/notes/all-staff-meeting-logex-2022-05"}
+{"timestamp": "2026-01-29T23:02:38.386182", "path": "/Users/folkol/Documents/notes/samtal med jesper one group"}
+{"timestamp": "2026-01-29T23:02:56.820126", "path": "/Users/folkol/Documents/notes/intermediate language disassembly .net ildasm"}
+{"timestamp": "2026-01-29T23:03:16.704391", "path": "/Users/folkol/Documents/notes/google doubleclick"}
+{"timestamp": "2026-01-29T23:03:43.383929", "path": "/Users/folkol/Documents/notes/backend-as-a-service"}
+{"timestamp": "2026-01-29T23:03:53.440004", "path": "/Users/folkol/Documents/notes/react-js-reconciliation"}
+{"timestamp": "2026-01-29T23:04:18.173813", "path": "/Users/folkol/Documents/notes/avg antivirus call home"}
+{"timestamp": "2026-01-29T23:04:21.612835", "path": "/Users/folkol/Documents/notes/attacking pgp black hat"}
+{"timestamp": "2026-01-29T23:04:35.510110", "path": "/Users/folkol/Documents/notes/chrome phone home"}
+{"timestamp": "2026-01-29T23:04:51.060657", "path": "/Users/folkol/Documents/notes/postfix-mail-setup"}
+{"timestamp": "2026-01-29T23:04:52.643074", "path": "/Users/folkol/Documents/notes/OWASP Web Security Testing"}
+{"timestamp": "2026-01-29T23:06:31.703718", "path": "/Users/folkol/Documents/notes/scratch/gcloud"}
+{"timestamp": "2026-01-29T23:06:42.436327", "path": "/Users/folkol/Documents/notes/bluetooth experiment/6"}
+{"timestamp": "2026-01-29T23:06:43.246138", "path": "/Users/folkol/Documents/notes/bluetooth experiment/5"}
+{"timestamp": "2026-01-29T23:06:43.830403", "path": "/Users/folkol/Documents/notes/bluetooth experiment/4"}
+{"timestamp": "2026-01-29T23:06:44.399504", "path": "/Users/folkol/Documents/notes/bluetooth experiment/3"}
+{"timestamp": "2026-01-29T23:06:44.948490", "path": "/Users/folkol/Documents/notes/bluetooth experiment/2"}
+{"timestamp": "2026-01-29T23:06:45.509413", "path": "/Users/folkol/Documents/notes/bluetooth experiment/1"}
+{"timestamp": "2026-01-29T23:06:55.650155", "path": "/Users/folkol/Documents/notes/Easy Rust Video"}
+{"timestamp": "2026-01-29T23:07:15.306122", "path": "/Users/folkol/Documents/notes/rust crash course"}
+{"timestamp": "2026-01-29T23:07:22.779384", "path": "/Users/folkol/Documents/notes/review followups of security check"}
+{"timestamp": "2026-01-29T23:08:16.104268", "path": "/Users/folkol/Documents/notes/2025-12-20-1brc-rust-jon"}
+{"timestamp": "2026-01-29T23:08:27.872692", "path": "/Users/folkol/Documents/notes/2025-03-23-fabric-and-local-models"}
+{"timestamp": "2026-01-29T23:08:32.789212", "path": "/Users/folkol/Documents/notes/2025-04-05-how-does-fabric-work"}
+{"timestamp": "2026-01-29T23:08:42.142085", "path": "/Users/folkol/Documents/notes/performance-aware-programming/2025-06-29-chatgpt-recaps"}
+{"timestamp": "2026-01-29T23:08:59.021459", "path": "/Users/folkol/Documents/notes/c64-info"}

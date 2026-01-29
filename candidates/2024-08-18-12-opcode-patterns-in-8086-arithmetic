@@ -1,0 +1,8 @@
+# Opcode Patterns in 8086 Arithmetic
+
+- the basic shape of instructions, OPcode + variable length bits, is there for all kinds of instructions -- not just mov
+- various familities have 'extra opcode bits', for example 'arithmetic' is in place 'reg'
+- in general, there might be a base version of the instruction with a truncated opcode + something in byte 1 -- but if it needs more extended bits for the opcode it will put them 'somewhere'
+- in general: family-prefix + specialization.
+
+- homework: implement add/sub/cmp, plus conditional jumps

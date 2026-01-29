@@ -1,0 +1,13 @@
+# https://en.wikipedia.org/wiki/Mbox#Mbox_family
+
+'beginning of file | blank'
+From ...
+Header1
+Header2
+Header3
+
+Body
+
+some difference formats: mboxo, mboxrd, mboxcl, mboxcl2
+
+Some are ambigious ("From " left in the body), some quote it, (">From "), some quote ">*From", to avoid unquote ambiguities, some use content-length header or a combination of the above.

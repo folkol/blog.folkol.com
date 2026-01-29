@@ -1,0 +1,41 @@
+Related Answer
+Profile photo for Mark Gritter
+Mark Gritter
+, Distributed Systems PhD dropout
+Answered Sep 6, 2021 · Upvoted by 
+Terry Lambert
+, Apple Core OS Kernel Team; technical lead on several projects over 8 years · Author has 4.6K answers and 5.9M answer views
+How would you explain totally ordered reliable multicast to a CS layman?
+“Multicast” means: the same message is sent to multiple receivers.
+
+We typically distinguish between messages that are “sent” and those that are “delivered” to the application. Many messages may appear over the network, but only those explicitly handed to the application count.
+
+“Reliable” means: it tolerates failures in the network. Ideally, this would mean it tolerates failures in the participants as well. Writers may apply specific criteria as to what that means, usually some combination of
+
+Liveness: if any participant sends a message, all receivers will eventually deliver that message. (Otherwise we could just not deliver any messages and guarantee the other properties!)
+At-most-once: the message is delivered to any receiver at most once.
+Correctness: the message is delivered intact.
+“Totally ordered” means that every receiver delivers the messages in the exact same order. So for any pair of messages, you can ask two receivers “was A delivered before B” and get the same answer. (This order may be different from the sending order.)
+
+This is distinguished from “causal ordering” where the relationship is that if A is delivered before B is sent, then any participant delivers A before B. But the delivery mechanism doesn’t guarantee that an unrelated message C is delivered consistently to all other receivers.
+
+Usually multicast protocols are meant to allow multiple senders, which complicates things— if we had just one sender then total ordering would be much, much easier (though still require unbounded buffering.)
+
+My advisor wrote a somewhat inflammatory paper about why all this is bunk. I hope that if you are taking a Distributed Systems class you will at least give it a quick read:
+
+Understanding the limitations of causally and totally ordered communication | ACM SIGOPS Operating Systems Review
+Causally and totally ordered communication support (CATOCS) has been proposed as important to provide as part of the basic building blocks for constructing reliable distributed systems. In this paper, we identify four major limitations to CATOCS, ...
+https://dl.acm.org/doi/10.1145/173668.168623
+(It should be fairly easy to find copies around, for example https://www.cs.rice.edu/~alc/comp520/papers/Cheriton_Skeen.pdf)
+
+It makes three arguments that apply to totally ordered multicast (as well as non-multicast!)
+
+The message layer can’t say “for sure”. Side channels such as a shared database, or a client that isn’t part of the multicast cluster, means that some changes may be visible even though the multicast protocol has not officially delivered them.
+The message layer isn’t transactional on groups of messages, which is a more important property for consistency. But if you have transactions (and locking) why do you need totally-ordered communication?
+Total ordering at the message layer is far too inefficient to be used at scale; it imposes an overhead yet fails to solve real application problems.
+Nevertheless, I expect totally-ordered multicast to remain a fixture of distributed systems courses, even though I don’t believe any production distributed systems use it as a primitive. They typically perform leader election, funnel updates through that leader, and handle failures differently than replaying or delaying messages! The bottleneck of having a single leader can be mitigated by sharding.
+
+
+https://dl.acm.org/doi/10.1145/173668.168623
+https://www.cs.rice.edu/~alc/comp520/papers/Cheriton_Skeen.pdf
+

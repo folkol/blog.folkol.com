@@ -1,0 +1,10 @@
+- nessie catalog
+- Can it read ICEBERG, and WHAT CATALOGS can it connect to?
+- "Dremio is a datalakehouse platform"
+- Dremio have 'reflections', like a materialized view but without having to redefine the view — just flip a switch
+- "Dremio arctic catalog"
+- ELT, transforming virtually with Dremio semantic layer
+	- you can transform it without having to copy the data
+	- access with arrow flight, REST, JDBC, UI
+	- Dremio is 'configure views', then read with the above
+	- 

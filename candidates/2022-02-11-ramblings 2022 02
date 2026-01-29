@@ -1,0 +1,92 @@
+EJB bean types
+stateful
+stateless
+(entity?)
+- what protocols/policies/rules are there for each of them?
+- local/remote interfaces?
+- bean pools?
+- implicit transactions?
+- marshalling?
+
+- application server clusters, a bit equivalent of envoy sidecars?
+- what about implicit persistance
+- message queues?
+- security?
+
+Fysisk knapp som säger till om paus efter 45 min?
+
+
+
+
+
+
+
+E-mail is not a good fit for -professional- correspondence.
+
+E-mail senders are not authenticated by default, which invites impersonation / scams / phishing.
+E-mail user agents load external entities by default, which is a security risk and infringes on privacy.
+E-mails are not confidential by default, no end-to-end encryption.
+E-mails do not support threading, but real life discussions aren't linear.
+E-mails disclose recipients and cc:s by default, which is noisy + privacy problem.
+E-mails are 'reply all':ed to, which is a privacy problem and noisy.
+E-mails end up in junk boxes.
+E-mails drown in spam.
+E-mails are filtered out by robots / rules, even if they are legit.
+E-mail addresses can't be rotated, once disclosed they are forever in the hands of scammers and spammers.
+
+People loses their minds when emails are involved. They click on links, reply to old threads, send sensitive files to the wrong recipients.
+
+There are ways to mitigate some of these problems, but they are not used on a large scale.
+
+When it's easy for users to make mistakes, they are not at fault — the system is.
+
+
+
+
+
+
+
+
+Note taking
+
+note taking app with support for inline images, some markup/styling and tagging
+highlight parts of text
+add relations between notes
+
+
+
+
+Utmattningssyndrom
+
+    https://www.arbetsmiljoforum.se/kunskapsbank-arbetsmiljoe/psykosocial-arbetsmiljoe/stress/keds-sjaelvskattningstest-foer-utmattningssyndrom/
+
+    Karolinska Exhaustion Disorder Scale
+
+    Den som sammanlagt får över 18 poäng på de nio frågorna i testet kan vara i riskzonen för utmattningssyndrom. Du kommer få besked om din poängsumma när du besvarat alla frågorna.
+
+    Du fick 5 poäng. Du bedöms för närvarande inte vara i riskzonen för att drabbas av utmattningssyndrom.
+
+    http://www.stressforskning.su.se/polopoly_fs/1.51211.1321608218!/temablad_utbrandhet.pdf
+
+    Maslachs tre teman:
+    - För det första beskrev många av de intervjuade en känslomässig utmattning, dvs. en förnimmelse av att vara tömd på posi- tiva känslor. På sikt kan detta leda till en invärtes stumhet: man har givit allt och har inget kvar att ge.
+    - Det andra temat som Maslach identifierade i intervjuerna var de negativa attityder som utvecklades gentemot patienterna. Hon fann att de intervjuade använde sig av en ökande känslomässig distans i syfte att skydda sig mot upplevelsen av känslomässig utmattning. Dessa känslor medförde skuld, en skuld som dock är irrationell, då orsakerna till individens bristande välbefinnande står att finna i det sätt varpå arbetet är organiserat.
+    - Slutligen identifierade Maslach ett tredje tema: upplevelsen av att genomgå en kris i sin professionella roll. Den minskade professionella prestationen kan till en början inte observeras, utan är snarare en upplevelse hos den drabbade individen.
+
+    Maslachs och medarbetares definition av utbrändhet – triaden av känslomässig ut- mattning, cynism och minskad professionell prestation – är den som fått mest spridning.
+
+    Klinisk diagnos, minst 4 av dessa i princip dagligen i minst 4 veckor:
+    - Koncentrationssvårigheter och minnesstörning.
+    - Påtagligt nedsatt förmåga att hantera krav och göra saker under tidspress.
+    - Känslomässig labilitet eller irritabilitet.
+    - Sömnstörning.
+    - Påtaglig svaghet eller uttröttbarhet.
+    - Fysiska symtom som värk, bröstsmärtor, hjärtklappning, magtarmbesvär, yrsel, ljudkänslighet eller synrubbningar.
+
+
+
+
+bus driver: 
+- person driving a bus
+- kernel code responsible for handling computer bus
+

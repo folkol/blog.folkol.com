@@ -1,0 +1,22 @@
+# https://www.simplethread.com/20-things-ive-learned-in-my-20-years-as-a-software-engineer/
+
+1. 'How can you not know what FOO is?' -> There is too much to learn, don't worry about what you don't know.
+2. The hardest part is building the right thing. Technically advanced and clean code doesn't matter if noone is using the product.
+3. The best software engineers think like designers. Keeping the user's need in mind is the heart of good UX.
+4. The best code is no code, or code you don't have to maintain.
+5. Software is a means to an end.
+6. Sometimes you have to stop sharpening the saw, and just start cutting shit.
+7. If you don't have a good grasp of the universe of what's possible, you can't design a good system. Be wary of people who haven't written any code in a long time designing systems.
+8. Every system eventually sucks, get over it. You will never get a perfect system, strive for continuous improvement.
+9. Nobody asks 'why' enough. Question assumptions. Take note of what new team members are confused about.
+10. We should be far more focused on avoiding 0.1x programmers than finding 10x ones.
+11. One of the big differences between a senior engineer and a junior angineer is that they've formed opinions about the way things should be.
+12. People don't really want innovation; they want cheap wins and novelty. True innovation will make people do things in new ways.
+13. Your data is the most important part of your system. The data will likely outlive your code base, spend energy keeping it orderly and clean.
+14. Look for technological sharks. RDBMs et. al. are sharks, honed to perfection by evolution. Don't treat them as old and busted just because they are old.
+15. Don't mistake humility for ignorance. Never assume that just because someone doesn't throw their opinion in your face, they have nothing to contribute. Seek their opinon/advice.
+16. Software engineers should write regularly. Writing means you will have to think about things clearly. Writing skills are to be honed!
+17. Keep your processes as lean as possible. Don't "add more process" unless you need it. https://www.simplethread.com/agile-at-20-the-failed-rebellion/
+18. Software engineers, like all humans, need to feel ownership.
+19. Interviews are almost worthless for telling how good of a team member someone will be.
+20. Always strive to build smaller systems.

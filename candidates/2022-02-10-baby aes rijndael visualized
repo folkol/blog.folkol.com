@@ -1,0 +1,31 @@
+# (Baby) AES
+
+https://en.wikipedia.org/wiki/Bent_function
+
+
+
+AES is based on a design principle known as a substitution–permutation network
+Unlike its predecessor DES, AES does not use a Feistel network.
+
+https://csrc.nist.gov/csrc/media/projects/cryptographic-standards-and-guidelines/documents/aes-development/rijndael-ammended.pdf
+
+
+https://www.researchgate.net/publication/2237728_AES_proposal_rijndael
+EXOR = XOR
+
+Known attacks on AES?
+Nonlinearity = combats differential analysis
+
+Interactive AES-visualization.
+Choose keys.
+All zeroes
+All ones
+Specific pattern
+Random
+
+Numrounds
+Maybe even num blocksize? (Rijndael = 32 x n)
+Maybe 'paint' key?
+
+Display as matrix or as vector?
+

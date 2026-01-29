@@ -1,0 +1,35 @@
+https://youtu.be/o-HTsJ1-wdI?t=6119
+
+init.tips, built specifically for hand off 'how do I start foo'
+
+> 'some recommendations for when things get more complex'
+
+'the ship of theseus', everything should be replacable
+
+> "The Ship of Theseus is a thought experiment about whether an object that has had all of its original components replaced remains the same object" —https://en.wikipedia.org/wiki/Ship_of_Theseus
+
+"mysql is layered, the query layer and the backend (innodb), as opposed to postgresql where everything is the same (postgres engine)"
+
+uber - postgres to mysql (for scaling db layer)
+
+superjson, JS Object into string, instead of "just JSON". Preserves datetimes and maps.
+
+> Everything other than functions
+
+"Stop, you are thinking in systems/infra instead of applications. You aren't building Netflix here, you are building an app — a side project."
+
+"zod is similar to yup"
+
+"compiler assisted programming"
+"as if co-pilot where always correct"
+
+"Ownership of product is more important than ownership or code"
+
+"I wanna build products, not structures"
+
+"Where is the line between dev team and ops"
+
+"The number of sub-20 dev companies that are already using Kubernetes is hilarious. We are too eager on building structures that makes us feel good."
+
+"Developers aren't fun to work with, y'all are different — you all hang out in prime's streams and now in mine. When you are in an average company and surrounded by average developers — the conversations look and sound very different. And, I just want to build cool shit for cool people." "As foo said, the average developer sucks. And if I were to build developer tools, I would have to care not just about the average developer — but the below-average developer as well because they are a meaningful chunk of our potential audience."
+

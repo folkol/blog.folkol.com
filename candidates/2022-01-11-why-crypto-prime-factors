@@ -1,0 +1,7 @@
+https://crypto.stackexchange.com/questions/35440/why-does-rsa-need-p-and-q-to-be-prime-numbers
+
+So, to make factoring as difficult as possible, you want the prime factors to be as large as possible, which means you want N to have the fewest factors possible. With 𝑝 p and 𝑞 q prime, 𝑁 N has two factors. With 𝑝 p and 𝑞 q composite, 𝑁 N has at least four factors, possibly more.
+
+(Also, e.g. RSA is defined in terms of prime numbers, see Euler PHI (even though it is replaced by Carmichaels Totient).)
+
+    https://crypto.stackexchange.com/questions/29591/lcm-versus-phi-in-rsa

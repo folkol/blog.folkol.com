@@ -1,0 +1,1597 @@
+# Blog post candidates ~/Documents
+
+
+## TODO
+
+$ ls -d */
+Adobe/                                     imposters-handbook/
+algorithms/                                Inbox.mbox-2021-08/
+ansökan avlopp/                            ivbar/
+Arduino/                                   jfokus-brown-bag-lunch/
+Autodesk/                                  labbar/
+bitbucket-pipelines/                       langbrossle/
+crash course in mythology/                 learn-uidesign/
+cv/                                        linkedin_recruited_analysis/
+death-analysis/                            message_history/
+developer-week-europe-2021/                nagios-statistics/
+Documents – Mattias’s MacBook Pro (2)/     nordea/
+Documents - Mattias MacBook Air/           notes/
+Documents - Mattias’s iMac/                ORKA/
+Documents - Mattias’s MacBook Pro - 1/     paintings/
+Documents - Mattias’s MacBook Pro (3)/     pki-certificates/
+Documents - Mattias’s MacBook Pro/         presentations/
+Drawings/                                  Processing/
+folkol.com/                                riksdag-votering/
+from-work-laptop/                          rust/
+FromPC/                                    simc/
+google-foobar/                             sna/
+hack-the-box/                              Truesec tech talks/
+Hackerrank/                                unicode/
+highbrow digest/                           video digests/
+icccm/                                     volumes.graffle/
+ideas/                                     WebEx/
+
+
+
+annotations: n TAG comment
+n = prio (negative is "no", 0 is "meh", 1 is "could be nice", 2: definitely a candidate)
+	non-candidates (like zip files etc) are just removed from the list
+TAG = content category (TODO)
+	NUGGET: nugget of information (TIL in blog)
+	PAPER: summary or comments on research paper
+	REFLECTION: 'thinking out loud' etc?
+	SUMMARY: notes, reflection or summary of (e.g.) a youtube video? ("DIGEST"?)
+	QUOTE: random nice(?) quote? :)
+	OTHER for example replicate someone else's experiments
+	COURSE: course / tutorial / guide?
+	IDEA: random idea?
+	POST: Like nugget, but more info. Original research / contribution / etc.
+	TALK: Maybe outline + slides + etc?
+	GROK/CORE IDEA/CONCEPT(S)?
+
+comment: ...
+
+
+$ ls -l
+total 18021792
+
+-rw-------@   1 folkol  staff      4541578 May 31  2020  INFORMATION SClt1'DlG IN _ APPLICATION OF BIEO'f.ROHIC DIGITAL COO'lJ-tmfS !O BUSIIBSS OPERATIONS PROJECT WHIRLWIND R-232_Information_Sorting_in_the_Application_of_Electronic_Digital_Computers_to_Business_Operations_May54.pdf
+	1 PAPER copy of seminal paper about sorting
+-rw-------    1 folkol  staff          226 Aug 17  2021 # https:::docs.microsoft.com:en-us:learn:tv:?WT.mc
+	0 NUGGET small note about kaggle and a quote "less code, more power". PowerBI inspirated talk
+-rw-------    1 folkol  staff          495 May 28  2021 1% rule applied to developers
+	1 REFLECTION developers don't seem to learn, but does it matter? Reference to 1% rule of content creation
+-rw-------    1 folkol  staff          199 Apr 10  2021 10 things I learned from the jQuery source
+	1 SUMMARY of youtube video, 
+-rw-------    1 folkol  staff          333 Apr  6  2021 10-minutes-to-pandas
+	0 SUMMARY
+-rw-------@   1 folkol  staff      8003767 Dec  3  2021 198100_APL-STAT.pdf
+	1 PAPER learn statistics with APL
+-rw-------    1 folkol  staff          351 Sep 21  2020 1password review 2020 my thoughts 1 year later pros and cons
+	1 SUMMARY comments from youtube video
+-rw-------@   1 folkol  staff       702131 Sep  6  2021 210612-edr_evasion_flowchart_r2.png.pdf
+	1 SUMMARY PDF cheatsheet on EDR evasion
+-rw-------    1 folkol  staff          948 Jan 20  2021 3 more data structures you need to know
+	1 SUMMARY bunch of data structures, comment to youtube video
+-rw-------    1 folkol  staff         1442 May  5  2022 36-questions-about-your-neighbourhood
+	2 REFLECTION what do you know about your neigborhood? (these are partial answers, find original post)
+-rw-------@   1 folkol  staff         1033 Jun 21  2021 5 ways to improve your code
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         1661 Jan 29  2021 6 mistakes beginner programmers make
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff          845 Sep  1  2021 6 python mistakes to avoid
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         1768 Jun 18  2021 a ceonversation in old engilsh and old norse
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff          990 Apr 10  2021 a complete guide to useEffect
+	1 SUMMARY of other blog posts
+-rw-------    1 folkol  staff       744169 May 15  2020 A faster way to delete millions of files in a directory.webarchive
+	2 OTHER delete many files
+-rw-------    1 folkol  staff           66 Aug 17  2021 A gentle introduction to eBPF
+	1 SUMMARY
+-rw-------    1 folkol  staff          547 Mar 25  2021 a guide to parsing algorithms and terminology
+	1 SUMMARY notes about another blog post
+-rw-------    1 folkol  staff        10119 Apr 10  2021 A look inside react fiber
+	1 SUMMARY notes about another blog post
+-rw-------    1 folkol  staff         5694 Jan 26  2021 A short introduction to DevOps and how to integr
+	2 SUMMARY of youtube video, maybe JForum?
+-rw-------@   1 folkol  staff      1468981 Feb 12  2021 A Slackware Primer - Eleven is Louder.pdf
+	2 SUMMARY a slackware primer, internet archive
+-rw-------@   1 folkol  staff       143862 Oct  5  2020 A_Review_of_Assured_Data_Deletion_Mechanism_in_Clo.pdf
+	2 PAPER paper about data deletion in cloud
+-rw-------@   1 folkol  staff          425 Jul 12  2020 about cvs
+	1 NUGGER about cv:s (resumes)
+-rw-------    1 folkol  staff         1149 Jan  7  2021 AES Explained Computerphile
+	2 SUMMARY youtube video
+-rw-------    1 folkol  staff          109 Aug 17  2021 algorithm ideas
+	1 OTHER
+drwx------    3 folkol  staff           96 Oct  4  2019 algorithms/Word\ Search
+	0 OTHER leetcode summary
+-rw-------@   1 folkol  staff       767797 Jul 25  2022 An analysis of the behaviour of the digital rain in The Matrix | digital-rain-analysis.pdf
+	2 SUMMARY reverse engineer the rain?
+-rw-------@   1 folkol  staff            0 Oct 21  2017 an introduction to vim
+	0 SUMMARY empty file
+-rw-------@   1 folkol  staff        84120 Aug 13  2021 An Overview of SSL (version 2) from adam.shostack org.pdf
+	2 SUMMARY SSLv2 1995
+-rw-------@   1 folkol  staff          117 Jan 30  2021 andy stumpf quote
+	2 QUOTE I think people are often in a rush to talk in an educated manner about things they know nothing about. —Andy Stumpf$
+-rw-------    1 folkol  staff          222 May  4  2020 anonymization-pitfalls
+	1 SUMMARY anonymization pitfalls, 3 links
+-rw-------    1 folkol  staff         1889 Feb  4  2021 ansible interprets become_password as ninja template in python 2.xml
+	0 notes about some ansible vulnerability
+-rw-------    1 folkol  staff          587 Jul 10  2018 apl idiom
+	1 NUGGET idiom: make everything take what you want vs make exactly and nothing more than what you want
+-rw-------    1 folkol  staff         1723 Jan 22  2022 apl info
+	1 SUMMARY bunch of APL links
+-rw-------@   1 folkol  staff      2224866 Feb 13  2018 apl notation iverson.pdf
+	1 PAPER Iverson's APL book
+-rw-------@   1 folkol  staff       240140 Sep 23  2017 aplj.pdf
+	1 PAPER APL vs J
+-rw-------@   1 folkol  staff          487 Jan 22  2022 apotekens-krypteringsalgoritm
+	2 NUGGET reverse PNR från SHA256 genom sökning, men kolla att publik referens finns först
+-rw-------    1 folkol  staff        18822 Dec 18  2020 Are VHLLs Really High-Level?
+	1 SUMMARY very high level languages?
+-rw-------@   1 folkol  staff       346573 Feb 13  2018 array language with rank polymorphism.pdf
+	1 PAPER An Array-Oriented Language with Static Rank Polymorphism
+-rw-------@   1 folkol  staff       205824 Apr  5  2021 arv-o-matic from internet archive.pdf
+	1 PAPER something about JavaScript hidden state
+-rw-------@   1 folkol  staff         2997 Jan 28  2018 ascii
+	1 SUMMARY structure of ascii table
+-rw-------@   1 folkol  staff       197843 Sep 13  2016 ASystematicApproachtoFactoring.pdf
+	1 PAPER
+-rw-------@   1 folkol  staff      2743197 Apr  1  2021 authenticated key exchange stanford.pdf
+	1 SUMMARY slide deck
+-rw-------    1 folkol  staff        23829 Jun 17  2020 AWS Summit online 2020 06
+	1 SUMMARY of AWS Summit
+-rw-------    1 folkol  staff          751 Nov 27  2020 AWS Training and Certification
+	1 SUMMARY AWS IAM
+-rw-------@   1 folkol  staff         1015 Apr  9  2021 bärsärk, sinnesstämning, begrundande
+	0 REFLECTION bärsärk
+-rw-------    1 folkol  staff         2224 May 28  2021 Base skills in being an artist
+	1 SUMMARY youtube about artistry
+-rw-------    1 folkol  staff           78 Jan 17  2022 bash completion for aliases
+	2 SUMMARY bash completion for bash aliases
+-rw-------@   1 folkol  staff         1186 Sep 16  2019 bash idioms
+	2 NUGGET bash idioms (about geeknight talk)
+-rw-------    1 folkol  staff          422 May 28  2021 bash templating instead of envsubst
+	1 NUGGET bash for loop that could have been call to envsubst
+-rw-------@   1 folkol  staff        30405 Oct 30  2019 bash-course.v1
+	2 GUIDE bash course
+-rw-------@   1 folkol  staff           30 Sep 16  2019 bash-neat-tricks
+	2 NUGGET file * | sort -f -t : -b -k 2
+-rw-------@   1 folkol  staff       822849 Jan  5  2025 basic_tests.png
+	2 SUMMARY BASIC principles for Node.js tests
+-rw-------@   1 folkol  staff      7315320 Feb  5  2018 becomingfunctional.pdf
+	1 PAPER comments about book?
+-rw-------    1 folkol  staff         2879 Jan 29  2021 beginners guide to network troubleshooting linux networking
+	2 SUMMARY https://www.redhat.com/sysadmin/beginners-guide-network-troubleshooting-linux
+-rw-------    1 folkol  staff         2536 Mar  5  2021 Beginning graphic design
+	1 SUMMARY beginning graphic design
+-rw-------    1 folkol  staff         1673 Sep 21  2021 best microphone for home working
+	1 SUMMARY which microphone for home work research
+-rw-------    1 folkol  staff          197 Nov 15  2020 best tips from running in production
+	1 SUMMARY links to youtube videos
+-rw-------@   1 folkol  staff          583 Nov 19  2017 Better Metrics
+	1 NUGGET other ways than 'load' to measure load
+-rw-------    1 folkol  staff          645 Apr 12  2021 big o notation
+	1 SUMMARY big-O
+drwx------   31 folkol  staff          992 May  2  2022 bitbucket-pipelines/
+	1 SUMMARY or maybe guide to bitbucket pipelines
+-rw-------    1 folkol  staff           83 Oct 14  2021 blog: Every 'release' gets a tag, automatic histor
+	1 IDEA just the name
+-rw-------    1 folkol  staff           44 Nov 20  2020 blogpost : note : dylikt med "roliga ord"!
+	1 funny words?
+-rw-------@   1 folkol  staff          328 Apr 10  2021 bobby fischer on gender equality
+	0 SUMMARY random interview
+-rw-------@   1 folkol  staff         2740 Apr 10  2021 bobby fischer on varson tonight show
+	1 SUMMARY youtube interview
+-rw-------    1 folkol  staff         1718 May 15  2021 borocg-painting-tutorials
+	1 SUMMARY painting tutorial
+-rw-------@   1 folkol  staff       135803 Jun 30  2021 BPF original paper.pdf
+	1 PAPER BSD Packet Filter
+-rw-------@   1 folkol  staff         2174 Oct  5  2020 brian kernighan on unix c awk ampl and go
+	1 SUMMARY notes from youtube vidoe
+-rw-------    1 folkol  staff          888 Aug 27  2021 Byta handfat
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff         1012 Aug  9  2021 byta tryckvakt
+	1 SUMMARY byta tryckvakt i pumphuset
+-rw-------    1 folkol  staff          649 Jan 23  2018 C++ goodies:
+	1 NUGGET 
+-rw-------    1 folkol  staff          597 Jun 22  2021 Career Advice for Junior Software Developers
+	1 SUMMARY
+-rw-------@   1 folkol  staff         1713 Dec 16  2017 category theory for programmers
+	1 SUMMARY
+-rw-------@   1 folkol  staff       437625 Oct 19  2018 cgp-in-nutshell.pdf
+	1 SUMMARY Cartesian Genetic Programming in a nutshell
+-rw-------    1 folkol  staff          248 Dec  3  2018 choose command
+	1 GUIDE how to identify which command line tool to use?
+-rw-------@   1 folkol  staff           66 May 28  2021 citat
+	1 QUOTE Gör var du gör!
+-rw-------@   1 folkol  staff       112501 Apr  5  2021 clock domain crossing.pdf
+	1 SUMMARY https://web.archive.org/web/20130517060536/https://w2.cadence.com/whitepapers/cdc_wp.pdf
+-rw-------@   1 folkol  staff      9993613 Feb  5  2018 clojurecookbook.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff     10554897 Feb  5  2018 clojureprogramming.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff         5459 Sep 19  2019 code optimisation isaac
+	1 SUMMARY of mail conversation regarding c++ talk
+-rw-------@   1 folkol  staff      8710412 Mar 22  2022 code-that-fits-in-your-head.pdf
+	1 SUMMARY Robert C Martin series, heuristics for Software Engineering
+-rw-------    1 folkol  staff          283 Jun 21  2021 codecov incident
+	1 SUMMARY incident
+-rw-------    1 folkol  staff          148 Dec 22  2019 coding apps suggestions
+	1 SUMMARY essential programming apps
+-rw-------    1 folkol  staff           63 Jan 10  2022 color coding heat map, most recently used or 'most
+	1 NUGGET visualise 'hot code' in repo?
+-rw-------@   1 folkol  staff       198067 Dec  8  2020 color space conversions.pdf
+	1 PAPER
+-rw-------@   1 folkol  staff         1055 Nov 12  2021 comments
+	2 IDEA comments management app
+-rw-------@   1 folkol  staff        29815 May 19  2019 Common UNIX Utilities.html
+	1 NUGGET common unix tools
+-rw-------    1 folkol  staff          581 Mar 28  2019 compiled pipelines
+	1 IDEA compiled "unix pipelines'?"
+-rw-------    1 folkol  staff        13927 Jun 28  2021 configuring  floating ip addresses for networking in OpenStack public and private clouds
+	1 SUMMARY configuring floating ips in opensatck
+-rw-------    1 folkol  staff         1634 Dec 14  2019 Containers Today notes
+	1 SUMMARY 'Containers today'
+-rw-------    1 folkol  staff        12051 Sep  9  2021 Copy and paste in Linux
+	2 GUIDE a guide to 'copy and paste' on Linux, and what trips people up (multiple clipboards)
+-rw-------    1 folkol  staff         1512 Aug  6  2018 cosplay_foam
+	1 GUIDE cosplay foam
+-rw-------    1 folkol  staff         4617 Apr  5  2021 cpu core clock domains
+	1 SUMMARY cpu core clock domains
+-rw-------    1 folkol  staff           78 Sep 25  2020 cpu utilization
+	1 SUMMARY blog post
+-rw-------    1 folkol  staff           73 Dec  5  2020 Crash Course for OpenGL programming model for the
+	0 GUIDE just name fornow
+-rw-------    1 folkol  staff         2476 Jun 19  2021 crash course in astrology
+	1 SUMMARY youtube video
+drwx------    3 folkol  staff           96 Feb 19  2021 crash course in mythology/epic or gilgamesh
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff          256 May 28  2021 Create a PowerShell Cmdlet with C#
+	0 SUMMARY youtube walkthrough
+-rw-------    1 folkol  staff        10873 Apr  5  2021 dan abramov react fiber deep dive
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff         2433 Apr 13  2022 data contagiousness
+	2 NUGGET? how does data propagate?
+-rw-------    1 folkol  staff         1166 Nov 19  2021 data is like glitter
+	2 NUGGET same as above, data is like glitter
+-rw-------@   1 folkol  staff          987 May  6  2020 Data recovery and disk mechanics
+	1 SUMMARY how is data recovered from disks?
+-rw-------    1 folkol  staff         9314 Nov  7  2020 data remanence in public cloud
+	1 SUMMARY data remanence in public clouds
+-rw-------    1 folkol  staff           55 Nov  3  2018 data structures
+	1 SUMMARY https://en.wikipedia.org/wiki/List_of_data_structures
+-rw-------    1 folkol  staff          746 Jun  3  2022 data-aggregation
+	2 NUGGET composability of data aggregation
+-rw-------    1 folkol  staff         2388 Apr 19  2022 data-is-like-glitter-2022-04
+	2 POST revision
+-rw-------    1 folkol  staff         3039 May 16  2022 data-is-like-glitter-2022-05
+	2 POST revision
+-rw-------    1 folkol  staff         2524 Jul  4  2018 datalog
+	1 IDEA create data matching an expression with datalog? (originally: Ivbar ERA)
+-rw-------@   1 folkol  staff       483985 Apr 26  2022 DDD_Reference_2015-03.pdf
+	1 SUMMARY Domain-Driven Design Reference
+drwx------    7 folkol  staff          224 Aug 16  2020 death-analysis
+	1 SUMMARY wow raid death analysis?
+-rw-------@   1 folkol  staff           69 Jan  6  2018 Decision tree of which unix tool to chose?
+	1 IDEA how to pick tool?
+-rw-------    1 folkol  staff         7333 Apr  9  2021 Deep Dive into Git Edward Thomson
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff          310 Nov 27  2020 Define how organization depends on various compone
+	1 IDEA project managment tool?
+-rw-------    1 folkol  staff        40290 Feb 19  2020 demystifying async and await python
+	1 SUMMARY demystifying async / await in Python?
+-rw-------    1 folkol  staff         1645 Oct  7  2021 design your own mechanical keyboard
+	1 GUIDE
+drwx------    3 folkol  staff           96 Apr 29  2021 developer-week-europe-2021/README
+	1 SUMMARY
+-rw-------    1 folkol  staff          312 Mar 19  2019 dictionary combinatorics
+	0 NUGGET generate and print 2-combinations of /usr/share/dict/words	
+-rw-------@   1 folkol  staff          882 Jul 12  2019 digervisan
+	1 QUOTE test från gammal bok
+-rw-------@   1 folkol  staff          139 Nov 20  2020 digest of 'we hacked apple for 3 months'
+	1 SUMMARY
+-rw-------    1 folkol  staff          127 Jun 21  2021 dirbuster
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff          196 Jun 22  2021 disabling icmp and snmp wont increase security
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff          281 Apr 19  2021 display graph or tree from parent child list
+	1 NUGGET draw 'list of parent/child pairs' as 'directory tree'?
+-rw-------@   1 folkol  staff        50322 Mar  7  2018 Django Project Structure — The Definitive Guide to Deploying Django Applications on Heroku.html
+	1 SUMMARY
+-rw-------    1 folkol  staff         1242 Mar  9  2018 django_all
+	1 SUMMARY
+-rw-------    1 folkol  staff          141 Apr 27  2020 django-hash
+	2 NUGGET how generate 'django hash'
+-rw-------    1 folkol  staff          136 Apr 12  2021 dns talk
+	1 IDEA
+-rw-------@   1 folkol  staff          197 Sep 21  2020 do research
+	1 NUGGET visualize high dimensional data T-SNE for clustering
+-rw-------    1 folkol  staff          287 Dec 22  2019 docker container users and groups
+	1 NUGGER how do users and groups map from host to container?
+-rw-------    1 folkol  staff         3580 Mar  2  2021 docker for mac under the hood
+	1 SUMMARY
+-rw-------    1 folkol  staff         2240 Jul 12  2018 docker registry cache bug
+	1 NUGGET sometimes a layer was not published after registry gc and before restart
+-rw-------    1 folkol  staff          188 Feb 15  2021 Doing Data Science with Python
+	1 SUMMARY
+-rw-------@   1 folkol  staff       306167 Sep 21  2020 DROVORUB-Fact sheet and FAQs.pdf
+	1 SUMMARY DROVORUB malware
+-rw-------    1 folkol  staff          649 Sep 15  2021 dungeon crawler game
+	1 IDEA games
+-rw-------    1 folkol  staff          783 Jan 22  2021 dungeoncrawler where stamina and shield:sword dura
+	1 IDEA games, dungeon crawler where shield breaks and player stamina matters?
+-rw-------@   1 folkol  staff       251260 Sep 22  2017 Dyalog APL Idioms.pdf
+	1 SUMMARY dyalog idioms
+-rw-------@   1 folkol  staff      3401053 Sep 23  2017 Dyalog APL Programmer's Guide & Language Reference.pdf
+	1 PAPER
+-rw-------@   1 folkol  staff       412194 Sep 23  2017 Dyalog APL Terminology.pdf
+	1 PAPER function and operators reference
+-rw-------    1 folkol  staff         1160 May 28  2021 Dynamic Programming
+	1 SUMMARY Dynamic Programming
+-rw-------@   1 folkol  staff       388307 Aug 23  2021 Dynamic Range of Abstraction Levels Paper.pdf
+	1 PAPER dynamic range of abstraction levels as the basis for describing systems
+-rw-------    1 folkol  staff           43 Oct 17  2018 earth-plot
+	1 IDEA babylon.js etc
+-rw-------@   1 folkol  staff         4446 Jul 16  2020 eca.html
+	1 SUMMARY or maybe program? Elementary Cellular Automaton
+-rw-------    1 folkol  staff          412 Sep 29  2018 ECS Networking
+	1 SUMMARY awsvpc networking driver lets you attach an elastic network interface directly to a task.
+-rw-------@   1 folkol  staff        28986 Oct 22  2017 ed
+	1 COURSE ed, the standard editor
+-rw-------@   1 folkol  staff         7126 Oct 25  2017 ed talk
+	1 TALK outline etc?
+-rw-------    1 folkol  staff         7033 Oct 24  2017 ed talk.old
+	1 TALK outline etc?
+-rw-------@   1 folkol  staff         1312 Oct  4  2019 Effective Python
+	1 SUMMARY of book (or NUGGET?)
+-rw-------    1 folkol  staff          122 Feb 19  2021 egyptian pyramid texts
+	1 SUMMARY, video is gone
+-rw-------    1 folkol  staff         1956 Feb  4  2018 EKS
+	1 SUMMARY EKS, Kubernetes on AWS
+-rw-------    1 folkol  staff         1182 Jun  7  2018 eks notes
+	1 SUMMARY
+-rw-------    1 folkol  staff         3174 Nov 27  2020 elastisys kubecon digest
+	1 SUMMARY notes from kubecon
+-rw-------@   1 folkol  staff        10932 Nov 16  2020 Electronics Fundamentals
+	1 SUMMARY course
+-rw-------@   1 folkol  staff          806 May 17  2021 embracing your weirdness
+	1 NUGGET/QUOTE 2 youtube videos
+-rw-------@   1 folkol  staff      1838828 Nov 20  2019 empirical study of vulnerabilities p2201-liA.pdf
+	1 NUGGETS/SUMMARY large-scale empirical study of security patches
+-rw-------@   1 folkol  staff         4272 Apr 12  2021 en dag i en utvecklares liv
+	1 SUMMARY exempel på vad utvecklare för om dagarna
+-rw-------@   1 folkol  staff      3149826 May 31  2020 Enhanced Generic Key-Address Mapping Sort Algorithm.pdf
+	1 SUMMARY content-based sorting with linear average time complexity
+-rw-------@   1 folkol  staff     21190178 Jan  7  2020 epdf.pub_bipartite-graphs-and-their-applications.pdf
+	1 PAPER bipartite graphs
+-rw-------@   1 folkol  staff         4892 Jan  5  2018 essence_of_cpp
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff         5299 Jul  4  2020 event-driven reactive systems
+	1 SUMMARY JForum, Reacting to an Event-Driven world
+-rw-------    1 folkol  staff         1251 Feb 15  2021 EX-NSA hacker tells us how to get into hacking
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff          825 May 18  2021 examples of data breaches
+	1 SUMMARY examples of data breaches
+-rw-------    1 folkol  staff          645 Nov 27  2020 exfiltrate data through Safespring DNS
+	1 NUGGET exfiltrate data through DNS
+-rw-------    1 folkol  staff         2415 Dec  8  2020 explain hacking in 5 levels
+	1 SUMMARY
+-rw-------    1 folkol  staff          283 Nov  8  2020 explaining ssds
+	2 SUMMARY how do SSDs work?
+	- https://www.youtube.com/watch?v=5S_gUbzVdh8&t=78s
+-rw-------    1 folkol  staff         1019 May  6  2019 failed_tests.py
+	1 NUGGET program for summarizing jenkins tests over time
+-rw-------    1 folkol  staff         4060 Jan  8  2021 FAIR Risk Analysis Method
+	2 SUMMARY Factor Analysis of Information Risk
+-rw-------    1 folkol  staff        10734 Oct 17  2020 fargate doodle
+	1 OTHER moodle design stuff
+-rw-------@   1 folkol  staff         2336 Jan 12  2018 fast c++
+	1 NUGGET/SUMMARY
+-rw-------    1 folkol  staff          537 Apr  9  2021 fast lru lib
+	1 LRU with ring buffer?
+-rw-------@   1 folkol  staff        11374 May 22  2016 fast-servers.webarchive
+	2 NUGGET fast servers
+-rw-------    1 folkol  staff          485 Sep 26  2018 fastpipes
+	1 IDEA
+-rw-------@   1 folkol  staff       629326 Jul  6  2021 FFT paper.pdf
+	1 SUMMARY FFT https://web.archive.org/web/20160313024655/https://math.berkeley.edu/~strain/273.F10/duhamel.vetterli.fft.review.pdf
+-rw-------    1 folkol  staff         1914 Sep 10  2021 file sharing services
+	1 IDEA Automatically stitch RdpCaches + 
+-rw-------@   1 folkol  staff       510762 Aug 24  2021 file system hierarchy standard fhs-2.3.pdf
+	1 PAPER
+-rw-------    1 folkol  staff          223 Jun 28  2018 filters
+	1 IDEA functional / reactive operators as shell filters?
+-rw-------    1 folkol  staff          133 Apr 12  2021 flags.folkol.com
+	1 IDEA find a flag by features / flag gallery (looks / history / blazoning)
+-rw-------    1 folkol  staff          619 Nov 27  2020 flask jsonify sorts on keys
+	1 IDEA notes
+-rw-------    1 folkol  staff          188 Mar 14  2022 flee from stuff game
+	1 IDEA game, flee from stuff instead of shooting stuff?
+-rw-------    1 folkol  staff         1524 Apr 12  2021 floyd tortoise and hare
+	1 NUGGET find duplicates in array. Sort + scan, hahsmap, floyd
+-rw-------    1 folkol  staff         3334 Sep 22  2020 FMV webinar
+	1 SUMMARY Försvarsmaktens materielverk
+-rw-------    1 folkol  staff         1674 Mar  1  2022 fonts and types
+	1 SUMMARY fonts vs types history
+-rw-------    1 folkol  staff          158 Sep 29  2020 For veggies, my favourite go-to is probably caulif
+	1 QUOTE
+-rw-------    1 folkol  staff          592 Nov 21  2018 formal grammars
+	1 SUMMARY grammar + Chomsky
+-rw-------    1 folkol  staff       768043 May  7  2021 fr-svenska-utf8.txt
+	1 NUGGET maybe where to find this?
+-rw-------    1 folkol  staff         2582 Sep 10  2021 FRA achievements, SEC-T
+	1 SUMMARY FRA achievments talk
+-rw-------    1 folkol  staff         7460 Feb 15  2021 fra challenges
+	1 SUMMARY challenges
+-rw-------    1 folkol  staff         2260 Nov 14  2020 Fundamentals of CPU Architecture
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff         3972 May 18  2022 funnel-research
+	1 SUMMARY of data / marketing history
+-rw-------@   1 folkol  staff      8255008 Sep 17  2021 Gang of Four Design Patterns.pdf
+	1 SUMMARY brief reference of the patterns
+-rw-------@   1 folkol  staff         8150 Nov 23  2020 geek night talks
+	1 NUGGETS
+-rw-------    1 folkol  staff         7520 Nov  7  2018 git 101
+	1 SUMMARY
+-rw-------    1 folkol  staff           78 Sep 16  2019 git attributes mechanism
+	1 NUGGET git attributes, filters, git-foo-bar -> git foo-bar
+-rw-------    1 folkol  staff          243 Sep 24  2021 git find commits introduced by a branch
+	1 NUGGET
+-rw-------    1 folkol  staff         4696 Apr 12  2021 git for each commit:
+	1 NUGGET investigation of git history
+-rw-------@   1 folkol  staff          860 Apr 12  2021 git missing change commit
+	1 NUGGET investigation of git history
+-rw-------    1 folkol  staff        35751 Oct 13  2021 git-flow tool
+	1 SUMMARY git-flow tool
+-rw-------@   1 folkol  staff       538507 Feb 26  2021 git-in-reverse.pdf
+	1 SUMMARY talk
+-rw-------    1 folkol  staff         1086 Oct 26  2021 git-list-objects
+	1 NUGGET git list objects
+-rw-------    1 folkol  staff         2742 Sep 21  2020 github workflow
+	1 SUMMARY git branch workflow
+-rw-------@   1 folkol  staff        51485 Jan 30  2021 glossary of military units
+	1 SUMMARY/NUGGETS military terms (that is used in civilian life?)
+-rw-------    1 folkol  staff           62 Apr 12  2021 google cloud data erasure
+	1 SUMMARY crypto shredding
+-rw-------    1 folkol  staff          781 Apr 12  2021 google coding interview with a competitive programmer
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         1447 Mar 10  2021 google coding interview with a facebook engineer.py
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         7226 Dec  5  2020 google dev fest 2020
+	1 SUMMARY
+-rw-------    1 folkol  staff        14826 Apr 10  2019 google onboarding kubernetes
+	1 SUMMARY
+-rw-------@   1 folkol  staff      1731473 Sep 21  2020 google research optimize cdn performance.pdf
+	1 PAPER CDN optimization architecture
+-rw-------    1 folkol  staff          860 Mar 11  2021 google systems design interview with an ex google
+	1 SUMMARY youtube
+drwx------   50 folkol  staff         1600 May 12  2022 google-foobar
+	1 SUMMARY google foobar challenge
+-rw-------    1 folkol  staff           72 Jan 10  2022 google-search-info
+	1 SUMMARY how search works + SERP
+-rw-------    1 folkol  staff          456 Nov  8  2020 GPT GUID Partition Table
+	1 SUMMARY GPT
+-rw-------    1 folkol  staff          356 Oct 30  2020 graph db, but don't traverse other objects — but o
+	1 IDEA
+-rw-------    1 folkol  staff           74 May 28  2021 graph difference delta
+	1 NUGGET graphs that show deltas, consistent hashing
+-rw-------@   1 folkol  staff        22703 Sep 24  2020 Graphic Design Tutorial Basic Typesetting
+	1 SUMMARY principles of basic typesetting
+-rw-------    1 folkol  staff          906 Jan 16  2019 graphql
+	1 SUMMARY graphql
+-rw-------@   1 folkol  staff          302 Oct 15  2017 greek night talks
+	1 IDEA
+-rw-------    1 folkol  staff           76 Apr 12  2021 grep warn for 'stdin is a pipe, but no hyphen
+	1 IDEA
+-rw-------@   1 folkol  staff        15003 Nov  7  2021 grid walker hackerrank
+	1 SUMMARY hackerrank problem
+-rw-------    1 folkol  staff          456 May 28  2021 Group Action
+	1 SUMMARY
+-rw-------    1 folkol  staff           17 Nov 20  2020 GSAP animations?
+	1 NUGGET https://gsap.com
+-rwx------@   1 folkol  staff      1404755 Jun  4  2019 h2.key
+	1 TALK what happens when you type print("X") in Python? (step through kernel code)
+-rw-------    1 folkol  staff         2976 Mar 21  2021 habits of efficient developers
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         1195 Feb 15  2021 hack less
+	1 SUMMARY added multi-filter to less
+-rw-------    1 folkol  staff         3560 May 26  2020 hacking and hardening kubernets
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         1004 Mar 23  2018 HashiCorp Vault
+	1 SUMMARY
+-rw-------@   1 folkol  staff        20992 Dec 22  2019 Haxx0r lunch and learn
+	1 SUMMARY/TALK
+drwx------    4 folkol  staff          128 Feb 19  2021 highbrow digest/Productivity Hacks
+	1 SUMMARY
+drwx------    4 folkol  staff          128 Feb 19  2021 highbrow digest/speed reading
+	1 SUMMARY
+-rw-------    1 folkol  staff         1698 Nov 27  2020 highbrow on freud
+	1 SUMMARY
+-rw-------@   1 folkol  staff         2792 Oct 17  2020 highbrow vikings
+	1 SUMMARY
+-rw-------    1 folkol  staff         1856 Nov 21  2020 hiragana katakana kanji introduction to japanese writing
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff          132 Apr 19  2021 hoodie med tryck
+	1 IDEA
+-rw-------@   1 folkol  staff      1137415 Oct 13  2020 hot- risk- och sårbarhetsanalys.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          521 Dec  5  2020 How do ultrasonit delay lines work
+	1 SUMMARY ultrasonic delay lines
+-rw-------    1 folkol  staff          156 Sep 28  2018 how to be more effective with functions
+	1 SUMMARY
+-rw-------    1 folkol  staff          669 Jan  8  2021 How to Choose a Password
+	1 SUMMARY
+-rw-------@   1 folkol  staff        30824 Dec 17  2019 How to communicate like a pro_ Episode #6.rtf
+	1 SUMMARY highbrow
+-rw-------    1 folkol  staff         2243 Jun 19  2021 How to estimate software development time
+	1 SUMMARY
+-rw-------    1 folkol  staff          157 Nov 20  2020 how-hackers-get-into-your-business
+	1 SUMMARY
+-rw-------    1 folkol  staff         7541 May  8  2020 how-heroku-works
+	1 SUMMARY
+-rw-------    1 folkol  staff           32 May 28  2021 http:::ebay.github.io:tsv-utils:
+	2 NUGGET tsv utils
+-rw-------    1 folkol  staff          208 Nov 27  2020 https:::www.freecodecamp.org:news:how-to-get-a-doc
+	1 NUGGET how get ip
+-rw-------@   1 folkol  staff         1580 May 18  2021 hultafors hammare designation
+	2 NUGGET Hultafors designations
+-rw-------@   1 folkol  staff          354 May 31  2018 humming-to-tabs
+	2 IDEA humming to tabs
+-rw-------    1 folkol  staff          192 Sep 24  2021 Hydrolocked: Engine oil seeped past piston rings,
+	1 NUGGET ?
+-rw-------@   1 folkol  staff         2272 Apr 12  2021 I recognize the lion by his claw
+	1 NUGGET Whatquam ex ungue leonem
+-rw-------    1 folkol  staff         3535 Jun  3  2022 Implement chat UI, there is a chat server to which
+	1 IDEA chat server
+drwx------    7 folkol  staff          224 Jul  2  2021 imposters-handbook
+	1 NUGGET reference to the book with small summary
+-rw-------    1 folkol  staff          575 Jul  4  2020 improving vim speed
+	1 SUMMARY
+-rw-------    1 folkol  staff        10658 Oct  5  2020 indesign for beginners
+	1 SUMMARY crash course
+-rw-------    1 folkol  staff          455 Nov 20  2020 information security
+	1 POST is "Rubber hose cryptography" actually a thing?
+-rw-------    1 folkol  staff          325 Sep 16  2019 inside git
+	1 TALK
+-rw-------    1 folkol  staff          756 Nov  8  2020 inside the ssd arstechnica
+	1 SUMMARY
+-rw-------    1 folkol  staff          419 Dec  5  2019 install docker on ubuntu
+	1 NUGGET install docker on ubuntuy
+-rw-------    1 folkol  staff        34114 Feb 25  2018 install kubernetes on pi cluster
+	1 SUMMARY install kubernetes on pi cluster
+-rw-------    1 folkol  staff        23371 Aug 17  2021 install openstack with devstack installer so that you can ssh to virtual machines
+	1 SUMMARY install openstack with devstack installer so that you can ssh
+-rw-------@   1 folkol  staff          431 Nov  7  2018 Interesting snippets
+	1 NUGGET
+-rw-------@   1 folkol  staff       948414 Jun 26  2021 introduction to linux interfaces for virtual networking redhat.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          875 Sep 24  2021 introduction to pivot tables
+	1 SUMMARY introduction to pivot tables
+-rw-------    1 folkol  staff         2351 Apr 17  2021 introduction to webrtc
+	1 SUMMARY introduction to webrtc
+-rw-------@   1 folkol  staff        24074 Dec 10  2021 IntroToCrypto.pdf
+	1 SUMMARY rsa
+-rw-------    1 folkol  staff          743 Aug 17  2021 intuition-about-statistics
+	1 SUMMARY statistical intuition
+-rw-------    1 folkol  staff         1285 Sep 29  2020 IP distribution geo
+	2 IDEA map?
+-rw-------    1 folkol  staff         3509 Oct 16  2020 iptables overview
+	1 SUMMARY ferm vs iptables
+-rw-------    1 folkol  staff         2434 Dec 22  2019 is mv atomic
+	2 NUGGET
+-rw-------    1 folkol  staff         1549 Jul  9  2021 island arbetstidsreduktion
+	1 SUMMARY
+-rw-------    1 folkol  staff          148 Jul  4  2020 javascripe types and known instances
+	1 NUGGET type hierarchy in standard JavaScript
+-rw-------    1 folkol  staff        16349 May 14  2019 jenkins migration
+drwx------    3 folkol  staff           96 Jan 12  2021 jfokus-brown-bag-lunch
+	1 SUMMARY
+-rw-------@   1 folkol  staff          899 Nov 14  2017 jq
+	1 NUGGET/COURSE grok jq
+-rw-------@   1 folkol  staff      5162265 Mar 16  2022 jvm-ecosystem-report-2021.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff        29265 Jun  1  2022 k-anonymity
+	2 SUMMARY
+-rw-------@   1 folkol  staff       331302 May 20  2022 k-anonymity-paper.pdf
+	1 PAPER
+-rw-------    1 folkol  staff         7811 Jul  6  2021 kaseya VSA truesec
+	1 SUMMARY youtube
+-rw-------@   1 folkol  staff      2103058 Mar 21  2021 knife sharpening paper.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         2048 Jan  6  2018 knr
+	1 SUMMARY
+-rw-------@   1 folkol  staff         5318 Oct  5  2020 kommatecknet
+	2 SUMMARY of awesome talk about punctuation (kommatering i svenskan)
+-rw-------    1 folkol  staff        25579 Sep 30  2020 kubernetes with rancher
+	1 SUMMARY
+-rw-------@   1 folkol  staff         1050 Jan 21  2021 l0 caches or uops cache
+	1 NUGGET "l0 caches", https://uops.info/cache.html
+-rw-------@   1 folkol  staff          147 Jun 12  2020 labbförslag
+	1 IDEA
+-rw-------    1 folkol  staff           18 Oct 22  2017 lambda as prompt?
+	1 IDEA
+-rw-------    1 folkol  staff          900 Aug 17  2021 layout diagrams
+	1 IDEA graph drawing / layout?
+-rw-------    1 folkol  staff          910 Jun 21  2021 learn agile estimation in 10 minutes
+	1 SUMMARY
+-rw-------    1 folkol  staff         1834 Oct  2  2017 learn lisp the hard way
+	1 SUMMARY
+-rw-------@   1 folkol  staff      1892603 Apr  1  2021 lecture-8---group-theory-dh.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff        34935 Oct 29  2020 less is more
+	2 COURSE what's a pager / intro to less
+-rw-------@   1 folkol  staff          790 Nov  7  2018 less known unix tools
+	2 NUGGET
+-rw-------    1 folkol  staff          958 Apr  4  2021 lin clark a cartoon into to fiber
+	1 SUMMARY
+-rw-------    1 folkol  staff         7069 Apr 12  2021 linux boot process
+	1 SUMMARY
+-rw-------    1 folkol  staff          419 Dec  5  2020 linux kernel device mappers
+	1 SUMMARY
+-rw-------    1 folkol  staff          737 Nov 18  2020 Linux Tech Tips AMD Ryzen 5000 series
+	1 SUMMARY
+-rw-------@   1 folkol  staff       258062 Feb 22  2022 linux-ipsec-tutorial.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff       110524 Apr 30  2021 lis.py
+	1 SUMMARY / longest increasing subsequence?
+-rw-r--r--@   1 folkol  staff        93089 Sep 19 23:35 listing-with-timestamps-curated.txt
+	TODO: Maybe use these as candidates?
+-rw-------    1 folkol  staff         1415 Apr  6  2021 logex all hands bo
+	2 QUOTE "Please be Dutch about it"  <-- "skräd inte orden! :)"
+	2 NUGGET TOIL
+-rw-------    1 folkol  staff           45 Sep 27  2018 loop like a native
+	1 NUGGET python iteration
+-rw-------    1 folkol  staff         6867 Feb  4  2021 Lunch and Learn Password strength
+	1 SUMMARY are humans good PRNGs?
+-rw-------    1 folkol  staff         1924 Nov  8  2020 lunch and learn topics
+	1 IDEAS
+-rw-------    1 folkol  staff       337890 Nov  7  2019 man-bash-cleaned
+	2 SUMMARY of the man page
+-rw-------    1 folkol  staff         1222 Aug 17  2021 meaning of 0.0.0.0 gateway
+	1 NUGGET
+-rw-------    1 folkol  staff         1063 Nov 27  2020 MEETING THE ENEMY a feminist comes to terms with the Men's Rights movement Cassie Jaye
+	1 SUMMARY
+-rw-------    1 folkol  staff         1889 May 30  2022 metacompliance-every-day-security-threats
+	1 SUMMARY
+-rw-------@   1 folkol  staff          899 Sep 24  2021 mickes music theory
+	2 SUMMARY
+-rw-------    1 folkol  staff         2565 Apr 30  2021 mickes musikteori
+	2 SUMMARY
+-rw-------@   1 folkol  staff       420405 Jun 23  2021 microsoft performance comparison security design choices.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff        19247 Oct  1  2020 microsoft security intelligence report v 24 2018
+	1 SUMMARY
+-rw-------    1 folkol  staff          811 May 28  2021 minimize computation environment changes
+	1 NUGGET
+-rw-------@   1 folkol  staff       831110 Oct 12  2020 MinIO-in-Healthcare.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         1249 Nov  8  2020 modular arithmetic visually explained
+	2 SUMMARY
+-rw-------@   1 folkol  staff       308719 Sep 16  2021 MSDN Magazine MEMORY MODELS understand the impact of low-lock techniques in multithreaded apps .pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         6908 Aug 24  2021 munin monitoring
+	1 SUMMARY
+-rw-------@   1 folkol  staff         2217 Jan 19  2021 music composition
+	1 NUGGET "Rythm, melody and harmony is the same thing — just on massively different scales."
+	1 SUMMARY composition
+-rw-------    1 folkol  staff         5481 Apr 19  2021 must read pandas interview questions and answers
+	1 SUMMARY
+-rw-------    1 folkol  staff         4703 Oct  5  2020 namn på värdshus
+	1 IDEA
+-rw-------    1 folkol  staff         6865 Jun 26  2021 Netfilter Archeology, 18 years from Linux 2.3 to 4.x
+	1 SUMMARY
+-rw-------    1 folkol  staff         2789 Aug 17  2021 Netfilter Flow
+	1 SUMMARY
+-rw-------@   1 folkol  staff        11734 Sep  3  2020 Network Security 101 full workshop
+	1 SUMMARY
+-rw-------@   1 folkol  staff          706 Aug 11  2020 never spit the difference
+	1 SUMMARY
+-rw-------@   1 folkol  staff      1091706 May 20  2022 nist-k-anonymity.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         2813 Jun  2  2021 nmap
+	1 NUGGET
+-rw-------@   1 folkol  staff       557292 Oct  5  2020 nn_exposure_paper_2018.pdf
+	1 PAPER Measuring Unintended Neural Network Memorization and Extracting Secrets
+-rw-------    1 folkol  staff          234 May 28  2021 Noctua vs Arctic P12?
+	1 choose fan
+-rw-------    1 folkol  staff         5758 May  7  2021 Nonce-Disrespecting Adversatires: Practical Forger
+	1 SUMMARY # Nonce-Disrespecting Adversaries: Practical Forgery Attacks on GCM in TLS
+-rw-------    1 folkol  staff          527 Jan 10  2022 note taking
+	1 NUGGET/TOOL note taking
+-rw-------    1 folkol  staff          262 Nov 27  2020 Note-taking vs TODOs.
+	1 IDEA
+-rw-------@   1 folkol  staff          342 Apr 12  2021 note32145
+	1 IDEA
+-rw-------    1 folkol  staff          351 Jun 17  2020 Notes app:
+	1 IDEA
+-rw-------    1 folkol  staff          379 May 28  2021 npm dump transitive dependency
+	1 NUGGET how re-resolve dependency without remiving lock file?
+-rw-------    1 folkol  staff          142 Oct 30  2020 number line upwards?
+	1 IDEA floor / higher / etc makes sense
+-rw-------@   1 folkol  staff          754 Dec 22  2019 numeral systems
+	2 NUGGET
+-rw-------    1 folkol  staff         1204 Feb 13  2020 numerical systems bases
+	2 NUGGET bases
+-rw-------    1 folkol  staff         7141 May  3  2019 numpy
+	1 SUMMARY
+-rw-------    1 folkol  staff         2578 Dec  5  2020 Nvidia GPU architecture
+	1 SUMMARY
+-rw-------    1 folkol  staff         2820 Oct 13  2021 oauth and oidc
+	1 SUMMARY OAuth / OIDC introduction and terms
+-rw-------    1 folkol  staff          603 Nov 27  2020 object-oriented programming is embarrassing
+	1 SUMMARY Top comment: Actual title: "Overengineered solutions to simple problems are bad."
+-rw-------@   1 folkol  staff       244579 Dec  2  2020 oclhashcat_benchmarking - The Password Project.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          377 Apr 27  2018 openg
+	1 SUMMARY
+-rw-------    1 folkol  staff          746 Jan 28  2018 opengl
+	1 SUMMARY
+-rw-------    1 folkol  staff          760 Jun 21  2021 openstack architecture and components
+	1 SUMMARY
+-rw-------    1 folkol  staff         3466 Aug 17  2021 OpenStack Documentation Digest
+	1 SUMMARY
+-rw-------    1 folkol  staff         3446 Jun 26  2021 OpenStack in single VM
+	1 SUMMARY
+-rw-------@   1 folkol  staff         1839 Jun 29  2021 openstack managing port level security
+	1 SUMMARY
+-rw-------    1 folkol  staff         1112 Nov 20  2020 openstack network chart
+	1 SUMMARY
+-rw-------    1 folkol  staff         3772 Feb  8  2022 openstack networking (neutron)
+	1 SUMMARY
+-rw-------    1 folkol  staff          785 Jun 30  2021 OpenStack Networking Concepts RedHat
+	1 SUMMARY
+-rw-------    1 folkol  staff         1392 Jun 30  2021 OpenStack Neutron Security Groups
+	1 SUMMARY
+-rw-------@   1 folkol  staff       679286 Aug 11  2021 Overcoming Intuition- Metacognitive Difficulty Activates Analytic Reasoning.pdf
+	1 PAPER https://pages.stern.nyu.edu/~aalter/intuitive.pdf
+-rw-------    1 folkol  staff          457 Nov  7  2018 p
+	1 IDEA typed streams
+-rw-------    1 folkol  staff          166 Apr 19  2021 pager that folds repeated input?
+	1 IDEA
+-rw-------    1 folkol  staff          208 Nov 18  2021 painter run back and forth triangular numbers
+	1 NUGGET triangular number
+-rw-------    1 folkol  staff         2359 Apr 26  2021 pandas advanced indexing
+	1 SUMMARY
+-rw-------    1 folkol  staff          219 Jul  4  2020 pandas digest
+	1 CONCEPTS
+-rw-------@   1 folkol  staff      1044212 Jul  4  2022 paper-how-do-committees-invent.pdf
+	1 PAPER https://www.melconway.com/Home/pdf/committees.pdf
+-rw-------@   1 folkol  staff       276538 Mar 22  2021 Parsing_in_Python.pdf
+	1 PAPER different parsers
+-rw-------    1 folkol  staff          180 Apr 21  2021 Password salt rotation?
+	1 IDEA should we rotate salt?
+-rw-------    1 folkol  staff           19 Oct 17  2018 paste with snippet
+	1 IDEA paste-with-snippet
+-rw-------    1 folkol  staff           85 Apr 12  2021 pathologic egrep
+	1 NUGGET extremely slow with long lines, example?
+-rw-------@   1 folkol  staff      1489974 Apr 30  2021 patience sort microsoft sigmod14.pdf
+	1 PAPER patience sort
+-rw-------@   1 folkol  staff          706 Mar  3  2021 Pavel Tsatsouline on slow training
+	1 PAPER slow muscle fiber training
+-rw-------@   1 folkol  staff       136747 Feb 19  2020 peg parser paper.pdf
+	1 PAPER PEG parsers
+-rw-------    1 folkol  staff          493 Dec  1  2020 peka-och-klicka-adventure
+	1 IDEA escape room?
+-rw-------    1 folkol  staff         5697 Nov  7  2020 performance analysis
+	1 GUIDE various tools for performance analysis
+-rw-------@   1 folkol  staff           19 May 28  2021 picasso pycowday
+	1 IDEA
+-rw-------    1 folkol  staff          352 Jun 27  2018 pipes – programming language
+	1 IDEA
+-rw-------    1 folkol  staff           21 Apr 12  2021 pivot shell command?
+	1 IDEA
+drwx------    3 folkol  staff           96 Oct 11  2021 pki-certificates
+	1 SUMMARY
+-rw-------@   1 folkol  staff          641 Jul 27  2018 platform game last stand
+	2 IDEA "beat-em-up", Tetris style.
+-rw-------    1 folkol  staff         2984 Mar 19  2018 postgres statistics
+	1 SUMMARY
+-rw-------    1 folkol  staff          142 Dec 15  2020 powerknapp som man måste "rivstarta" (som gräsklip
+	1 IDEA
+-rw-------    1 folkol  staff         1677 Sep 30  2021 PowerPoint Training
+	1 SUMMARY
+-rw-------    1 folkol  staff        15387 Nov  6  2018 PowerShell
+	1 SUMMARY
+-rw-------@   1 folkol  staff       311166 Jul  6  2021 Prefix Sums and their applications.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          832 Nov 27  2019 Primality tests
+	2 NUGGET
+-rw-------    1 folkol  staff          409 Sep 24  2021 principal component analysis PCA
+	1 SUMMARY
+-rw-------    1 folkol  staff          466 Dec  5  2020 Print ascii value of character
+	1 IDEA
+-rw-------    1 folkol  staff          153 Apr 12  2021 privilege escalation .bashrc
+	1 NUGGET
+-rw-------    1 folkol  staff          965 Dec  8  2020 problemet är att man är lite för smart, samt tror
+	1 QUOTE
+-rw-------    1 folkol  staff        35726 Apr 23  2021 process graph pipes sockets
+	2 NUGGET visualize process graph
+-rw-------@   1 folkol  staff          978 Jan 28  2021 Produktivitet och sysselsättning
+	2 REFLECTION hushåll med din Mojo!
+-rw-------    1 folkol  staff         1033 Mar 11  2021 programmer types
+	1 SUMMARY youtube video
+-rw-------    1 folkol  staff         2209 Aug 13  2021 programming language influences
+	2 IDEA family tree of languages (+youtube)
+-rw-------@   1 folkol  staff          233 Aug 26  2021 programming syntax
+	1 IDEA
+-rw-------    1 folkol  staff          760 Jul 13  2020 programming-language-syntax
+	1 IDEA
+-rw-------    1 folkol  staff          664 Apr 12  2021 psychiatric data breach in finland
+	1 SUMMARY
+-rw-------    1 folkol  staff           93 Oct 13  2021 public key chain analogies
+	1 IDEA
+-rw-------    1 folkol  staff         4333 Aug  7  2020 publishing (perfect) python packages on pypi
+	1 SUMMARY publish packages to pypi
+-rw-------    1 folkol  staff          468 Aug 20  2021 pull-model of performance analysis
+	1 IDEA
+-rw-------    1 folkol  staff          418 Oct 26  2021 pycon 2021
+	1 SUMMARY
+-rw-------    1 folkol  staff         3199 Feb 15  2018 pypi demo
+	1 GUIDE
+-rw-------    1 folkol  staff        13191 Jul 22  2018 Python 3 strings vs bytes
+	1 SUMMARY
+-rw-------    1 folkol  staff           54 Oct 17  2018 Python as a protocol based language
+	2 GROK
+-rw-------    1 folkol  staff          273 Mar  4  2020 python concurrency from the ground up david beazley
+	1 SUMMARY
+-rw-------    1 folkol  staff          112 Nov 20  2018 python find all classes
+	1 SUMMARY
+-rw-------    1 folkol  staff          567 Jun 10  2020 python pet peeves
+	2 REFLECTION
+-rw-------    1 folkol  staff          310 Nov 27  2020 python protocols
+	1 SUMMARY
+-rw-------@   1 folkol  staff          545 Oct 27  2017 python_security
+	1 SUMMARY introduction python
+	1 SUMMARY security youtube
+-rw-------    1 folkol  staff       213506 May 27  2019 python-hello-world-readme.md
+	1 SUMMARY what happens when I run hello world in Python?
+-rw-------    1 folkol  staff         1383 Sep 30  2017 python's visualization landscape
+	1 SUMMARY
+-rw-------    1 folkol  staff         3664 Jul 19  2018 python37
+	1 SUMMARY what's new in 3.7
+-rw-------@   1 folkol  staff          331 Jan 14  2022 quotes
+	2 QUOTE
+-rw-------@   1 folkol  staff       678244 Sep 21  2020 RacoonAttack.pdf
+	1 PAPER
+-rw-------    1 folkol  staff          746 Jul 12  2020 radix sort?
+	2 GROK radix sort (also, unstable counting sort for small ranges?)
+	2 NUGGET COUNT SORT (Harold H. Seward)
+-rw-------    1 folkol  staff         8569 Feb 13  2020 RBAC in Azure
+	1 SUMMARY RBAC in Azure
+-rw-------    1 folkol  staff        19043 Jun 28  2021 rdo networking in too much detaul quantum:neutron
+	1 SUMMARY
+-rw-------    1 folkol  staff         4233 Apr  4  2021 react performance tips and tricks
+	1 SUMMARY youtuve
+-rw-------    1 folkol  staff          744 Jun 11  2020 react-stuff
+	2 CONCEPTS react
+-rw-------    1 folkol  staff         4534 Apr  4  2021 reacts performance end to end
+	1 SUMMARY
+-rw-------    1 folkol  staff         1517 Jan 29  2022 README
+	1 SUMMARY laern ui design
+-rw-------    1 folkol  staff          425 Jun 18  2021 recreating Dennis Ritchie's PhD Thesis
+	1 SUMMARY
+	1 QUOTES
+-rw-------    1 folkol  staff          321 Feb 23  2021 redbridge eventdriven with kafka and kubernetes
+	1 CONCEPTS kafka 101
+-rw-------    1 folkol  staff       332303 Sep 14  2021 Redis from .NET (Core) application.
+	1 SUMMARY
+-rw-------    1 folkol  staff           87 Jun  3  2020 remove extended attribute quarantine for unsigned apps
+	1 NUGGET
+-rw-------@   1 folkol  staff       184332 Mar 26  2021 Render Graphviz graphs directly in your posts - Announcements - Graphviz.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          156 Dec  5  2020 resistor color bands
+	1 NUGGET (also, explain how they were chosen / mnemonics)
+-rw-------    1 folkol  staff         2017 Dec  5  2020 reverse engineer z80
+	1 SUMMARY
+-rw-------    1 folkol  staff         1433 Nov 20  2018 reverse hash
+	1 SUMMARY
+-rw-------    1 folkol  staff         1763 Sep 20  2020 roll20.js
+	1 IDEA animation instead of video
+-rw-------    1 folkol  staff          338 Oct 10  2020 rollspelsdoodle
+	1 IDEA moodle design
+-rw-------    1 folkol  staff          985 Aug 30  2021 rollspelsuppslag
+	1 IDEA
+-rw-------@   1 folkol  staff        40354 Apr 12  2021 romanian name generation
+	1 POST generate romanian names
+-rw-------    1 folkol  staff          793 Nov  7  2018 rsa
+	1 GROK rsa algoritm
+-rw-------@   1 folkol  staff          527 May 28  2021 rsa key disclosure and ecdsa nonce leakage
+	1 SUMMARY timeline partial rsa key -> full recovery
+-rw-------    1 folkol  staff        15994 Dec  7  2020 RSA Security got hacked
+	1 SUMMARY
+-rw-------    1 folkol  staff         5506 May 19  2019 RSA talk
+	1 TALK
+-rw-------@   1 folkol  staff        75832 Apr 30  2021 rule of thumb complexity class per input size.pdf
+	1 NUGGET reinterpret for "reasonable complexity for real world app"
+-rw-------@   1 folkol  staff       206588 May 13  2021 safari_bookmarks.html
+	1 SUMMARY, publish my bookmarks?
+-rw-------@   1 folkol  staff         2251 Aug 12  2021 Scale Kubernetes to Support 50000 services
+	1 SUMMARY
+-rw-------@   1 folkol  staff         1114 Apr 23  2019 scipy toolkits overview
+	1 SUMMARY
+-rw-------    1 folkol  staff       944038 Aug  9  2021 scm breeze cd to folder with hyphen
+	1 POST what happened when trying to cd to 2020-11 (scm_breeze choked)
+	1 IDEA show how I use scm_breeze for various things
+-rw-------    1 folkol  staff          153 Sep 17  2021 scrape_certs.sh
+	1 NUGGET show certs
+-rw-------    1 folkol  staff          113 May 28  2021 search or flow chart for dataviz
+	1 IDEA organize so we can find a suitable one?
+-rw-------@   1 folkol  staff       209164 Nov  1  2017 search_in_variant.svg
+	1 NUGGET plot svg in browser? (or convert svg to png?)	
+	2 NUGGET how look at svg? command
+-rw-------    1 folkol  staff         1686 Sep 24  2021 sec-t 2021
+	1 SUMMARY
+-rw-------    1 folkol  staff           59 Sep 24  2021 security review of man page rendering
+	1 IDEA rendering man pages seems complicated, find vulnerability?
+-rw-------    1 folkol  staff          920 Mar  4  2020 security-breach-samples
+	1 SUMMARY
+-rw-------@   1 folkol  staff          150 Dec 22  2019 sed lecture
+	2 GROK sed 'basic loop'
+-rw-------    1 folkol  staff          387 Apr 12  2021 selinux policy
+	1 SUMMARY
+-rw-------    1 folkol  staff         1507 Oct 10  2020 serverless react and graphql app with aws amplify and appsync
+	1 SUMMARY
+-rw-------    1 folkol  staff        14342 Jul  1  2021 setup openstack devstack for terraform and ansible testing
+	1 GUIDE
+-rw-------    1 folkol  staff          159 Apr 19  2021 shamir secret well defined or multiple roots
+	1 IDEA
+-rw-------    1 folkol  staff          972 Jan 22  2022 shannon nyquish sampling
+	1 SUMMARY
+-rw-------@   1 folkol  staff          209 Oct 21  2017 shell utils
+	2 NUGGET
+-rw-------@   1 folkol  staff           61 May 12  2020 silly weekday names
+	1 IDEA
+-rw-------@   1 folkol  staff       358533 Jul  6  2021 single assignment c.pdf
+	1 SUMMARY https://www.sac-home.org/_media/docs:tutorial.pdf
+-rw-------@   1 folkol  staff       885280 Oct  1  2020 SIR Report v24.pdf
+	1 SUMMARY security intelligence report
+-rw-------    1 folkol  staff          695 Apr 19  2021 snippets list GUI
+	1 IDEA
+-rw-------    1 folkol  staff         1628 Mar  1  2021 socrates
+	1 QUOTE
+-rw-------    1 folkol  staff          293 Jun 29  2021 Software costs
+	1 REFLECTION total cost of ownership for softwar development
+-rw-------@   1 folkol  staff      9609831 Apr 25  2022 software engineering at google.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         1071 Sep 21  2020 sorting ideas
+	1 IDEA
+-rw-------    1 folkol  staff         6387 May  2  2019 spark
+	1 SUMMARY
+-rw-------    1 folkol  staff         8694 Aug 20  2021 spark performance troubleshooting
+	1 SUMMARY
+-rw-------    1 folkol  staff          252 May  3  2020 speed-typetris
+	1 IDEA
+-rw-------    1 folkol  staff        15438 Jul  4  2020 spf record
+	1 SUMMARY
+-rw-------    1 folkol  staff         3525 Mar  5  2018 spring-boot-lab
+	1 SUMMARY
+-rw-------    1 folkol  staff          275 Apr 23  2021 ssd drives architecture
+	1 NUGGET ipcalc, nmap -sT, masscan, identification/authentication/authorization
+	1 CONCEPT ssd page block cell
+-rw-------    1 folkol  staff         1418 Dec  7  2020 SSH ciphers
+	1 SUMMARY
+-rw-------@   1 folkol  staff          844 Sep 24  2021 stämningsförslag för datorspel
+	1 IDEA
+-rw-------@   1 folkol  staff       941086 Jun 30  2020 statistikordlista ebm ulf eriksson.pdf
+	1 PAPER
+-rw-------    1 folkol  staff         1091 Sep  2  2020 storytie with viss offensive security fails phobos.io
+	1 SUMMARY hak5 pro tips
+-rw-------    1 folkol  staff         1192 Nov 27  2020 strategispel
+	1 IDEA
+-rw-------    1 folkol  staff         1848 Dec  5  2020 Superblock Inode Dentry File
+	1 SUMMARY
+-rw-------@   1 folkol  staff       369814 Nov  7  2020 SurveyonDataRemanenceinCloudComputingEnvironment.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff         2337 Jan 18  2021 svensk skrivstil
+	1 SUMMARY historia
+-rw-------@   1 folkol  staff      1022605 Nov 11  2020 Swenson2007_Chapter_FileSystemJournalForensics.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          265 May 28  2021 System clipboard is not not a good place for secre
+	1 REFLECTION
+-rw-------@   1 folkol  staff        62160 Feb 23  2022 tcp state transition diagram.gif
+	1 SUMMARY
+-rw-------    1 folkol  staff         1270 Jun 25  2021 teespring security incident
+	1 SUMMARY
+-rw-------@   1 folkol  staff           77 Apr 12  2021 tekla styrka svaghet talang överslag wrong djungle syndrome
+	1 NUGGET ?
+-rw-------    1 folkol  staff         1041 Aug 17  2021 teutonic fury
+	1 QUOTE
+-rw-------@   1 folkol  staff          380 Jan  1  2018 text filter speed
+	1 POST compare text filter speeds
+-rw-------    1 folkol  staff         4698 Apr 26  2021 The Application of Matrices
+	2 SUMMARY
+-rw-------    1 folkol  staff         1390 Oct 12  2020 the design of everyday things summary of summary
+	2 SUMMARY
+-rw-------@   1 folkol  staff         2929 Sep 18  2020 the full contact recon int0x80 of dual core savant derbycon
+	1 SUMMARY
+-rw-------@   1 folkol  staff        69213 Feb  8  2018 The Master Boot Record (MBR) and What it Does.webarchive
+	1 NUGGET / SUMMARY
+-rw-------    1 folkol  staff           71 Jun 29  2021 The Matasano Crypto Challenges
+	1 SUMMARY
+-rw-------@   1 folkol  staff         9938 Apr 12  2021 the need for cognition scale
+	2 NUGGET
+-rw-------@   1 folkol  staff       115793 Feb 19  2021 The Need for Cognition Scale.pdf
+	2 NUGGET https://en.wikipedia.org/wiki/Need_for_cognition (screenshot)
+-rw-------    1 folkol  staff         5669 Apr  4  2021 the react cookbook advanced recipes to level up your next app
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff         2444 Nov 27  2020 the wet codebase
+	1 SUMMARY dan abramov
+-rw-------@   1 folkol  staff     25934279 Mar 26  2019 Theory_of_The_Spencerian_Method_of_PaPractical_Penmanship_and_Five_Copybooks.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         1311 Feb 19  2021 thinking fast and slow
+	1 SUMMARY
+-rw-------    1 folkol  staff          490 Apr 12  2021 this kind of secure erase is no longer considered safe
+	1 QUOTE
+-rw-------    1 folkol  staff          345 Apr 10  2021 three key vectors for transistor technology
+	1 SUMMARY
+-rw-------    1 folkol  staff         1141 Jan 19  2021 tidsbestämma gammal DN
+	1 NUGGET
+-rw-------    1 folkol  staff           63 Nov 21  2018 time complexity
+	1 NUGGET
+-rw-------@   1 folkol  staff       211558 Sep 23  2020 time series analysis.pdf
+	1 SUMMARY convolution
+-rw-------    1 folkol  staff          375 Sep 25  2020 time standards and time zones UTC GMT ZULU
+	1 SUMMARY
+-rw-------    1 folkol  staff         3706 Nov 15  2021 tls certifiate chains
+	1 SUMMARY
+-rw-------    1 folkol  staff          306 Nov 27  2020 tls in wireshard
+	1 SUMMARY wiresHARK
+-rw-------@   1 folkol  staff         2399 Jul  2  2021 to scram or not to scram
+	1 SUMMARY SCRAM = Salted Challence Response Authentication Mechanism
+-rw-------    1 folkol  staff         2679 Apr  4  2021 top 10 mistakes react programmers make
+	1 SUMMARY
+-rw-------    1 folkol  staff         2067 Mar 27  2019 top 5 mistakes spark
+	1 SUMMARY
+-rw-------    1 folkol  staff         5866 Apr 12  2021 top three data breach vectors
+	1 SUMMARY
+-rw-------@   1 folkol  staff         5898 Jul 25  2021 transforming code into beautiful, idiomatic python
+	2 NUGGETSs
+-rw-------    1 folkol  staff         7069 Nov 20  2020 truesec tech talk 2020 10 22
+	1 SUMMARY
+-rw-------@   1 folkol  staff      5603045 Feb 14  2022 Truesec Threat Intelligence Report 2022.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff         4875 Sep 21  2020 TrueSec webinat hotbild
+	1 SUMMARY
+-rw-------    1 folkol  staff          168 Feb  3  2022 tryck tröja
+	2 IDEA
+-rw-------    1 folkol  staff         1046 Mar 18  2021 tryhackme basic penetration testing
+	1 SUMMARY
+-rw-------@   1 folkol  staff       375802 Aug 10  2017 Tutorial: Metacompilers Part 1.html
+	1 SUMMARY
+-rw-------@   1 folkol  staff       945031 Oct 11  2018 typografi.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          750 Dec  5  2020 UEFI for mere mortals
+	1 SUMMARY youtube
+-rw-------    1 folkol  staff          916 Nov 14  2018 unhash.c
+	1 NUGGET unhash PNR
+-rw-------    1 folkol  staff         5849 Feb 27  2019 unicode 2
+	1 TALK
+-rw-------    1 folkol  staff         1115 Jul 18  2018 Unix filters
+	1 NUGGET
+-rw-------@   1 folkol  staff        27714 Jun  2  2019 unix terminals chalmers.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          343 Feb 22  2019 unixtools
+	1 NUGGET
+-rw-------    1 folkol  staff          401 Sep 24  2021 use subjectAltName instead of commonName
+	1 SUMMARY
+-rw-------    1 folkol  staff         2314 Jan 14  2022 useful tool ideas
+	1 IDEA
+-rw-------    1 folkol  staff          749 May 28  2021 uux
+	1 REFLECTION "magic files" in spool
+	1 NUGGET kprobes / execsnoop
+-rw-------@   1 folkol  staff         1098 Mar 17  2020 varonis 2020 data breach statistics
+	1 SUMMARY
+-rw-------@   1 folkol  staff           33 May 28  2021 via tidens förruttnelse : osmos
+	1 QUOTE
+-rw-------@   1 folkol  staff        18740 Jul 25  2021 viktiga komihåg för arbetet i datorrummet
+	1 QUOTE
+-rw-------@   1 folkol  staff          468 Feb  4  2021 vildsvinsjakt skandinavisk fauna
+	1 QUOTE
+-rw-------@   1 folkol  staff      3850701 Oct 29  2017 vimbook-OPL.pdf
+	1 SUMMARY
+-rw-------@   1 folkol  staff        51347 Sep 24  2020 Virtualization.pdf
+	1 SUMMARY
+-rw-------    1 folkol  staff          185 May 28  2021 visidata install
+	2 NUGGET
+-rw-------@   1 folkol  staff         1284 May 28  2021 visualize aes dispersion with some nice input patt
+	1 IDEA
+-rw-------    1 folkol  staff          265 Oct 13  2021 visualize git project flow as flying over a river
+	1 IDEA
+-rw-------    1 folkol  staff          313 Nov 27  2020 warcraftlogs queries
+	1 SUMMARY
+-rw-------@   1 folkol  staff           48 Jun  7  2018 wavelengths that penetrate water but not earth?
+	1 IDEA scanning bottom of ocean
+-rw-------    1 folkol  staff          753 May 31  2022 web-3-composable-data
+	1 SUMMARY
+-rw-------    1 folkol  staff          118 Aug 17  2021 Websites reposting content spamdexing article spinning
+	1 SUMMARY
+-rw-------@   1 folkol  staff        16376 Apr 17  2021 welles terminal issue zsh paste double
+	2 POST
+-rw-------    1 folkol  staff          152 Apr 10  2021 What about a 'light loudspeaker?'
+	1 IDEA
+-rw-------    1 folkol  staff          622 Dec  8  2020 what color is this
+	1 IDEA
+-rw-------    1 folkol  staff        28184 Sep 28  2018 what does it take to be an expert in python
+	1 SUMMARY
+-rw-------    1 folkol  staff         1346 Aug  7  2020 what does PEP 517 mean for packaging
+	1 SUMMARY
+-rw-------    1 folkol  staff         1284 Dec  2  2018 what happens when you call print
+	1 SUMMARY
+-rw-------    1 folkol  staff          195 Sep 24  2021 what is a power user
+	1 REFLECTION
+-rw-------@   1 folkol  staff         3692 Apr 12  2021 what the flux
+	1 SUMMARY
+-rw-------@   1 folkol  staff        19120 Aug 13  2021 what the heck is SSL_CK_DES_192_EDE3_CBC_WITH_MD5
+	2 NUGGET "weird" ciphersuite
+-rw-------@   1 folkol  staff        33926 Jul 23  2022 What's inside id_rsa?
+	2 POST
+-rw-------    1 folkol  staff          356 Dec 15  2020 when you work on things results come magnus walker
+	2 QUOTE
+-rw-------    1 folkol  staff          969 Sep 15  2021 whichunixutil
+	2 POST/TOOL
+-rw-------    1 folkol  staff          447 Apr 12  2021 Whiteboard-produkt.
+	1 IDEA
+-rw-------    1 folkol  staff         1941 Nov 20  2020 why encryption is no longer enouch to protect sensitive data
+	1 SUMMARY
+-rw-------    1 folkol  staff         8367 Nov 27  2020 wifi connection 4 way handshake
+	1 SUMMARY
+-rw-------@   1 folkol  staff       296275 Aug 17  2021 Wikipedia_webrequest_flow_2020.png
+	1 SUMMARY
+-rw-------    1 folkol  staff         1561 Sep 14  2021 Windows HELLO PIN
+	1 SUMMARY
+-rw-------    1 folkol  staff         5714 Nov 30  2021 work smarter zoom
+	1 SUMMARY
+-rw-------    1 folkol  staff         7622 Mar 19  2020 working with time series in python
+	1 SUMMARY
+-rw-------    1 folkol  staff          447 Apr  5  2021 wow cpu and gpu comparisons
+	1 POST measure performance with/without addons/settings
+-rw-------@   1 folkol  staff         1207 Sep 22  2020 wow performance
+	1 SUMMARY
+-rw-------    1 folkol  staff         1146 Aug 13  2021 Writing Sublime Plugins
+	1 SUMMARY
+-rw-------@   1 folkol  staff        22279 Aug 27  2021 www.bemroses.net:images:curves.jpg
+	1 SUMMARY classical learning curves for some common editors
+-rw-------@   1 folkol  staff        18363 Jun  1  2019 Yet another guided tour of CPython
+	1 SUMMARY
+-rw-------    1 folkol  staff           52 Apr 12  2021 yg, fast mer generell med t.ex. "terraform-plugin"
+	1 IDEA
+-rw-------    1 folkol  staff         1008 Jan 22  2021 you should learn how to hack
+	1 SUMMARY
+-rw-------@   1 folkol  staff       376959 Apr  5  2022 zipattacks mike auckland.pdf
+	1 SUMMARY breaking zip
+-rw-------@   1 folkol  staff          581 May 31  2022 zodiak-killer-how-was-the-340-made
+	1 SUMMARY
+
+
+
+# ~/Documents/notes
+
+
+
+$ ls -l
+total 20992
+-rw-------   1 folkol  staff      388 Jun 19  2022  3b1b-tips-to-be-a-better-problem-solver
+	1 SUMMARY
+-rw-------   1 folkol  staff      187 Jun 10  2022 # ECMA-262
+	0 SUMMARY
+-rw-------   1 folkol  staff     2481 Jun 22  2022 100-web-development-things
+	1 SUMMARY
+-rw-------   1 folkol  staff     1526 Jun 18  2022 10x-dev-zipfs-law
+	1 SUMMARY
+	1 QUOTE The rich gets richer, and the hubs get hubbier
+-rw-------   1 folkol  staff     1762 Aug  7  2020 14342.md
+	1 IDEA notes
+-rw-------   1 folkol  staff     2364 Feb  7  2022 20 things I've learned in my 20 yeras as a software engineer
+	1 SUMMARY
+-rw-------   1 folkol  staff     5582 Oct 20  2020 2020-10-11
+	1 IDEA fantasy tropes
+	1 SUMMARY Roman Province vs Colony?
+	1 SUMMARY modelling success, what do others do?
+-rw-------   1 folkol  staff     7094 Jul 26  2022 2022-07-23
+	1 IDEA log viewer for Windows?
+	1 SUMMARY AWS Well Architected, lenses for smaller apps
+	1 NUGGET Lambda @ URL
+-rw-------   1 folkol  staff     2000 Jul 29  2022 2022-07-28
+	1 SUMMARY Communicating Sequential Processes
+	1 NUGGET/GUIDE Couchbase vs DynamoDB
+	1 SUMMARY S3 implementation, read and write have to wait for quorum / witnesses
+-rw-------@  1 folkol  staff      791 Oct 22  2023 2023-10-22
+	1 NUGGET vim global marks
+	1 QUOTE don't solve problems you don't have!
+	1 NUGGET problem solving for interview problems
+-rw-------   1 folkol  staff     1935 Nov 11  2023 2023-10-25
+	1 SUMMARY OLAP vs OLTP, columnar databases
+	1 SUMMARY DuckDB getting started
+-rw-------   1 folkol  staff     8925 Jul 31  2024 2024-07-31-bookdb-review
+	1 NUGGET gharchive
+-rw-------   1 folkol  staff     5699 Jul 31  2024 2024-07-31-photon
+	1 SUMMARY Andy Pavlov on Photon for Spark (Databricks runtime via JNI)
+	1 SUMMARY SQL on Spark
+-rw-------   1 folkol  staff   290829 Jan  5  2025 2024-08-01-spark-overview
+	1 SUMMARY
+-rw-------   1 folkol  staff       79 Aug 16  2024 2024-08-16-notes
+	1 SUMMARY Rust Performance Book
+-rw-------   1 folkol  staff     4908 Feb 15  2025 2024-11-30-tinybench-archeology
+	2 SUMMARY tinybench archeology
+	2 NUGGET https://rust-book.cs.brown.edu, alternative mental model for ownership
+		https://rust-book.cs.brown.edu/ch04-01-what-is-ownership.html
+-rw-------   1 folkol  staff       21 Nov 30  2024 2024-11-30-vitest-history
+	1 SUMMARY
+-rw-------   1 folkol  staff     3066 Dec 28  2024 2024-12-28-criterion.js
+	1 SUMMARY criterion.js
+	1 NUGGET how deploy npm js
+-rw-------   1 folkol  staff      651 Jan  5  2025 2025-01-05.2
+	1 SUMMARY leetcode stuff
+-rw-------   1 folkol  staff     1524 Feb 15  2025 2025-02-15-gdb-in-15-min
+	2 NUGGET/SUMMARY quick into of gdb
+-rw-r--r--@  1 folkol  staff     2991 Jul 12 13:42 2025-03-23-fabric-and-local-models
+	1 SUMMARY using local models with fabric
+-rw-r--r--@  1 folkol  staff      467 Jul 12 13:41 2025-04-05-how-does-fabric-work
+	2 NUGGET
+-rw-r--r--@  1 folkol  staff     5224 Jul 12 13:41 2025-04-21-multi-modal-models
+	1 NUGGET tussilago on brown grass; description + sentiment analyis
+-rw-r--r--@  1 folkol  staff     7349 May 10  2025 2025-05-10-ollama-model-timings
+	1 POST compared some different models for summarization
+-rw-r--r--@  1 folkol  staff     1255 Aug 22 21:55 2025-07-12-escape-velocity
+	1 SUMMARY create a game
+-rw-r--r--@  1 folkol  staff      851 Jul 12 13:42 2025-07-12-large-language-models
+	1 SUMMARY why are they called large language models?
+-rw-r--r--@  1 folkol  staff      476 Jul 12 12:35 2025-07-12-nessie-catalog
+	1 SUMMARY
+-rw-r--r--@  1 folkol  staff      927 Dec 21 13:47 2025-12-20-1brc-rust-jon
+	1 SUMMARY Impl rust
+-rw-r--r--@  1 folkol  staff    63717 Dec 22 01:33 2025-12-21-identify-blog-post-candidates-form-notes
+	1 SUMMARY
+-rw-------   1 folkol  staff      838 Dec 28  2024 3b1b-a-manim-demo-with-ben-sparks
+	1 SUMMARY a manim demo
+-rw-------@  1 folkol  staff      218 Nov 20  2022 3b1b-on-convolutions
+	1 QUOTE expanding polynomials and collecting like terms is the same thing as a convolution
+-rw-------   1 folkol  staff     3557 Nov 11  2023 3t-stack-tutorial
+	1 SUMMARY
+-rw-------   1 folkol  staff     4931 Jan 17  2022 5 remarkably powerful hacks to become more articulate
+	2 SUMMARY
+-rw-------   1 folkol  staff      927 Jan 16  2022 8 python coding tips from the google python style guide
+	1 SUMMARY
+-rw-------   1 folkol  staff      593 Jun 17  2023 a-firehouse-of-rust-for-busy-people
+	1 NUGGET 3 big ideas
+-rw-------   1 folkol  staff       68 Oct  8  2023 aes
+	1 PAPER AES
+-rw-------   1 folkol  staff    12005 Jun  3  2022 age quod agis
+	1 QUOTE
+	1 SUMMARY history
+-rw-------   1 folkol  staff     2666 Jul 21  2023 all-rust-features-explained
+	1 SUMMARY
+-rw-------   1 folkol  staff      119 Jun 18  2022 amazon-global-network-overview
+	2 SUMMARY AWS Network as of 2016
+-rw-------   1 folkol  staff     1922 Jun  3  2022 angular-vs-angularjs
+	1 SUMMARY
+-rw-------   1 folkol  staff     1309 Mar 25  2022 api-mocking-react-development
+	1 SUMMARY mocking APIs
+-rw-------   1 folkol  staff      587 Feb  6  2022 assigned access kiosk breakout hard mode
+	1 NUGGET Kiosk Mode breakout
+-rw-------   1 folkol  staff     7538 Feb 24  2022 attacking pgp black hat
+	1 SUMMARY
+-rw-------   1 folkol  staff     3572 Jan 26  2022 auth0
+	1 SUMMARY SaaS on OpenID
+-rw-------   1 folkol  staff      202 Jun 28  2024 automatic-rebase-history
+	1 NUGGET automatic rebase given 'template'
+-rw-------   1 folkol  staff    11853 Jun 17  2022 aws-iam
+	1 SUMMARY
+-rw-------   1 folkol  staff     8786 Aug  9  2022 aws-services-summary
+	1 SUMMARY categories and history of services
+	1 SUMMARY SNS / SQS / Lambda
+-rw-------@  1 folkol  staff      687 Feb 10  2022 baby aes rijndael visualized
+	2 SUMMARY (little program on folkol.com)
+-rw-------   1 folkol  staff     1051 Apr 12  2022 backend-as-a-service
+	1 SUMMARY
+-rw-------   1 folkol  staff    20297 Oct  7  2023 bean-vs-bean
+	1 SUMMARY EJB
+	1 GROK EJB
+-rw-------   1 folkol  staff     4415 Jun 25  2022 bell-labs-the-unix-operating-system
+	2 SUMMARY youtube. Choose your primitives / axioms. Let others build on top of it.
+-rw-------   1 folkol  staff      126 Jun  3  2022 better-pbpaste
+	1 IDEA
+-rw-------   1 folkol  staff      187 May  9  2022 better-tree-tool
+	1 IDEA like tree, but if stdin isatty we use that instead of crawling the folders
+-rw-------   1 folkol  staff     1340 Aug  6  2023 bevy game engine
+	1 SUMMARY
+-rw-------   1 folkol  staff    19313 Mar 29  2024 bigquery-dremel
+	2 SUMMARY "Retrospective paper discuss the in-memory shuffle, which was an important part -- which is why we didn't read the original paper."
+	2 NUGGET "A pipeline breaker is an operator that produces the first (correct) output tuple only after all input tuples have been processed"
+	2 SUMMARY Volcano model vs etc
+-rw-------   1 folkol  staff      193 Jun 19  2022 binary-heap-in-array
+	1 NUGGET
+-rw-------   1 folkol  staff       34 Apr 25  2022 bit-buketten
+	1 NUGGET bitbucket / bit-buketten / buk-ätten
+drwx------  10 folkol  staff      320 Jan 14  2022 bluetooth experiment
+	1 POST bluetooth problems with GC
+-rw-------   1 folkol  staff      494 Apr 13  2022 bo-on-motivation-velocity-and-daniel-pink
+	1 NUGGET daniel Pink on motivation and velocity
+-rw-------   1 folkol  staff      873 Jun 19  2022 browser-reflow
+	1 SUMMARY
+-rw-------   1 folkol  staff      466 Aug 20  2022 build-custom-keyboard
+	1 SUMMARY
+-rw-------@  1 folkol  staff      127 Nov 12  2022 c64-info
+	1 SUMMARY links
+-rw-------   1 folkol  staff     6743 Jul 26  2022 cache-coherence-protocols-nesoacademy
+	1 SUMMARY cache coherence
+	2 SUMMARY matrix animation
+-rw-------   1 folkol  staff     3056 Jun 26  2022 casey-muratori-papers-I-have-loved
+	1 SUMMARY
+drwxr-xr-x@  4 folkol  staff      128 Dec 21 00:08 chatgpt-hallisar
+	1 NUGGET
+-rw-------   1 folkol  staff     4924 Feb 10  2022 chrome phone home
+	1 SUMMARY Chrome sending data to Google
+-rw-------   1 folkol  staff    22627 May 29  2022 chrome-university
+	1 SUMMARY develoment, current arch and future, of Chrome
+-rw-------   1 folkol  staff     3885 Jun 22  2022 clean-coders-hate-when-happens-to-your-code-when-you-use-these-enterprise-programming-tricks
+	1 SUMMARY
+-rw-------   1 folkol  staff    47129 Jul 25  2024 comprehensive-rust-course
+	1 SUMMARY
+-rw-------   1 folkol  staff     7821 Jun 28  2024 convention-raw-pointers-and-ownership-plus-ascii-tshirt
+	1 IDEA hoodies
+-rw-------   1 folkol  staff     6514 Jan 14  2022 coordinate compression and studying techniques
+	1 SUMMARY memory encoding
+-rw-------   1 folkol  staff      284 Aug 17  2023 corespotlightd
+	1 NUGGET how to stop it?	
+-rw-------   1 folkol  staff      591 May 28  2022 deep-foundations-of-advanced-javascript
+	1 SUMMARY
+-rw-------   1 folkol  staff      666 Jan  9  2022 dev mem
+	1 NUGGET/SUMMARY /dev/mem
+-rw-------   1 folkol  staff      552 Apr 22  2022 dribbble-top-10-bad-designs
+	1 SUMMARY
+-rw-------   1 folkol  staff     3806 Jan 10  2022 Easy Rust Video
+	2 NUGGET Rust book in Easy English: https://dhghomon.github.io/easy_rust/Chapter_1.html
+	2 NUGGET mithradates Easy Rust Video Version
+-rw-------   1 folkol  staff   163880 Jun 19  2022 ecmascript-standard
+	1 SUMMARY
+-rw-------   1 folkol  staff      401 May 14  2022 elon-musk-principle-for-knowledge-acquisition
+	1 NUGGET
+-rw-------   1 folkol  staff     1168 Aug  9  2022 encoding
+	1 SUMMARY
+drwxr-xr-x@  3 folkol  staff       96 Jul 12 12:34 escape-velocity/README
+	1 IDEA
+-rw-------   1 folkol  staff      331 Jun 19  2022 exact-closed-form-expression-for-fib
+	1 NUGGET closed form, estimate or plot the error?
+-rw-------   1 folkol  staff      249 Jan 22  2022 Fermats theory: Light travels the path that takes
+	1 NUGGET
+-rw-------   1 folkol  staff     3369 May 15  2022 firebase-security-checklist
+	1 SUMMARY
+-rw-------   1 folkol  staff       38 Sep 28  2022 fladdermus
+	1 POST
+-rw-------   1 folkol  staff       39 Jan 10  2022 fool of all trades
+	1 QUOTE
+-rw-------   1 folkol  staff      148 Jun 30  2022 game-shoot-em-up-duel-on-small-planets
+	1 IDEA
+-rw-------   1 folkol  staff     2384 Feb  8  2022 gcp kms
+	1 SUMMARY KMS + key stuff
+-rw-------   1 folkol  staff      163 Jan 13  2022 gender-neutrality-in-ancient-hunter-groups
+	1 SUMMARY
+-rw-------   1 folkol  staff       94 Jul 21  2024 git-performance-issues-on-large-repositories
+	1 SUMMARY/NUGGET
+-rw-------   1 folkol  staff       70 Jan 28  2022 github wikis not indexed
+	1 NUGGET
+-rw-------   1 folkol  staff      336 Jun  3  2022 goodbye-useeffects
+	1 SUMMARY
+-rw-------   1 folkol  staff      198 Apr 22  2022 google doubleclick
+	1 SUMMARY
+-rw-------   1 folkol  staff      153 Jan 22  2022 google serps and knowledge graph
+	1 SUMMARY
+-rw-------   1 folkol  staff     8432 Oct  8  2023 google-ajax-xssi-json-header
+	2 NUGGET AJAX reponses begin with )]}'
+-rw-------@  1 folkol  staff      854 Aug  9  2022 gzip padding
+	2 POST
+-rw-------   1 folkol  staff      214 Oct 22  2023 hashmap-quadratic-probing
+	2 SUMMARY hashmap probing, maybe comparison?
+-rw-------   1 folkol  staff     3582 Jun 17  2022 hdd-track-size
+	1 SUMMARY HDD Track size
+-rw-------   1 folkol  staff       62 Aug  7  2022 heraldik namnskick
+	1 SUMMARY
+-rw-------   1 folkol  staff      426 Jan 10  2022 how does webpack work
+	1 SUMMARY
+-rw-------   1 folkol  staff    12262 Jun 19  2022 how-is-aws-vpc-implemented
+	1 SUMMARY
+-rw-------   1 folkol  staff     3939 Jun 19  2022 how-to-learn-aws-starting-points-per-role
+	1 SUMMARY
+-rw-------   1 folkol  staff     1254 Jun 19  2022 how-to-not-learn-russian-and-how-to
+	1 SUMMARY
+-rw-------   1 folkol  staff     4300 Jul 19  2022 hugo-tutorials
+	1 SUMMARY
+-rw-------   1 folkol  staff     5730 Nov  6  2022 id-software-core-principles
+	2 SUMMARY highlighter core principles
+-rw-------   1 folkol  staff      845 Nov 15  2021 ideas
+	1 IDEA
+-rw-------   1 folkol  staff     2066 May 16  2022 infosecwriteups-motsec-core-ruleset
+	1 SUMMARY WAF Core Ruleset and bypass
+-rw-------   1 folkol  staff     1624 Mar 24  2022 integrated-tests-are-a-scam
+	1 SUMMARY checking vs testing
+-rw-------   1 folkol  staff     1502 Mar 25  2022 integration-tests-are-a-scam
+	1 SUMMARY checking vs testing strategies
+-rw-------   1 folkol  staff        7 Apr 27  2022 intermediate language disassembly .net ildasm
+	1 NUGGET
+-rw-------   1 folkol  staff     2360 Jun  4  2022 Interview with ex-google senior leader who joined
+	1 SUMMARY
+-rw-------@  1 folkol  staff     7081 Aug 13  2022 introduction-to-ext4
+	1 SUMMARY
+-rw-------@  1 folkol  staff   308628 Jan 10  2022 IntroToCrypto RSA.pdf
+	1 SUMMARY demystifying RSA https://arxiv.org/pdf/2308.02785
+-rw-------   1 folkol  staff    19365 Oct  7  2023 jakarta-or-microprofile
+	1 SUMMARY JakartaEE starter
+-rw-------   1 folkol  staff     2882 Jul 21  2024 java-how-fast-can-you-parse-1-billion-rows
+	1 SUMMARY 1brc
+-rw-------   1 folkol  staff     4784 Jan 14  2022 JavaScript type coercion explained
+	1 SUMMARY
+-rw-------   1 folkol  staff     1695 Jun  4  2022 javascript-engines-how-do-they-even
+	1 SUMMARY v8 introduction
+-rw-------   1 folkol  staff      167 Jul 21  2023 jetbrains-navigation-plugin
+	1 IDEA
+-rw-------   1 folkol  staff    32605 Aug  1  2024 kquery-work-notes
+	2 SUMMARY Kquery / Arrow / Type Systems / Data Sources / Plans / Expressions / Optimization / SQLParser
+	1 SUMMARY spark etc
+-rw-------   1 folkol  staff     1185 Jun 23  2022 learn-sass-in-20-min
+	1 SUMMARY
+drwx------   3 folkol  staff       96 Apr 21  2025 leetcode
+	1 SUMMARY Pareto set
+-rw-------   1 folkol  staff     3840 Feb 23  2022 limitations of causally and totally ordered communication
+	1 SUMMARY
+-rw-------   1 folkol  staff     1107 Apr 29  2023 linux-login-process
+	1 SUMMARY
+-rw-------   1 folkol  staff     1236 Nov 11  2023 longevity-of-cut-off-wheels
+	1 SUMMARY
+-rw-------   1 folkol  staff     2564 Feb 15  2025 lsm-trees
+	1 SUMMARY
+-rw-------   1 folkol  staff      529 Jun 30  2022 macos-menu-bar-app
+	1 SUMMARY/GUIDE
+-rw-------   1 folkol  staff     1449 Nov 15  2021 main
+	1 IDEAs
+-rw-------   1 folkol  staff     1346 Jan 10  2022 mastering-key-bindings-in-emacs
+	1 SUMMARY
+-rw-------   1 folkol  staff     6443 Jun 19  2022 max-histogram-area
+	1 SUMMARY
+-rw-------   1 folkol  staff      362 Jun  3  2022 mbox-file-format
+	1 SUMMARY
+-rw-------   1 folkol  staff     3540 May 15  2022 mdn-getting-started-with-the-web
+	1 SUMMARY
+-rw-------   1 folkol  staff     7506 Apr 29  2022 metacompliance-gdpr
+	1 SUMMARY
+-rw-------   1 folkol  staff      467 Apr 13  2022 miessler-2022-03-22
+	1 SUMMARY
+-rw-------@  1 folkol  staff      659 Jun 18  2022 most-common-numbers-used-by-humans
+	1 IDEA
+-rw-------   1 folkol  staff      383 Nov  5  2022 music-from-old-spotify-lists
+	2 TIPS
+-rw-------   1 folkol  staff     5735 Aug 16  2024 nanotrusting-the-nanotime
+	2 SUMMARY
+-rw-------   1 folkol  staff     2424 Mar 25  2022 navigating-code-in-vscode
+	1 SUMMARY
+-rw-------   1 folkol  staff      790 Sep  1  2022 non-aggregation.txt
+	1 SUMMARY
+-rw-------   1 folkol  staff      124 Jan  5  2025 notes-2025-01-05
+	1 QUOTE "Conference Driven Development"
+-rw-------@  1 folkol  staff      482 Nov 16  2021 Null Byte, 6 step framework
+	1 SUMMARY
+-rw-------   1 folkol  staff    51925 Apr 25  2022 overlay vs underlay networks
+	1 SUMMARY
+-rw-------   1 folkol  staff     2316 Feb  2  2022 OWASP Web Security Testing
+	1 SUMMARY
+-rw-------   1 folkol  staff       22 Aug  9  2022 pexels.com
+	1 TIPS pexels.com free stock photos
+	dande-lion?
+-rw-------   1 folkol  staff     1268 Aug  7  2020 pipenv crash course
+	1 SUMMARY
+-rw-------   1 folkol  staff    14652 Feb  3  2022 postfix-mail-setup
+	1 SUMMARY
+-rw-------   1 folkol  staff    16900 Jun 28  2024 pratt-paper
+	2 SUMMARY
+-rw-------   1 folkol  staff      977 May 19  2024 primagen-algo-2
+	1 SUMMARY
+-rw-------   1 folkol  staff      731 Jun 22  2022 primeagen-developer-workflow
+	1 SUMMARY
+-rw-------   1 folkol  staff       63 Jan 13  2022 purplesec cyber security statistics
+	1 SUMMARY https://purplesec.us/resources/cybersecurity-statistics/
+-rw-------   1 folkol  staff     7028 Dec  5  2020 python packaging
+	1 SUMMARY
+-rw-------   1 folkol  staff      504 Apr 13  2022 ram disk on mac
+	1 NUGGET
+-rw-------@  1 folkol  staff     4014 Feb 11  2022 ramblings 2022 02
+	2 REFLECTION emails
+	1 SUMMARY jaba EJB
+	1 IDEA note taking
+	2 NUGGET https://aterhamtningsportalen.se/test-utmattningssyndrom
+	1 REFLECTION bus driver, human driving a bus or kernel module
+-rw-------   1 folkol  staff     1711 Jun  3  2022 react-concepts
+	1 SUMMARY
+-rw-------   1 folkol  staff    12570 Apr  1  2022 react-js-reconciliation
+	1 SUMMARY
+-rw-------@  1 folkol  staff     9892 Mar  1  2022 rijndael s-box aes
+	2 SUMMARY
+-rw-------   1 folkol  staff     1642 Jan 11  2022 rust cli
+	1 NUGGET
+-rw-------   1 folkol  staff       45 Jan  9  2022 rust crash course
+	1 SUMMARY
+-rw-------   1 folkol  staff      650 Jan 10  2022 rust rust rust
+	1 SUMMARY
+-rw-------   1 folkol  staff    11424 Jun 17  2023 rust-lang-blog
+	1 SUMMARY
+-rw-------   1 folkol  staff     4897 May 11  2022 s3 TTBF folkol.com
+	1 NUGGET latency
+-rw-------   1 folkol  staff    11260 Aug  9  2022 s3-implementation
+	1 SUMMARY
+drwx------   4 folkol  staff      128 Jan 17  2022 scratch
+	1 IDEA hoodie
+-rw-------   1 folkol  staff     2887 Jun 25  2022 simple-code-that-is-fast-followup
+	1 SUMMARY
+-rw-------   1 folkol  staff       70 Sep 28  2022 sketch-data-structure
+	1 CONCEPT 'sketch' data stucture
+-rw-------   1 folkol  staff       44 May  5  2022 skotten i sarajevo scotsman in
+	1 REFLECTION skotten i sarajevo (with scottish kilt)
+-rw-------   1 folkol  staff      529 Jan 19  2022 smarter every day coast guard
+	1 SUMMARY
+-rw-------   1 folkol  staff     2887 Nov  6  2022 solving-problems-the-clojure-way
+	1 SUMMARY
+drwxr-xr-x@  3 folkol  staff       96 Dec  1 00:06 spark-dissect
+	1 SUMMARY
+-rw-------   1 folkol  staff    21948 Apr 13  2022 spotlight-indexing-on-macos
+	1 SUMMARY
+-rw-------   1 folkol  staff     3556 May 14  2022 statquest-entropy-for-datascience
+	2 SUMMARY
+-rw-------   1 folkol  staff      315 May 13  2022 statquest-expected-values-main-ideas
+	2 SUMMARY
+-rw-------   1 folkol  staff     4630 Jun 16  2023 statquest-machine-learning
+	2 SUMMARY
+-rw-------   1 folkol  staff       35 Feb  2  2022 stock image to match your content microsoft spy
+	1 NUGGET
+-rw-------   1 folkol  staff      240 May 14  2022 sublime-quick-navigation
+	1 IDEA
+-rw-------   1 folkol  staff      137 Apr 28  2022 terraform-custom-ca
+	1 NUGGET
+-rw-------   1 folkol  staff     2667 Jan 22  2022 The Absolute Beginner's Guide to Emacs
+	1 SUMMARY
+-rw-------   1 folkol  staff       55 Jan 22  2022 The shortest pencil is longer than the longest mem
+	1 QUOTE
+-rw-------   1 folkol  staff     1006 May 15  2022 the-5-most-important-css-concepts-for-beginners
+	1 SUMMARY
+-rw-------   1 folkol  staff      112 Jun 25  2022 the-little-cs-book-bigmachine.io
+	1 SUMMARY
+-rw-------@  1 folkol  staff    24888 Aug 12  2024 the-rust-performance-book
+	2 SUMMARY
+-rw-------   1 folkol  staff      220 Jun 25  2022 the-thirty-million-lines-problem
+	1 SUMMARY youtube
+-rw-------   1 folkol  staff     5939 Jan 15  2023 the-typescript-handbook
+	1 SUMMARY casey rant about bad software
+-rw-------   1 folkol  staff     1813 Jul  5  2022 theo-tech-stack
+	1 SUMMARY
+-rw-------   1 folkol  staff     1536 Jun  3  2022 tommy emmanuel practice skill and music
+	1 QUOTE
+-rw-------   1 folkol  staff     1968 Dec  5  2020 top 10 algorithms for the coding interview for software engineer
+	1 SUMMARY
+-rw-------   1 folkol  staff     1110 Jul 21  2023 transformers-language-model
+	1 SUMMARY
+-rw-------   1 folkol  staff       64 Feb  1  2022 tunnelblick keeps passphrase around
+	1 IDEA
+drwx------   3 folkol  staff       96 Jan 13  2022 ui design erik kennedy
+	1 SUMMARY
+-rw-------   1 folkol  staff      228 Jan 19  2022 understanding-digital-signatures
+	1 SUMMARY
+-rw-------   1 folkol  staff      100 Jan 22  2022 uniform-cost search vs djikstras (don't add all no
+	1 NUGGET
+-rw-------   1 folkol  staff       59 Aug  9  2022 vercel deploy
+	1 GUIDE
+-rw-------   1 folkol  staff   143313 Mar 30  2022 virtual networking and overlays
+	1 SUMMARY
+-rw-------   1 folkol  staff      464 Jan 10  2022 webpack and stty modes
+	1 SUMMARY
+-rw-------   1 folkol  staff     3367 Apr 22  2022 whois-scripting
+	1 SUMMARY
+-rw-------   1 folkol  staff      595 Jan 11  2022 why-crypto-prime-factors
+	2 SUMMARY
+-rw-------   1 folkol  staff      229 Sep  9  2023 x123
+	1 IDEA maya vs inca vs aztec
+	1 QUOTE It's a process, don't be too hrd on yourself!
+-rw-------   1 folkol  staff     2792 Jun 23  2022 you-are-not-stupid-how-to-easily-learn-difficult-things
+	2 SUMMARY
+-rw-------   1 folkol  staff      164 Jun  3  2022 you-dont-know-js-yet
+	1 SUMMARY

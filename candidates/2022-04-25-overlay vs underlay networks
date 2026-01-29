@@ -1,0 +1,1087 @@
+# Requirements
+
+Site-to-site for AD integration.
+- some problems in the current environment
+- pritunl
+- new openstack, can't use overlay
+    - MFA on console
+    - console = admin gui
+- TODO: Is there some test that I can do with pritunl
+
+- MRDM hosted a small application in france, and we used OVHcloud, offsite backups
+- offsite backup = not only physically, but also under "someone else's control"
+
+- https://www.google.com/search?client=safari&rls=en&q=zerotier&ie=UTF-8&oe=UTF-8
+
+- Vincent will forward mail thread with Safespring
+
+
+# https://www.youtube.com/watch?v=NPmhd28V5LY
+
+Thing       Underlay                        Overlay
+Definition  Physical underlying network     Virtual network
+E.g.        Physical paths and IPSec tuns   Logical tunnels
+Protocols   OSPF/IS-IS/BGP                  VxLAN/NVGRE/GRE/OTV...
+Flow        switches/routers                Only along virtual links
+Packet      responsible for packet deliv.   offloaded from delivery
+Deployment  Time consuming, less scalable   rapid and incremental deploy
+Control     Hardware oriented               Software oriented
+Encaps.     delivery/reliabiliy L3+L4       Needs to encapsulate
+Multipath   Multipath adds complexity       Multipath out of the box
+Scalable    Less so, 4096 VLANs             16M VNIs
+
+City Networks (Iver)
+
+
+# https://etherealmind.com/usage-of-overlay-and-underlay-networking/
+
+- 
+- Ethernet multicast, https://en.wikipedia.org/wiki/Multicast
+- 
+
+
+## https://www.routexp.com/2020/03/comparison-vxlan-vs-nvgre-vs-stt-vs.html
+
+
+MPLS: Multiprotocol label switching (switching based on labels instead of network addresses, Whereas network addresses identify endpoints the labels identify established paths between endpoints.
+)
+VLAN: Tagged frames (+possibly trunk port)
+
+
+
+## https://docs.microsoft.com/en-us/windows-server/manage/windows-admin-center/azure/azure-extended-network
+
+extend on-premise networks to Azure
+
+
+## VxLAN part 1 — how does it work?
+
+Do you wish to run a L2 network on top of your existing network? That's one of the things that VxLAN does! (Tunneling)
+
+- Spanning tree / trunking / stretching VLANS
+    - Spanning tree network
+        - Spanning tree protocol (STP).
+            - to avoid broadcast storms
+            - A broadcast storm or broadcast radiation is the accumulation of broadcast and multicast traffic on a computer network. Extreme amounts of broadcast traffic constitute a "broadcast storm". It can consume sufficient network resources so as to render the network unable to transport normal traffic.[1] A packet that induces such a storm is occasionally nicknamed a Chernobyl packet.[2]
+        - The basic function of STP is to prevent bridge loops and the broadcast radiation that results from them. Spanning tree also allows a network design to include backup links providing fault tolerance if an active link fails.
+    - trunking network
+        - VLAN port 
+        - For managed services providers (MSPs), trunking in networking will typically relate either to link aggregation or virtual local area network (VLAN) trunking, a practice that is integral to VLAN configuration.
+        - Link aggregation
+
+            Sometimes, trunking refers specifically to port trunking, also known as link aggregation or Ethernet bonding. This is a method of combining individual Ethernet links to act as one logical link, potentially making it possible to overcome certain bandwidth limitations. This allows you to connect several switches with Ethernet ports and allocate traffic among all the ports, relieving switch-switch or switch-to-server congestion. If failover occurs, link aggregration enables faster recovery, as the signals simply use another port while still routing to the correct endpoint. As a result, this simultaneous packet transmission may result in improved performance. The IEEE standard for link aggregation is referred to as 802.1AX.
+        - A VLAN is a way to provide connectivity for subnets on a network. 
+        - On a practical level, this both prevents certain devices from interacting and allows others to connect more efficiently.
+        - Tagging ethernet frames
+            - Access ports: Handle traffic for one VLAN
+            - Trunk ports: often higher bandwidth and lower latency, but needs to tag the frames
+        - 
+    - A stretched VLAN is a VLAN that spans multiple physical data centers.
+
+
+- VTEPs are used to communicate packages from node to node in a VxLAN VNI. Packages that arrives to a VTEP are wrapped in IP or UDP packages.
+- VxLAN gateway, VxLAN support in physical switch.
+- Underlay networks are L3 / switched, some kind of dynamic routing
+- VxLAN VNIs: Virtual L2 segments.
+
+- frame is sent on VNI, ends up on VTEP, is encapsulated (UDP or IP), sent to correct destination VTEP, decapsulated, emitted on the VNI
+    - 'inner mac frame'
+    - UDP
+    - Enable jumboframes everywhere
+
+## https://blog.ipspace.net/2021/09/overlay-underlay-reuse.html
+
+Can we reuse underlay for some services?
+
+"Before answering it, let’s define some terminology which will inevitably lead us to the it’s tunnels all the way down endstate."
+
+
+## Kubernetes Service Mesh
+
+- https://www.tetrate.io/blog/what-is-istio-and-why-does-kubernetes-need-it/
+
+    - 
+
+## Istio in 15 min https://www.youtube.com/watch?v=16fgzklcF7Y
+
+- Istio is a Service Mesh implementation.
+- Extract/refactor 'non-business'-parts (monitoring, tracing, whatever) of micro services to a sidecar-microservice and proxy all communication through this one.
+- Istio control plane injects this service side-car into all microservice-pods.
+- Traffic split / canary deployment
+- Service Mesh is a Pattern or Paradigm, Istio is one of its implementations.
+- The Istio is comprised of Envoy (the sidecar proxy) and istiod, the Istio control plane.
+- Before v1.5, the control plane had many components (pilot: configuration discovery, citadel: certificates, galley: configurations), but they are now all integrated into istiod.
+- How do we configure this?
+    - You don't have to adjust deployment and service k8s yaml files
+    - Clear separation between application logic and 'other stuff'.
+    - Can be configured by k8s yaml files.
+    - CRD, custom resource/component, CustomResourceDefinition
+    - Istiod will read these CRDs and convert them to envoy-specific configurations and send them out to the envoy proxys.
+    - We don't configure proxies, we configure istiod.
+    - istiod push this configuration to the proxies.
+    - configuration and service discovery
+    - TLS between all proxies (istiod is CA)
+        - Q: How does istiod authenticate the pod for cert?
+- istio ingress gateway
+    - alternative to nginx ingress controller
+    - runs as a pod in your cluster
+    - configure routes
+    - gateway CRD
+- traffic flow
+    - user will initiare request to web service
+    - hit the istio gateway
+    - gateway will evaluate virtual service rules 
+    - send it to webservice microservice
+    - reaches the envoy proxy
+    - proxy will evaluate and forward to the destination container on localhost (inside the pod)
+    - service will contact downstream service by:
+        - calling proxy on localhost
+        - proxy will evaluate virtual service, destination rules, etc
+        - it will talk to another proxy
+        - that one will in itself contact it's service on pod localhost
+        - mutual TLS
+            - this will in turn talk to a database service in the same way
+            - all of this will be done while envoy proxies collect tracing and metrics
+
+### istio.io
+
+What is a Service Mesh?
+
+Modern applications are typically architected as distributed collections of microservices, with each collection of microservices performing some discrete business function. A service mesh is a dedicated infrastructure layer that you can add to your applications. It allows you to transparently add capabilities like observability, traffic management, and security, without adding them to your own code. The term “service mesh” describes both the type of software you use to implement this pattern, and the security or network domain that is created when you use that software.
+
+
+### https://www.altoros.com/blog/integrating-calico-and-istio-to-secure-zero-trust-networks-on-kubernetes/
+
+Networks without trust
+
+The concept of zero-trust networking (ZTN) was introduced in 2010. At the core, the ZTN model means not allowing access to anyone unless they are authenticated and their request to a specific network resource has been authorized. ZTN builds on the following principles:
+
+- Networks should always be assumed to be hostile.
+- External and internal threats exist on the network at all times.
+- Network locality is not sufficient for gaining trust.
+- Every device, user, and workflow should be authenticated and authorized.
+- Network policies must be dynamic and calculated from as many sources of data as possible.
+
+
+### https://www.youtube.com/watch?v=A8AkkP5_GbE
+
+Kubernetes networking with Calico
+
+"There is no such thing as container networking"
+
+CNI, Container Network Interface. Specification that acts as as interface between container runtime and networking model implementations
+
+Container Runtime
+    Container Network Interface
+        Plugins: Weave|Calico|Romana|Cilium
+
+We will primarily look at Calico.
+Basic Networking requirements:
+- IPAM (IP Address Management) and lifecycle management of network devices
+- Connectivity in Container network
+- Route advertisement
+
+
+- deploy as helm chart
+
+
+"CNI plugins, flannel/calico/weave/canal"
+
+
+## https://medium.com/google-cloud/understanding-kubernetes-networking-pods-7117dd28727
+
+
+
+## https://blog.ipspace.net/2021/06/comparing-evpn-with-flood-learn.html
+
+Do you have a writeup that compares and contrasts the hardware resource utilization when one uses flood-and-learn or BGP EVPN in a leaf-and-spine network?
+
+I don’t… so let’s fix that omission. In this blog post we’ll focus on pure layer-2 forwarding (aka bridging), a follow-up blog post will describe the implications of adding EVPN IP functionality.
+
+
+
+## https://kubernetes.io/docs/concepts/cluster-administration/networking/
+
+TODO: Read through k8s concepts @ https://kubernetes.io/docs/concepts/
+
+
+
+## https://superuser.openstack.org/articles/run-your-kubernetes-cluster-on-openstack-in-production/
+
+TODO
+
+### https://blog.ipspace.net/2011/10/mpls-is-not-tunneling.html
+
+You can talk about tunneling when a protocol that should be lower in the protocol stack gets encapsulated in a protocol that you’d usually find above or next to it. MAC-in-IP, IPv6-in-IPv4, IP-over-GRE-over-IP, MAC-over-VPLS-over-MPLS-over-GRE-over-IPsec-over-IP ... these are tunnels. IP-over-MPLS-over-PPP/Ethernet is not tunneling, just like IP-over-LLC1-over-TokenRing or IP-over-X.25-over-LAPD wasn’t.
+
+
+## https://medium.com/@cohesivenet/using-ipsec-site-to-site-vpn-connections-in-the-cloud-3c9db2f08663
+
+## https://docs.ukcloud.com/articles/openstack/ostack-how-configure-ipsec-vpn.html
+
+- This article uses a pfSense virtual firewall appliance to provide the IPsec VPN endpoint. UKCloud provides a UKCloud for OpenStack image for the pfSense appliance in the public catalog, however, you can upload your own image if you prefer.
+    - https://github.com/UKCloud/vpn-on-openstack
+
+
+
+
+# vendor selection MosCoW
+
+Compliance requirements musts
+Data center ISO27001 certified
+Data residency in Sweden
+Swedish owner of OpenStack provider
+
+Technical requirments, musts
+Most operational tasks ourselves (expanding disks, resizing VMs)
+Ability to create site-2-site VPN tunnel on network layer
+Ability to create own overlay network
+Use of Terraform via management API
+
+
+
+
+## https://docs.openstack.org/python-neutronclient/rocky/cli/osc/v2/vpn-ipsec-site-connection.html
+
+
+
+## https://www.youtube.com/watch?v=pIKeMBqHpYg
+
+EVPN / VxLAN / Underlay Networks
+
+Why underlay?
+
+Primary reason is exchange loopback address information between VTEPs in the datacenter.
+
+
+TODO: IPSec?
+
+
+
+### Spine-Leaf Architecture Explained
+
+A spine-leaf architecture is data center network topology that consists of two switching layers—a spine and leaf. The leaf layer consists of access switches that aggregate traffic from servers and connect directly into the spine or network core. Spine switches interconnect all leaf switches in a full-mesh topology.
+
+
+
+
+
+# OpenStack Public Cloud Passport, Marketplace
+
+Kanske ett till: Det finns ett företag som jag inte minns namnet på, lite mer traditionell (men lite bättre än Tieto). —Micke
+- fsdata?
+
+Asked friends, googled, checked OpenStack marketplace.
+
+TODO: https://www.cloudtango.net/msp/Sweden
+https://openinfra.dev, Open Infrastructure Foundation
+
+[Ej Sverige, kanske?] Telia Cloud Platform
+[Ej OpenStack]: https://imedsec.se/index.php/en/imedsec-cloud-zone/iaas
+
+
+https://www.openstack.org/marketplace
+https://www.openstack.org/marketplace/public-clouds/
+
+    Karlskrona, Sweden: citynetworks
+    Stockholm, Sweden: elastx
+    Stockholm, Sweden: citynetworks
+    Kista, Sweden: binero
+    Vallentuna, Sweden: binero
+
+    citynetwork, kanske köpt av Iver.
+
+    elastx / elastisys
+
+    molntjänster / datormoln
+
+    vägledning av molntjänster SKR, https://skr.se/skr/naringslivarbetedigitalisering/digitalisering/arkitektursakerhet/molntjanster/vagledningarmolntjanster.29885.html
+
+
+Atea
+
+
+
+Bahnhof Cloud:
+
+    Bahnhof Cloud
+    Moln med sekretess
+    Av systemutvecklare för systemutvecklare.
+
+        https://www.bahnhof.net
+            - OpenStack legacy login
+            - Bahnhof.cloud
+
+        Based in Sweden. Säker lagring på svensk mark.
+            Säker lagring på svensk mark
+                Vi tar säkerhet på allvar och därför drivs din lösning i Sveriges modernaste datacenter, helt i Bahnhofs regi. Alla våra anläggningar certifieras av Based in Sweden som garanterar 100% säker lagring på svensk mark, under svensk lagstiftning. Det ger maximalt skydd mot avlyssning, företagsspionage och myndighetsövervakning.
+
+                USP: 
+                    - own fiber network
+                    - säkerhetsklassade datacenter
+                    - Vi lämnar aldrig ut information till tredje part och all din data stannar i Sverige. Bahnhofs infrastruktur är därför ett givet val för GDPR-förenlig hantering av känsliga data.
+                    - Våra datacenter drivs av förnybar el och är miljöcertifierade enligt Triple Green. 
+
+                    Created account, stored password in Safari keychain.
+
+                    Two-factor optional.
+
+                "OpenStack legacy login"?
+
+                    https://os.bahnhof.net/index.php?rp=/login
+
+                Unclear if we have access to OpenStack API:s, I created a ticket with an inquiry.
+
+
+            Login to our first generation OpenStack platform here: https://bahnhof.net/login
+
+                Log in for services ordered before June 1, 2020
+
+                    Services ordered before June 1, 2020, continue to be serviced on our previous cloud portal on cp.bahnhof.net
+
+                openstack
+                    Get your Openstack platform here, tailored for easy access, the use orchestration tools like heat, a large variety of flavors, builtin object storage and more.
+
+                    - Control your data
+                    - Under Swedish Juristiction
+                    - Your data is proteceted
+                    - Simple pricing
+
+    Hello! At the moment API isn't exposed to customers sorry.
+
+
+
+Elastx:
+
+    Signup: Elastx Cloud | Jelastic PaaS
+
+        Kan inte signa upp p.g.a. "company + VAT".
+        Ring dem på Phone: +46 8-557 72810.
+
+        Svarade inte (kö, gav upp efter en kvart).
+
+        Har mailat dem.
+
+
+        Bra tillgängligt för företagskunder.
+
+        Tja. Jag kollar vad det finns för alternativa OpenStack-leverantörer (Tim vill undersöka möjligheten att flytta från Safespring), och en av de större i sverige är "elastx" – man kan dock inte skapa konto som privatperson där utan behöver ange företagsnamn och organisationsnummer. Kan jag använda LOGEX Healthcare Analytics AB / 556490-5312 för detta?
+
+            Maria sa att detta är ok.
+
+    Konkret skillnad mot Safespring: swift istället för cepth
+    Testa konto, se om det verkar lira. Återkom med frågor.
+
+        https://www.suse.com/c/ceph-vs-swift-openstack-object-storage-pros-vs-cons-approach-evaluation-flawed-analysis/
+
+            Object Storage: Ceph Cluster / S3
+
+                - Ceph delivers unified storage, supporting File, Block and Object.
+                - Swift is Object only.
+
+                Ceph is an independent open source project. Swift was originally part of the Open Stack project – though the company that owns it, SwiftStack – is moving it on from this heritage.
+
+                In favour of Ceph.
+                    - The obvious point of File, Block and Object in the same wrapper. It might be an obvious point, but it’s a pretty damn important one.
+                    - Better transfer speed and lower latency – because traffic to and from the Swift cluster goes through proxy servers which slow it down.
+                    - Swift can have further latency problems as replicas are not necessarily updated at the same time, so requesters retrieving data can access old – wrong/outdated – versions.
+
+                Against Ceph
+                    - Ceph’s multi-region support – usually touted as an advantage, is in a master slave configuration, but as replication is only possible from master to slave, in a deployment with 2+ regions you can get uneven load distribution. Not a problem in Swift.
+                    - In Ceph you should only write to the master. . . but there is nothing to stop you from writing to the slave which can mean poor execution resulting in inconsistencies and, in extreme circumstances, complete corruption. Not a problem in Swift.
+                    - There can also be a security issue as RADOS clients on the Cloud compute node communicate directly with the RADOS servers over the same network Ceph uses for unencrypted replication traffic. So, potentially, if Ceph client node is compromised, the attacker can see all traffic on the storage network. Not a problem in Swift.
+
+                "Real reason Ceph is better"
+
+                    - #1. Because running open source technology requires skilled engineers.
+                    - #2. Because Swift is busy working on proprietary APIs that not only differ from Ceph, but also from Amazon Simple Storage System, which will potentially lead to widespread resistance to ‘yet another storage interface’.
+
+
+        Mår företaget bra?
+
+            Mikael Holmström  7:37 PM
+            Jag har försökt gräva lite mer men känns som ganska tunt: (ta detta som skummat, inte absolut sanning)
+            ** City Networks (Iver) ("compliant cloud", vet inte om annat gäller för "icke-compliant" tjänst)
+            https://compliant.citynetwork.eu/
+
+            *** Iver verkar vara en svensk koncern (som nu äger City), okänt ägarskap
+
+            *** Datacenter i Sverige (bl.a.)
+
+            *** ISO27k
+            https://citycloud.com/iso-certifications (vanlig, ej som nedan)
+            https://compliant.citynetwork.eu/ (compliant, nedan)
+
+                Owners  Management  Network administrators  System administrators   Developers  SIRT
+            Location    Karlskrona  Karlskrona & Stockholm  Karlskrona  Karlskrona  Karlskrona  Karlskrona
+            Jurisdiction    Sweden & EU Sweden & EU Sweden & EU Sweden & EU Sweden & EU Sweden & EU
+            Certificates    ISO 9001    ISO 9001    ISO 9001    ISO 9001    ISO 9001    ISO 9001
+                ISO 14001   ISO 14001   ISO 14001   ISO 14001   ISO 14001   ISO 14001
+                ISO 22301   ISO 22301   ISO 22301   ISO 22301   ISO 22301   ISO 22301
+                ISO 27001   ISO 27001   ISO 27001   ISO 27001   ISO 27001   ISO 27001
+                ISO 27010   ISO 27010   ISO 27010   ISO 27010   ISO 27010   ISO 27010
+                ISO 27013   ISO 27013   ISO 27013   ISO 27013   ISO 27013   ISO 27013
+                ISO 27015*  ISO 27015*  ISO 27015*  ISO 27015*  ISO 27015*  ISO 27015*
+                ISO 27017   ISO 27017   ISO 27017   ISO 27017   ISO 27017   ISO 27017
+                ISO 27018   ISO 27018   ISO 27018   ISO 27018   ISO 27018   ISO 27018
+
+
+            Data centers
+                Frankfurt   Stockholm 1 Stockholm 2 Karlskrona
+            Jurisdiction    Germany & EU    Sweden & EU Sweden & EU Sweden & EU
+            DR Backup   Frankfurt am Main   Karlskrona  Karlskrona  Stockholm
+            Certificates    ISO 9001    ISO 9001    ISO 9001    ISO 9001
+                    ISO 14001   ISO 14001   ISO 14001   ISO 14001
+                    ISO 22301   ISO 22301   ISO 22301   ISO 22301
+                    ISO 27001   ISO 27001   ISO 27001   ISO 27001
+                    ISO 27010   ISO 27010   ISO 27010    
+                    ISO 27013   ISO 27013   ISO 27013    
+                    ISO 27015*  ISO 27015*  ISO 27015*   
+                    ISO 27017   ISO 27017   ISO 27017    
+                    ISO 27018   ISO 27018   ISO 27018    
+
+            + The certificate is revoked but the controls are still applied.
+
+            *** API
+            """
+            Use your favourite automation tool
+            Use Terraform, Ansible or run full CI/CD with Zuul to automate your workloads.
+            """
+
+            ** Elastx
+
+            *** Svenskt företag, okänt ägarskap
+
+            *** API + terraform verkar supportas
+            *** No BaaS?
+
+            *** quirks
+            https://docs.elastx.cloud/docs/openstack-iaas/
+
+            (bl.a.)
+            "Maximum of one router per project. We only support a single router due to how resources are allocated in our network infrastructure."
+            "Live migration is not supported."
+
+            *** 
+            https://elastx.se/en/information-security-policy/
+            """
+            This is to certify that the management system of:
+            Elastx AB
+            Main site: Katarinavägen 15, SE-116 45 Stockholm, Sweden
+            has been registered by Intertek as conforming to the requirements of
+            ISO/IEC 27001:2013
+            The management system is applicable to:
+            IT Cloud platform provider and related services.
+            In accordance with Statement of Applicability (SOA) version 5.0
+            """
+
+            *** 99.95% SLA (upp till 50%, "Compensation is deducted from next month invoice and only towards future platform consumption.")
+            Omsättning, resultat och tillgångar kan vara lite intressanta (även om dessa är till 2020), Binero ser skakigt ut men de har ju också gjort en pivot:
+            https://www.allabolag.se/5569065617/elastx-ab
+            https://www.allabolag.se/5562643022/binero-group-ab-publ
+            https://www.allabolag.se/5566307806/city-network-international-ab
+            https://www.allabolag.se/5565753042/iver-sverige-ab
+            https://www.allabolag.se/5593240111/iver-group-ab (edited) 
+
+Hej,
+
+här kommer de frågor som vi har stött på hittils:
+
+
+Angående Terms of Service:
+
+"Elastx may modify this Cloud Services Agreement or any policy or other terms referenced in this Cloud Services Agreement at any time by posting a revised version at the websites displaying the policy and/or posting a revised version of this Cloud Services Agreement. ... If you disagree with any modifications to the policies or this Cloud Services Agreement prior to the expiration of the fifteen-day period, your sole and exclusive remedy shall be to stop using the Services."
+
+Detta känns som en väldigt kort tidsperiod att hinna migrera hela installationen samt alla kunder. Är de 15 dagarna förhandlingsbara, och om inte – kan vi få ta del av historiken för policies och avtal i syfte att göra en riskbedömning?
+
+"Virtual Private Servers: If your use of the server, bandwidth or memory exceeds that of a similarly situated customer, this Agreement may be terminated by us, or your service may be suspended until you mitigate your excess use of our resources"
+
+Gäller detta även instanser skapade i OpenStack-projektet, och går det i så fall få lite mer konkreta gränser för vad som är "excessive"? (Vi har t.ex. en del minnes- och beräkningstunga batchjobb.)
+
+"We may change this IP Address at any time".
+
+Det är för mig otydligt vad för IP-adresser detta avser, gäller det även floating ip:s i OpenStack? Om så är fallet, går det att ta del av historik för hur ofta detta skett för att göra en riskbedömning? (Det är vanligt att både vi och våra kunder konfigurerar explicita IP-adresser i våra brandväggar.)
+
+"Any data present on our backup servers will be overwritten"
+
+Avser detta överskrivning/skrubbning i syfte att försvåra återläsning av data, eller betyder det bara att diskarna kommer att "återanvändas och förr eller senare skrivas över"? Finns motsvarande garanti för övrig lagring eller gäller detta enbart backup-diskarna?
+
+
+Övriga frågor:
+
+- Jag hittar ingen inställning i portalen för MFA, går det att konfigurera MFA för access till portalen och/eller API:erna?
+
+- Det framgår av Elastx Information Security Policy att det ISMS-scope som är 27k-certifierat är "IT Cloud platform provider and related services", men jag förstår inte riktigt vad som innefattas i detta. Framförallt så undrar jag om allt ner till metallen sköts helt i Elastx regi eller om det finns delar som är utlagda på andra bolag.
+
+
+
+
+    - Terms of Service
+        They may make arbitrary updates to the ToS, and we have only 15 days notice.
+        "If you disagree with any modifications to the policies or this Cloud Services Agreement prior to the expiration of the fifteen-day period, your sole and exclusive remedy shall be to stop using the Services."
+
+        shared hosting (not IaaS): You may not use excess resources.
+
+        Virtual Private Servers: If your use of the server, bandwidth or memory exceeds that of a similarly situated customer, this Agreement may be terminated by us, or your service may be suspended until you mitigate your excess use of our resources.
+
+        The Services may include an IP Address. This IP Address is leased to you by us. We may change this IP Address at any time. The IP Address is not transferable. Upon the Termination of this Agreement, you must cease using the IP Address.
+
+        n. Data Processing Agreement
+
+            If your use of the Services will include processing of personal data, ELASTX will, on your request, provide you with a Data Processing Agreement.
+
+        d. Upon termination of this Agreement, your data will be deleted. Any data present on our backup servers will be overwritten. We shall have no obligation whatsoever to provide data to you upon termination of this Agreement.
+
+        a. Either of us may terminate this Agreement by providing the other with written notice of intent to terminate (a “Termination Notice”). 
+
+        Neither party shall ever disclose to any third party any Confidential Information received from the other party. “Confidential Information” means information disclosed to a party under this Agreement, which the disclosing party has identified as confidential information.
+
+
+        Signup:
+
+            Elastx Platforms (optional)
+
+            OpenStack IaaS
+
+            Kubernetes CaaS
+
+            Jelastic PaaS
+            Elastx Connectivity (optional)
+
+            Cloud VPN
+
+            Cloud Connect
+
+            Cloud Exchange
+            Elastx Security (optional)
+
+            Bot & Scraper Protection
+
+            DDoS Protection
+
+            Web Application Firewall
+            Elastx Other (optional)
+
+            Application Monitoring
+
+            Mail Relay
+
+            Professional Services
+
+
+        Elastx Sign-Up
+
+            I am not a Company Signatory, but they suggested I sign up using the company information anyway — and Maria agreed.
+
+            Sign-up submitted!
+                Thank you for your interest in Elastx platforms and services! We will contact you shortly (during regular office hours CET) and provide additional information and instructions.
+
+                Best regards
+                /Team Elastx
+
+                Infra-team ska återkomma med inloggningsuppgifter. Kolla ifall vi kan ändra dem så de har spritts i mailkorgar.
+
+                    Återkom fort. De föreslog att "återställa lösenord".
+
+                    Ett OpenStack-projektet och konto för "mattias.johansson@logex.com" är nu upplagt.
+                    För att komma åt ditt konto föreslår jag att du besöker "https://ops.elastx.cloud/forgot_password/" och återställer lösenordet.
+
+
+                        Keystone Credentials
+                        Horizon
+
+                        API Access: Download Openstack Credentials.
+
+                        Identity API v2 and v3.
+
+                            Management
+                                Access Control
+                                    mattias.johansson@logex.com mattias.johansson@logex.com Secret Store, Project Moderator, Load Balancer, Orchestration, Object Store, Project Member, Project Administrator
+
+                        Identity Projects
+                            logex   Trial account LOGEX Healthcare Analytics AB #11553  4182e329d1c14a98b309c8bf152d31a1
+
+
+                        https://docs.openstack.org/keystone/latest/contributor/http-api.html
+
+
+
+                        Error: Error creating openstack_compute_volume_attach_v2 10ae1be3-fbdf-4fc1-a017-2f142d05b31e: Bad request with: [POST https://ops.elastx.cloud:8774/v2.1/servers/10ae1be3-fbdf-4fc1-a017-2f142d05b31e/os-volume_attachments], error message: {"badRequest": {"message": "Invalid volume: Instance 10ae1be3-fbdf-4fc1-a017-2f142d05b31e and volume 983718f7-6d6a-4e52-94f2-a95ccadc00b9 are not in the same availability_zone. Instance is in sto3. Volume is in sto2", "code": 400}}
+
+
+                            Tunnel works:
+
+                                sudo tcpdump -i ens3 udp
+                                tcpdump: verbose output suppressed, use -v or -vv for full protocol decode
+                                listening on ens3, link-type EN10MB (Ethernet), capture size 262144 bytes
+                                11:21:39.003478 IP 192.168.199.10.38019 > vm2.4789: VXLAN, flags [I] (0x08), vni 42
+                                IP 192.168.60.5 > vm2: ICMP echo request, id 2, seq 85, length 64
+                                11:21:39.003545 IP vm2.59381 > 192.168.199.10.4789: VXLAN, flags [I] (0x08), vni 42
+                                IP vm2 > 192.168.60.5: ICMP echo reply, id 2, seq 85, length 64
+                                11:21:40.027434 IP 192.168.199.10.38019 > vm2.4789: VXLAN, flags [I] (0x08), vni 42
+                                IP 192.168.60.5 > vm2: ICMP echo request, id 2, seq 86, length 64
+                                11:21:40.027516 IP vm2.59381 > 192.168.199.10.4789: VXLAN, flags [I] (0x08), vni 42
+
+
+
+
+
+Inquiry:
+
+Compliance requirements
+
+Data center ISO27001 certified Must
+    yes
+Data residency in Sweden Must
+    yes
+Swedish owner of OpenStack provider Must
+    yes
+OpenStack provider ISO27001 certified Should
+    yes
+
+Technical requirements
+
+Most operational tasks ourselves (expanding disks, resizing VMs) Must
+    ?
+
+Ability to create site-2-site VPN tunnel on network layer Must
+    ?
+Ability to create own overlay network Must
+    ?
+SLA: 99% Should
+    yes
+Use of Terraform via management API Must
+    yes
+MFA on console Should
+    ?
+
+Ability to do offsite backups / managed backup solutions Should
+    yes
+Operation requirements Availability support desk Should
+    yes
+SSO on console (nice to have) Could
+    ?
+
+Costs n/a
+Other Company reputability Should
+Other healthcare clients Should
+
+
+City Networks
+
+
+    City Network is a leading global public cloud provider. It delivers public, compliant and private clouds based on OpenStack.
+
+    City Network is certified according to ISO 9001, 14001, 27001, 27010, 27013, 27015, 27017 and 27018 – internationally recognized standards for quality, sustainability and information security. It´s services are available from more than 20 data centers around the world.
+
+    With its compliant cloud, City Network ensures that customers comply with demands originating from specific laws and regulations concerning auditing, reputability, data handling and data security such as Basel, Solvency and GDPR.
+
+
+
+    "Iver köper City Networks."
+
+    Compliant Cloud
+    IaaS for heavily regulated industries
+
+        "Anything great that ever happened in the world, first happened in their imagination."
+            Astrid Lindgren
+
+        admin.citycloud.com, created account, no password — but awaiting confirmation.
+
+
+        Compliant Cloud
+            IaaS for heavily regulated industries
+
+            The pace of innovation depends on flexible and programmable IT infrastructure. Heavily regulated industries in Europe, such as government agencies, banks and healthcare companies, can not lawfully settle for any proprietary public cloud.
+
+            - data residency
+            - gdpr
+            - NIS
+            - pci (cpp|cds|tsp)
+            - BaFIN BAIT (financial)
+
+            Certificates: https://compliant.citynetwork.eu
+
+    The entrepreneurial companies, Candidator, DGC and Solid Park, have announced the formation of Iver.
+
+    Signup:
+        - I signed up as 'private'
+
+        ToS: https://citycontrolpanel.com/files/City_Network_General_Terms_And_Conditions_City_Cloud.pdf
+
+
+            https://citycloud.com/devops/deploy-your-first-kubernetes-cluster-with-terraform-rke-and-manage-it-with-rancher
+
+            https://support.citynetwork.se/index.php?/Knowledgebase/Article/View/509/0/Install-openstack-python-client-and-authenticate-with-an-API-user
+
+            - add openstack user
+            - 'native openstack api'
+            - 
+
+
+
+Binero Cloud
+
+    Skapade konto, angav personnummer.
+
+    Detta orderformulär tillhandahålls i en säker miljö och för att skydda mot bedrägerier från och mot din nuvarande IP adress (82.196.111.67) så blir den loggad.
+
+        Orderbekräftelse
+            Order Placed #2723183957
+
+            Har du har frågor angående din beställning ber vi dig kontakta vår supportavdelning. Uppge då ditt ordernummer.
+
+            Sorry, we couldn't find a pending verification matching your request.
+
+
+            "Logga in in i Cloudportalen"
+
+                API Users: Inga API-användare.
+
+                    https://support.binero.com/knowledge-base/skapa-en-api-anvandare/
+
+                        OpenStack API user, no MFA?
+
+            GUIt verkar skit!
+
+            Mitt konto -> Tjänster -> ... -> Se detaljer -> Hantera/Logga in(SSO)
+
+            binero cloud portal(?) -> ACCESS & SÄKERHET -> Api Users -> Skapa user -> ladda ner RC-fil (se-something)
+
+    Requirements:
+    - ISO27k-certade.
+    - Har eget datacenter.
+    - Högpresterande anläggningar. Väl utvalda!
+    - Kontigo Care är kund.
+    - Binero har köpt RedBridge.
+
+    - Loopia Group AB köper Binery Group AB köper RedBridge.
+
+        ** Binero
+
+            *** "Kontigo Care" (okänt till vilken utsträckning)
+
+            *** ISO27k-certade (Binero iaf, datacentret oklart).
+            "Bineros egna datacenter, kallat DCS01, ligger i Vallentuna"
+            "Utöver vårt egna datacenter, så hyr vi också in oss i ett antal noga utvalda och högpresterande anläggningar runt om i Sverige"
+
+            """
+            Högsta fokus på säkerhet & skydd
+            Hela fastigheten är omgärdad av ett elektriﬁerat staket som är kopplat till larmcentral. Byggnaderna är tillverkade av betong och samtliga dörrar är skyddsklass 4 vilket gör det mycket svårt för en obehörig att rent mekaniskt ta sig in i fastigheten. Området ronderas av väktare vid slumpmässiga tillfällen dygnet runt årets alla dagar.
+
+            Säkerhetssystemet vet när – och vilka – människor som är i lokalerna och i olika säkerhetszoner (ner på rack-nivå) garanterar att ingen obehörig når känslig funktion (eller information). Alla ytor bevakas med övervakningskamera. Ev. larm går till polis, övervakningsbolag och vår personal.
+
+            DCS01 har bästa möjliga brandskydd i form av Novec gas och aspirerande detektorer som märker minsta tendens till brand i alla utrymmen och släcker genom att sänka syrenivån (utan att vara farligt för personer i lokalen). Brandlarmet larmar automatiskt brandkåren.
+            """
+
+            """
+            Binero är certifierade enligt ISO 9001, 14001 och
+            27001, samt den globala klimatcertifieringen
+            'Fossil Free Data' som innebär att serverhallen
+            möter strikta krav på att vara energieffektiv, ha
+            låga koldioxidutsläpp och använda 100 % förnybar el.
+            """
+
+            *** features
+            https://binero.com/publikt-moln
+
+            *** 
+
+            Finansiell översikt
+
+            | JAN-JUN 2021 (Mkr) | Binero (1) | RedBridge (2) | Kombinerad Proforma (3) |
+            | Omsättning         | 23,0       | 41,5          | 64,5                    |
+            | EBITDA         | -4,8       | 3,6           | -1,2                    |
+
+            | HELÅR 2020 (Mkr)   | Binero (1) | RedBridge (2) | Kombinerad Proforma (3) |
+            | Omsättning         | 45,7       | 74,2          | 119,9                   |
+            | EBITDA             | -11,5      | 7,6           | -3,9                    |
+
+            *** 
+            In light of the critical Log4j vulnerability (CVE-2021-44228) we recommend all customers that is running anything with Java verify that it's not using a vulnerable version of Log4j if that's a dependency.
+            We at Binero is taking active measures to prevent this by blocking HTTP attacks using this vulnerability with our IDS.
+
+            *** 
+            https://binero.com/aktien
+            Källa: Euroclear 31 december 2021
+
+            | Ägare                                            | Antal aktier | Innehav  % |
+            | Arbona AB                                        | 3 498 599    | 11,1%      |
+            | Pejoni AB                                        | 3 338 597    | 10,6%      |
+            | Stefan Andersson                                 | 2 792 297    | 8,9%       |
+            | Richard Göransson                                | 2 746 967    | 8,7%       |
+            | Jonas Feist                                      | 2 681 711    | 8,5%       |
+            | Whistler AB                                      | 1 701 323    | 5,4%       |
+            | Mölna Spar AB                                    | 1 597 705    | 5,1%       |
+            | Rockpoint AB (kontrolleras av Richard Göransson) | 1 597 705    | 5,1%       |
+            | Blibros AB                                       | 1 402 810    | 4,5%       |
+            | MIC Värdepapper AB                               | 1 390 000    | 4,4%       |
+            | Övriga aktieägare                                | 8 766 555    | 27,8%      |
+            | Total per 31 december 2021                       | 31 514 269   | 100%       |
+
+            *** 
+            https://binero.com/sla
+
+            Typ av tjänst   Garanterad upptid
+            Public cloud    
+            - Nätverk    99,95%
+            - Compute    99,95%
+            - Block storage  99,95%
+            - API        99,00%
+            - GUI        99,00%
+            - Object storage 99,00%
+            Private cloud    
+            - Nätverk    99,95%
+            - Compute    99,95%
+            - SAN        99,95%
+            Colocation 1     99,95%
+            Bare metal 2     99,95%
+            1 för colocation garanteras upptid på el och nätverk
+            2 för bare metal (dedikerad server) garanteras upptid på el och nätverk
+
+            Ersättningen kan inte kombineras med andra typer av garantier. De högsta möjliga ersättning är 50% av den totala månadsavgiften under månaden där störningen inträffade och kan inte överstiga detta värde.
+
+
+
+
+    Kom mail från Binero med välkomnande och fråga om vi behövde hjälp.
+    Jag svarade på mailet, men kan återkomma med lista av frågor när jag har kollat runt lite.
+
+- Binero är ... —Micke
+    Ej seriöst säkerhetsinriktat, something something.
+    Micke säger: "traditionella" (reg.anm: pajasar)
+- 11-50 anställda (linkedin)
+- Iver köpt upp alla andra.
+    - city cloud / city network
+    - dgc / eqt
+    - candidator
+
+Compliance requirements musts
+Data center ISO27001 certified, oklart – men Binero har (och deras egna @ Vallentuna)
+Data residency in Sweden – skriver en del om gdpr, TODO
+Swedish owner of OpenStack provider – Seems so, unclear. See tree.
+
+Technical requirments, musts
+Most operational tasks ourselves (expanding disks, resizing VMs)
+    - change flavor: check
+    - expand volume: 
+
+          # openstack_blockstorage_volume_v2.volume_1 must be replaced
+            -/+ resource "openstack_blockstorage_volume_v2" "volume_1" {
+                  ~ attachment        = [
+                      - {
+                          - device      = "/dev/sdb"
+                          - id          = "175a2d5a-bc65-4bea-809e-9379f75d95f8"
+                          - instance_id = "c18b371e-2d98-4d2a-8480-57ca582563bc"
+                        },
+                    ] -> (known after apply)
+                  ~ availability_zone = "europe-se-1a" -> (known after apply)
+                  ~ id                = "175a2d5a-bc65-4bea-809e-9379f75d95f8" -> (known after apply)
+                  ~ metadata          = {} -> (known after apply)
+                    name              = "volume_1"
+                  ~ region            = "europe-se-1" -> (known after apply)
+                  ~ size              = 1 -> 2 # forces replacement
+                  ~ volume_type       = "ssd" -> (known after apply)
+                }
+            Even when detached, it wants to replace.
+
+    - https://docs.openstack.org/cinder/rocky/cli/cli-manage-volumes.html
+
+        Worked:
+
+            binero{openstack}$ openstack volume list
+            +--------------------------------------+----------+--------+------+-----------------------------+
+            | ID                                   | Name     | Status | Size | Attached to                 |
+            +--------------------------------------+----------+--------+------+-----------------------------+
+            | 194ce838-cc49-46de-b788-612c414ebe15 | volume_1 | in-use |    1 | Attached to vm on /dev/sdb  |
+            +--------------------------------------+----------+--------+------+-----------------------------+
+            binero{openstack}$ openstack server remove volume vm volume_1
+            binero{openstack}$ openstack volume set volume_1 --size 2
+            binero{openstack}$ openstack server add volume vm volume_1
+
+
+
+        Created ext3-fs and added file with data.
+            ubuntu@vm:/mnt$ history
+                1  ls
+                2  lsblk
+                3  mkfs.ext4 /dev/sdb
+                4  sudo mkfs.ext4 /dev/sdb
+                5  mkdir -p /mnt/foobar_volume
+                6  sudo mkdir -p /mnt/foobar_volume
+                7  mount /dev/sdb /mnt/foobar_volume
+                8  sudo mount /dev/sdb /mnt/foobar_volume
+                9  cd /mnt/foobar_volume
+               10  ls
+               11  echo some\ data >info.dat
+               12  sudo echo some\ data >info.dat
+               13  sudo echo some\ data | tree info.dat
+               14  echo some\ data | sudo tee info.dat
+               15  ls
+               16  cat info.dat
+               17  cd ..
+               18  ls
+               19  history
+
+
+
+
+Ability to create site-2-site VPN tunnel on network layer: 
+    - 
+
+Ability to create own overlay network: 
+    - ip link add vxlan0 type vxlan id 42 group 239.1.1.1 dev eth1 dstport 4789
+    ubuntu@vm:~$ ip link add vxlan0 type vxlan id 42 remote 192.168.100.10 dev ens3 dstport 4789
+    ubuntu@vm:~$ sudo ip link set vxlan0 up
+    ubuntu@vm:~$ sudo ip addr add 192.168.60.4/24 dev vxlan0
+
+    ubuntu@vm2:~$ ip link add vxlan0 type vxlan id 42 remote 192.168.199.10 dev ens3 dstport 4789
+
+    - 16:47:24.030845 IP 192.168.100.10.55613 > host-192-168-199-10.openstacklocal.4789: VXLAN, flags [I] (0x08), vni 42
+      IP 192.168.60.5 > vm: ICMP echo request, id 7, seq 3, length 64
+      16:47:24.030845 IP 192.168.60.5 > vm: ICMP echo request, id 7, seq 3, length 64
+      16:47:24.030929 IP vm > 192.168.60.5: ICMP echo reply, id 7, seq 3, length 64
+      16:47:24.030946 IP host-192-168-199-10.openstacklocal.42802 > 192.168.100.10.4789: VXLAN, flags [I] (0x08), vni 42
+      IP vm > 192.168.60.5: ICMP echo reply, id 7, seq 3, length 64
+
+Use of Terraform via management API: Check
+    - https://support.binero.com/knowledge-base/hantera-openstack-resurser-med-terraform/
+Horizon(maybe?) -> compute -> ssh keys -> does not show in openstack cli
+    - https://support.binero.com/knowledge-base/managing-openstack-resources-using-terraform/?lang=en
+    - https://support.binero.com/?s=horizon&ht-kb-search=1
+
+
+
+    OpenStack Services Enabled (https://www.openstack.org/marketplace/public-clouds/binero/binero-public-cloud)
+
+        SERVICE RELEASE API COVERAGE
+        Block Storage API & Extensions  Victoria (Cinder v3.0)  
+        Command-line interface for all OpenStack services   Victoria (Openstackclient ) N/A
+        Compute Service API & Extensions    Victoria (Nova v2.0)    
+        Container Orchestration Engine Provisioning API & Extensions    Victoria (Magnum v1)    
+        Dashboard   Victoria (Horizon ) N/A
+        DNS service API Victoria (Designate v2) 
+        Identity service API & Extensions   Victoria (Keystone v3.0)    
+        Image service API   Victoria (Glance v2.5)  
+        Key management API  Victoria (Barbican v1.0)    
+        Load balancer   Victoria (Octavia ) N/A
+        Metering & Data Collection Service API  Victoria (Ceilometer v2.0)  
+        Networking API & Extensions Victoria (Neutron v2.0) 
+        Object store API & Extensions   Victoria (Swift v1.0)   
+        Orchestration API   Victoria (Heat v1.0)    
+        Puppet modules to deploy OpenStack  Victoria (Puppet-openstack )    N/A
+        Workflow service    Victoria (Mistral ) N/A
+
+    https://support.binero.com/knowledge-base/vilka-urler-galler-for-openstack-api/?lang=en
+
+    https://support.binero.com/knowledge-base/what-modules-are-available-in-openstack/?lang=en
+
+
+https://www.safespring.com/blogg/debatt-20210205/
+
+
+
+
+
+
+
+
+
+
+
+TODO: Googla runt efter random kritik.
+
+
+
+
+# SafeSpring
+
+
+    Created vm and two networks.
+
+        Tried VxLAN:
+
+
+
+
+
+
+
+## MosCoW
+ 
+Ability to create site-2-site VPN tunnel on network layer
+What network layer is this? The tenant/project networks that we create with TerraForm or something else? Is this for Pritunl-site-to-site, and if so — do we know what's needed to tick this checkbox? (Multicast enabled? Something else?)
+
+Ability to create own overlay network
+What kind of overlay do we need, and what is the use case?
+ 
+MFA/SSO on console
+What 'console' is this? VNC/VM console? Is 'MFA to management GUI and then access token for VNC' good enough?
+ 
+SLA: 99%
+What in the SLA needs to be 2 nines? (Anything less than 2 nines sounds ridicilous, so I assume that I can read this as "there needs to be some SLA available"?)
+
+
+
+https://docs.pritunl.com/docs/site-to-site-configuration
+
+
+## Site-to-Site with IPSec
+
+https://docs.pritunl.com/docs/site-to-site-with-ipsec
+
+https://community.spiceworks.com/topic/1994693-point-to-point-vs-site-to-site-vpn-s
+
+    PPTP uses a GRE tunnel oiver TCP port 1723, and is used to create a connection from a host to another, maybe a server that can accept multiple PPTP connections into it. A Site to Site VPN generally would be IPSec, and support multiple session from multiple hosts to multiple hosts.
+
+    I wouldn't recommend PPTP because of the issues with security.
+
+    VPN really comes in two flavors: Site-to-Site and Remote Access. Site to site would be used for connecting two local area networks via an encrypted tunnel were the remote access is more an on demand VPN that might be used by a road warrior with a notebook computer to access corporate resources from the comfort of their hotel room.
+
+    Most of the UTM devices supports point-to-point VPN and Site-to-site VPN. You can verify on their datasheet. For example you can configure user based VPN connection ( IPSec & SSL ) on the UTM device and using their client software, a remote laptop can connect directly to the office network. Also UTM device has the facility to create branch office tunnel between sites. On each side you should have a UTM device and configuration to be done on either side to establish the tunnel using public network. 
+
+        UTM: Unified Threat Management (Appliance)
+
+# https://docs.pritunl.com/docs/getting-started
+
+
+## https://demo.pritunl.com
+
+
+# https://sirinsoftware.com/blog/securing-your-project-with-vpn-openvpn-vs-ipsec-2/
+
+    Security challenges:
+
+    - The level of security of a VPN connection is directly dependent on the security of authentication at the user end. Simple password protection methods are vulnerable to attacks and cracking. Two-, and sometimes three-factor identification may be necessary.
+    - VPN is based on remote access to the network, and every computer in the network must follow the same security regulations in order to avoid potential virus infection. High-quality anti-viral software can be used as a prevention technique.
+    - Split Tunneling. Initially, this concept is useful – it allows accessing both public and internal networks at the same time from a single computer. However, if you don’t put all of your traffic inside the VPN tunnel first, you create a breach for hackers to access your computer. This can be resolved by using a firewall.
+
+    OpenVPN:
+        - widely adopted
+        - relies on TLS for key exchange
+        - some vulnerabilities, but no major
+
+        The software is particularly useful for endpoints behind firewalls and facility routers. The connection is camouflaged by HTTPS during deep packet inspection.
+
+    IPSec:
+        In an OpenVPN vs. IPsec comparison, the latter is definitely older. It has the advantage of being native to most operating systems, eliminating the need for third-party apps. It uses cryptography and mutual authentication to protect the data flow and internal communications in IP networks. Contrary to OpenVPN, which uses TLS and SSH encryption protocols at the top, seventh OSI layer (the application layer), IPsec operates at the third (network) layer.
+
+        - Remote network access. Using remote access, computers joined to a corporate network can access the internal resources over the internet. Hence, there is a risk of getting the network infected by malware via the IPsec tunnel if the endpoint’s system was infected beforehand.
+        - Compromised algorithms. In recent years, hackers have deciphered some of the IPsec security algorithms. A way to avoid this is to use the latest algorithms that have not yet been reverse engineered.
+
+
+        ## https://serverfault.com/questions/202917/openvpn-vs-ipsec-pros-and-cons-what-to-use/473435#473435
+
+
+
+    "Configure the firewall to allow 500 and 4500/UDP ports for the IKE, ESP, and AH protocols by adding the IPsec service: ..."
+
+
+
+
+allowed address pairs
+
+    The allowed-address-pairs extension is currently only supported by the ML2 and Open vSwitch plug-ins.
+    https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/10/html/networking_guide/sec-allowed-address-pairs
+
+    

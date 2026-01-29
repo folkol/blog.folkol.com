@@ -1,0 +1,1 @@
+uniform-cost search vs djikstras (don't add all nodes to Q right away, and break when target found)

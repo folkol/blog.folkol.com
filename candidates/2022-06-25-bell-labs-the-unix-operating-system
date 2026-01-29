@@ -1,0 +1,117 @@
+# AT&T Archives: The UNIX Operating System
+
+The UNIX System: Making Computers More Productive
+
+1982, Bell Laboratories
+
+https://www.youtube.com/watch?v=tc4ROCJYbm0
+
+Software development is hard.
+Crying need for software.
+Not enough developer.
+Keeping it work in the face of change is hard.
+Continual demand of changes and new features.
+There is no way to get perfect requirements in the first place, and that means we have to build the software to be very change tolerant.
+	- make the software clear, easy to read and easy to change
+	- write many small modules of code, that way your changes can be localized
+What we need to do is to work on a higher level, so that we only need to change a few lines of code instead of thousands.
+Reference to mythical man month.
+Building UNIX: They found a few primitives that enabled you to do a great deal of work with just a few primitives.
+Unix system:
+	- kernel, the thing that controls the resources of the machine
+	- shell, wrapped around the kernel (at least conceptually)
+	- utilities, around the shell. The "meat".
+The main differentiator of Unix is that you can glue these utilities together in many ways. Often unobvious ways, to get different jobs done. The system is very flexible in this respect.
+I think that the notion of pipelining is the fundamental contribution of the system.
+Building blocks.
+- p sentence  # p as in print, sentence on $PATH?
+At Bell Laboratories
+UNIX systems privide
+more timesharing ports
+then all other systems
+combined
+- split the sentence into words, compare each word with the words in a dictionary, when missing — warn.
+- makewords sentence \  # one word per line	
+	| lowercase \  # dictionary doesn't have capitalization
+	| sort \  # dictionary is sorted, so we sort so that we have an easier time comparing
+	| uniq(ue) \  # get rid of duplicates
+	| mismatch -  # check words in stdin for presence in dictionary
+
+Pattern matching for searching for patterns in text, from the theory of studying automata.
+
+Features:
+Formatless files
+Hierarchical directory structure.
+Pipelines.
+Device-independent I/O.
+
+The heart of the system is the file system.
+You only need to know the name.
+
+A file is simply a sequence of bytes, its main attribute is its size. —Ken Thompson
+
+/  # root
+	/usr
+		/bwk
+			/tv
+				sentence...
+			/src
+			troff
+
+
+https://thehackernews.com/2019/10/unix-bsd-password-cracked.html
+
+Shell, or the command interpreter.
+Looks at what you type, and interprets them as command to execute.
+The commands are just names of files which the shell looks for in a particular way.
+They can be compiled programs, or 'shell sequences' like the pipeline that we wrote above.
+
+# These are in 'plot'
+spline <data \ # takes datapoints and fits a curve
+	| graph \  # reads datapoints and outputs a graph specification
+	| tek  # reads the graph specification and does something specific to this terminal
+
+the ability to add lists of commands into a file and execute them by giving the filename lets us tailor our environment in the way we want to work.
+
+Input/output redirection. Normally, keyboard and terminal. The shell can be told to redirect these to and from files.
+
+myspell sentence >dev/fileprinter
+
+"Standard streams", handled by the shell.
+
+I/O devices, peripheral devices are exposed 'as files' in the file system.
+- lineprinter
+- modems
+- tape drives
+
+Shell programming languages.
+C programming language.
+Fortran
+LISP
+Algol
+
+Choose your primitives / axioms. Let others build on top of it.
+
+Design aids.
+
+Composability.
+
+LGEN, takes boolean expressions as input and produces logic circuit designs as output.
+
+Because tool building is such a way of life on the Unix system, over the years we have developed tools that help us build other tools. Parser generators, lexical analyser generators, and other tools that let us organize and build other tools.
+
+yacc
+- originally used to build compilers
+- now used for applications as well
+- built on the theory of LALR(1) parsing
+
+text input | parsing tables -> finite state machine -> parsing actions -> structured output
+
+Geometric layout of the circuit.
+Graph partitioning. Iteratively tries to come up with ok solutions to something that is very hard in theory.
+
+Then, tracks are layed out.
+
+These programs build on top of eachother.
+
+Computers will be more intervowen with people's life. UNIX will not be the final solution, but I think that it will be a good step along the way.

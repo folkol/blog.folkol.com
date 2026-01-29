@@ -1,0 +1,327 @@
+Alacritty, Xfce terminal och Konsole, pastade både med ctrl+shift+v och mittenklick, samma beteende
+
+Alacritty: terminal emulator
+Xfce terminal: terminal emulator
+Konsole (KDE): terminal emulator
+
+ohmyzsh
+
+
+
+
+arch:
+
+	$ vagrant init archlinux/archlinux
+	vagrant up
+	==> vagrant: A new version of Vagrant is available: 2.2.15 (installed version: 2.2.10)!
+	==> vagrant: To upgrade visit: https://www.vagrantup.com/downloads.html
+
+	A `Vagrantfile` has been placed in this directory. You are now
+	ready to `vagrant up` your first virtual environment! Please read
+	the comments in the Vagrantfile as well as documentation on
+	`vagrantup.com` for more information on using Vagrant.
+	$ vagrant up
+	Bringing machine 'default' up with 'virtualbox' provider...
+	==> default: Box 'archlinux/archlinux' could not be found. Attempting to find and install...
+	    default: Box Provider: virtualbox
+	    default: Box Version: >= 0
+	==> default: Loading metadata for box 'archlinux/archlinux'
+	    default: URL: https://vagrantcloud.com/archlinux/archlinux
+	==> default: Adding box 'archlinux/archlinux' (v20210401.18564) for provider: virtualbox
+	    default: Downloading: https://vagrantcloud.com/archlinux/boxes/archlinux/versions/20210401.18564/providers/virtualbox.box
+	Download redirected to host: vagrantcloud-files-production.s3-accelerate.amazonaws.com
+	==> default: Successfully added box 'archlinux/archlinux' (v20210401.18564) for 'virtualbox'!
+	==> default: Importing base box 'archlinux/archlinux'...
+	==> default: Matching MAC address for NAT networking...
+	==> default: Checking if box 'archlinux/archlinux' version '20210401.18564' is up to date...
+	==> default: Setting the name of the VM: zshtest_default_1618417383016_63263
+	==> default: Clearing any previously set network interfaces...
+	==> default: Preparing network interfaces based on configuration...
+	    default: Adapter 1: nat
+	==> default: Forwarding ports...
+	    default: 22 (guest) => 2222 (host) (adapter 1)
+	==> default: Booting VM...
+	There was an error while executing `VBoxManage`, a CLI used by Vagrant
+	for controlling VirtualBox. The command and stderr is shown below.
+
+	Command: ["startvm", "58f7e8b2-83ad-4908-9a7c-a61aae884c38", "--type", "headless"]
+
+	Stderr: VBoxManage: error: The virtual machine 'zshtest_default_1618417383016_63263' has terminated unexpectedly during startup with exit code 1 (0x1)
+	VBoxManage: error: Details: code NS_ERROR_FAILURE (0x80004005), component MachineWrap, interface IMachine
+
+	brew reinstall virtualbox
+
+
+
+	https://apple.stackexchange.com/questions/312795/zsh-paste-from-the-clipboard-a-command-takes-a-few-second-to-be-write-in-the-ter
+
+
+	vagrant up still fails
+
+	security and privacy: system module has been updated -> Allow -> Reboot
+
+	worked now!
+
+	but I can't stop -> restart 'normal'
+
+	brew upgrade virtualbox
+
+	brew reinstall virtualbox
+
+	
+	More problems... brew uninstall virtualbox, and installed from package downloaded from virtualbox.com
+
+	Installed from Ubuntu ISO, still problems (especially when trying to select ISO at startup). Worked when I inserted the ISO before boot...
+
+
+
+	Ubuntu with zsh, without ohmyzsh.
+	Paste from
+
+
+	13
+
+		 SHIFT+INS pastes the content of the clipboard, as you can see here. It is the same as CTRL+V (with the difference CTRL+V doesn't work for example in graphic terminals, there you have to use SHIFT+INS or the middle-mouse-click-trick).
+
+		When you select a piece of text, it will be loaded to an entirely other buffer than the buffer aforementioned (it is another clipboard, respectively), and you can use it with the middle mouse button, even without Xorg, in tty!
+
+		Ryran wrote: highlight + middle click isn't an xorg thing. Many distros support it out of the box on virtual consoles (ttys) as well. (e.g., RedHat/Fedora requires a package+service called gpm to be installed & running.) That said, each highlight + middle click clipboard is local to its tty (i.e., you can't highlight and paste between different virt consoles and/or X).
+
+		Summarized: in Xorg you have got two different clipboards. One is reachable with the keyboard, the other is with the mouse.
+
+
+		https://unix.stackexchange.com/questions/33761/whats-the-difference-between-pasting-with-middle-mouse-button-and-shiftins
+
+
+		"Ubuntu Terminal".
+
+
+
+		both with set and builtin set
+
+
+		https://linux.die.net/man/1/zshbuiltins
+
+				set [ {+|-}options | {+|-}o [ option_name ] ] ... [ {+|-}A [ name ] ] [ arg ... ]
+			Set the options for the shell and/or set the positional parameters, or declare and set an array. If the -s option is given, it causes the specified arguments to be sorted before assigning them to the positional parameters (or to the array name if -A is used). With +s sort arguments in descending order. For the meaning of the other flags, see zshoptions(1). Flags may be specified by name using the -o option. If no option name is supplied with -o, the current option states are printed: see the description of setopt below for more information on the format. With +o they are printed in a form that can be used as input to the shell.
+			If the -A flag is specified, name is set to an array containing the given args; if no name is specified, all arrays are printed together with their values.
+			If +A is used and name is an array, the given arguments will replace the initial elements of that array; if no name is specified, all arrays are printed without their values.
+
+			The behaviour of arguments after -A name or +A name depends on whether the option KSH_ARRAYS is set. If it is not set, all arguments following name are treated as values for the array, regardless of their form. If the option is set, normal option processing continues at that point; only regular arguments are treated as values for the array. This means that
+
+
+		DISABLE_MAGIC_FUNCTIONS=true
+
+
+		$ cat ~/.zshrc
+		export ZSH="/home/folkol/.oh-my-zsh"
+		ZSH_THEME="robbyrussell"
+		plugins=(git)
+		source $ZSH/oh-my-zsh.sh
+
+		Samma fel på macen!
+
+
+		Good commit
+
+
+			HEAD$ zsh -a
+			zsh: Can't add module parameter `zsh_scheduled_events': parameter already exists
+			zsh: Can't add module parameter `parameters': parameter already exists
+			zsh: Can't add module parameter `commands': parameter already exists
+			zsh: Can't add module parameter `functions': parameter already exists
+			zsh: Can't add module parameter `dis_functions': parameter already exists
+			zsh: Can't add module parameter `functions_source': parameter already exists
+			zsh: Can't add module parameter `dis_functions_source': parameter already exists
+			zsh: Can't add module parameter `funcfiletrace': parameter already exists
+			zsh: Can't add module parameter `funcsourcetrace': parameter already exists
+			zsh: Can't add module parameter `funcstack': parameter already exists
+			zsh: Can't add module parameter `functrace': parameter already exists
+			zsh: Can't add module parameter `builtins': parameter already exists
+			zsh: Can't add module parameter `dis_builtins': parameter already exists
+			zsh: Can't add module parameter `reswords': parameter already exists
+			zsh: Can't add module parameter `dis_reswords': parameter already exists
+			zsh: Can't add module parameter `patchars': parameter already exists
+			zsh: Can't add module parameter `dis_patchars': parameter already exists
+			zsh: Can't add module parameter `options': parameter already exists
+			zsh: Can't add module parameter `modules': parameter already exists
+			zsh: Can't add module parameter `dirstack': parameter already exists
+			zsh: Can't add module parameter `history': parameter already exists
+			zsh: Can't add module parameter `historywords': parameter already exists
+			zsh: Can't add module parameter `jobtexts': parameter already exists
+			zsh: Can't add module parameter `jobdirs': parameter already exists
+			zsh: Can't add module parameter `jobstates': parameter already exists
+			zsh: Can't add module parameter `nameddirs': parameter already exists
+			zsh: Can't add module parameter `userdirs': parameter already exists
+			zsh: Can't add module parameter `usergroups': parameter already exists
+			zsh: Can't add module parameter `aliases': parameter already exists
+			zsh: Can't add module parameter `dis_aliases': parameter already exists
+			zsh: Can't add module parameter `galiases': parameter already exists
+			zsh: Can't add module parameter `dis_galiases': parameter already exists
+			zsh: Can't add module parameter `saliases': parameter already exists
+			zsh: Can't add module parameter `dis_saliases': parameter already exists
+			zsh: Can't add module parameter `termcap': parameter already exists
+			zsh: Can't add module parameter `widgets': parameter already exists
+			zsh: Can't add module parameter `keymaps': parameter already exists
+
+
+			master$ git bisect bad
+			Bisecting: 1374 revisions left to test after this (roughly 11 steps)
+			[0de3b29fd3fde0d5d95271cb076a12931ccee7d8] composer: Fix bin directory when Composer is not available (#6240)
+
+
+
+			HEAD$ zsh -a
+			zsh: Can't add module parameter `zsh_scheduled_events': parameter already exists
+			zsh: Can't add module parameter `parameters': parameter already exists
+			zsh: Can't add module parameter `commands': parameter already exists
+			zsh: Can't add module parameter `functions': parameter already exists
+			zsh: Can't add module parameter `dis_functions': parameter already exists
+			zsh: Can't add module parameter `functions_source': parameter already exists
+			zsh: Can't add module parameter `dis_functions_source': parameter already exists
+			zsh: Can't add module parameter `funcfiletrace': parameter already exists
+			zsh: Can't add module parameter `funcsourcetrace': parameter already exists
+			zsh: Can't add module parameter `funcstack': parameter already exists
+			zsh: Can't add module parameter `functrace': parameter already exists
+			zsh: Can't add module parameter `builtins': parameter already exists
+			zsh: Can't add module parameter `dis_builtins': parameter already exists
+			zsh: Can't add module parameter `reswords': parameter already exists
+			zsh: Can't add module parameter `dis_reswords': parameter already exists
+			zsh: Can't add module parameter `patchars': parameter already exists
+			zsh: Can't add module parameter `dis_patchars': parameter already exists
+			zsh: Can't add module parameter `options': parameter already exists
+			zsh: Can't add module parameter `modules': parameter already exists
+			zsh: Can't add module parameter `dirstack': parameter already exists
+			zsh: Can't add module parameter `history': parameter already exists
+			zsh: Can't add module parameter `historywords': parameter already exists
+			zsh: Can't add module parameter `jobtexts': parameter already exists
+			zsh: Can't add module parameter `jobdirs': parameter already exists
+			zsh: Can't add module parameter `jobstates': parameter already exists
+			zsh: Can't add module parameter `nameddirs': parameter already exists
+			zsh: Can't add module parameter `userdirs': parameter already exists
+			zsh: Can't add module parameter `usergroups': parameter already exists
+			zsh: Can't add module parameter `aliases': parameter already exists
+			zsh: Can't add module parameter `dis_aliases': parameter already exists
+			zsh: Can't add module parameter `galiases': parameter already exists
+			zsh: Can't add module parameter `dis_galiases': parameter already exists
+			zsh: Can't add module parameter `saliases': parameter already exists
+			zsh: Can't add module parameter `dis_saliases': parameter already exists
+			zsh: Can't add module parameter `termcap': parameter already exists
+			zsh: Can't add module parameter `widgets': parameter already exists
+			zsh: Can't add module parameter `keymaps': parameter already exists
+
+
+
+
+
+
+
+
+HEAD$ git bisect bad
+19c0b185ad9b37b448a979fb6cc995cc648e76a4 is the first bad commit
+commit 19c0b185ad9b37b448a979fb6cc995cc648e76a4
+Author: iCross <rja@icross.cc>
+Date:   Thu Sep 10 14:08:02 2015 +0800
+
+    fix url-quote-magic not working issue
+
+    Incompatibilites between 5.0.8 and 5.1:
+    bracketed-paste-magic may also be necessary in order to apply url-quote-magic.
+
+    Reference:
+    https://github.com/zsh-users/zsh/blob/a9df6aaa702abf761b155cd842a7f6917be44139/Functions/Zle/url-quote-magic#L11
+
+:040000 040000 ea441a063b705476e83b7bb840f066760ae63589 e4a71ed5990865af8d5fc7d11a548ae3c383266d M	lib
+
+
+			https://stackoverflow.com/questions/30840651/what-does-autoload-do-in-zsh
+
+				https://stackoverflow.com/questions/4493173/z-shell-autoload-builtin-what-is-it-good-for/4493687#4493687
+
+					autoload allows for functions to be specified without a body which then get automatically loaded when used ;)
+
+
+
+ALL_EXPORT
+
+
+HEAD$ zsh -a
+zsh: Can't add module parameter `zsh_scheduled_events': parameter already exists
+zsh: Can't add module parameter `parameters': parameter already exists
+zsh: Can't add module parameter `commands': parameter already exists
+zsh: Can't add module parameter `functions': parameter already exists
+zsh: Can't add module parameter `dis_functions': parameter already exists
+zsh: Can't add module parameter `functions_source': parameter already exists
+zsh: Can't add module parameter `dis_functions_source': parameter already exists
+zsh: Can't add module parameter `funcfiletrace': parameter already exists
+zsh: Can't add module parameter `funcsourcetrace': parameter already exists
+zsh: Can't add module parameter `funcstack': parameter already exists
+zsh: Can't add module parameter `functrace': parameter already exists
+zsh: Can't add module parameter `builtins': parameter already exists
+zsh: Can't add module parameter `dis_builtins': parameter already exists
+zsh: Can't add module parameter `reswords': parameter already exists
+zsh: Can't add module parameter `dis_reswords': parameter already exists
+zsh: Can't add module parameter `patchars': parameter already exists
+zsh: Can't add module parameter `dis_patchars': parameter already exists
+zsh: Can't add module parameter `options': parameter already exists
+zsh: Can't add module parameter `modules': parameter already exists
+zsh: Can't add module parameter `dirstack': parameter already exists
+zsh: Can't add module parameter `history': parameter already exists
+zsh: Can't add module parameter `historywords': parameter already exists
+zsh: Can't add module parameter `jobtexts': parameter already exists
+zsh: Can't add module parameter `jobdirs': parameter already exists
+zsh: Can't add module parameter `jobstates': parameter already exists
+zsh: Can't add module parameter `nameddirs': parameter already exists
+zsh: Can't add module parameter `userdirs': parameter already exists
+zsh: Can't add module parameter `usergroups': parameter already exists
+zsh: Can't add module parameter `aliases': parameter already exists
+zsh: Can't add module parameter `dis_aliases': parameter already exists
+zsh: Can't add module parameter `galiases': parameter already exists
+zsh: Can't add module parameter `dis_galiases': parameter already exists
+zsh: Can't add module parameter `saliases': parameter already exists
+zsh: Can't add module parameter `dis_saliases': parameter already exists
+zsh: Can't add module parameter `termcap': parameter already exists
+zsh: Can't add module parameter `widgets': parameter already exists
+zsh: Can't add module parameter `keymaps': parameter already exists
+
+
+
+when did zsh -a stop spamming errors?
+
+
+
+	HEAD$ git bisect bad
+	Bisecting: 0 revisions left to test after this (roughly 0 steps)
+	[3f6e87df15104484219c04828b2eddd6d09ee065] init: run update check in the same zsh process (#9019)
+
+
+	commit 3f6e87df15104484219c04828b2eddd6d09ee065 (HEAD)
+	Author: Marc Cornellà <marc.cornella@live.com>
+	Date:   Wed Jun 17 11:23:52 2020 +0200
+
+	    init: run update check in the same zsh process (#9019)
+
+	diff --git a/oh-my-zsh.sh b/oh-my-zsh.sh
+	index 4b4191c0..741bad51 100644
+	--- a/oh-my-zsh.sh
+	+++ b/oh-my-zsh.sh
+	@@ -5,9 +5,7 @@ if [[ -z "$ZSH_CACHE_DIR" ]]; then
+	 fi
+
+	 # Check for updates on initial load...
+	-if [ "$DISABLE_AUTO_UPDATE" != "true" ]; then
+	-  env ZSH=$ZSH ZSH_CACHE_DIR=$ZSH_CACHE_DIR DISABLE_UPDATE_PROMPT=$DISABLE_UPDATE_PROMPT zsh -f $ZSH/tools/check_for_upgrade>
+	-fi
+	+source $ZSH/tools/check_for_upgrade.sh
+
+
+
+
+
+	Can reproduce without oh-my-zsh:
+
+$ cat ~/.zshrc
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz url-quote-magic
+zle -N self-insert url-quote-magic

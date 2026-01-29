@@ -1,0 +1,22 @@
+10x dev / zipf's law
+
+A latent variable is a variable that cannot be observed. The presence of latent variables, however, can be detected by their effects on variables that are observable. Most constructs in research are latent variables.27 Dec 2012
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5172588/
+
+Both natural and artificial systems often exhibit a surprising degree of statistical regularity. One such regularity is Zipf’s law. Originally formulated for word frequency [1], Zipf’s law has since been observed in a broad range of domains, including city size [2], firm size [3], mutual fund size [4], amino acid sequences [5], and neural activity [6, 7].
+
+Zipf’s law is a relation between rank order and frequency of occurrence: it states that when observations (e.g., words) are ranked by their frequency, the frequency of a particular observation is inversely proportional to its rank,
+
+https://en.wikipedia.org/wiki/Benford%27s_law
+Distribution of first digits.
+
+
+https://www.quantamagazine.org/scant-evidence-of-power-laws-found-in-real-world-networks-20180215/
+
+A simple mechanism called “preferential attachment,” Albert and Barabási argued, explains why these power laws appear: When a new node joins a network, it is more likely to connect to a conspicuous, high-degree node than an obscure, low-degree node. In other words, the rich get richer and the hubs get hubbier.
+
+https://icon.colorado.edu/#!/
+
+https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/
+

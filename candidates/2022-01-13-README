@@ -1,0 +1,11 @@
+Typography checklist for complex apps (free preview)
+
+    I’ll save you 4 hours with this 2-word summary: use checklists! 🤓
+
+    1. I’ve just dumped some labels and values onto a page. And that’s a fine way to start 👍
+    2. First item on the list. Remove obvious labels. (like, 'task name', just place a heading with the name)
+    3. Combine lables and values into human-readable phrases.
+    4. Urgent: true|false -> "urgent!" or nothing?
+    5. Display information visually. Joined 'assigned to' and 'due' into same line.
+    6. Show what's actionable! E.g. replace 'date' with 'in 2 weeks' or 'tomorrow'.
+

@@ -1,0 +1,11 @@
+Status page: http://localhost:8004/webpack-dev-server
+
+https://webpack.js.org/migrate/5/
+
+stty
+termios
+https://unix.stackexchange.com/questions/117981/what-are-the-responsibilities-of-each-pseudo-terminal-pty-component-software
+https://unix.stackexchange.com/questions/79334/how-does-a-linux-terminal-work/79354#79354
+https://www.win.tue.nl/~aeb/linux/lk/lk-11.html
+http://www.linusakesson.net/programming/tty/
+https://www.yabage.me/2016/07/08/tty-under-the-hood/

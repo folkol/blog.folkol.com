@@ -1,0 +1,23 @@
+https://www.linuxjournal.com/article/3121
+
+- shell
+	- interprets commands and fork+exec them (and wait for it)
+
+- boot process (anno 1999)
+	- when the computer is booted, a boot loader is loading the kernel into memory and calling it
+	- the kernel initializes itself and any hardwre that may be attached to the computer
+	- the kernel starts the primordial process: init
+	- init reads inittab, and starts any applicable programs listed there
+		- one such program is what lets users login to the system: getty + login
+			- kernel runs getty for each available terminal device
+			- getty: initializes it, prints login prompt
+			- when name entered, executes login program
+			- the login program prompts for password
+				- if correct -- spawn user's shell
+				- if incorrect -- exit
+			- if login (and getty) exited, init reaps the process and spawns another getty for the free device
+	- if the connection was from the network, there is no getty -- but instead sshd/etc will spawn the login process
+
+
+https://web.archive.org/web/20200214202231/http://jdebp.eu./Softwares/nosh/guide/virtual-terminal-login.html
+

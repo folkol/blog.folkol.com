@@ -1,0 +1,4 @@
+Turn indexing off: mdutil -a -i off /
+Trash all spotlight data: rm -rf ~/Library/Metadata/CoreSpotlight/ and sudo /System/Volumes/Data/.Spotlight-V100, then
+killall -KILL Spotlight spotlightd mds (not sure this was the right set of processes)
+Turn indexing back on: mdutil -a -i on /

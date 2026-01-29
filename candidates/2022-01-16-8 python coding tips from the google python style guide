@@ -1,0 +1,46 @@
+# https://www.youtube.com/watch?v=woIkysZytSs
+
+(https://google.github.io/styleguide/pyguide.html)
+
+- style guide for google python libraries
+
+1. Imports
+
+- no wildcards
+- import the module, not the function
+
+
+2. use main function
+
+- __name...
+
+
+3. comprehensions
+
+- only use simple comprehensions (max one line per part), for more complicated cases — use a for loop
+
+4. default function argument
+
+- don't use too many arguments
+- don't use mutable default arguments
+
+5. properties
+
+- getting or setting instance variables that require trivial calculations
+- use getter or setter if they are more advanced
+
+6.
+
+7. lexical scope
+
+8. exception handling
+
+- if you can't do anything useful with the error, don't catch it and let some other part of the program handle it
+
+8.1. asserts
+
+- use asserts to ensure internal correctness, not to ensure correct usage of this code — raise exceptions instead
+- don't use catchall
+- 
+
+10. 

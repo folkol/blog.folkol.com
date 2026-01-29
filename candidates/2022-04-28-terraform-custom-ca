@@ -1,0 +1,2 @@
+openssl s_client -showcerts -connect keystone.api.cloud.ipnett.se:443
+SSL_CERT_FILE="$(pwd)"/safedc_baas.pem ./terraform.sh plan se-prod

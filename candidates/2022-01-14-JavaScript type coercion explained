@@ -1,0 +1,128 @@
+# https://www.freecodecamp.org/news/js-type-coercion-explained-27ba3d9a2839/
+
+Casting: Explicit, like Number(x).
+Type coersion: Automatic as needed to interpret the code.
+
+JavaScript has got three types of conversions:
+- to string
+- to boolean
+- to number
+
+## String conversion
+
+"To explicitly convert values to a string apply the String() function. Implicit coercion is triggered by the binary + operator, when any operand is a string:"
+
+String(123)  // explicit
+123 + ''     // implicit, as triggered by binary +
+
+All primitive values are converted to strings naturally:
+
+String(123)        // '123'
+String(-12.3)      // '-12.3'
+String(null)       // 'null'
+String(undefined)  // 'undefined'
+String(true)       // 'true'
+String(false)      // 'false'
+Symbol('foo')      // 
+// Same for '' + value and value + ''
+
+(Symbol will not be converted implicitly, see https://leanpub.com/understandinges6/read/#leanpub-auto-symbol-coercion)
+
+
+## Boolean conversion
+
+"To explicitly convert a value to a boolean apply the Boolean() function.
+Implicit conversion happens in logical context, or is triggered by logical operators ( || && !) ."
+
+
+Note: Logical operators such as || and && do boolean conversions internally, but actually return the value of original operands, even if they are not boolean. See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators
+
+As soon as there are only 2 possible results of boolean conversion: true or false, it’s just easier to remember the list of falsy values.
+
+Boolean('')           // false
+Boolean(0)            // false     
+Boolean(-0)           // false
+Boolean(NaN)          // false
+Boolean(null)         // false
+Boolean(undefined)    // false
+Boolean(false)        // false
+
+Anything not in this list is converted to true, including 'object', function, 'Array', 'Date', user-defined type, and so on. Symbols are truthy values. Empty object and arrays are truthy as well.
+
+Boolean({})             // true
+Boolean([])             // true
+Boolean(Symbol())       // true
+!!Symbol()              // true
+Boolean(function() {})  // true
+
+## Numeric conversion
+
+For an explicit conversion, just apply Number(), same as you did with Boolean() and String().
+
+
+Triggered in more cases:
+
+- comparison operators
+- bitwise operators
+- arithmetic operators (Note, binary + prioritizes string conversion if either operand is a string.)
+- unary + operator
+- loose equality operator (==), note: does not convert to number if both operands are string
+
+Number('123')   // explicit
++'123'          // implicit
+123 != '456'    // implicit
+4 > '5'         // implicit
+5/null          // implicit
+true | 0        // implicit
+
+How is how primitive values are converted to numbers:
+
+Number(" 12 ")                 // 12
+Number("-12.34")               // -12.34
+Number(true)                   // 1
+Number(false)                  // 0
+Number(null)                   // 0
+Number("\n")                   // 0, because trim + empty
+Number(123)                    // 123
+Number(" 12s ")                // NaN, because not only number
+Number(undefined)              // NaN
+
+
+When converting a string to a number, the engine first trims leading and trailing whitespace, \n, \t characters, returning NaN if the trimmed string does not represent a valid number. If string is empty, it returns 0.
+
+null and undefined are handled differently: null becomes 0, whereas undefined becomes NaN.
+
+Symbols cannot be converted to a number neither explicitly nor implicitly. Moreover, TypeError is thrown, instead of silently converting to NaN, like it happens for undefined. See more on Symbol conversion rules on MDN.
+
+
+There are two special rules to remember:
+
+1. When applying == to null or undefined, numeric conversion does not happen. null equals only to null or undefined, and does not equal to anything else.
+2. NaN does not equal to anything even itself:
+
+
+## Type coercion for objects
+
+When it comes to objects and engine encounters expression like [1] + [2,3], first it needs to convert an object to a primitive value, which is then converted to the final type. And still there are only three types of conversion: numeric, string and boolean.
+
+The simplest case is boolean conversion: any non-primitive value is always 
+coerced to true, no matter if an object or an array is empty or not.
+
+
+
+
+
+### Precedece rules and associativity: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#table
+
+
+
+
+
+### Aside: https://raygun.com/learn/javascript-debugging-tips
+	
+	console.{log,table,trace,debug,warn,info,error}
+	console.todo = function(msg) {
+		console.log(‘ % c % s % s % s‘, ‘color: yellow; background - color: black;’, ‘–‘, msg, ‘–‘);
+
+	}
+	monitor(somefunc)

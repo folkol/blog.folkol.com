@@ -1,0 +1,10 @@
+Quadratic Probing?
+- Open addressing / closed hashing
+- While collision, try next bucket by quadratic probing
+	- if bucket x is occupied, try:
+		x + 1^2
+		x + 2^2
+		x + 3^2
+		x + 4^2
+		etc
+		if no most slots, what?

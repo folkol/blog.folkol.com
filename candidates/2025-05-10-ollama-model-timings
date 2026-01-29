@@ -1,0 +1,231 @@
+# create_micro_summary, ollama
+
+
+https://docs.google.com/spreadsheets/d/1wZ04Un4ULbsNmU4ZJD_GsZTV1BOtcf7NaL3EQ7oUIiw/edit?gid=0#gid=0
+
+
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m cogito:3b -sp create_micro_summary <carpal-tunnel-release-video.txt
+
+real	0m2.703s
+user	0m0.039s
+sys	0m0.038s
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m cogito:3b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m19.456s
+user	0m0.040s
+sys	0m0.037s
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m cogito:8b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m7.288s
+user	0m0.046s
+sys	0m0.044s
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m cogito:8b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m42.606s
+user	0m0.057s
+sys	0m0.053s
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m cogito:14b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m12.159s
+user	0m0.050s
+sys	0m0.047s
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m cogito:14b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	1m19.394s
+user	0m0.045s
+sys	0m0.070s
+
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m gemma3:1b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m3.952s
+user	0m0.049s
+sys	0m0.055s
+
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m gemma3:1b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m10.898s
+user	0m0.067s
+sys	0m0.065s
+
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m gemma3:4b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m8.051s
+user	0m0.063s
+sys	0m0.071s
+
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m gemma3:4b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m33.873s
+user	0m0.088s
+sys	0m0.086s
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m gemma3:12b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	0m34.835s
+user	0m0.183s
+sys	0m0.186s
+
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m gemma3:12b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	2m6.668s
+user	0m0.127s
+sys	0m0.121s
+
+
+$ time OLLAMA_API_URL=http://192.168.8.130:11434 fabric-ai -m gemma3:27b -sp create_micro_summary <carpal-tunnel-release-video.txt
+real	2m7.649s
+user	0m0.160s
+sys	0m0.147s
+
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m gemma3:27b -sp create_micro_summary <carpal-tunnel-release-video.txt
+## Comprehensive Summary of the Carpal Tunnel Release Video
+^C
+
+real	20m0.594s
+user	0m0.043s
+sys	0m0.117s
+
+
+openai,o4-mini,?,0m24s,
+
+
+
+
+host,model,size,time,factor
+pc,cogito:3b,2.2GB,0m2s,?
+macmini,cogito:3b,2.2GB,0m19s,?
+pc,cogito:8b,4.9GB,0m7s,?
+macmini,cogito:8b,4.9GB,0m42s,?
+pc,cogito:14b,9GB,0m12s,?
+macmini,cogito:14b,9GB,1m19s,?
+pc,gemma3:1b,0.8GB,0m3s,?
+macmini,gemma3:1b,0.8GB,0m10s,?
+pc,gemma3:4b,3.3GB,0m8.051s,?
+macmini,gemma3:4b,3.3GB,0m33s,?
+pc,gemma3:12b,8.1GB,0m34s,?
+macmini,gemma3:12b,8.1B,2m6s,?
+pc,gemma3:27b,17GB,2m7s,?
+macmini,gemma3:27b,17GB,?,?
+
+ (dog efter 20 min, hade producerat ~10% av output)
+
+
+
+
+$ cat ~/Downloads/model_timings.csv
+model,size,macmini,openai,pc,pc_seconds,macmini_seconds,mac_vs_pc_factor
+cogito:3b,2.2GB,0m19s,,0m2s,2.0,19.0,9.5
+cogito:8b,4.9GB,0m42s,,0m7s,7.0,42.0,6.0
+cogito:14b,9GB,1m19s,,0m12s,12.0,79.0,6.6
+gemma3:12b,8.1B,2m6s,,,,126.0,
+gemma3:12b,8.1GB,,,0m34s,34.0,,
+gemma3:1b,0.8GB,0m10s,,0m3s,3.0,10.0,3.3
+gemma3:4b,3.3GB,0m33s,,0m8.051s,8.051,33.0,4.1
+gemma3:27b,17GB,?,,2m7s,127.0,,
+
+o4-mini,?,,0m24s,,,,
+
+
+
+
+model       size   macmini  openai    pc     pc_seconds  macmini_seconds  mac_vs_pc_factor
+cogito:3b   2.2GB  0m19s    0m2s      2.0    19.0        9.5
+cogito:8b   4.9GB  0m42s    0m7s      7.0    42.0        6.0
+cogito:14b  9GB    1m19s    0m12s     12.0   79.0        6.6
+gemma3:12b  8.1B   2m6s     126.0
+gemma3:12b  8.1GB  0m34s    34.0
+gemma3:1b   0.8GB  0m10s    0m3s      3.0    10.0        3.3
+gemma3:4b   3.3GB  0m33s    0m8.051s  8.051  33.0        4.1
+gemma3:27b  17GB   ?        2m7s      127.0
+
+
+
+
+$ time OLLAMA_API_URL=http://127.0.0.1:11434 fabric-ai -m gemma3:27b -sp create_micro_summary <carpal-tunnel-release-video.txt
+## Comprehensive Summary of the Carpal Tunnel Release Video
+^C
+
+
+
+
+
+$ time fabric-ai -m gpt-4.5-preview-2025-02-27 -sp create_micro_summary <carpal-tunnel-release-video.txt
+# ONE SENTENCE SUMMARY:
+This video details the anatomy, preparation, anesthetic, surgical procedure, and practical tips for successful carpal tunnel release surgery.
+
+# MAIN POINTS:
+- Carpal tunnel surgery involves releasing the transverse carpal ligament.
+- Proper incision placement avoids injury to median and ulnar nerves.
+- Local anesthetic infiltration is a common and efficient anesthetic technique.
+
+# TAKEAWAYS:
+- Maintain hand supination to prevent accidental nerve damage.
+- Confirm complete ligament release to ensure successful surgery.
+- Blunt dissection minimizes risk to nearby nerves and structures.
+
+real	0m11.630s
+user	0m0.027s
+sys	0m0.023s
+
+
+$ time fabric-ai -m gpt-4.1 -sp create_micro_summary <carpal-tunnel-release-video.txt
+## ONE SENTENCE SUMMARY:
+Carpal tunnel release involves anatomical understanding, precise incision planning, careful anesthesia, and meticulous technique to ensure safe, effective decompression.
+
+## MAIN POINTS:
+- Accurate anatomical knowledge guides safe incision and avoids nerve or vessel injury.
+- Local anesthetic infiltration is preferred for speed and minimal resource use.
+- Complete ligament division, proper hand positioning, and vigilance prevent complications.
+
+## TAKEAWAYS:
+- Know surface anatomy and incision landmarks before starting.
+- Always protect the median nerve during ligament division.
+- Maintain hand supination to avoid drifting and unintended injuries.
+
+real	0m4.381s
+user	0m0.028s
+sys	0m0.024s
+
+$ time fabric-ai -m gpt-4-turbo -sp create_micro_summary <carpal-tunnel-release-video.txt
+# ONE SENTENCE SUMMARY:
+Malik explains the detailed process of performing a carpal tunnel release surgery, focusing on anatomy, incision planning, and procedural steps.
+
+# MAIN POINTS:
+- Detailed anatomy of the carpal tunnel, including muscle and ligament structures.
+- Techniques for local anesthesia administration and surgical incision.
+- Tips for avoiding complications during the procedure.
+
+# TAKEAWAYS:
+- Understanding anatomy is crucial for correct incision.
+- Local anesthesia techniques vary; choose wisely.
+- Precision in incision placement minimizes risks.
+
+real	0m4.750s
+user	0m0.025s
+sys	0m0.019s
+
+$ time fabric-ai -m o4-mini -T 0 -t 1 -sp create_micro_summary <carpal-tunnel-release-video.txt
+**ONE SENTENCE SUMMARY:**
+Carpal tunnel release covers anatomy review, incision planning, local anesthetic infiltration, ligament division technique, release confirmation, and stepwise operative tips.
+
+**MAIN POINTS:**
+- Understand carpal tunnel anatomy and avoid vital nearby structures.
+- Plan incision precisely between distal wrist crease and Kaplan’s line.
+- Divide transverse carpal ligament under McDonald elevator protection.
+
+**TAKEAWAYS:**
+- Keep hand supinated to prevent ulnar drift.
+- Confirm complete ligament release proximally and distally using elevator hook.
+- Use mixed long and short acting anesthetic for balanced block duration.
+
+real	0m24.204s
+user	0m0.031s
+sys	0m0.030s
+
+
+
+
+
+
+

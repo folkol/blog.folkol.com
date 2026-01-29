@@ -1,0 +1,21 @@
+Descriptive statistics and histogram of bytes set in memory words?
+
+https://superuser.com/questions/71389/what-is-dev-mem
+
+See also: dd if=/dev/urandom of=/dev/kmem bs=1 count=1 seek=$RANDOM – 
+user3490
+Sep 9 '12 at 12:14
+6
+Shouldn't memory protection stop access to the physical RAM for all processes except the one which has been assigned to that area of RAM? Or does sudo override that protection? – 
+Matthew Lock
+ Aug 14 '14 at 3:05
+1
+@MatthewLock, /dev/mem does it. It is a kernel driver that lets one read and write to arbitrary memory locations. – 
+sleblanc
+ May 10 '20 at 19:13
+
+https://man7.org/linux/man-pages/man4/mem.4.html
+
+
+
+CONFIG_STRICT_DEVMEM

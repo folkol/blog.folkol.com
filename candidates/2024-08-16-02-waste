@@ -1,0 +1,27 @@
+# Waste
+
+https://www.computerenhance.com/p/waste
+
+> Reduce the number or increase the speed
+
+- 1/5 multiplier: WASTE instructions
+
+int __declspec(noinline) add(int A, int B) {
+	return A + B;
+}
+
+#pragma optimize("", off)
+int main(int ArgCount, char **Args) {
+	return add(1234, 5678);
+}
+
+- Run in debugger, show the disassembly
+- Python comparison: what about Integer.MAX_VALUE + 1?
+- step through interpreter: find the switch(bytecode) and step!
+- conclusion: don't use Python?
+
+- timed a python program, 161 cycles per add
+- 0.8 adds per clock peak
+- 129 times slower in Python
+
+- try measure sum(numbers) instead...

@@ -1,0 +1,38 @@
+vim global marks
+Ben Awad
+"This is TJ", NeoVim
+https://www.youtube.com/watch?v=lvKQh3Od6V4
+
+async_hooks,create hook, PROMISE etc
+promise explosion -> memory explosion -> GC
+
+
+chaos monkey - instance
+chaos gorilla - service
+chaos kong - shuts off region
+
+Don't solve problems you don't have!
+
+"Blue services"
+
+"default return values if dependent services time out or die"
+
+You don't know what you are doing, not no — it doesn't work.
+
+"Web Container", running Node?
+
+SmooshGate
+
+
+
+
+5 problem solving tips for programming interview problems
+https://www.youtube.com/watch?v=GBuHSRDGZBY
+
+#1, start with brute force
+#2, think of an easier version of the problem
+#3, think with simpler examples, notice pattern — and expand
+#4, some sort of vizualisation
+#5, test solution on a few examples
+
+

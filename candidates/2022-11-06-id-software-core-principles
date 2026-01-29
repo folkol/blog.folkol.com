@@ -1,0 +1,74 @@
+# "The Early Days of id Software: Programming Principles" by John Romero (Strange Loop 2022)
+https://www.youtube.com/watch?v=IzqdZAYcwfY
+
+## Highlighted core principles
+
+1. No prototypes. Just make the game. Polish as you go. Don't depend on polish happening later. Always maintain constantly shippable code.
+	- this doesn't always hold, only if we have a very clear idea and can see it in your head
+	- modern game development use prototypes all the time. E.g. GYM, whitebox-model. If you want to try out movement, you create a 'movement-GYM' and move around there to test things out. You might have a magic-GYMs etc, you test one subsystem of the game in these gyms. A normal game today have 30-40 gyms.
+2. It's incredibly important that your game can always be run by your team. Bulletproof your engine by providing defaults upon load failure. Defaults should be 'obviously not the correct thing, like a bagel instead of a monster'
+3. Keep your code absolutely simple. Keep looking at your functions and figure our how you can simplify further.
+	- all games up to quake was in C, not C++
+4. Great tools help make great games. Spend as much time on tools as possible.
+	- tile editors, etc
+5. We are our own best testing team and should never allow anyone else to experience bugs or see the game crash. Don't waste others' time. Test thoroughly before checking in your code.
+6. As soon as you see a bug, you fix it. Do not continue on. If you don't fix your bugs your new code will be built on a buggy codebase and ensuer an unstable foundation.
+	- if you check in buggy code, someone else will build new code on top of a buggy foundation.
+Ideas for DOOM, inspired by D&D campaign full of demons + evil dead + Aliens.
+7. Use a development system that is superior to your target.
+	- we used NEXT workstations, which was superior to the PC DOS system.
+8. Great tools make great games. DOOMed and QuakeED.
+9. Write your code for this game only -- not for a future game. You're going to be writing new code later becaues you'll be smarter.
+	- started from scratch, as always.
+	-  qtest.exe, death match only demo
+11. Encapsulate functionality to ensure design consistency. This minimizes mistakes and saves design time.
+	- E.g. instead of 'a torch model' + 'torch light' + 'torch sound' and place them in a single location, we composed a 'torch entity' and placed it.
+12. Try to code transparently. Tell your lead and peers exactly how you are going to solve your current task and get feedback and advice. Do not treat game programming like each coder is a black box. The project could go off the rails and cause delays.
+13. Programming is a creative art form based on logic. Every programmer is different and will code differently. It's the output that matters.
+	- Don't focus on superficial differences and rigid styles, it is the output that matters.
+
+Q: How did you collaborate? You had no git.
+A: We had no source control, we had floppy. Backup was 'whatever the state of the game was on everybodys computer'. We talked to eachother in the same room, we passed code around on floppies.
+
+Q: What was the freeze bug on some computers?
+A: Game was driven by timer ticks (35FPS for graphics, 35FPS for logic, 140FPS for audio). We compared hardware counter with stored value to see if it was time to 'do some logic', but the hardware timer was 16bit and wrapped around -- so we never got to 'value for next tick'. We had to reset the hardware timer so that it never wrapped around.
+
+Q: How did you resolve architecture discussions.
+A: We split up ownedship.
+
+Q: How do meaningful progress on spare time projects?
+A: Do not wait for money, you have to do it yourself. After work, on the weekends. It WILL take extra time. You've got to sacrifice.
+
+Q: Suspiciously happy, and productive. How did you manage 'business', how did you divide the money.
+A: We split even, we kept most money in the company. We tried to avoid financial stress. We kept at least one year worth of money in the bank.
+
+Q: Small highperforming team, how did you decide who to hire?
+A: We already knew them.
+
+Q: This demon themed D&D campaign, tell us about it.
+A: It was not full of deamons until I made that happen. The mad genius behind all of this was John Carmack, he was still a good dungeon master -- you had to think about what you did because of political reactions.
+
+Q: Any principles that you scrapped or revisited?
+A: prototype
+
+Q: How did you work together?
+A: Everbody was super-respectful with eachother, nobody never yelled. Being very professional.
+
+Q: Testing strategies?
+A: Play the game! Make sure the code runs! You need to try to ruin it. Try to break it! There was pride to write bugfree code. Try to put bad data in.
+
+Q: Managers?
+A: No. It was a hivemind situation. It was a small team.
+
+Q: Did you pay attention to the demo scene?
+A: We knew about the 80:s demo scene, we knew how the code worked -- but it wouldn't help us much since our code worked on a lot of data and had to work on different platforms.
+
+Q: It's not a bug, it is a feature? Any happy accidents?
+A: The bug that is now a feature, in DOOM, one of them is when you as the played when you had one sound channel. Let played-sound-effects stomp on previous sound to not eat up all channels. Because the played only had one channel, when you fired the gun - silent BFG trick. You fire the gun and then 'use' on a wall -- the sound sound stomps the BFG sound.
+
+Q: You mention always start fresh. Didn't you copy-paste things?
+A: We keeped really foundational stuff, like 'load file' etc. But reevaluate if there are new tricks.
+
+Span blitter in DOOM: renders horisontal stripes.
+
+https://www.gamedeveloper.com/design/programming-principles-from-the-early-days-of-id-software

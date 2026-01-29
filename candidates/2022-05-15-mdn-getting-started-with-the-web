@@ -1,0 +1,128 @@
+# https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web
+
+## What will your website look like?
+
+Plan information, basic layout, fonts, colors.
+
+
+
+## Dealing with files
+
+Basic structure:
+index.html
+images/
+styles/
+scripts/
+
+
+## HTML basics
+
+HyperText Markup Language
+	- hypertext: text with links
+
+Anatomy of an HTML element
+
+opening tag     content     closing tag
+<foo> ...................... </foo>
+elementelementelementelementelementelement
+
++attributes
+
+Some elements can be nested, refer to HTML5 for details. (Or use static analysis.)
+
+Some elements are 'empty', they don't have to be closed.
+
+<img src=...>
+
+
+
+Anatomy of an HTML document
+
+<!DOCTYPE html>  // mandatory
+<html>  // sometimes called root
+<head>   // container for metadata
+	<meta>  // metadata
+<body>  // the visible part
+
+
+## CSS Basics
+
+style sheet
+- manual detailing the house style of a particular publisher, publication, etc.
+
+- 'the cascade', the priority scheme that is used to merge styles from different places, specificity etc
+
+- to fall, pour, or rush in or as if in a cascade
+
+ruleset ("rule"): selector { declarations (property: property_value;) }
+
+selectors: 
+a, b, c = a or b or c
+
+
+CSS: All about boxes
+
+padding border margin
+width, background-color, color, text-shadow, display
+
+property: 0  // one value affects all 4 sides
+property: x y // x affects top/bottom, y affects left/right
+property: x y z // top, horizontal, bottom
+property: x y z w // top, right, bottom, left
+
+padding syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/padding#syntax
+
+
+CSS Units:
+cm/mm/in/px/pt/pc: absolute IRL length
+relative lengths:
+	em: element font size
+	ex: element font x-height
+	ch: width of the zero glyph
+	rem: relative to root element font size
+	vw: 1% of viewport width
+	vh: 1% of viewport height
+	vmin: 1% of viewport's smallest dimension
+	vmin: 1% of viewport's largest dimension
+	%: relative to parent element (think about relative/absolute)
+
+
+CSS display:
+https://www.w3schools.com/cssref/pr_class_display.asp
+"type of rendering box"	
+
+
+https://www.w3.org/TR/WD-CSS2-971104/box.html
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model
+
+If the box-sizing property is set to content-box (default) and if the element is a block element, the content area's size can be explicitly defined with the width, min-width, max-width, height, min-height, and max-height properties.
+
+https://drafts.csswg.org/css-box/#intro
+
+flex-box
+
+
+display values:
+- inline, like span (height and width have no effect)
+- block, like p (starts on new line and takes up all width)
+- contents, makes the container disappear, making the children elements of the parent
+- flex, block-level flex container (for positioning chilren)
+- grid, block-level grid-container
+- inline-block, formatted as inline — but you can set width and height
+- inline-flex, ...
+- inline-grid, ...
+- inline-table, displayed as an inline-level grid container
+- list-item, let the element behave like a <li> element
+- run-in, displays as block or inline, depending on context
+- table, behave like table
+- table-{caption,column-group,header-group,footer-group,row-group,cell,column,tr}, like these parts
+	The <col> tag is useful for applying styles to entire columns, instead of repeating the styles for each cell, for each row.
+- none, the element is completely removed
+- initial, reset to default value
+- inherit, inherit from parent
+
+
+visibility: hidden, still there but not shown. Positioned / takes up space.
+
+## JavaScript basics
+

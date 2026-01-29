@@ -1,0 +1,50 @@
+HDD track size
+
+https://www.nature.com/articles/s41467-021-22687-y
+
+	Abstract
+	Hard disk drives (HDDs) are used as secondary storage in digital electronic devices owing to low cost and large data storage capacity. Due to the exponentially increasing amount of data, there is a need to increase areal storage densities beyond ~1 Tb/in2. This requires the thickness of carbon overcoats (COCs) to be <2 nm. However, friction, wear, corrosion, and thermal stability are critical concerns below 2 nm, limiting current technology, and restricting COC integration with heat assisted magnetic recording technology (HAMR). Here we show that graphene-based overcoats can overcome all these limitations, and achieve two-fold reduction in friction and provide better corrosion and wear resistance than state-of-the-art COCs, while withstanding HAMR conditions. Thus, we expect that graphene overcoats may enable the development of 4–10 Tb/in2 areal density HDDs when employing suitable recording technologies, such as HAMR and HAMR+bit patterned media
+
+	https://www.nature.com/articles/s41467-021-22687-y.pdf
+
+		Therefore, they can experience mechanical damage whenever intermittent contact occurs with the head11,15, and are susceptible to corrosion8,11,14 and oxidation11,15, leading to HDD degradation or damage.
+
+		4 µm
+
+		head-media-spacing: ~10nm
+		flying clearance( head-media-spacing - head and media overcoat - PFPE lubricant): ~5nm. Probably jiggling around here as well.
+
+https://security.web.cern.ch/rules/images/HDD%20Data%20Reconstructiusing%20MFM.pdf
+	
+	Typically, in the read channel of an actual hard disk drive, a phase-locked loop (PLL) is employed to perform bit synchronization. However, in the case of the readback signals coming from MFM images, there is typically only a small segment of the constant frequency preamble available, over which a PLL would not be able to lock, much less track timing variations.
+
+	"The performance has been poor even under these idealized conditions, but this is attributed to a particular form of degradation that could be removed by an improved experimental setup."
+
+https://hddscan.com/doc/HDD_Tracks_and_Zones.html
+
+	- Appeared on web.archive.org 2009. (https://web.archive.org/web/*/https://hddscan.com/doc/HDD_Tracks_and_Zones.html)
+
+
+https://books.google.se/books?id=J9C4BAAAQBAJ&pg=PA250&lpg=PA250&dq=what+is+the+TPI+of+a+modern+hard+drive&source=bl&ots=_7TQFP8Vdb&sig=ACfU3U3_K8eNfwbpqYuAxkhzr2pvTS8ntw&hl=en&sa=X&ved=2ahUKEwjl-tGL0bT4AhVTR_EDHfVvCL4Q6AF6BAg3EAM#v=onepage&q=what%20is%20the%20TPI%20of%20a%20modern%20hard%20drive&f=false
+
+	Tobust Control Design with MATLAB® (2014), page 250: 35k+ TPI (track distance is less than a micro inch).
+
+
+https://www.seagate.com/files/staticfiles/docs/pdf/whitepaper/seagate-acutrac-TP624.1-1110US.pdf
+	
+	Seagate Whitepaper (2011): In the Seagate Barracuda hard drive series, TPI levels have gone from 250,000 in the previous generation to 340,000 today. (75 nanometers wide.)
+
+https://www.techtarget.com/searchstorage/feature/HAMR-vs-MAMR-and-the-future-of-high-capacity-hard-drives
+
+	- 5 key HDD technologies
+		- Helium-sealed assemblies to reduce aerodynmic drag
+		- Micro actuators with new suspension to reduce vibrations and allow packing more spindles in a drive housing
+		- Shingled magnetic recording to reduce the disk track spacing
+		- Instant secure erase and cryptographically signed firmware
+		- NVMe-oF protocol support
+
+https://en.wikipedia.org/wiki/Hard_disk_drive_performance_characteristics
+
+"Track Pitch"
+
+~80nm average track pitch for "modern drive" 2019.

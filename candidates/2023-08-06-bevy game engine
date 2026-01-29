@@ -1,0 +1,32 @@
+# Crash Course
+
+https://www.youtube.com/watch?v=fFm1IxuPQxA
+
+https://kenney.nl/assets/rolling-ball-assets
+https://kenney.nl/assets/impact-sounds
+
+Resource: A mutable global.
+- used for framework settings, if they are present they will do something
+- something not attached to a game entity could be a resource
+- "A system is function that runs at some point"	
+- "SpriteBundle"
+- "Struct update syntax"
+- coordinates: 0,0 i middle, and every 1.0 is one (logical) pixel
+- transform: translation, rotation, scale
+- assets in './assets/' by default
+- spawns entity, attaches components to it
+- bundle: group of components, splatted
+- ::<> <-- Turbofish
+- added lots of derives, + PathLIke
+- rapier is a physics engine, rapier2d is a plugin that uses rapier
+- "Dynamic Rigid Body" is something that is not static, you can apply forces
+- "damping", air resistance
+- Restitution: How it "stops", bouncing
+- ECS -- giant database table
+- dampening -> imposes terminal velocity
+- "continuous collision detection" if you have problems skipping through things
+- WASM can't access very many cores, and can't now use network (much)?
+- idiomatic asterisk include: preludes, in testing and enum with many variants in a local scope (scope). self::* sometimes
+- game veloren, godo rust bindings
+- rust user group
+- ECS was 50 years ago, but coming back now

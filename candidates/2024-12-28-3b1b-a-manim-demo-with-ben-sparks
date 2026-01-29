@@ -1,0 +1,26 @@
+# A Manim demo with Ben Sparks
+
+https://www.youtube.com/watch?v=rbu7Zu5X1zI
+
+Use Manim Community version
+
+- All scenes are classes (InteractiveScene)
+- ipython REPL, connected to the scene
+- 'checkpoint_paste()', the ipython repl will revert to a previous version
+- anything can transform into anything, like the H of the text to the circle
+- alot of things boil down to class Transform
+- there is a hierarchy of objects, and can be groups
+- everything is always 3D
+- Mobject = Math Object
+- 'set_points_as_corners'
+- VGroup (vectorized objects)
+- ipython embed used for Manim
+- When the scene is done, we can render it:
+	manim some_file.py WhichSceneClass --prerun --finder -w
+	terminis
+	drop into 'finalcut' and do the final editing
+- 'mathpics', OCR but for math equations
+
+
+https://github.com/3b1b/videos?tab=readme-ov-file#workflow
+

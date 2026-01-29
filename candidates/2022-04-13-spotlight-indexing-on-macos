@@ -1,0 +1,396 @@
+On Catalina and Big Sur, the startup volume (/) is mounted read only, so the Spotlight index isn't store there.
+It is located at /System/Volumes/Data/
+
+sudo rm -r /System/Volumes/Data/.Spotlight-V100
+
+https://support.apple.com/en-bh/HT201716
+
+Measure processes' activity, load / cpu usage / syscalls per minute?
+
+By the way, running mdutil -s / returns Indexing enabled.
+
+ERA-2722$ man mdutil
+                                                                                                             mdutil(1)                         General Commands Manual                        mdutil(1)
+
+                                                                                                             NAME
+                                                                                                                  mdutil – manage the metadata stores used by Spotlight
+
+                                                                                                             SYNOPSIS
+                                                                                                                  mdutil [-pEsav] [-i on | off] mountPoint ...
+
+                                                                                                             DESCRIPTION
+                                                                                                                  The mdutil command is useful for managing the metadata stores for mounted volumes.
+
+                                                                                                                  The following options are available:
+
+                                                                                                                  -i on | off
+                                                                                                                      Sets the indexing status for the provided volumes to on or off.  Note that
+                                                                                                                      indexing may be delayed due to low disk space or other conditions.
+
+                                                                                                                  -d  Disables Spotlight searches on the provided volume.
+
+                                                                                                                  -E  This flag will cause each local store for the volumes indicated to be erased.
+                                                                                                                      The stores will be rebuilt if appropriate.
+
+                                                                                                                  -s  Display the indexing status of the listed volumes.
+
+                                                                                                                  -a  Apply command to all stores on all volumes.
+
+                                                                                                                  -t  Resolve files from file id with an optional volume path or device id.
+
+                                                                                                                  -p  Spotlight caches indexes of some network devices locally.  This option requests
+                                                                                                                      that a local caches be flushed to the appropriate network device.
+
+                                                                                                                  -V volume-path
+                                                                                                                      Apply command to all stores on the specified volume.
+
+                                                                                                                  -v  Print verbose information when available.
+
+                                                                                                                  -r plugins
+                                                                                                                      Ask the server to reimport files for UTIs claimed by the listed plugin.
+
+                                                                                                                  -L volume-path
+                                                                                                                      List the directory contents of the Spotlight index on the specified volume.
+
+                                                                                                                  -P volume-path
+                                                                                                                      Dump the VolumeConfig.plist for the specified volume.
+
+                                                                                                                  -X volume-path
+                                                                                                                      Remove the Spotlight index directory on the specified volume.  This does not
+                                                                                                                      disable indexing.  Spotlight will reevaluate volume when it is unmounted and
+                                                                                                                      remounted, the machine is rebooted, or an explicit index command such as 'mdutil
+                                                                                                                      -i' or 'mdutil -E' run for the volume.
+
+                                                                                                             SEE ALSO
+                                                                                                                  mdfind(1), mds(8), mdimport(1)
+
+                                                                                                             Mac OS X                             September 1, 2005                            Mac OS X
+
+
+
+
+ERA-2722$ mdutil -sa
+/:
+    Indexing enabled.
+/System/Volumes/Data:
+    Indexing enabled.
+ERA-2722$ mount
+/dev/disk1s5s1 on / (apfs, sealed, local, read-only, journaled)
+devfs on /dev (devfs, local, nobrowse)
+/dev/disk1s4 on /System/Volumes/VM (apfs, local, noexec, journaled, noatime, nobrowse)
+/dev/disk1s2 on /System/Volumes/Preboot (apfs, local, journaled, nobrowse)
+/dev/disk1s6 on /System/Volumes/Update (apfs, local, journaled, nobrowse)
+/dev/disk1s1 on /System/Volumes/Data (apfs, local, journaled, nobrowse)
+map auto_home on /System/Volumes/Data/home (autofs, automounted, nobrowse)
+
+ERA-2722$ mdutil -sav
+/:
+    Indexing enabled.
+/System/Volumes/Data:
+    Indexing enabled.
+    Scan base time: 2022-04-06 12:24:34 +0000 (508410 seconds ago), reasoning: '(null)'
+
+ERA-2722$ sudo mdutil -L /System/Volumes/Data
+Password:
+/System/Volumes/Data/.Spotlight-V100:
+drwx------   3     0     0         96 May 08 2019 23:39 Store-V1
+drwx------   3     0     0         96 May 16 2019 09:28 Store-V2
+-rw-------   1     0     0       4171 May 16 2019 09:19 VolumeConfiguration.plist
+
+/System/Volumes/Data/.Spotlight-V100/Store-V1:
+-rw-------   1     0     0        348 May 08 2019 23:39 VolumeConfig.plist
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2:
+drwx------  86     0     0       2752 Apr 12 2022 10:49 DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A:
+-rw-------   1     0     0  226529280 Apr 12 2022 11:34 .store.db
+-rw-------   1     0     0   16777216 Apr 06 2022 15:30 0.directoryStoreFile
+-rw-------   1     0     0   16777216 Apr 06 2022 15:30 0.directoryStoreFile.shadow
+-rw-------   1     0     0  573861056 Mar 29 2022 20:32 0.indexArrays
+-rw-------   1     0     0    7622736 Mar 29 2022 20:32 0.indexBigDates
+-rw-------   1     0     0  116510528 Mar 29 2022 20:32 0.indexCompactDirectory
+-rw-------   1     0     0   10296448 Mar 29 2022 20:32 0.indexDirectory
+-rw-------   1     0     0    1524548 Apr 06 2022 15:36 0.indexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 11:07 0.indexHead
+-rw-------   1     0     0   15245472 Mar 29 2022 20:32 0.indexIds
+-rw-------   1     0     0 2378253644 Mar 29 2022 20:31 0.indexPositions
+-rw-------   1     0     0  512564006 Mar 29 2022 20:31 0.indexPostings
+-rw-------   1     0     0        568 Mar 29 2022 20:32 0.indexUpdates
+-rw-------   1     0     0    1524548 Apr 12 2022 09:40 0.shadowIndexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 09:40 0.shadowIndexHead
+-rw-------   1     0     0          0 May 16 2019 09:19 Cab.created
+-rw-------   1     0     0          0 May 16 2019 10:17 Cab.modified
+drwx------   3     0     0         96 Apr 02 2022 10:50 Cache
+-rw-------   1     0     0          0 May 16 2019 09:19 Lion.created
+-rw-------   1     0     0         28 Apr 12 2022 10:40 indexState
+-rw-------   1     0     0       1472 Apr 06 2022 15:30 journalAttr.16975
+-rw-------   1     0     0      25820 Apr 12 2022 11:38 journalAttr.17039
+-rw-------   1     0     0          0 May 16 2019 09:19 journalExclusion
+drwx------   2     0     0         64 Oct 10 2019 23:39 journals.assisted_import_post
+drwx------   3     0     0         96 Oct 10 2019 23:00 journals.assisted_import_pre
+drwx------   2     0     0         64 May 16 2019 09:19 journals.corespotlight
+drwx------   2     0     0         64 Apr 12 2022 10:49 journals.health_check
+drwx------   2     0     0         64 May 16 2019 09:19 journals.live
+drwx------   2     0     0         64 Oct 10 2019 23:42 journals.live_priority
+drwx------   2     0     0         64 Apr 12 2022 10:40 journals.live_system
+drwx------   4     0     0        128 Apr 12 2022 10:40 journals.live_user
+drwx------   2     0     0         64 May 16 2019 09:19 journals.migration
+drwx------   2     0     0         64 May 16 2019 09:19 journals.migration_secondchance
+drwx------   2     0     0         64 May 16 2019 10:17 journals.repair
+drwx------   2     0     0         64 Apr 06 2022 15:36 journals.scan
+-rw-------   1     0     0     262144 Apr 06 2022 15:36 live.0.directoryStoreFile
+-rw-------   1     0     0     262144 Apr 06 2022 15:36 live.0.directoryStoreFile.shadow
+-rw-------   1     0     0    9605440 Apr 06 2022 15:36 live.0.indexArrays
+-rw-------   1     0     0     477124 Apr 06 2022 15:36 live.0.indexBigDates
+-rw-------   1     0     0    1407834 Apr 06 2022 15:36 live.0.indexCompactDirectory
+-rw-------   1     0     0     216908 Apr 06 2022 15:36 live.0.indexDirectory
+-rw-------   1     0     0      95425 Apr 06 2022 16:33 live.0.indexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 11:09 live.0.indexHead
+-rw-------   1     0     0     954248 Apr 08 2022 00:46 live.0.indexIds
+-rw-------   1     0     0   17782044 Apr 06 2022 15:36 live.0.indexPositions
+-rw-------   1     0     0    3617185 Apr 06 2022 15:36 live.0.indexPostings
+-rw-------   1     0     0         21 Apr 06 2022 15:36 live.0.indexUpdates
+-rw-------   1     0     0      95425 Apr 12 2022 09:40 live.0.shadowIndexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 09:40 live.0.shadowIndexHead
+-rw-------   1     0     0    1048576 Apr 12 2022 10:40 live.1.directoryStoreFile
+-rw-------   1     0     0    1048576 Apr 12 2022 10:40 live.1.directoryStoreFile.shadow
+-rw-------   1     0     0   25165824 Apr 12 2022 10:40 live.1.indexArrays
+-rw-------   1     0     0     262144 Apr 12 2022 10:40 live.1.indexBigDates
+-rw-------   1     0     0      32768 Apr 12 2022 10:40 live.1.indexCompactDirectory
+-rw-------   1     0     0      65792 Apr 12 2022 10:40 live.1.indexDirectory
+-rw-------   1     0     0      52429 Apr 12 2022 10:40 live.1.indexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 10:41 live.1.indexHead
+-rw-------   1     0     0     524288 Apr 12 2022 10:40 live.1.indexIds
+-rw-------   1     0     0   16777216 Apr 12 2022 10:40 live.1.indexPositionTable
+-rw-------   1     0     0   67108864 Apr 12 2022 10:40 live.1.indexPositions
+-rw-------   1     0     0   33554432 Apr 12 2022 10:40 live.1.indexPostings
+-rw-------   1     0     0   16777216 Apr 12 2022 10:40 live.1.indexTermIds
+-rw-------   1     0     0          0 Apr 12 2022 10:40 live.1.indexUpdates
+-rw-------   1     0     0   25165824 Apr 12 2022 10:40 live.1.shadowIndexArrays
+-rw-------   1     0     0      32768 Apr 12 2022 10:40 live.1.shadowIndexCompactDirectory
+-rw-------   1     0     0      65792 Apr 12 2022 10:40 live.1.shadowIndexDirectory
+-rw-------   1     0     0      49158 Apr 12 2022 10:40 live.1.shadowIndexGroups
+-rw-------   1     0     0       4096 Apr 12 2022 10:40 live.1.shadowIndexHead
+-rw-------   1     0     0    9899168 Apr 12 2022 10:40 live.1.shadowIndexPositionTable
+-rw-------   1     0     0    9899168 Apr 12 2022 10:40 live.1.shadowIndexTermIds
+-rw-------   1     0     0     498707 Apr 06 2022 15:30 permStore
+-rw-------   1     0     0       4256 Aug 25 2021 12:00 remapping3410
+-rw-------   1     0     0  134217728 Apr 12 2022 10:49 reverseDirectoryStore
+-rw-------   1     0     0  134217728 Apr 12 2022 10:40 reverseDirectoryStore.shadow
+-rw-------   1     0     0         71 Apr 12 2022 10:40 reverseStore.updates
+-rw-r--r--   1     0     0          4 Apr 12 2022 10:40 shutdown_time
+-rw-------   1     0     0  226529280 Apr 12 2022 10:40 store.db
+-rw-------   1     0     0          3 Apr 12 2022 10:40 store.updates
+-rw-r--r--   1     0     0          4 May 16 2019 09:19 store_generation
+-rw-------   1     0     0          0 May 16 2019 09:19 tmp.Cab
+-rw-------   1     0     0          0 May 16 2019 09:19 tmp.Lion
+-rw-------   1     0     0          0 May 16 2019 09:19 tmp.SnowLeopard
+-rw-------   1     0     0    1186213 Apr 06 2022 10:20 tmp.spotlight.loc
+-rw-------   1     0     0       4096 Apr 12 2022 11:09 tmp.spotlight.state
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/Cache:
+---------- Cache directory skipped ----------
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.assisted_import_post:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.assisted_import_pre:
+-rw-------   1     0     0          0 Oct 10 2019 23:00 retire.2204686
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.corespotlight:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.health_check:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.live:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.live_priority:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.live_system:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.live_user:
+-rw-------   1     0     0       3099 Apr 12 2022 10:40 journal.62621
+-rw-------   1     0     0          0 Apr 12 2022 10:40 retire.62931
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.migration:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.migration_secondchance:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.repair:
+
+/System/Volumes/Data/.Spotlight-V100/Store-V2/DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A/journals.scan:
+
+ERA-2722$ sudo mdutil -P /System/Volumes/Data
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Annotations</key>
+    <dict>
+        <key>Creation_Predicates</key>
+        <dict>
+            <key>false</key>
+            <integer>0</integer>
+            <key>fstype.apfs</key>
+            <integer>1</integer>
+            <key>has.uuid</key>
+            <integer>1</integer>
+            <key>interconnect.pci-express</key>
+            <integer>1</integer>
+            <key>is.alreadyindexed</key>
+            <integer>0</integer>
+            <key>is.apfssnapshot</key>
+            <integer>0</integer>
+            <key>is.automount</key>
+            <integer>0</integer>
+            <key>is.backupstore</key>
+            <integer>0</integer>
+            <key>is.backupvolume</key>
+            <integer>0</integer>
+            <key>is.bootablevolume</key>
+            <integer>1</integer>
+            <key>is.cameramedia</key>
+            <integer>0</integer>
+            <key>is.diskimage</key>
+            <integer>0</integer>
+            <key>is.dontbrowse</key>
+            <integer>0</integer>
+            <key>is.ejectable</key>
+            <integer>0</integer>
+            <key>is.external</key>
+            <integer>0</integer>
+            <key>is.externalvolumes.defaultoff</key>
+            <integer>0</integer>
+            <key>is.externalvolumes.ignore</key>
+            <integer>0</integer>
+            <key>is.filevault</key>
+            <integer>0</integer>
+            <key>is.forcedefaultindex</key>
+            <integer>0</integer>
+            <key>is.forcefsonly</key>
+            <integer>0</integer>
+            <key>is.home</key>
+            <integer>0</integer>
+            <key>is.internal</key>
+            <integer>1</integer>
+            <key>is.ipod</key>
+            <integer>0</integer>
+            <key>is.local</key>
+            <integer>1</integer>
+            <key>is.lowdiskspace</key>
+            <integer>0</integer>
+            <key>is.mobilebackups</key>
+            <integer>0</integer>
+            <key>is.network</key>
+            <integer>0</integer>
+            <key>is.nonSearchableRole</key>
+            <integer>0</integer>
+            <key>is.quarantined</key>
+            <integer>0</integer>
+            <key>is.readonly</key>
+            <integer>0</integer>
+            <key>is.removable</key>
+            <integer>0</integer>
+            <key>is.rootfs</key>
+            <integer>1</integer>
+            <key>is.safeboot</key>
+            <integer>0</integer>
+            <key>is.syntheticmount</key>
+            <integer>0</integer>
+            <key>is.tinyvolume</key>
+            <integer>0</integer>
+            <key>is.windowsbootablevolume</key>
+            <integer>0</integer>
+            <key>is.xsan</key>
+            <integer>0</integer>
+            <key>policy.location.volume</key>
+            <integer>1</integer>
+            <key>self.appleinternal</key>
+            <integer>0</integer>
+            <key>self.server</key>
+            <integer>0</integer>
+            <key>status.neverindex</key>
+            <integer>0</integer>
+            <key>supports.catsearch</key>
+            <integer>1</integer>
+            <key>supports.fileids</key>
+            <integer>1</integer>
+            <key>supports.volfs</key>
+            <integer>1</integer>
+            <key>true</key>
+            <integer>1</integer>
+            <key>uuid.5f653dd5-4f71-415c-80cd-d070bc964eb6</key>
+            <integer>1</integer>
+        </dict>
+        <key>DebugKey1</key>
+        <string>2019-05-08 21:39:38 +0000 3</string>
+        <key>DefaultStore_EffectiveSearch</key>
+        <integer>3</integer>
+        <key>DefaultStore_RequestedSearch</key>
+        <integer>3</integer>
+    </dict>
+    <key>ConfigurationCreationDate</key>
+    <date>2019-05-08T21:39:38Z</date>
+    <key>ConfigurationCreationVersion</key>
+    <string>Version 10.14.4 (Build 18E227)</string>
+    <key>ConfigurationModificationDate</key>
+    <date>2019-05-16T07:19:52Z</date>
+    <key>ConfigurationModificationVersion</key>
+    <string>Version 10.14.4 (Build 18E227)</string>
+    <key>ConfigurationVolumeUUID</key>
+    <string>5F653DD5-4F71-415C-80CD-D070BC964EB6</string>
+    <key>ConfigurationWriteback</key>
+    <false/>
+    <key>Exclusions</key>
+    <array/>
+    <key>Options</key>
+    <dict>
+        <key>ConfigurationType</key>
+        <string>Default</string>
+    </dict>
+    <key>Stores</key>
+    <dict>
+        <key>DB3BEE26-4ABC-4C1F-9FF7-5FDD8F1E572A</key>
+        <dict>
+            <key>CreationDate</key>
+            <date>2019-05-08T21:39:38Z</date>
+            <key>CreationVersion</key>
+            <string>Version 10.14.4 (Build 18E227)</string>
+            <key>IndexVersion</key>
+            <integer>95</integer>
+            <key>PartialPath</key>
+            <string>/</string>
+            <key>PolicyDate</key>
+            <date>2019-05-16T07:19:52Z</date>
+            <key>PolicyLevel</key>
+            <string>kMDConfigSearchLevelReadWrite</string>
+            <key>PolicyProcess</key>
+            <string>STORE_ADD</string>
+            <key>PolicyVersion</key>
+            <string>Version 10.14.4 (Build 18E227)</string>
+        </dict>
+    </dict>
+</dict>
+</plist>
+
+
+
+
+reindexing stuck https://apple.stackexchange.com/questions/337706/spotlight-re-indexing-takes-too-long-or-doesnt-work/337782#337782:
+
+    sudo /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -seed -lint -r -f -v -dump -domain local -domain system -domain user -domain network
+
+    killall Dock
+
+    sudo mdutil -E /
+
+Details
+
+the issue was in the Launch Services Database. I figured it out by looking at the Console app. There were tons of messages like
+
+    errore  16:19:03.743202 +0100   mds LaunchServices: store or url (null) was nil -10813, retrying
+    errore  16:19:03.743247 +0100   mds LaunchServices: Database mapping failed with result -10813, retries = 7
+
+https://discussions.apple.com/thread/8151912
+
+Rebuilt the spotlight index on your mac: https://support.apple.com/en-us/HT201716
+

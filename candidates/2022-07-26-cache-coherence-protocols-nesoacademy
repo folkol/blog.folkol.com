@@ -1,0 +1,242 @@
+# Cache Coherence Problem & Cache Coherency Protocols
+
+Multicore processors have some memory per-core.
+How keep these in sync?
+
+Internal bus: bus in between private caches.
+
+A = 7 in main memory.
+
+MISD: Multiple instruction-stream and single data stream.
+
+P1: A + 1
+Cache miss.
+Copy from main memory.
+
+Cache Coherency Protocols
+Each cache line has got some state:
+- M(odified)
+- S(hared)
+- I(nvalid)
+
+- E(xclusive), only I have it
+- O(wned), the cache is the owner, will satisfy read requests from other cores
+- F(forward), if memory block gets update, this core is responsible for forwarding to other caches
+
+(Software) cache coherence schemes.
+- Compiler / kernel detects problem and prevents caching.
+
+(Hardware) cache coherence protocols.
+- snooping-based / bus-based
+	- all caches connect to bus
+	- write update, when my line is promoted from shared to modified, other caches update their stuff
+		- write through
+		- write back
+	- write invalidate, when I write — other caches will invalidate their lines
+		- write through
+		- write back
+- directory based protocol
+	- cache metadata is held in shared directory
+	- interconnect / point-to-point
+
+
+
+--------------------------
+
+AWS App Runner?
+
+
+aws.com/messaging
+
+	https://aws.amazon.com/messaging/?c=ai&sec=srvm
+
+	we work backwards, try to indentify what the customer pain points are — and find solutions
+
+	SQS, n to m producers / consumers.
+
+	MQ vs 
+
+	buzzword bingo
+		- deadletter queue
+		- pub-sub
+		- ...
+
+	message vs notification
+
+	amazon mq is a hosted version of active mq
+
+	Not REST, but AMQP/MQTT/STOMP(?)
+
+		reader, always online or 'now and then', whatever?
+
+	SNS, pub-sub, fan-out to different places
+
+	optimized for ?? (latency, throughput, ...)
+
+	SQS, decoupling
+
+	write is not acknowledged before it is flushed to disk in multiple AZs
+
+	FIFOs, guaranteed exactly once delivery, but this restrains other things like throughput.
+
+	AFR: Annual failure rate, low single digit %.
+
+	Long polling, SQS or SNS? SQS is used for this, SNS you send them to topic, and they are then routed.
+
+	Amazon MQ: Managed Apache ActiveMQ.
+
+		"JMS Based"
+
+		Now that we know what a message broker is, let’s look at the different messaging styles, more specifically point-to-point messaging and publish-subscribe messaging.
+
+	https://www.youtube.com/watch?v=RoKAEzdcr7k
+
+		SQS, SNS, Event Bridge. When to use what?
+
+		EventBridge vs Apache Camel?
+
+		SQS:
+			- Optional FIFO
+			- like orders
+			- consumers poll the service
+			- each item is 'consumed'?
+			- queues are typically owned by the consumer
+			- can be consumed by lambdas, in case polling etc is handled automatically
+			- one-by-one or batch
+			- 'message buffer service' unless configured as FIFO (at creation time)
+			- typically one-to-one (producer/consumer)
+			- message are consumed
+
+			- reliable 1:1 async communication
+			- temporary message holding pool
+			- optional ordered message processing
+
+		SNS:
+			- message are not consumed, each subscriber gets all messages. 'Fan-out'.
+			- avoids partial failure compared to posting to n different SQS queues because of retry
+			- should be buffered in SQS topics to avoid 'missing' messages when consumers are offline
+			- 'subscription filter'
+
+			- 1:n fan-out
+			- high throughput
+			- many subscribers
+
+		EventBridge:
+			- similar to SNS
+			- message bus instead of topic
+			- filtering
+			- dispatch to targets (rules)
+			- can integrate with third party services
+			- limit: one rule can have maximum of 5 targets
+
+			- 1:n (with limits)
+			- AWS/SaaS/Application integrations
+
+		Kafka?
+			- Can subscribe 'after the fact'.
+
+
+
+
+---------------------
+
+https://www.youtube.com/watch?v=oJbfMBROEO0&list=TLPQMjQwNzIwMjLph8PZiEkCIQ&index=2
+
+How to write 'senior' code?
+1. Prevent Unfinished Work, pressure from 'scrum' to say that you are done even if there is techical debt.
+2. Enforced Coding Standards, autoformat on save.
+3. Document Chosen Patterns, on wikis etc.
+4. Review new patterns early, before it has infested everything. ("Rx"?)
+5. Incrementally refactor instead of creating 'refactoring stories'. Don't let management remove these stories.
+6. Assume Unexpected Change, pad estimates.
+
+
+
+--------------------
+
+Were some years more eventful than othes? Why?
+- I keep seeing '1856', which I recognize because Åbro was founded that year (a Swedish brewery).
+- Is this Frequency illusion, or are some years 'more eventful'?
+- First stab might be to see 'number of events' on different wikipedia pages (The page for year 1856 lists 'things happened this year')
+	- 
+	1800: 39
+	1801: 
+
+
+	- events per day of year?
+	- 
+
+	https://eu.usatoday.com/story/money/2020/09/06/the-worlds-most-important-event-every-year-since-1920/113604790/
+
+
+
+https://en.wikipedia.org/wiki/Portal:Current_events
+https://stackoverflow.com/questions/8555320/is-there-a-wikipedia-api-just-for-retrieve-the-content-summary
+	- It is very recommendable to use &redirects=1 which redirects automatically to content of synonyms
+	- 
+
+
+----------------------
+
+message broker comparion
+- latencies
+- throughput
+- persistent or not?
+
+
+comparing message broker latencies
+- 
+- 
+- 
+
+https://www.confluent.io/blog/apache-kafka-vs-enterprise-service-bus-esb-friends-enemies-or-frenemies/
+
+----------------------
+Matrix-effect
+
+https://www.youtube.com/watch?v=Vb6bA4J1Gbg
+- 
+
+
+https://www.youtube.com/watch?v=MvEXkd3O2ow
+
+
+https://www.youtube.com/watch?v=U9XP96PW6us
+
+follow the white rabbit
+
+
+“Follow the White Rabbit” is the cryptic instruction given to Neo in The Matrix. It is an overt allusion to Lewis Carrol's novel Alice in Wonderland and the White Rabbit that leads her down a madcap, upside down world where logic lays insanity bare and blurs the line between what should be and what is not.
+
+
+rows?
+60 cols
+
+arabic numerals
+maybe hiragana?
+periods?
+glare up when drooping
+flickers otherwise
+nothing when disappears
+nothing when changes
+>50% empty
+strings
+they don't "shift", but rather 'appears'.
+often long empty bands
+
+
+https://matrix.fandom.com/wiki/Matrix_code
+https://en.wikipedia.org/wiki/Matrix_digital_rain
+
+https://en.wikipedia.org/wiki/Half-width_kana
+
+This code uses a custom typeface designed by Simon Whiteley,[1] which includes mirror images of half-width kana characters and Western Latin letters and numerals.[2] 
+
+https://www.fontspace.com/matrix-code-nfi-font-f11467
+
+Though uncredited in the films, Simon Whiteley created the Matrix code. In an interview with CNet, he said that he scanned the characters from his wife's Japanese cookbooks, saying "I like to tell everybody that The Matrix's code is made out of Japanese sushi recipes".[2]
+
+https://int10h.org/blog/2021/02/simulating-crt-monitors-ffmpeg-pt-2-monochrome/
+
+https://carlnewton.github.io/digital-rain-analysis/
+

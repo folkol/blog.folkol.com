@@ -1,0 +1,24 @@
+# Instructions Per Clock
+
+- IPC (Instructions per clock) or ILP (Instruction-level parallelism)
+
+- multiple 2/5: far under max IPC ('stalling pipeline'?)
+
+- loop overheads
+- reduce loop overhead by 'unrolling' or 'vectorization'
+
+> '(code) listing 5'
+
+- data dependencies, can't accumulate in some int if we want parallelism
+- 'giant serial dependency chain'
+- 'the loop maintenance can be done in parallel'
+- 'give the CPU more things to do at the same time'
+- keep separate tallies and add them in the end?
+
+- x2 the performance chains
+- 
+
+
+
+
+t-shirt: mechanical sympathy

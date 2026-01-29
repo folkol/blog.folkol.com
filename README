@@ -20,3 +20,38 @@ $ aws-vault exec admin -- aws s3 sync _site/ s3://com.folkol.blog/ \
   --delete \
   --exclude "assets/*" --exclude "images/*" \
   --cache-control "public,max-age=300"
+
+## notes audit tool
+
+The `bin/notes-audit` tool helps triage files in `~/Documents/notes` as potential blog post candidates.
+
+### Usage
+
+```bash
+# Review pending notes (default command)
+./bin/notes-audit review
+
+# Show statistics
+./bin/notes-audit status
+
+# Reset decisions
+./bin/notes-audit reset --all              # Reset all decisions
+./bin/notes-audit reset --path /path/to/note  # Reset specific note
+
+# Clear rejection for a note
+./bin/notes-audit unreject --path /path/to/note
+
+# List accepted or rejected notes
+./bin/notes-audit list accepted
+./bin/notes-audit list rejected
+```
+
+### How it works
+
+- Scans `~/Documents/notes` recursively for text-like files
+- Shows a summary and opens each file in `less` for review
+- After viewing, you can: accept (copy to `candidates/`), reject, postpone, or skip
+- Accepted notes are copied to `candidates/` with a date prefix (unless already present)
+- Rejected notes are marked and won't appear again unless updated
+- Updated notes automatically re-enter the queue
+- State is persisted in `.notes-audit/` (excluded from Jekyll)

@@ -1,0 +1,27 @@
+# SIMD: Single Instruction, Multiple Data
+
+> multiplier 3/5: SIMD
+
+> Replace multiple accumulators with 'wide' versions
+> SSE (Streaming SIMD Extensions)
+
+> PADDD p-add-d, packed (multiple ints 'packed' in one place), add, double-word
+> they always 'line up', 'lanes'
+> vector computing, not exactly the same thing
+> 'feels like working with vectors'
+
+> vector strides + one masked... or vector strikes + normal loop
+> 'SIMD: save a bunch of that frontend work'
+
+> SSE, also AVX and AVX512 -- each widen the vector with more lanes
+> __intrinsic
+> we can make it look cleaner
+> '_mm_hadd_epi32', 'horizontal' add
+> _mm_cvtsi128_si32(Sum);
+> AVX 'lane segregation'
+> 'you might not hit the full width expansion'
+
+> linear data dependency occurs even with SIMD registers, so we can use different accumulators even with SIMD registers
+> Also: we can split this on multiple cores if we have a lot of work to do!
+
+> Bad cache behavior? Next video!

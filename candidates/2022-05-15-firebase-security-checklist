@@ -1,0 +1,61 @@
+# https://firebase.google.com/support/guides/security-checklist
+
+Avoid abusive traffic
+
+- Set up monitoring and alerting for backend services
+- use app check so that only your apps can access backend
+- configure your cloud functions to scale for normal traffic (limit concurrent instances)
+- set up alerting to know when limits are nearly reached
+- prevent self-DoS, test functions locally in the emulator
+- where real-time responsiveness is less important, structure functions defensively, for example put stuff on a queue and batch-process at regular intervals
+
+Understand API-keys
+- API keys for firebas services are not secrets
+- set up API key scoping
+- Keep FCM server keys secret
+- keep service account keys secret
+
+Security rules
+- when setting up cloud firestore, realtime database and cloud storage, initialize your security rules to deny all access by default, and add rules that grant access to specific resources as you develop your app
+- security rules are a schema, add rules when you add documents
+- unit test security rules with the emulator suite, add it to CI
+
+Authentication
+- custom authentication: mint JWTs from a trusted (server-side) environment
+- managed authentication: oauth 2.0 providers are the most secure
+- email-password authentication: set tight quota for the sign-in endpoint to prevent brute force attacks
+- update to cloud identity platform for multi-factor authenticatoin
+
+Anonymous authentication
+- only use anonymous authentication for warm onboarding
+- convert users to another sign-in method if they'll want the data when they lose their phone
+- use security rules that require users to have converted to a sign in provider or have verified their email
+
+Environment management
+- set up development and staging projects
+- limit team access to production data
+
+Library management
+- watch our for library misspellings or new maintainers
+- don't update libraries without understanding the changes
+- install watchdog libraries (such as Snyk) as dev or test dependencies
+- set up monitoring for functions, check it after library updates
+
+Cloud Function safety
+- never put sensitive information in a cloud functions environment variable, function environments are reused in between function calls. Embed non-secrets in code, Firebase Admin SDK can acquire service account credentials during initialization, Application Default Credentials are available, use Cloud Secret Manager for other stuff
+- Encrypt sensitive information
+- Simple functions are safer, if you need complexity — consisder Cloud Run
+
+## https://www.optimizesmart.com/geek-guide-removing-referrer-spam-google-analytics/
+
+	If your Google Analytics is getting referrer spam, ghost spam or any other type of fake traffic or you would like to know whether you are getting such type of traffic then this article is for you.
+
+	In this article, I will show you how to minimise or even completely eliminate the negative impact of fake traffic on your GA reports.
+
+## https://security.stackexchange.com/questions/106892/how-does-google-analytics-prevent-fake-data-attacks-against-an-entitys-traffic
+## https://stackoverflow.com/questions/2418609/how-does-google-analytics-prevent-traffic-spoofing#2419115
+
+Generall, no way to prevent it. Rate limit per IP, short lived tokens, ML, might mitigate. Real time black lists.
+
+"At present, it is possible to fake any GA hit :("
+
