@@ -862,7 +862,7 @@
     "sha256": "5f73bfaf28501aa3b0596f7335efc9a660429408a94f0aeb0d43d28fd9ad475e"
   },
   "/Users/folkol/Documents/notes/2022-07-28": {
-    "status": "postponed",
+    "status": "rejected",
     "mtime_ns": 1659106680000000000,
     "size": 2000,
     "sha256": "358c00a7e9b1d4c277369e25fc879f7865e21788b08a140bbeac1a480f3150f3",
@@ -882,10 +882,11 @@
     "sha256": "85d90baf9e39f339c4544d082d37a8b07f5759751e27130e7b6a8c3a311552ce"
   },
   "/Users/folkol/Documents/notes/hugo-tutorials": {
-    "status": "postponed",
+    "status": "rejected",
     "mtime_ns": 1658253442000000000,
     "size": 4300,
-    "sha256": "1c87c50feec52244582d2c93e63681cd23faa4794cb4f003132e2c5121cb8eea"
+    "sha256": "1c87c50feec52244582d2c93e63681cd23faa4794cb4f003132e2c5121cb8eea",
+    "changed_since": false
   },
   "/Users/folkol/Documents/notes/theo-tech-stack": {
     "status": "accepted",
@@ -970,10 +971,11 @@
     "sha256": "c52924f45600fca215d3103bec0d875c9a572f43bd2b33f8c77894238a6f23fd"
   },
   "/Users/folkol/Documents/notes/how-to-not-learn-russian-and-how-to": {
-    "status": "postponed",
+    "status": "rejected",
     "mtime_ns": 1655669068000000000,
     "size": 1254,
-    "sha256": "8a1f3a3df08ded3e4b533f28846b03ed0e6f515f15a1152b0c7e3b421d54a42e"
+    "sha256": "8a1f3a3df08ded3e4b533f28846b03ed0e6f515f15a1152b0c7e3b421d54a42e",
+    "changed_since": false
   },
   "/Users/folkol/Documents/notes/ecmascript-standard": {
     "status": "rejected",
